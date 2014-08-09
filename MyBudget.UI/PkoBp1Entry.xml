@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<account-history>
+  <search>
+    <account>03102039580000123456789000</account>
+    <date since='2013-02-01' to='2012-02-20'/>
+    <filtering>Wszystkie</filtering>
+  </search>
+  <operations>
+    <operation>
+      <exec-date>2013-02-02</exec-date>
+      <order-date>2013-02-02</order-date>
+      <type>Przelew z rachunku</type>
+      <description>
+        Nr rach. przeciwst.: 11 2222 3333 4444 5555 6666 7777
+        Dane adr. rach. przeciwst.: Name
+        Tytuł: SomeTitle
+      </description>
+      <amount curr='PLN'>-100.00</amount>
+      <ending-balance curr='PLN'>+10000.00</ending-balance>
+    </operation>
+  </operations>
+</account-history>
