@@ -1,7 +1,9 @@
-﻿using MyBudget.Core;
+﻿using Microsoft.Win32;
+using MyBudget.Core;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,24 +20,13 @@ using System.Windows.Shapes;
 namespace MyBudget.UI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for MainWindowShell.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class Shell : Window
     {
-        public MainWindow()
+        public Shell()
         {
-            string str = ManifestStreamReaderHelper.ReadEmbeddedResource(
-                this.GetType().Assembly,
-                "MyBudget.UI.PkoBp1Entry.xml");
-            Data = new PkoBpParser().Parse(str);
             InitializeComponent();
         }
-
-        public IEnumerable<BankAccountEntry> Data
-        {
-            get;
-            private set;
-        }
-
     }
 }

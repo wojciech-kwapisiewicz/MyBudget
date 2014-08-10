@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="MyBudget.UI.Main.MainContentView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"             
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300"          
+        x:Name="_demo">
+    <StackPanel>
+        <Button 
+            Content="Load"
+            Command="{Binding ElementName=_demo, Path=LoadFile}" />
+        <Grid>
+            <Grid.Resources>
+                <xcdg:DataGridCollectionViewSource 
+                        x:Key="cvsOrders"
+                        Source="{Binding ElementName=_demo, Path=ViewModel.Data}">
+                </xcdg:DataGridCollectionViewSource>
+            </Grid.Resources>
+
+            <xcdg:DataGridControl ReadOnly="True"
+                    x:Name="_dataGrid" 
+                    ItemsSource="{Binding Source={StaticResource cvsOrders} }" >
+                <xcdg:DataGridControl.View>
+                    <xcdg:TableflowView FixedColumnCount="1" />
+                </xcdg:DataGridControl.View>
+
+                <xcdg:DataGridControl.Columns>
+                    <xcdg:Column FieldName="Id"
+                             IsMainColumn="True">
+                    </xcdg:Column>
+                </xcdg:DataGridControl.Columns>
+            </xcdg:DataGridControl>
+        </Grid>
+    </StackPanel>
+</UserControl>

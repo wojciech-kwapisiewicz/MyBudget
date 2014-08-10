@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="IClassifier.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BankAccountEntry.cs" />
     <Compile Include="PkoBpParser.cs" />
     <Compile Include="Model\CustomDescription.cs" />
