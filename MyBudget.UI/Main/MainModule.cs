@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
+using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,12 +23,12 @@ namespace MyBudget.UI.Main
 
         public void Initialize()
         {
-            _container.RegisterType<object, MainContentView>(typeof(MainContentView).ToString());
-            _container.RegisterType<object, WelcomePageView>(typeof(WelcomePageView).ToString());
+            //Navigable elements
+            _container.RegisterType<object, WelcomePageView>(typeof(WelcomePageView).FullName);
 
+            //Starting regions registration
             _regionManager.RegisterViewWithRegion(RegionNames.MainNavigation, typeof(MainNavigationView));
             _regionManager.RegisterViewWithRegion(RegionNames.MainContent, typeof(WelcomePageView));
-            //_regionManager.RegisterViewWithRegion(RegionNames.MainContent, typeof(MainContentView));
         }
     }
 }

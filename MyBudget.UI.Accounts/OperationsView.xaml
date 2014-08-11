@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MyBudget.UI.Main.MainContentView"
+﻿<UserControl x:Class="MyBudget.UI.Accounts.OperationsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -8,9 +8,12 @@
              d:DesignHeight="300" d:DesignWidth="300"          
         x:Name="_demo">
     <StackPanel>
-        <Button 
-            Content="Load"
-            Command="{Binding ElementName=_demo, Path=LoadFile}" />
+        <StackPanel Orientation="Horizontal">
+            <Button Content="Dodaj z pliku"
+                    Command="{Binding ElementName=_demo, Path=LoadFileCommand}" />
+            <Button Content="Zapisz"
+                    Command="{Binding ElementName=_demo, Path=SaveCommand}" />
+        </StackPanel>
         <Grid>
             <Grid.Resources>
                 <xcdg:DataGridCollectionViewSource 

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.UI
+namespace MyBudget.UI.Core
 {
     public static class RegionNames
     {

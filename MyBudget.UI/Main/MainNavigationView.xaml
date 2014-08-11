@@ -10,22 +10,19 @@
             <TextBlock Text="Nawigacja" 
                    Margin="0 0 0 5" 
                    HorizontalAlignment="Center" 
-                   Style="{StaticResource HeaderTextBlockStyle}"  />
+                   Style="{StaticResource HeaderTextBlockStyle}" />
             <Button Content="Start" Command="{Binding NavigateWelcomePage}" />
             <Button Content="Operacje" Command="{Binding NavigateOperations}" />
-            <!--<Button Content="Wczytaj wyciąg" />
-            <Button Content="Pokaż zestawienia" />-->
             <Expander Header="Zarządzaj">
                 <StackPanel>
-                    <Button Content="Konta" />
-                    <Button Content="Wyciągi" />
-                    <Button Content="Operacje" />
-                    <Button Content="Reguły" />
+                    <Button Content="Konta" Command="{Binding NavigateAccounts}" />
+                    <Button Content="Wyciągi" Command="{Binding NavigateImported}" />
+                    <Button Content="Operacje" Command="{Binding NavigateOperations}" />
                 </StackPanel>
             </Expander>
             <Expander Header="Konfiguracja">
                 <StackPanel>
-                    <Button Content="Konfiguruje reguły" />
+                    <Button Content="Reguły" Command="{Binding NavigateRules}" />
                 </StackPanel>
             </Expander>
         </StackPanel>

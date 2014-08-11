@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
+using MyBudget.UI.Accounts;
 using MyBudget.UI.Main;
 using System;
 using System.Collections.Generic;
@@ -28,11 +29,16 @@ namespace MyBudget.UI
 
         protected override void ConfigureModuleCatalog()
         {
-            Type type1 = typeof(MainModule);
+            RegisterModule(typeof(MainModule));
+            RegisterModule(typeof(AccountsModule));
+        }
+
+        private void RegisterModule(Type mainModuleType)
+        {
             ModuleCatalog.AddModule(new ModuleInfo()
             {
-                ModuleName = type1.Name,
-                ModuleType = type1.AssemblyQualifiedName
+                ModuleName = mainModuleType.Name,
+                ModuleType = mainModuleType.AssemblyQualifiedName
             });
         }
     }

@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.UI.Services
+namespace MyBudget.UI.Core.Services
 {
     public class FileDialogService
     {

@@ -1,5 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
+using MyBudget.UI.Accounts;
+using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,16 +29,19 @@ namespace MyBudget.UI.Main
             DataContext = this;
 
             NavigateOperations = new DelegateCommand(() =>
-    regionManager.RequestNavigate(RegionNames.MainContent, typeof(MainContentView).ToString()));
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(OperationsView).FullName));
 
             NavigateWelcomePage = new DelegateCommand(() => 
-    regionManager.RequestNavigate(RegionNames.MainContent, typeof(WelcomePageView).ToString()));
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(WelcomePageView).FullName));
+
+            NavigateAccounts = new DelegateCommand(() => 
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName));
             
             InitializeComponent();
         }
 
-
         public ICommand NavigateWelcomePage { get; set; }
         public ICommand NavigateOperations { get; set; }
+        public ICommand NavigateAccounts { get; set; }
     }
 }

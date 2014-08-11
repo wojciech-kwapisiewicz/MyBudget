@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core;
-using MyBudget.UI.Services;
+using MyBudget.UI.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -19,25 +19,28 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace MyBudget.UI.Main
+namespace MyBudget.UI.Accounts
 {
     /// <summary>
-    /// Interaction logic for MainContentView.xaml
+    /// Interaction logic for OperationsView.xaml
     /// </summary>
-    public partial class MainContentView : UserControl, INavigationAware
+    public partial class OperationsView : UserControl, IConfirmNavigationRequest, IRegionMemberLifetime
     {
-        public MainContentView(BankEntriesViewModel viewModel)
+        public OperationsView(OperationsViewModel viewModel)
         {
             ViewModel = viewModel;
-            LoadFile = new DelegateCommand(() => ViewModel.Data = Load());
+            LoadFileCommand = new DelegateCommand(() => ViewModel.Data = LoadFromFile());
+            SaveCommand = new DelegateCommand(() => Save());
             InitializeComponent();
         }
 
-        public BankEntriesViewModel ViewModel { get; set; }
+        public OperationsViewModel ViewModel { get; set; }
 
-        public ICommand LoadFile { get; set; }
+        public ICommand LoadFileCommand { get; set; }
 
-        public IEnumerable<BankAccountEntry> Load()
+        public ICommand SaveCommand { get; set; }
+
+        public IEnumerable<BankAccountEntry> LoadFromFile()
         {
             using (Stream stream = new FileDialogService().OpenFile())
             {
@@ -45,6 +48,10 @@ namespace MyBudget.UI.Main
             }
         }
 
+        public void Save()
+        {
+            MessageBox.Show("Saved!");
+        }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)
         {
@@ -53,27 +60,22 @@ namespace MyBudget.UI.Main
 
         public void OnNavigatedFrom(NavigationContext navigationContext)
         {
+
         }
 
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
         }
-    }
 
-
-    public class BankEntriesViewModel : BindableBase
-    {
-
-
-        private IEnumerable<BankAccountEntry> _Data;
-        public IEnumerable<BankAccountEntry> Data
+        public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> continuationCallback)
         {
-            get { return _Data; }
-            set
-            {
-                _Data = value;
-                OnPropertyChanged(() => Data);
-            }
+            bool goAhead = MessageBox.Show("Are you sure?", "??", MessageBoxButton.OKCancel) == MessageBoxResult.OK;
+            continuationCallback(goAhead);
+        }
+
+        public bool KeepAlive
+        {
+            get { return false; }
         }
     }
 }

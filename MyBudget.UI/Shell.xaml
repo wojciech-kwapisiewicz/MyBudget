@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
         xmlns:prism="http://www.codeplex.com/prism"        
         xmlns:local="clr-namespace:MyBudget.UI"
+        xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
         Title="Shell" Height="350" Width="525">
     <Window.Resources>
         <ResourceDictionary>
@@ -21,10 +22,11 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <ContentControl x:Name="MainToolbar"
-                        prism:RegionManager.RegionName="{x:Static local:RegionNames.MainNavigation}"/>
+                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainNavigation}"/>
         <ContentControl x:Name="MainControl" 
+                        Margin="5 5 5 5"
                         Grid.Column="1"
-                        prism:RegionManager.RegionName="{x:Static local:RegionNames.MainContent}"/>
+                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainContent}"/>
 
         <StatusBar Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
             <WrapPanel>
