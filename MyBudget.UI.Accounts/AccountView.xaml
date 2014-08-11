@@ -5,7 +5,27 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
-            
-    </Grid>
+    <StackPanel>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Zapisz" Command="{Binding ViewModel.Save}" />
+            <Button Content="Anuluj" Command="{Binding ViewModel.GoBack}" />
+        </StackPanel>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Label Content="Nazwa konta:" Grid.Row="0" Grid.Column="0" />
+            <Label Content="Numer konta:" Grid.Row="1" Grid.Column="0" />
+            <Label Content="Opis konta:" Grid.Row="2" Grid.Column="0" />
+            <TextBox Text="{Binding ViewModel.Data.Name}" Grid.Row="0" Grid.Column="1"/>
+            <TextBox Text="{Binding ViewModel.Data.Number}" Grid.Row="1" Grid.Column="1"/>
+            <TextBox Text="{Binding ViewModel.Data.Description}" Grid.Row="2" Grid.Column="1"/>
+        </Grid>
+    </StackPanel>
 </UserControl>

@@ -117,9 +117,11 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AccountsViewModel.cs" />
     <Compile Include="AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="AccountViewModel.cs" />
     <Compile Include="OperationsView.xaml.cs">
       <DependentUpon>OperationsView.xaml</DependentUpon>
     </Compile>

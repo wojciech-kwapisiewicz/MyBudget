@@ -12,6 +12,6 @@
             <Button Content="Op1" />
             <Button Content="Op1" />
             <Button Content="Op1" />
-        </StackPanel>
+        </StackPanel>   
     </StackPanel>
 </UserControl>

@@ -23,6 +23,7 @@ namespace MyBudget.UI.Accounts
         public void Initialize()
         {
             //Navigable elements
+            _container.RegisterType<object, AccountView>(typeof(AccountView).FullName);
             _container.RegisterType<object, AccountsView>(typeof(AccountsView).FullName);
             _container.RegisterType<object, OperationsView>(typeof(OperationsView).FullName);
         }

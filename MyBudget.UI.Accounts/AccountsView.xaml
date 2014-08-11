@@ -4,8 +4,31 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="300" d:DesignWidth="300"
+             VerticalAlignment="Stretch">
     <Grid>
-        <TextBlock Text="Cos tu bedzie" />
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="Dodaj" Command="{Binding ViewModel.AddAccount}" />
+            <Button Content="Edytuj" Command="{Binding ViewModel.EditAccount}" />
+            <Button Content="Usuń" Command="{Binding ViewModel.DeleteAccount}" />    
+        </StackPanel>
+        <ListBox Grid.Row="1"
+                 ItemsSource="{Binding ViewModel.Data}"
+                 SelectedItem="{Binding ViewModel.SelectedItem, Mode=TwoWay}">
+            <ListBox.ItemTemplate>               
+                <DataTemplate>  
+                    <StackPanel>
+                        <TextBlock Text="{Binding Name}"
+                                   Style="{StaticResource SubHeaderTextBlockStyle}"  />
+                        <TextBlock Text="{Binding Number}" />
+                        <TextBlock Text="{Binding Description}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
     </Grid>
 </UserControl>

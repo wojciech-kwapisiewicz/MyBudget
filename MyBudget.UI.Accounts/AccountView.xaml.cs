@@ -1,4 +1,7 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Microsoft.Practices.Prism.Regions;
+using MyBudget.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,11 +21,38 @@ namespace MyBudget.UI.Accounts
     /// <summary>
     /// Interaction logic for AccountView.xaml
     /// </summary>
-    public partial class AccountView : UserControl
+    public partial class AccountView : UserControl, INavigationAware
     {
-        public AccountView()
+        public AccountView(AccountViewModel viewModel)
         {
+            ViewModel = viewModel;
+            this.DataContext = this;
             InitializeComponent();
+        }
+
+        public AccountViewModel ViewModel { get; set; }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+            ViewModel.Journal = navigationContext.NavigationService.Journal;
+            BankAccount selected = navigationContext.Parameters["selected"] as BankAccount;
+            if(selected==null)
+            {
+                ViewModel.Data = new BankAccount();
+            }
+            else
+            {
+                ViewModel.Data = selected;
+            }
         }
     }
 }
