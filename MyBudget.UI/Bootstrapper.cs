@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Modularity;
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
+using MyBudget.Core;
 using MyBudget.UI.Accounts;
 using MyBudget.UI.Main;
 using System;
@@ -31,6 +32,12 @@ namespace MyBudget.UI
         {
             RegisterModule(typeof(MainModule));
             RegisterModule(typeof(AccountsModule));
+        }
+
+        protected override void ConfigureContainer()
+        {
+            new CoreUnityConfiguration().Configure(base.Container);
+            base.ConfigureContainer();
         }
 
         private void RegisterModule(Type mainModuleType)

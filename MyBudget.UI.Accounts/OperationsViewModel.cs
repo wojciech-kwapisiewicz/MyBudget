@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core;
+using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,8 +11,8 @@ namespace MyBudget.UI.Accounts
 {
     public class OperationsViewModel : BindableBase
     {
-        private IEnumerable<BankAccountEntry> _Data;
-        public IEnumerable<BankAccountEntry> Data
+        private IEnumerable<BankOperation> _Data;
+        public IEnumerable<BankOperation> Data
         {
             get { return _Data; }
             set

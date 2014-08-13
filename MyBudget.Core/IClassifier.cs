@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBudget.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,6 @@ namespace MyBudget.Core
 {
     public interface IClassifier
     {
-        CustomDescription GetCustomDescription(BankAccountEntry entry);
+        CustomDescription GetCustomDescription(BankOperation entry);
     }
 }

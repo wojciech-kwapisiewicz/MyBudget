@@ -17,7 +17,9 @@ namespace MyBudget.UI.Accounts
     {
         IRegionManager _regionManager;
 
-        public AccountsViewModel(IRegionManager regionManager)
+        public AccountsViewModel(
+            IRegionManager regionManager,
+            IBankAccountRepository bankAccountsRepository)
         {
             _regionManager = regionManager;
 
@@ -27,15 +29,16 @@ namespace MyBudget.UI.Accounts
 //            NavigateAccounts = new DelegateCommand(() =>
 //    regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName));
 
-            Data = new List<BankAccount>()
-            {
-                new BankAccount(){Id=0, Name="Konto PKO0", Number="0000000", Description="Konto normalne"},
-                new BankAccount(){Id=1, Name="Konto PKO1", Number="0000001", Description="Konto normalne"},
-                new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
-                new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
-                new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
-                new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"}
-            };
+            Data = bankAccountsRepository.GetAll();
+            //    new List<BankAccount>()
+            //{
+            //    new BankAccount(){Id=0, Name="Konto PKO0", Number="0000000", Description="Konto normalne"},
+            //    new BankAccount(){Id=1, Name="Konto PKO1", Number="0000001", Description="Konto normalne"},
+            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
+            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002"},
+            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
+            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"}
+            //};
         }
 
         private IEnumerable<BankAccount> _Data;

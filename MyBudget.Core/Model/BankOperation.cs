@@ -6,26 +6,18 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.Model
 {
-    public class BankAccountEntry
+    public class BankOperation
     {
         public int Id { get; set; }
-
-        public string OperationName { get; set; }
-        
+        public BankAccount BankAccount { get; set; }
+        public BankOperationType Type { get; set; }
         public DateTime OrderDate { get; set; }
-        
         public DateTime ExecutionDate { get; set; }
-
         public decimal Amount { get; set; }
-
-        public decimal Balance { get; set; }
-
+        public decimal EndingBalance { get; set; }
         public string Description { get; set; }
-
-        public string Type { get; set; }
-
         public CustomDescription CustomDescription { get; set; }
     }
 }

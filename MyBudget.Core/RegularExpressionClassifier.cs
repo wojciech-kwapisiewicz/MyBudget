@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBudget.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,9 @@ namespace MyBudget.Core
             _regularExpression = regularExpression;
         }
 
-        public CustomDescription GetCustomDescription(BankAccountEntry entry)
+        public CustomDescription GetCustomDescription(BankOperation entry)
         {
-            string value = typeof(BankAccountEntry).GetField(_fieldName).GetValue(entry) as string;
+            string value = typeof(BankOperation).GetField(_fieldName).GetValue(entry) as string;
             return null;
         }
     }

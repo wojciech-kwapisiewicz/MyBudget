@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBudget.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace MyBudget.Core
 {
     public interface IParser
     {
-        IEnumerable<BankAccountEntry> Parse(Stream stream);
-        IEnumerable<BankAccountEntry> Parse(string inputString);
+        IEnumerable<BankOperation> Parse(Stream stream);
+        IEnumerable<BankOperation> Parse(string inputString);
     }
 }

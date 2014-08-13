@@ -4,10 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.Model
 {
     public class CustomDescription
     {
+        public int Id { get; set; }
         public string Category { get; set; }
         public string SubCategory { get; set; }
     }
