@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;

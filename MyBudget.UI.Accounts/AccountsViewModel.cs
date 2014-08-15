@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core;
 using System;
@@ -19,26 +20,14 @@ namespace MyBudget.UI.Accounts
 
         public AccountsViewModel(
             IRegionManager regionManager,
-            IBankAccountRepository bankAccountsRepository)
+            IRepository<BankAccount> bankAccountsRepository)
         {
             _regionManager = regionManager;
 
             AddAccount = new DelegateCommand(NavigateToAdd);
             EditAccount = new DelegateCommand(NavigateToEdit, () => SelectedItem != null);
 
-//            NavigateAccounts = new DelegateCommand(() =>
-//    regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName));
-
             Data = bankAccountsRepository.GetAll();
-            //    new List<BankAccount>()
-            //{
-            //    new BankAccount(){Id=0, Name="Konto PKO0", Number="0000000", Description="Konto normalne"},
-            //    new BankAccount(){Id=1, Name="Konto PKO1", Number="0000001", Description="Konto normalne"},
-            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
-            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002"},
-            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"},
-            //    new BankAccount(){Id=2, Name="Konto PKO2", Number="0000002", Description="Konto normalne"}
-            //};
         }
 
         private IEnumerable<BankAccount> _Data;

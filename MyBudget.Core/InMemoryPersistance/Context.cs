@@ -5,15 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core.Model
+namespace MyBudget.Core.InMemoryPersistance
 {
-    public class BankOperationType : IIdentifiable<string>
+    public class Context : IContext
     {
-        public string Name { get; set; }
-
-        public string Id
+        public bool SaveChanges()
         {
-            get { return Name; }
+            return true;
         }
     }
 }

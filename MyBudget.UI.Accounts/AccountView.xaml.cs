@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -48,10 +49,12 @@ namespace MyBudget.UI.Accounts
             if(selected==null)
             {
                 ViewModel.Data = new BankAccount();
+                ViewModel.EditMode = EditMode.Add;
             }
             else
             {
                 ViewModel.Data = selected;
+                ViewModel.EditMode = EditMode.Edit;
             }
         }
     }

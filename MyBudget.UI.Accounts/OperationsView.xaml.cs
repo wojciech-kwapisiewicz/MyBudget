@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core.Services;
 using System;
@@ -28,14 +29,25 @@ namespace MyBudget.UI.Accounts
     public partial class OperationsView : UserControl, IConfirmNavigationRequest, IRegionMemberLifetime
     {
         PkoBpParser _parser;
+        IRepository<BankOperation> _operationRepository;
 
         public OperationsView(
             OperationsViewModel viewModel,
-            PkoBpParser parser)
+            PkoBpParser parser,
+            IRepository<BankOperation> operationRepository)
         {
+            _operationRepository = operationRepository;
             _parser = parser;
             ViewModel = viewModel;
-            LoadFileCommand = new DelegateCommand(() => ViewModel.Data = LoadFromFile());
+            viewModel.Data = _operationRepository.GetAll();
+            LoadFileCommand = new DelegateCommand(() =>
+            {
+                foreach (var a in LoadFromFile())
+                {
+                    _operationRepository.Add(a);
+                }
+                viewModel.Data = _operationRepository.GetAll();
+            });
             SaveCommand = new DelegateCommand(() => Save());
             InitializeComponent();
         }

@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
+using MyBudget.Core.DataContext;
+using MyBudget.Core.InMemoryPersistance;
 using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -12,10 +14,18 @@ namespace MyBudget.Core
     {
         public void Configure(IUnityContainer unityContainer)
         {
-            unityContainer.RegisterType<IBankAccountRepository, InMemoryBankAccountRepository>(
-                new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<IBankOperationTypeRepository, InMemoryBankOperationTypeRepository>(
-                new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankAccountInMemoryRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankOperationInMemoryRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankOperationTypeInMemoryRepository>(new ContainerControlledLifetimeManager());
+
+            unityContainer.RegisterType<IContext, Context>();
+
+            unityContainer.RegisterType<IRepository<BankAccount>, BankAccountInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankOperation>, BankOperationInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankOperation, int>, BankOperationInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankOperationType>, BankOperationTypeInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankOperationType, string>, BankOperationTypeInMemoryRepository>();
         }
     }
 }

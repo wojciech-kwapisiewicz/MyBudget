@@ -1,4 +1,5 @@
-﻿using MyBudget.Core.Model;
+﻿using MyBudget.Core.DataContext;
+using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;

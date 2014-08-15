@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyBudget.Core.DataContext;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.Model
 {
-    public class BankOperation
+    public class BankOperation : IIdentifiable<int>
     {
         public int Id { get; set; }
         public BankAccount BankAccount { get; set; }

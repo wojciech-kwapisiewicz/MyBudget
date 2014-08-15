@@ -1,4 +1,5 @@
 ﻿using Moq;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using NUnit.Framework;
 using System;
@@ -20,13 +21,13 @@ namespace MyBudget.Core.UnitTests
         {
             //Given
             BankAccount ba = new BankAccount();
-            Mock<IBankAccountRepository> accountRepo = new Mock<IBankAccountRepository>();
+            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
             accountRepo
                 .Setup(a => a.Get(It.IsAny<string>()))
                 .Returns(ba);
 
             BankOperationType type = new BankOperationType();
-            Mock<IBankOperationTypeRepository> typeRepo = new Mock<IBankOperationTypeRepository>();
+            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
             typeRepo
                 .Setup(a=>a.Get(It.IsAny<string>()))
                 .Returns(type);
@@ -49,13 +50,13 @@ namespace MyBudget.Core.UnitTests
         public void GivenPkoBpXmlFileWith1Entry_WhenParse_ThenListOf1EntryReturned()
         {
             BankAccount ba = new BankAccount();
-            Mock<IBankAccountRepository> accountRepo = new Mock<IBankAccountRepository>();
+            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
             accountRepo
                 .Setup(a => a.Get(It.IsAny<string>()))
                 .Returns(ba);
 
             BankOperationType type = new BankOperationType();
-            Mock<IBankOperationTypeRepository> typeRepo = new Mock<IBankOperationTypeRepository>();
+            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
             typeRepo
                 .Setup(a => a.Get(It.IsAny<string>()))
                 .Returns(type);

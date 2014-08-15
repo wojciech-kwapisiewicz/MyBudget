@@ -2,16 +2,13 @@
 using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.InMemoryPersistance
 {
-    public interface IParser
+    public class BankOperationTypeInMemoryRepository : AbstractInMemoryRepository<BankOperationType, string>
     {
-        IEnumerable<BankOperation> Parse(Stream stream);
-        IEnumerable<BankOperation> Parse(string inputString);
     }
 }

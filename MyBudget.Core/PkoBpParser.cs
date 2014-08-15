@@ -1,4 +1,5 @@
-﻿using MyBudget.Core.Model;
+﻿using MyBudget.Core.DataContext;
+using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -13,11 +14,12 @@ namespace MyBudget.Core
 {
     public class PkoBpParser : IParser
     {
-        private IBankAccountRepository _bankAccountRepository;
-        private IBankOperationTypeRepository _bankOperationTypeRepository;
+        private IRepository<BankAccount,string> _bankAccountRepository;
+        private IRepository<BankOperationType,string> _bankOperationTypeRepository;
 
-        public PkoBpParser(IBankAccountRepository bankAccountRepository,
-            IBankOperationTypeRepository bankOperationTypeRepository)
+        public PkoBpParser(
+            IRepository<BankAccount, string> bankAccountRepository,
+            IRepository<BankOperationType, string> bankOperationTypeRepository)
         {
             if (bankAccountRepository == null)
                 throw new ArgumentNullException("bankAccountRepository");

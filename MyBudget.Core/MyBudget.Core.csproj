@@ -49,15 +49,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CoreUnityConfiguration.cs" />
-    <Compile Include="Model\InMemoryBankAccountRepository.cs" />
-    <Compile Include="Model\InMemoryBankOperationTypeRepository.cs" />
-    <Compile Include="Model\IBankAccountRepository.cs" />
-    <Compile Include="Model\IBankOperationTypeRepository.cs" />
+    <Compile Include="DataContext\IContext.cs" />
+    <Compile Include="DataContext\IIdentifiable.cs" />
+    <Compile Include="InMemoryPersistance\AbstractInMemoryRepository.cs" />
+    <Compile Include="InMemoryPersistance\BankAccountInMemoryRepository.cs" />
+    <Compile Include="InMemoryPersistance\BankOperationInMemoryRepository.cs" />
+    <Compile Include="InMemoryPersistance\BankOperationTypeInMemoryRepository.cs" />
+    <Compile Include="InMemoryPersistance\Context.cs" />
     <Compile Include="IClassifier.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BankOperation.cs" />
     <Compile Include="Model\BankOperationType.cs" />
+    <Compile Include="DataContext\IRepository.cs" />
     <Compile Include="PkoBpParser.cs" />
     <Compile Include="Model\CustomDescription.cs" />
     <Compile Include="ManifestStreamReaderHelper.cs" />
