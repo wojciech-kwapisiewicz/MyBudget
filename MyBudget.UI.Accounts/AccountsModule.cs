@@ -26,6 +26,7 @@ namespace MyBudget.UI.Accounts
             _container.RegisterType<object, AccountView>(typeof(AccountView).FullName);
             _container.RegisterType<object, AccountsView>(typeof(AccountsView).FullName);
             _container.RegisterType<object, OperationsView>(typeof(OperationsView).FullName);
+            _container.RegisterType<object, StatementsView>(typeof(StatementsView).FullName);
         }
     }
 }

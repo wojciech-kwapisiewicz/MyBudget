@@ -4,7 +4,7 @@
         xmlns:prism="http://www.codeplex.com/prism"        
         xmlns:local="clr-namespace:MyBudget.UI"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
-        Title="Shell" Height="350" Width="525">
+        Title="Shell" Height="500" Width="900">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>

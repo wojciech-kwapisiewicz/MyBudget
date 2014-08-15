@@ -65,6 +65,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ReflectionHelper.cs" />
+    <Compile Include="DeferredAction.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="Services\FileDialogService.cs" />
   </ItemGroup>

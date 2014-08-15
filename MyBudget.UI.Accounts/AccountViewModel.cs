@@ -4,11 +4,6 @@ using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace MyBudget.UI.Accounts
 {
@@ -51,7 +46,8 @@ namespace MyBudget.UI.Accounts
             {
                 _bankAccountRepository.Add(Data);
             }
-
+            //Xceed.Wpf.DataGrid.DataGridCollectionView v;
+            //v.
             _context.SaveChanges();
             _regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName);
         }

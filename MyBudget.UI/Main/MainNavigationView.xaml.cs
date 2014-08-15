@@ -28,20 +28,24 @@ namespace MyBudget.UI.Main
         {
             DataContext = this;
 
-            NavigateOperations = new DelegateCommand(() =>
-    regionManager.RequestNavigate(RegionNames.MainContent, typeof(OperationsView).FullName));
-
             NavigateWelcomePage = new DelegateCommand(() => 
     regionManager.RequestNavigate(RegionNames.MainContent, typeof(WelcomePageView).FullName));
 
             NavigateAccounts = new DelegateCommand(() => 
     regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName));
-            
+
+            NavigateStatements = new DelegateCommand(() =>
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(StatementsView).FullName));
+
+            NavigateOperations = new DelegateCommand(() =>
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(OperationsView).FullName));
+
             InitializeComponent();
         }
 
         public ICommand NavigateWelcomePage { get; set; }
-        public ICommand NavigateOperations { get; set; }
         public ICommand NavigateAccounts { get; set; }
+        public ICommand NavigateStatements { get; set; }
+        public ICommand NavigateOperations { get; set; }
     }
 }

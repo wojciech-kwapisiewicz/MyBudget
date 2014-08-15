@@ -3,38 +3,64 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:xcdg="http://schemas.xceed.com/wpf/xaml/datagrid"             
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"           
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"  
              >
-    <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Content="Dodaj z pliku"
-                    Command="{Binding ViewModel.LoadFileCommand}" />
-            <Button Content="Zapisz"
-                    Command="{Binding ViewModel.SaveCommand}" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Label Content="Pole " />
+            <ComboBox Width="200" 
+                      ItemsSource="{Binding ViewModel.ObjectProperties}" 
+                      SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}"/>
+            <Label Content=" zawiera " />
+            <xctk:WatermarkTextBox Watermark="filtr"
+                                   Text="{Binding ViewModel.Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                                   MinWidth="200" 
+                                   VerticalContentAlignment="Center"/>
+            
+            <Label Content="Miesiąc:" 
+                   Margin="10 0 0 0"/>
+            <xctk:DateTimeUpDown Format="YearMonth" Width="120" Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" />
         </StackPanel>
-        <Grid>
-            <Grid.Resources>
-                <xcdg:DataGridCollectionViewSource 
-                        x:Key="cvsOrders"
-                        Source="{Binding ViewModel.Data}">
-                </xcdg:DataGridCollectionViewSource>
-            </Grid.Resources>
-
-            <xcdg:DataGridControl ReadOnly="True"
-                    x:Name="_dataGrid" 
-                    ItemsSource="{Binding Source={StaticResource cvsOrders} }" >
-                <xcdg:DataGridControl.View>
-                    <xcdg:TableflowView FixedColumnCount="1" />
-                </xcdg:DataGridControl.View>
-
-                <xcdg:DataGridControl.Columns>
-                    <xcdg:Column FieldName="Id"
-                             IsMainColumn="True">
-                    </xcdg:Column>
-                </xcdg:DataGridControl.Columns>
-            </xcdg:DataGridControl>
-        </Grid>
-    </StackPanel>
+        <DataGrid Grid.Row="1" 
+                  ItemsSource="{Binding ViewModel.Data}"
+                  IsReadOnly="True">
+            <DataGrid.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <TextBlock Text="{Binding Path=Name}" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </GroupStyle.HeaderTemplate>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate TargetType="{x:Type GroupItem}">
+                                        <Expander>
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock Text="{Binding Path=Name}" />
+                                                    <TextBlock Text="{Binding Path=ItemCount}"/>
+                                                    <TextBlock Text="Items"/>
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                </GroupStyle>
+            </DataGrid.GroupStyle>
+        </DataGrid>
+    </Grid>
 </UserControl>

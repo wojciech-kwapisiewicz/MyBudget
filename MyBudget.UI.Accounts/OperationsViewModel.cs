@@ -1,23 +1,18 @@
-﻿using Microsoft.Practices.Prism.Commands;
-using Microsoft.Practices.Prism.Mvvm;
+﻿using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
-using MyBudget.UI.Core.Services;
+using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Xceed.Wpf.Toolkit;
+using System.Windows.Data;
+using System.Windows.Threading;
 
 namespace MyBudget.UI.Accounts
 {
     public class OperationsViewModel : BindableBase
     {
-        PkoBpParser _parser;
         IRepository<BankOperation> _operationRepository;
 
         public OperationsViewModel(
@@ -25,36 +20,116 @@ namespace MyBudget.UI.Accounts
             IRepository<BankOperation> operationRepository)
         {
             _operationRepository = operationRepository;
-            _parser = parser;
 
-            LoadFileCommand = new DelegateCommand(LoadFromFile);
-            SaveCommand = new DelegateCommand(() => Save());
+            FilterDate = DateTime.Now;
+            ResetListData();
+
+            defferedDataUpdate = new DeferredAction(
+                Dispatcher.CurrentDispatcher,
+                () => { if (Data != null) Data.Refresh(); },
+                500);
         }
 
-        public void LoadFromFile()
+        private void ResetListData()
         {
-            using (Stream stream = new FileDialogService().OpenFile())
+            var list = new ListCollectionView(_operationRepository.GetAll().ToList());
+            list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
+            Data = list;
+        }
+
+        private ListCollectionView _data;
+        public ListCollectionView Data
+        {
+            get
             {
-                foreach (var item in _parser.Parse(stream))
+
+                return _data; 
+            }
+            set
+            {
+                _data = value;
+                OnPropertyChanged(() => Data);
+            }
+        }
+
+        #region Filtering
+
+        bool DatePredicateFilter(object obj)
+        {
+            BankOperation ba = obj as BankOperation;
+            return ba.ExecutionDate.Month == FilterDate.Month && ba.ExecutionDate.Year == FilterDate.Year;
+        }
+
+        private DateTime _filterDate;
+        public DateTime FilterDate
+        {
+            get
+            {
+                return _filterDate;
+            }
+            set
+            {
+                _filterDate = value;
+                OnPropertyChanged(() => FilterDate);
+                if (Data != null)
                 {
-                    _operationRepository.Add(item);
+                    Data.Refresh();
                 }
             }
-            OnPropertyChanged(() => Data);
         }
 
-        public IEnumerable<BankOperation> Data
+
+        bool FieldPredicateFilter(object obj)
         {
-            get { return _operationRepository.GetAll(); }
-        }
+            if(FilterProperty==null || string.IsNullOrEmpty(Filter))
+            {
+                return true;
+            }
 
-        public void Save()
+            BankOperation bo = obj as BankOperation;
+            return obj.GetPropertyValue<BankOperation>(FilterProperty).ToString().Contains(Filter);
+        }
+        
+        DeferredAction defferedDataUpdate;
+
+        public IEnumerable<string> ObjectProperties
         {
-            MessageBox.Show("Saved!");
+            get
+            {
+                return typeof(BankOperation).GetPropertiesNames();
+            }
         }
 
-        public ICommand LoadFileCommand { get; set; }
+        private string _filterProperty;
+        public string FilterProperty
+        {
+            get
+            {
+                return _filterProperty;
+            }
+            set
+            {
+                _filterProperty = value;
+                OnPropertyChanged(() => FilterProperty);
+                Data.Refresh();
+            }
+        }
 
-        public ICommand SaveCommand { get; set; }
+        private string _filter;
+        public string Filter
+        {
+            get
+            {
+                return _filter;
+            }
+            set
+            {
+                _filter = value;
+                OnPropertyChanged(() => Filter);
+                defferedDataUpdate.Go();
+            }
+        }
+
+        #endregion
     }
 }

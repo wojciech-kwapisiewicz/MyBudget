@@ -12,14 +12,9 @@
                    HorizontalAlignment="Center" 
                    Style="{StaticResource HeaderTextBlockStyle}" />
             <Button Content="Start" Command="{Binding NavigateWelcomePage}" />
+            <Button Content="Konta" Command="{Binding NavigateAccounts}" />
+            <Button Content="Wyciągi" Command="{Binding NavigateStatements}" />
             <Button Content="Operacje" Command="{Binding NavigateOperations}" />
-            <Expander Header="Zarządzaj">
-                <StackPanel>
-                    <Button Content="Konta" Command="{Binding NavigateAccounts}" />
-                    <Button Content="Wyciągi" Command="{Binding NavigateImported}" />
-                    <Button Content="Operacje" Command="{Binding NavigateOperations}" />
-                </StackPanel>
-            </Expander>
             <Expander Header="Konfiguracja">
                 <StackPanel>
                     <Button Content="Reguły" Command="{Binding NavigateRules}" />
