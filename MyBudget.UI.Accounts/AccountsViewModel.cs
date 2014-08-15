@@ -17,28 +17,23 @@ namespace MyBudget.UI.Accounts
     public class AccountsViewModel : BindableBase
     {
         IRegionManager _regionManager;
+        IRepository<BankAccount> _bankAccountsRepository;
 
         public AccountsViewModel(
             IRegionManager regionManager,
             IRepository<BankAccount> bankAccountsRepository)
         {
             _regionManager = regionManager;
+            _bankAccountsRepository = bankAccountsRepository;
 
             AddAccount = new DelegateCommand(NavigateToAdd);
             EditAccount = new DelegateCommand(NavigateToEdit, () => SelectedItem != null);
-
-            Data = bankAccountsRepository.GetAll();
+            DeleteAccount = new DelegateCommand(GoDeleteAccount, () => SelectedItem != null);
         }
 
-        private IEnumerable<BankAccount> _Data;
         public IEnumerable<BankAccount> Data
         {
-            get { return _Data; }
-            set
-            {
-                _Data = value;
-                OnPropertyChanged(() => Data);
-            }
+            get { return _bankAccountsRepository.GetAll(); }
         }
 
         private BankAccount _SelectedItem;
@@ -50,6 +45,7 @@ namespace MyBudget.UI.Accounts
                 _SelectedItem = value;
                 OnPropertyChanged(() => SelectedItem);
                 EditAccount.RaiseCanExecuteChanged();
+                DeleteAccount.RaiseCanExecuteChanged();
             }
         }
 
@@ -67,6 +63,12 @@ namespace MyBudget.UI.Accounts
             _regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountView).FullName, parameters);
 
         }
+
         public DelegateCommand DeleteAccount { get; set; }
+        private void GoDeleteAccount()
+        {
+            _bankAccountsRepository.Delete(SelectedItem);
+            OnPropertyChanged(() => Data);
+        }
     }
 }

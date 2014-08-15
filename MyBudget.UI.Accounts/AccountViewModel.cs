@@ -12,13 +12,6 @@ using System.Threading.Tasks;
 
 namespace MyBudget.UI.Accounts
 {
-    public enum EditMode
-    {
-        Add,
-        Edit,
-        ReadOnly
-    }
-
     public class AccountViewModel : BindableBase
     {
         public EditMode EditMode { get; set; }

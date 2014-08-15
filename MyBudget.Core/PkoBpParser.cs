@@ -31,11 +31,17 @@ namespace MyBudget.Core
 
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
+            if (stream == null)
+                throw new ArgumentNullException("stream");
             XDocument doc = XDocument.Load(stream);
             return GetEntriesFromXDocument(doc);
         }
         public IEnumerable<BankOperation> Parse(string inputString)
         {
+            if(!File.Exists(inputString))
+            {
+                throw new ArgumentException("File does not exist.", inputString);
+            }
             XDocument doc = XDocument.Parse(inputString);
             return GetEntriesFromXDocument(doc);
         }
