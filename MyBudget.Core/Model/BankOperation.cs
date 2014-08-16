@@ -12,12 +12,13 @@ namespace MyBudget.Core.Model
 {
     public class BankOperation : IIdentifiable<int>
     {
-        [DontDisplayAttribute]
+        [DontDisplay]
         public int Id { get; set; }
-        [DontDisplayAttribute]
+        [DontDisplay]
         public BankAccount BankAccount { get; set; }
-        [DontDisplayAttribute]
-        public CustomDescription CustomDescription { get; set; }
+
+        [LocalDescription("Numer na wyciągu", Language.Polish)]
+        public int LpOnStatement { get; set; }
         
         [LocalDescription("Typ operacji", Language.Polish)]
         public BankOperationType Type { get; set; }
@@ -29,7 +30,13 @@ namespace MyBudget.Core.Model
         public decimal Amount { get; set; }
         [LocalDescription("Saldo po operacji", Language.Polish)]
         public decimal EndingBalance { get; set; }
+        [LocalDescription("Tytułem", Language.Polish)]
+        public string Title { get; set; }
+        [DontDisplay]
         [LocalDescription("Opis", Language.Polish)]
         public string Description { get; set; }
+        
+        [DontDisplay]
+        public CustomDescription CustomDescription { get; set; }
     }
 }

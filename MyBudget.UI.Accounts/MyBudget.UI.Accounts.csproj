@@ -101,6 +101,7 @@
     <Compile Include="StatementsView.xaml.cs">
       <DependentUpon>StatementsView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="StatementsViewModel.cs" />
     <Page Include="AccountsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -18,6 +18,7 @@ namespace MyBudget.Core
             unityContainer.RegisterType<BankAccountInMemoryRepository>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<BankOperationInMemoryRepository>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<BankOperationTypeInMemoryRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankStatementInMemoryRepository>(new ContainerControlledLifetimeManager());
 
             unityContainer.RegisterType<IContext, Context>();
             unityContainer.RegisterType<ICurrentLanguage, CurrentLanguage>(new InjectionProperty("Language", Language.Polish));
@@ -28,6 +29,8 @@ namespace MyBudget.Core
             unityContainer.RegisterType<IRepository<BankOperation, int>, BankOperationInMemoryRepository>();
             unityContainer.RegisterType<IRepository<BankOperationType>, BankOperationTypeInMemoryRepository>();
             unityContainer.RegisterType<IRepository<BankOperationType, string>, BankOperationTypeInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankStatement>, BankStatementInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankStatement, int>, BankStatementInMemoryRepository>();
         }
     }
 }

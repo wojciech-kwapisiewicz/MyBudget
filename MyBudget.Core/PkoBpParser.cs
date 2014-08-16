@@ -6,6 +6,7 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
@@ -49,10 +50,13 @@ namespace MyBudget.Core
         private IEnumerable<BankOperation> GetEntriesFromXDocument(XDocument document)
         {
             BankAccount account = GetAccount(document);
-            
+
+            int lp = 0;
+
             var operations = document.XPathSelectElements("//operations/operation");
             foreach (var operation in operations)
             {
+                lp++;
                 string orderDate = operation.Descendants("order-date").Single().Value;
                 string executionDate = operation.Descendants("exec-date").Single().Value;
 
@@ -62,17 +66,42 @@ namespace MyBudget.Core
 
                 string typeName = operation.Descendants("type").Single().Value;
 
+                string title = ExtractTitle(description);
+
                 yield return new BankOperation()
                 {
+                    LpOnStatement = lp,
                     BankAccount = account,
                     OrderDate = ParseDate(orderDate),
                     ExecutionDate = ParseDate(executionDate),
                     Amount = ParseDecimal(amount),
                     EndingBalance = ParseDecimal(endingBalance),
+                    Title = title,
                     Description = description,
                     Type = GetType(typeName)
                 };
             }
+        }
+
+        private string ExtractTitle(string description)
+        {
+            string titlePrefix = "Tytuł: ";
+            int start = description.IndexOf(titlePrefix, StringComparison.InvariantCultureIgnoreCase);
+            if (start != -1)
+            {
+                int end = description.IndexOf('\n', start);
+                if (end == -1)
+                {
+                    return description.Substring(start + titlePrefix.Length);
+                }
+                else
+                {
+                    return description.Substring(start + titlePrefix.Length, end - start - titlePrefix.Length);
+                }
+            }
+            return description.IndexOf('\n') == -1 ? 
+                description : 
+                string.Empty;
         }
 
         private BankAccount GetAccount(XDocument document)

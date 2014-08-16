@@ -55,6 +55,7 @@
     <Compile Include="InMemoryPersistance\BankAccountInMemoryRepository.cs" />
     <Compile Include="InMemoryPersistance\BankOperationInMemoryRepository.cs" />
     <Compile Include="InMemoryPersistance\BankOperationTypeInMemoryRepository.cs" />
+    <Compile Include="InMemoryPersistance\BankStatementInMemoryRepository.cs" />
     <Compile Include="InMemoryPersistance\Context.cs" />
     <Compile Include="IClassifier.cs" />
     <Compile Include="IParser.cs" />
@@ -67,6 +68,7 @@
     <Compile Include="Model\BankOperation.cs" />
     <Compile Include="Model\BankOperationType.cs" />
     <Compile Include="DataContext\IRepository.cs" />
+    <Compile Include="Model\BankStatement.cs" />
     <Compile Include="PkoBpParser.cs" />
     <Compile Include="Model\CustomDescription.cs" />
     <Compile Include="ManifestStreamReaderHelper.cs" />

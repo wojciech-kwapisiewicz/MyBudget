@@ -12,7 +12,7 @@
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="Dodaj z pliku"
-                    Command="{Binding LoadFileCommand}" />
+                    Command="{Binding ViewModel.LoadFileCommand}" />
         </StackPanel>
     </Grid>
 </UserControl>

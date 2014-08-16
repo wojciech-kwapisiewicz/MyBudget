@@ -20,7 +20,7 @@ namespace MyBudget.UI.Core.Controls
             var text = new TextBlock();
             text.TextAlignment = System.Windows.TextAlignment.Right;
             text.HorizontalAlignment = System.Windows.HorizontalAlignment.Right;
-            text.MinWidth = 110;
+            text.MinWidth = 70;
             var currentBinding = this.Binding as Binding;
             var bindingToSet = new Binding
             {

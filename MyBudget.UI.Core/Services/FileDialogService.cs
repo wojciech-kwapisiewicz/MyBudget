@@ -8,18 +8,41 @@ using System.Threading.Tasks;
 
 namespace MyBudget.UI.Core.Services
 {
+    public class OpenFileResult : IDisposable
+    {
+        public OpenFileResult(Stream stream, string fileName)
+        {
+            FileName = fileName;
+            Stream = stream;
+        }
+
+        public string FileName { get; private set; }
+        public Stream Stream { get; private set; }
+
+        public void Dispose()
+        {
+            if (Stream != null)
+            {
+                Stream.Dispose();
+            }
+        }
+    }
+
     public class FileDialogService
     {
-        public Stream OpenFile()
+        public OpenFileResult OpenFile()
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = "Xml Files (.xml)|*.xml|Text Files (.txt)|*.txt|All Files (*.*)|*.*";
             dialog.FilterIndex = 1;
             if (dialog.ShowDialog() == true)
             {
-                return dialog.OpenFile();
+                string fileName = dialog.SafeFileName;
+                Stream stream = dialog.OpenFile();
+                return new OpenFileResult(stream, fileName);
             }
-            return null;
+
+            return new OpenFileResult(null, null);
         }
     }
 }

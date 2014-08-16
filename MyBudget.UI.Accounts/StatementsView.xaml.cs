@@ -26,31 +26,13 @@ namespace MyBudget.UI.Accounts
     /// </summary>
     public partial class StatementsView : UserControl
     {
-        PkoBpParser _parser;
-        IRepository<BankOperation> _operationRepository;
-
-        public StatementsView(PkoBpParser parser,
-            IRepository<BankOperation> operationRepository)
+        public StatementsView(StatementsViewModel viewModel)
         {
-            _parser = parser;
-            _operationRepository = operationRepository;
-
-            LoadFileCommand = new DelegateCommand(LoadFromFile);
+            ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
         }
 
-        public ICommand LoadFileCommand { get; set; }
-
-        public void LoadFromFile()
-        {
-            using (Stream stream = new FileDialogService().OpenFile())
-            {
-                foreach (var item in _parser.Parse(stream))
-                {
-                    _operationRepository.Add(item);
-                }
-            }
-        }
+        public StatementsViewModel ViewModel { get; set; }
     }
 }
