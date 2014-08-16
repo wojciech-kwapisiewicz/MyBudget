@@ -58,6 +58,11 @@
     <Compile Include="InMemoryPersistance\Context.cs" />
     <Compile Include="IClassifier.cs" />
     <Compile Include="IParser.cs" />
+    <Compile Include="Localization\CurrentLanguage.cs" />
+    <Compile Include="Localization\DontDisplayAttribute.cs" />
+    <Compile Include="Localization\ICurrentLanguage.cs" />
+    <Compile Include="Localization\Language.cs" />
+    <Compile Include="Localization\LocalDescriptionAttribute.cs" />
     <Compile Include="Model\BankAccount.cs" />
     <Compile Include="Model\BankOperation.cs" />
     <Compile Include="Model\BankOperationType.cs" />

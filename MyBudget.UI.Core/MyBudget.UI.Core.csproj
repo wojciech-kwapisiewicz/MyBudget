@@ -65,6 +65,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="LocalizedReflection.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="RegionNames.cs" />

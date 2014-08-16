@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Unity;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.InMemoryPersistance;
+using MyBudget.Core.Localization;
 using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace MyBudget.Core
             unityContainer.RegisterType<BankOperationTypeInMemoryRepository>(new ContainerControlledLifetimeManager());
 
             unityContainer.RegisterType<IContext, Context>();
+            unityContainer.RegisterType<ICurrentLanguage, CurrentLanguage>(new InjectionProperty("Language", Language.Polish));
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountInMemoryRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountInMemoryRepository>();

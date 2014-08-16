@@ -11,14 +11,23 @@ using System.Windows.Threading;
 
 namespace MyBudget.UI.Accounts
 {
+    public class CustomFilterProperty<T>
+    {
+        public string PropertyName{get;set;}
+        public Func<T, string, bool> FilteringFunction { get; set; }
+    }
+
     public class OperationsViewModel : BindableBase
     {
         IRepository<BankOperation> _operationRepository;
+        LocalizedReflection _reflectionHelper;
 
         public OperationsViewModel(
             PkoBpParser parser,
-            IRepository<BankOperation> operationRepository)
+            IRepository<BankOperation> operationRepository,
+            LocalizedReflection reflectionHelper)
         {
+            _reflectionHelper = reflectionHelper;
             _operationRepository = operationRepository;
 
             FilterDate = DateTime.Now;
@@ -87,7 +96,16 @@ namespace MyBudget.UI.Accounts
             }
 
             BankOperation bo = obj as BankOperation;
-            return obj.GetPropertyValue<BankOperation>(FilterProperty).ToString().Contains(Filter);
+            var f = CustomFilterProperties.SingleOrDefault(a => a.PropertyName == FilterProperty);
+            if(f!=null)
+            {
+                return f.FilteringFunction(bo, Filter);
+            }
+
+            return _reflectionHelper
+                .GetPropertyValue<BankOperation>(obj, FilterProperty)
+                .ToString().ToLowerInvariant()
+                .Contains(Filter.ToLowerInvariant());
         }
         
         DeferredAction defferedDataUpdate;
@@ -96,9 +114,24 @@ namespace MyBudget.UI.Accounts
         {
             get
             {
-                return typeof(BankOperation).GetPropertiesNames();
+                return
+                    CustomFilterProperties.Select(a => a.PropertyName).Concat(
+                    _reflectionHelper.GetPropertiesNames(typeof(BankOperation)));
             }
         }
+
+        public List<CustomFilterProperty<BankOperation>> CustomFilterProperties = new List<CustomFilterProperty<BankOperation>>
+        {
+            new CustomFilterProperty<BankOperation>()
+            {
+                PropertyName = "Konto bankowe",
+                FilteringFunction = (operation,filter) => 
+                    operation.BankAccount!=null && 
+                    operation.BankAccount.Description.ToLowerInvariant()
+                        .Contains(filter.ToLowerInvariant())
+            }
+        };
+
 
         private string _filterProperty;
         public string FilterProperty
