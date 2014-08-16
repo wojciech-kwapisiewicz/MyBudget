@@ -19,7 +19,7 @@ namespace MyBudget.UI.Core.Controls
             string format = parameter as string;
             if (!string.IsNullOrEmpty(format))
             {
-                return date.ToString(format, CultureInfo.CurrentCulture);
+                return date.ToLocalTime().ToString(format, CultureInfo.CurrentCulture);
             }
             else
             {

@@ -10,7 +10,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Data;
 using System.Windows.Input;
+using Xceed.Wpf.Toolkit;
 
 namespace MyBudget.UI.Accounts
 {
@@ -27,9 +29,31 @@ namespace MyBudget.UI.Accounts
             _parser = parser;
             _operationRepository = operationRepository;
             _statementsRepository = statementsRepository;
-
+            ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
         }
+
+        private void ResetListData()
+        {
+            var list = new ListCollectionView(_statementsRepository.GetAll().ToList());
+            Data = list;
+        }
+
+        private ListCollectionView _data;
+        public ListCollectionView Data
+        {
+            get
+            {
+
+                return _data;
+            }
+            set
+            {
+                _data = value;
+                OnPropertyChanged(() => Data);
+            }
+        }
+
         public ICommand LoadFileCommand { get; set; }
 
         public void LoadFromFile()
@@ -41,8 +65,10 @@ namespace MyBudget.UI.Accounts
 
                 BankStatement statement = new BankStatement()
                 {
-                    FileName = file.FileName
+                    FileName = file.FileName,
+                    LoadTime = DateTime.UtcNow
                 };
+
                 _statementsRepository.Add(statement);
 
                 foreach (var item in OnlyNew(
@@ -52,6 +78,8 @@ namespace MyBudget.UI.Accounts
                     _operationRepository.Add(item);
                 }
             }
+
+            ResetListData();
         }
 
         public IEnumerable<BankOperation> OnlyNew(

@@ -3,8 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:customGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <customGrid:DateToStringConverter x:Key="dateConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -14,5 +18,16 @@
             <Button Content="Dodaj z pliku"
                     Command="{Binding ViewModel.LoadFileCommand}" />
         </StackPanel>
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding ViewModel.Data}"
+                  >
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" />
+                <DataGridTextColumn Header="Data wczytania" Binding="{Binding LoadTime, Converter={StaticResource dateConverter}, ConverterParameter=g}" />
+            </DataGrid.Columns>
+            
+        </DataGrid>
     </Grid>
 </UserControl>

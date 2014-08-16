@@ -34,11 +34,7 @@
                                   IsReadOnly="True"
                                   GridForType="{Binding ViewModel.GridType}"
                                   LocalizedReflection="{Binding LocalizedReflection, RelativeSource={RelativeSource AncestorType=Window}}"
-                  >
-            
-            <!--<DataGrid.Columns>
-                <DataGridTextColumn Header="Description" Width="175" Binding="{Binding Description}" ></DataGridTextColumn>
-            </DataGrid.Columns>-->
+                                  >
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
