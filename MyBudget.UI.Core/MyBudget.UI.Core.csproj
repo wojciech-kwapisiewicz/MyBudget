@@ -65,7 +65,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DataGridDateColumn.cs" />
+    <Compile Include="Controls\DataGridDecimalColumn.cs" />
+    <Compile Include="Controls\DecimalToStringConverter.cs" />
     <Compile Include="Controls\ExtendedDataGrid.cs" />
+    <Compile Include="Controls\DateToStringConverter.cs" />
     <Compile Include="LocalizedReflection.cs" />
     <Compile Include="ReflectionHelper.cs" />
     <Compile Include="DeferredAction.cs" />

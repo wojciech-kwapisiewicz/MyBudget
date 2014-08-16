@@ -85,9 +85,41 @@ namespace MyBudget.UI.Core.Controls
                     grid.LocalizedReflection.GetPropertyName(property) :
                     property.Name;
 
-                grid.Columns.Add(new DataGridTextColumn() { Header = header, Binding = new Binding(property.Name) });
+                DataGridColumn column = GetColumn(property, header);
+                grid.Columns.Add(column);
             }
+        }
 
-        }        
+        private static DataGridColumn GetColumn(System.Reflection.PropertyInfo property, string header)
+        {
+            DataGridColumn column;
+            if (property.PropertyType == typeof(DateTime))
+            {
+                column = new DataGridDateColumn()
+                {
+                    Header = header,
+                    Binding = new Binding(property.Name),
+                    MinWidth = 70,
+                };
+            }
+            else if (property.PropertyType == typeof(decimal))
+            {
+                column = new DataGridDecimalColumn()
+                {
+                    Header = header,
+                    Binding = new Binding(property.Name),
+                    MinWidth = 110,
+                };
+            }
+            else
+            {
+                column = new DataGridTextColumn()
+                {
+                    Header = header,
+                    Binding = new Binding(property.Name)
+                };
+            }
+            return column;
+        }
     }
 }
