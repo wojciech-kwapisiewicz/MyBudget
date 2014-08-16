@@ -61,6 +61,9 @@ namespace MyBudget.UI.Accounts
             }
         }
 
+
+        public Type GridType { get { return typeof(BankOperation); } }
+
         #region Filtering
 
         bool DatePredicateFilter(object obj)

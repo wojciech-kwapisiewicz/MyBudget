@@ -17,16 +17,23 @@ namespace MyBudget.UI.Core
             _currentLanguage = currentLanguage;
         }
 
+        public string GetPropertyName(PropertyInfo property)
+        {
+            var localizationAttribute = property
+                .GetCustomAttributes(typeof(LocalDescriptionAttribute), false)
+                .Cast<LocalDescriptionAttribute>()
+                .SingleOrDefault(a => a.Language == _currentLanguage.Language);
+
+            return localizationAttribute == null ? property.Name : localizationAttribute.Description;
+        }
+
         public IEnumerable<string> GetPropertiesNames(Type type)
         {
             foreach (var property in type.GetProperties().FilterOutDontDisplay())
             {
-                var localizationAttribute = property
-                    .GetCustomAttributes(typeof(LocalDescriptionAttribute), false)
-                    .Cast<LocalDescriptionAttribute>()
-                    .SingleOrDefault(a => a.Language == _currentLanguage.Language);
 
-                yield return localizationAttribute == null ? property.Name : localizationAttribute.Description;
+
+                yield return GetPropertyName(property);
             }
         }
 
