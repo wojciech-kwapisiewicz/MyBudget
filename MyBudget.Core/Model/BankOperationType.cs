@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.Model
 {
-    public class BankOperationType : IIdentifiable<string>
+    public class BankOperationType : IIdentifiable<string>, IComparable   
     {
         [DontDisplayAttribute]
         public string Id
@@ -18,5 +18,15 @@ namespace MyBudget.Core.Model
 
         [LocalDescription("Nazwa",Language.Polish)]
         public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return Name;
+        }
+
+        public int CompareTo(object other)
+        {
+            return this.Name.CompareTo(((BankOperationType)other).Name);
+        }
     }
 }

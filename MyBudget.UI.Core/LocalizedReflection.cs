@@ -27,17 +27,7 @@ namespace MyBudget.UI.Core
             return localizationAttribute == null ? property.Name : localizationAttribute.Description;
         }
 
-        public IEnumerable<string> GetPropertiesNames(Type type)
-        {
-            foreach (var property in type.GetProperties().FilterOutDontDisplay())
-            {
-
-
-                yield return GetPropertyName(property);
-            }
-        }
-
-        public object GetPropertyValue<T>(object obj, string propertyName)
+        public PropertyInfo GetPropertyInfo<T>(string propertyName)
         {
             PropertyInfo pi = typeof(T).GetProperties().FilterOutDontDisplay()
                 .SingleOrDefault(a => a
@@ -49,7 +39,20 @@ namespace MyBudget.UI.Core
             {
                 pi = typeof(T).GetProperties().FilterOutDontDisplay().Single(a => a.Name == propertyName);
             }
+            return pi;
+        }
+        
+        public IEnumerable<string> GetPropertiesNames(Type type)
+        {
+            foreach (var property in type.GetProperties().FilterOutDontDisplay())
+            {
+                yield return GetPropertyName(property);
+            }
+        }
 
+        public object GetPropertyValue<T>(object obj, string propertyName)
+        {
+            PropertyInfo pi = GetPropertyInfo<T>(propertyName);
             return pi.GetValue(obj);
         }
     }

@@ -118,8 +118,8 @@ namespace MyBudget.UI.Accounts
             get
             {
                 return
-                    CustomFilterProperties.Select(a => a.PropertyName).Concat(
-                    _reflectionHelper.GetPropertiesNames(typeof(BankOperation)));
+                    //CustomFilterProperties.Select(a => a.PropertyName).Concat();
+                    _reflectionHelper.GetPropertiesNames(typeof(BankOperation));
             }
         }
 
@@ -147,7 +147,30 @@ namespace MyBudget.UI.Accounts
             {
                 _filterProperty = value;
                 OnPropertyChanged(() => FilterProperty);
-                Data.Refresh();
+                if(Data!=null)
+                {
+                    Data.Refresh();
+                }
+            }
+        }
+
+        private string _groupProperty;
+        public string GroupProperty
+        {
+            get
+            {
+                return _groupProperty;
+            }
+            set
+            {
+                _groupProperty = value;
+                OnPropertyChanged(() => GroupProperty);
+                Data.GroupDescriptions.Clear();
+                if (!string.IsNullOrEmpty(_groupProperty))
+                {
+                    var propertyInfo = _reflectionHelper.GetPropertyInfo<BankOperation>(_groupProperty);
+                    Data.GroupDescriptions.Add(new PropertyGroupDescription(propertyInfo.Name));
+                }
             }
         }
 
