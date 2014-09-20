@@ -86,8 +86,14 @@ namespace MyBudget.UI.Core.Controls
                     property.Name;
 
                 DataGridColumn column = GetColumn(property, header);
+                if (grid.Columns.Count == properties.Count() - 1)
+                {
+                    column.MinWidth = 100;
+                    column.Width = new DataGridLength(1, DataGridLengthUnitType.Star);
+                }
                 grid.Columns.Add(column);
             }
+
         }
 
         private static DataGridColumn GetColumn(System.Reflection.PropertyInfo property, string header)

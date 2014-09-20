@@ -24,8 +24,8 @@
                   ItemsSource="{Binding ViewModel.Data}"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" />
                 <DataGridTextColumn Header="Data wczytania" Binding="{Binding LoadTime, Converter={StaticResource dateConverter}, ConverterParameter=g}" />
+                <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" Width="*"/>
             </DataGrid.Columns>
             
         </DataGrid>
