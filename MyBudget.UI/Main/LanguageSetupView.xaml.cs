@@ -1,5 +1,4 @@
-﻿using Microsoft.Practices.Prism.Regions;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,18 +16,17 @@ using System.Windows.Shapes;
 namespace MyBudget.UI.Main
 {
     /// <summary>
-    /// Interaction logic for WelcomePageView.xaml
+    /// Interaction logic for LanguageSetupView.xaml
     /// </summary>
-    public partial class WelcomePageView : UserControl, IRegionMemberLifetime
+    public partial class LanguageSetupView : UserControl
     {
-        public WelcomePageView()
+        public LanguageSetupView(LanguageSetupViewModel viewModel)
         {
+            ViewModel = viewModel;
+            DataContext = this;
             InitializeComponent();
         }
 
-        public bool KeepAlive
-        {
-            get { return false; }
-        }
+        public LanguageSetupViewModel ViewModel { get; set; }
     }
 }

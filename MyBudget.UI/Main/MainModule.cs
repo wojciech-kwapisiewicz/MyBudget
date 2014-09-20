@@ -29,6 +29,9 @@ namespace MyBudget.UI.Main
             //Starting regions registration
             _regionManager.RegisterViewWithRegion(RegionNames.MainNavigation, typeof(MainNavigationView));
             _regionManager.RegisterViewWithRegion(RegionNames.MainContent, typeof(WelcomePageView));
+
+            //Configuration
+            _container.RegisterType<object, LanguageSetupView>(typeof(LanguageSetupView).FullName);
         }
     }
 }

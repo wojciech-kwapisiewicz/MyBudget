@@ -40,6 +40,9 @@ namespace MyBudget.UI.Main
             NavigateOperations = new DelegateCommand(() =>
     regionManager.RequestNavigate(RegionNames.MainContent, typeof(OperationsView).FullName));
 
+            NavigateLanguageSetup = new DelegateCommand(() =>
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(LanguageSetupView).FullName));
+
             InitializeComponent();
         }
 
@@ -47,5 +50,6 @@ namespace MyBudget.UI.Main
         public ICommand NavigateAccounts { get; set; }
         public ICommand NavigateStatements { get; set; }
         public ICommand NavigateOperations { get; set; }
+        public ICommand NavigateLanguageSetup { get; set; }
     }
 }
