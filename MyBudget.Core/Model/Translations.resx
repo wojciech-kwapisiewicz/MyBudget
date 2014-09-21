@@ -117,19 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonAdd" xml:space="preserve">
-    <value>Add</value>
+  <data name="BankAccount_Description" xml:space="preserve">
+    <value>Description</value>
   </data>
-  <data name="ButtonCancel" xml:space="preserve">
-    <value>Cancel</value>
+  <data name="BankAccount_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="ButtonDelete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="BankAccount_Number" xml:space="preserve">
+    <value>Number</value>
   </data>
-  <data name="ButtonEdit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="BankOperationType_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="ButtonSave" xml:space="preserve">
-    <value>Save</value>
+  <data name="BankOperation_Amount" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="BankOperation_BankAccount" xml:space="preserve">
+    <value>Bank account</value>
+  </data>
+  <data name="BankOperation_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="BankOperation_EndingBalance" xml:space="preserve">
+    <value>Ending balance</value>
+  </data>
+  <data name="BankOperation_ExecutionDate" xml:space="preserve">
+    <value>Execution date</value>
+  </data>
+  <data name="BankOperation_LpOnStatement" xml:space="preserve">
+    <value>Number</value>
+  </data>
+  <data name="BankOperation_OrderDate" xml:space="preserve">
+    <value>Order date</value>
+  </data>
+  <data name="BankOperation_Title" xml:space="preserve">
+    <value>Title</value>
+  </data>
+  <data name="BankOperation_Type" xml:space="preserve">
+    <value>Type</value>
+  </data>
+  <data name="CustomDescription_CardNumber" xml:space="preserve">
+    <value>Card number</value>
+  </data>
+  <data name="CustomDescription_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="CustomDescription_SubCategory" xml:space="preserve">
+    <value>Sub category</value>
   </data>
 </root>

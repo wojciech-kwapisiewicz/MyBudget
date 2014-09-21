@@ -118,39 +118,39 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AccountDescription" xml:space="preserve">
-    <value>Account description</value>
+    <value>Opis konta</value>
   </data>
   <data name="AccountName" xml:space="preserve">
-    <value>Account name</value>
+    <value>Nazwa konta</value>
   </data>
   <data name="AccountNumber" xml:space="preserve">
-    <value>Account number</value>
+    <value>Numer konta</value>
   </data>
   <data name="AddFromFile" xml:space="preserve">
-    <value>Add from file</value>
+    <value>Dodaj z pliku</value>
   </data>
   <data name="FileName" xml:space="preserve">
-    <value>File name</value>
+    <value>Nazwa pliku</value>
   </data>
   <data name="LabelContains" xml:space="preserve">
-    <value> contains </value>
+    <value> zawiera </value>
   </data>
   <data name="LabelField" xml:space="preserve">
-    <value>Field</value>
+    <value>Pole </value>
   </data>
   <data name="LoadTime" xml:space="preserve">
-    <value>Load time</value>
+    <value>Data wczytania</value>
   </data>
   <data name="Month" xml:space="preserve">
-    <value>Month</value>
+    <value>Miesiąc</value>
   </data>
   <data name="TextBlockFilter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtrowanie</value>
   </data>
   <data name="TextBlockGroup" xml:space="preserve">
-    <value>Group</value>
+    <value>Grupowanie</value>
   </data>
   <data name="WatermarkFilter" xml:space="preserve">
-    <value>Filter</value>
+    <value>Filtr</value>
   </data>
 </root>

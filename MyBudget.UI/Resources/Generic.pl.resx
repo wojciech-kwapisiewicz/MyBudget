@@ -117,31 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonNavigateAccounts" xml:space="preserve">
-    <value>Accounts</value>
+  <data name="ButtonAdd" xml:space="preserve">
+    <value>Dodaj</value>
   </data>
-  <data name="ButtonNavigateLanguageSetup" xml:space="preserve">
-    <value>Lang</value>
+  <data name="ButtonCancel" xml:space="preserve">
+    <value>Anuluj</value>
   </data>
-  <data name="ButtonNavigateOperations" xml:space="preserve">
-    <value>Operations</value>
+  <data name="ButtonDelete" xml:space="preserve">
+    <value>Usuń</value>
   </data>
-  <data name="ButtonNavigateRules" xml:space="preserve">
-    <value>Rules</value>
+  <data name="ButtonEdit" xml:space="preserve">
+    <value>Edytuj</value>
   </data>
-  <data name="ButtonNavigateStatements" xml:space="preserve">
-    <value>Statements</value>
-  </data>
-  <data name="ButtonNavigateWelcomePage" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="ExpanderConfiguration" xml:space="preserve">
-    <value>Configuration</value>
-  </data>
-  <data name="TextBlockNavigation" xml:space="preserve">
-    <value>Navigation</value>
-  </data>
-  <data name="TextChooseLanguage" xml:space="preserve">
-    <value>Language</value>
+  <data name="ButtonSave" xml:space="preserve">
+    <value>Zapisz</value>
   </data>
 </root>

@@ -9,6 +9,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
@@ -17,7 +18,11 @@
         </Grid.ColumnDefinitions>
         <Label Content="{lex:Loc MyBudget.UI:Resource:TextChooseLanguage}" />
         <ComboBox Grid.Column="1"
-                  SelectedItem="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=TwoWay}"
+                  SelectedItem="{Binding ViewModel.CurrentUICulture, Mode=TwoWay}"
+                  ItemsSource="{Binding ViewModel.AvailableUICultures}" />
+        <Label Content="2" Grid.Row="1" />
+        <ComboBox Grid.Column="1" Grid.Row="1"
+                  SelectedItem="{Binding ViewModel.CurrentCulture, Mode=TwoWay}"
                   ItemsSource="{Binding ViewModel.AvailableCultures}" />
     </Grid>
 </UserControl>

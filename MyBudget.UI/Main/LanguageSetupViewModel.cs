@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
+using MyBudget.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -10,20 +11,50 @@ namespace MyBudget.UI.Main
 {
     public class LanguageSetupViewModel : BindableBase
     {
-        public LanguageSetupViewModel()
+        ILanguageSettings _languageSettings;
+
+        public LanguageSetupViewModel(ILanguageSettings languageSettings)
         {
-            var a = WPFLocalizeExtension.Engine.LocalizeDictionary.Instance.Culture;
-            var b = WPFLocalizeExtension.Providers.ResxLocalizationProvider.Instance.AvailableCultures;
-            CurrentCulture = System.Threading.Thread.CurrentThread.CurrentCulture;
+            _languageSettings = languageSettings;
         }
 
-        public CultureInfo CurrentCulture { get; set; }
+        public CultureInfo CurrentCulture
+        {
+            get
+            {
+                return _languageSettings.CurrentCulture;
+            }
+            set
+            {
+                _languageSettings.CurrentCulture = value;
+            }
+        }
+
+        public CultureInfo CurrentUICulture
+        {
+            get
+            {
+                return _languageSettings.CurrentUICulture;
+            }
+            set
+            {
+                _languageSettings.CurrentUICulture = value;
+            }
+        }
+
+        public IEnumerable<CultureInfo> AvailableUICultures
+        {
+            get
+            {
+                return _languageSettings.AvailableUICultures;
+            }
+        }
+
         public IEnumerable<CultureInfo> AvailableCultures
         {
             get
             {
-                return WPFLocalizeExtension.Providers.ResxLocalizationProvider.Instance.AvailableCultures;
-                //return CultureInfo.GetCultures(CultureTypes.SpecificCultures);
+                return _languageSettings.AvailableCultures;
             }
         }
     }

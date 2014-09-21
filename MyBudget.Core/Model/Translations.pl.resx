@@ -117,31 +117,52 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="ButtonNavigateAccounts" xml:space="preserve">
-    <value>Accounts</value>
+  <data name="BankAccount_Description" xml:space="preserve">
+    <value>Opis</value>
   </data>
-  <data name="ButtonNavigateLanguageSetup" xml:space="preserve">
-    <value>Lang</value>
+  <data name="BankAccount_Name" xml:space="preserve">
+    <value>Nazwa</value>
   </data>
-  <data name="ButtonNavigateOperations" xml:space="preserve">
-    <value>Operations</value>
+  <data name="BankAccount_Number" xml:space="preserve">
+    <value>Numer</value>
   </data>
-  <data name="ButtonNavigateRules" xml:space="preserve">
-    <value>Rules</value>
+  <data name="BankOperationType_Name" xml:space="preserve">
+    <value>Name</value>
   </data>
-  <data name="ButtonNavigateStatements" xml:space="preserve">
-    <value>Statements</value>
+  <data name="BankOperation_Amount" xml:space="preserve">
+    <value>Kwota</value>
   </data>
-  <data name="ButtonNavigateWelcomePage" xml:space="preserve">
-    <value>Home</value>
+  <data name="BankOperation_BankAccount" xml:space="preserve">
+    <value>Konto bankowe</value>
   </data>
-  <data name="ExpanderConfiguration" xml:space="preserve">
-    <value>Configuration</value>
+  <data name="BankOperation_Description" xml:space="preserve">
+    <value>Opis</value>
   </data>
-  <data name="TextBlockNavigation" xml:space="preserve">
-    <value>Navigation</value>
+  <data name="BankOperation_EndingBalance" xml:space="preserve">
+    <value>Saldo po operacji</value>
   </data>
-  <data name="TextChooseLanguage" xml:space="preserve">
-    <value>Language</value>
+  <data name="BankOperation_ExecutionDate" xml:space="preserve">
+    <value>Data wykonania</value>
+  </data>
+  <data name="BankOperation_LpOnStatement" xml:space="preserve">
+    <value>Numer na wyciągu</value>
+  </data>
+  <data name="BankOperation_OrderDate" xml:space="preserve">
+    <value>Data zlecenia</value>
+  </data>
+  <data name="BankOperation_Title" xml:space="preserve">
+    <value>Tytułem</value>
+  </data>
+  <data name="BankOperation_Type" xml:space="preserve">
+    <value>Typ operacji</value>
+  </data>
+  <data name="CustomDescription_CardNumber" xml:space="preserve">
+    <value>Numer karty</value>
+  </data>
+  <data name="CustomDescription_Category" xml:space="preserve">
+    <value>Kategoria</value>
+  </data>
+  <data name="CustomDescription_SubCategory" xml:space="preserve">
+    <value>Podkategoria</value>
   </data>
 </root>

@@ -61,7 +61,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dodaj.
+        ///   Looks up a localized string similar to Add.
         /// </summary>
         internal static string ButtonAdd {
             get {
@@ -70,7 +70,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Anuluj.
+        ///   Looks up a localized string similar to Cancel.
         /// </summary>
         internal static string ButtonCancel {
             get {
@@ -79,7 +79,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Usuń.
+        ///   Looks up a localized string similar to Delete.
         /// </summary>
         internal static string ButtonDelete {
             get {
@@ -88,7 +88,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Edytuj.
+        ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string ButtonEdit {
             get {
@@ -97,7 +97,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Zapisz.
+        ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string ButtonSave {
             get {

@@ -61,7 +61,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Opis konta.
+        ///   Looks up a localized string similar to Account description.
         /// </summary>
         internal static string AccountDescription {
             get {
@@ -70,7 +70,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nazwa konta.
+        ///   Looks up a localized string similar to Account name.
         /// </summary>
         internal static string AccountName {
             get {
@@ -79,7 +79,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numer konta.
+        ///   Looks up a localized string similar to Account number.
         /// </summary>
         internal static string AccountNumber {
             get {
@@ -88,7 +88,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Dodaj z pliku.
+        ///   Looks up a localized string similar to Add from file.
         /// </summary>
         internal static string AddFromFile {
             get {
@@ -97,7 +97,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nazwa pliku.
+        ///   Looks up a localized string similar to File name.
         /// </summary>
         internal static string FileName {
             get {
@@ -106,7 +106,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  zawiera .
+        ///   Looks up a localized string similar to  contains .
         /// </summary>
         internal static string LabelContains {
             get {
@@ -115,7 +115,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pole .
+        ///   Looks up a localized string similar to Field.
         /// </summary>
         internal static string LabelField {
             get {
@@ -124,7 +124,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Data wczytania.
+        ///   Looks up a localized string similar to Load time.
         /// </summary>
         internal static string LoadTime {
             get {
@@ -133,7 +133,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Miesiąc.
+        ///   Looks up a localized string similar to Month.
         /// </summary>
         internal static string Month {
             get {
@@ -142,7 +142,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtrowanie.
+        ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string TextBlockFilter {
             get {
@@ -151,7 +151,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Grupowanie.
+        ///   Looks up a localized string similar to Group.
         /// </summary>
         internal static string TextBlockGroup {
             get {
@@ -160,7 +160,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtr.
+        ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string WatermarkFilter {
             get {

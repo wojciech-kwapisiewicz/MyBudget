@@ -70,10 +70,9 @@
     <Compile Include="Controls\DecimalToStringConverter.cs" />
     <Compile Include="Controls\ExtendedDataGrid.cs" />
     <Compile Include="Controls\DateToStringConverter.cs" />
-    <Compile Include="LocalizedReflection.cs" />
-    <Compile Include="ReflectionHelper.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="RegionNames.cs" />
+    <Compile Include="ResourceManagerHelper.cs" />
     <Compile Include="Services\FileDialogService.cs" />
   </ItemGroup>
   <ItemGroup>

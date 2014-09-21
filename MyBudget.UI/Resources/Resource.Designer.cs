@@ -61,7 +61,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Konta.
+        ///   Looks up a localized string similar to Accounts.
         /// </summary>
         internal static string ButtonNavigateAccounts {
             get {
@@ -70,7 +70,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Język.
+        ///   Looks up a localized string similar to Lang.
         /// </summary>
         internal static string ButtonNavigateLanguageSetup {
             get {
@@ -79,7 +79,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operacje.
+        ///   Looks up a localized string similar to Operations.
         /// </summary>
         internal static string ButtonNavigateOperations {
             get {
@@ -88,7 +88,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Reguły.
+        ///   Looks up a localized string similar to Rules.
         /// </summary>
         internal static string ButtonNavigateRules {
             get {
@@ -97,7 +97,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wyciągi.
+        ///   Looks up a localized string similar to Statements.
         /// </summary>
         internal static string ButtonNavigateStatements {
             get {
@@ -106,7 +106,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Start.
+        ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string ButtonNavigateWelcomePage {
             get {
@@ -115,7 +115,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Konfiguracja.
+        ///   Looks up a localized string similar to Configuration.
         /// </summary>
         internal static string ExpanderConfiguration {
             get {
@@ -124,7 +124,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Nawigacja.
+        ///   Looks up a localized string similar to Navigation.
         /// </summary>
         internal static string TextBlockNavigation {
             get {
@@ -133,7 +133,7 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Język aplikacji.
+        ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string TextChooseLanguage {
             get {

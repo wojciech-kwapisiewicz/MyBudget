@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -51,16 +52,6 @@ namespace MyBudget.UI.Core.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ExtendedDataGrid), new FrameworkPropertyMetadata(typeof(ExtendedDataGrid)));
         }
 
-        public LocalizedReflection LocalizedReflection
-        {
-            get { return (LocalizedReflection)GetValue(LocalizedReflectionProperty); }
-            set { SetValue(LocalizedReflectionProperty, value); }
-        }
-
-        // Using a DependencyProperty as the backing store for LocalizedReflection.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty LocalizedReflectionProperty =
-            DependencyProperty.Register("LocalizedReflection", typeof(LocalizedReflection), typeof(ExtendedDataGrid), new PropertyMetadata(null, SetUpColumns));
-
         public Type GridForType
         {
             get { return (Type)GetValue(GridForTypeProperty); }
@@ -76,16 +67,13 @@ namespace MyBudget.UI.Core.Controls
             var grid = (d as ExtendedDataGrid);
             grid.Columns.Clear();
 
-            var properties = grid.GridForType.GetProperties().FilterOutDontDisplay();
+            var properties = grid.GridForType.GetProperties();
 
             foreach (var property in properties)
             {
-                string header =
-                    grid.LocalizedReflection != null ?
-                    grid.LocalizedReflection.GetPropertyName(property) :
-                    property.Name;
-
+                var header = ResourceManagerHelper.GetTranslation(grid.GridForType, property.Name);
                 DataGridColumn column = GetColumn(property, header);
+
                 if (grid.Columns.Count == properties.Count() - 1)
                 {
                     column.MinWidth = 100;

@@ -11,6 +11,13 @@ using System.Windows.Threading;
 
 namespace MyBudget.UI.Accounts
 {
+
+    public class PropertyDescription
+    {
+        public string Translation { get; set; }
+        public string Name { get; set; }
+    }
+
     public class CustomFilterProperty<T>
     {
         public string PropertyName{get;set;}
@@ -20,17 +27,15 @@ namespace MyBudget.UI.Accounts
     public class OperationsViewModel : BindableBase
     {
         IRepository<BankOperation> _operationRepository;
-        LocalizedReflection _reflectionHelper;
 
         public OperationsViewModel(
             PkoBpParser parser,
-            IRepository<BankOperation> operationRepository,
-            LocalizedReflection reflectionHelper)
+            IRepository<BankOperation> operationRepository)
         {
-            _reflectionHelper = reflectionHelper;
             _operationRepository = operationRepository;
 
             FilterDate = DateTime.Now;
+
             ResetListData();
 
             defferedDataUpdate = new DeferredAction(
@@ -93,33 +98,45 @@ namespace MyBudget.UI.Accounts
 
         bool FieldPredicateFilter(object obj)
         {
-            if(FilterProperty==null || string.IsNullOrEmpty(Filter))
+            if (FilterProperty == null || string.IsNullOrEmpty(Filter))
             {
                 return true;
             }
 
             BankOperation bo = obj as BankOperation;
-            var f = CustomFilterProperties.SingleOrDefault(a => a.PropertyName == FilterProperty);
-            if(f!=null)
+            var f = CustomFilterProperties.SingleOrDefault(a => a.PropertyName == FilterProperty.Name);
+            if (f != null)
             {
                 return f.FilteringFunction(bo, Filter);
             }
 
-            return _reflectionHelper
-                .GetPropertyValue<BankOperation>(obj, FilterProperty)
-                .ToString().ToLowerInvariant()
+            return typeof(BankOperation)
+                .GetProperty(FilterProperty.Name)
+                .GetValue(bo).ToString().ToLowerInvariant()
                 .Contains(Filter.ToLowerInvariant());
         }
         
         DeferredAction defferedDataUpdate;
 
-        public IEnumerable<string> ObjectProperties
+        public IEnumerable<PropertyDescription> FilteringProperties
         {
             get
             {
-                return
-                    //CustomFilterProperties.Select(a => a.PropertyName).Concat();
-                    _reflectionHelper.GetPropertiesNames(typeof(BankOperation));
+                string[] filterProperties = new[] { 
+                    "BankAccount", 
+                    "Type", 
+                    "OrderDate", 
+                    "ExecutionDate", 
+                    "Amount", 
+                    "Title",
+                    "Description"};
+
+                return filterProperties.Select(a =>
+                    new PropertyDescription()
+                    {
+                        Name = a,
+                        Translation = ResourceManagerHelper.GetTranslation(typeof(BankOperation), a)
+                    });
             }
         }
 
@@ -127,7 +144,7 @@ namespace MyBudget.UI.Accounts
         {
             new CustomFilterProperty<BankOperation>()
             {
-                PropertyName = "Konto bankowe",
+                PropertyName = "BankAccount",
                 FilteringFunction = (operation,filter) => 
                     operation.BankAccount!=null && 
                     operation.BankAccount.Description.ToLowerInvariant()
@@ -136,8 +153,8 @@ namespace MyBudget.UI.Accounts
         };
 
 
-        private string _filterProperty;
-        public string FilterProperty
+        private PropertyDescription _filterProperty;
+        public PropertyDescription FilterProperty
         {
             get
             {
@@ -154,25 +171,7 @@ namespace MyBudget.UI.Accounts
             }
         }
 
-        private string _groupProperty;
-        public string GroupProperty
-        {
-            get
-            {
-                return _groupProperty;
-            }
-            set
-            {
-                _groupProperty = value;
-                OnPropertyChanged(() => GroupProperty);
-                Data.GroupDescriptions.Clear();
-                if (!string.IsNullOrEmpty(_groupProperty))
-                {
-                    var propertyInfo = _reflectionHelper.GetPropertyInfo<BankOperation>(_groupProperty);
-                    Data.GroupDescriptions.Add(new PropertyGroupDescription(propertyInfo.Name));
-                }
-            }
-        }
+
 
         private string _filter;
         public string Filter
@@ -186,6 +185,44 @@ namespace MyBudget.UI.Accounts
                 _filter = value;
                 OnPropertyChanged(() => Filter);
                 defferedDataUpdate.Go();
+            }
+        }
+
+        #endregion
+
+        #region Groupping
+
+        public IEnumerable<PropertyDescription> GrouppingProperties
+        {
+            get
+            {
+                string[] groupProperties = new[] { "Type", "OrderDate", "ExecutionDate", "Title" };
+                return groupProperties.Select(a =>
+                    new PropertyDescription()
+                    {
+                        Name = a,
+                        Translation = ResourceManagerHelper.GetTranslation(typeof(BankOperation), a)
+                    });
+            }
+        }
+
+        private PropertyDescription _groupProperty;
+        public PropertyDescription GroupProperty
+        {
+            get
+            {
+                return _groupProperty;
+            }
+            set
+            {
+                _groupProperty = value;
+                OnPropertyChanged(() => GroupProperty);
+
+                Data.GroupDescriptions.Clear();
+                if (_groupProperty != null)
+                {
+                    Data.GroupDescriptions.Add(new PropertyGroupDescription(value.Name));
+                }
             }
         }
 

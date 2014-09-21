@@ -20,6 +20,11 @@ namespace MyBudget.UI.Main
     /// </summary>
     public partial class LanguageSetupView : UserControl
     {
+        public LanguageSetupView()
+        {
+
+        }
+
         public LanguageSetupView(LanguageSetupViewModel viewModel)
         {
             ViewModel = viewModel;

@@ -13,6 +13,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}"
@@ -20,16 +21,30 @@
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
             <ComboBox Width="200" 
-                      ItemsSource="{Binding ViewModel.ObjectProperties}" 
-                      SelectedItem="{Binding ViewModel.GroupProperty, Mode=TwoWay}"/>
-            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}" 
+                      ItemsSource="{Binding ViewModel.GrouppingProperties}" 
+                      SelectedItem="{Binding ViewModel.GroupProperty, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Translation}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
+            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockFilter}" 
                        VerticalAlignment="Center"
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
             <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelField}" />
             <ComboBox Width="200" 
-                      ItemsSource="{Binding ViewModel.ObjectProperties}" 
-                      SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}"/>
+                      ItemsSource="{Binding ViewModel.FilteringProperties}" 
+                      SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Translation}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            
             <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelContains}" />
             <xctk:WatermarkTextBox Watermark="{lex:Loc MyBudget.UI.Accounts:Translations:WatermarkFilter}"
                                    Text="{Binding ViewModel.Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
@@ -39,13 +54,18 @@
                    Margin="10 0 0 0"/>
             <xctk:DateTimeUpDown Format="YearMonth" Width="120" Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" />
         </StackPanel>
-        <ownGrid:ExtendedDataGrid Grid.Row="1" 
+        <!--<ownGrid:ExtendedDataGrid Grid.Row="1" 
                                   AutoGenerateColumns="False"
                                   ItemsSource="{Binding ViewModel.Data}"
                                   IsReadOnly="True"
                                   GridForType="{Binding ViewModel.GridType}"
-                                  LocalizedReflection="{Binding LocalizedReflection, RelativeSource={RelativeSource AncestorType=Window}}"
                                   >
+        </ownGrid:ExtendedDataGrid>-->
+        <DataGrid Grid.Row="1"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  ItemsSource="{Binding ViewModel.Data}"
+                  >
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -76,6 +96,19 @@
                     </GroupStyle.ContainerStyle>
                 </GroupStyle>
             </DataGrid.GroupStyle>
-        </ownGrid:ExtendedDataGrid>
+            <DataGrid.Columns>
+                <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
+                                            Binding="{Binding OrderDate}"/>
+                <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
+                                            Binding="{Binding ExecutionDate}"
+                                            />
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Description}" 
+                                    Binding="{Binding Description}" 
+                                    MinWidth="100"
+                                    Width="*"
+                                    />
+                
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </UserControl>

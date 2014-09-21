@@ -2,8 +2,10 @@
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MyBudget.UI.Core;
+using MyBudget.UI.Localization;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +25,9 @@ namespace MyBudget.UI.Main
 
         public void Initialize()
         {
+            _container.RegisterType<ILanguageSettings, LanguageSettings>(
+                new ContainerControlledLifetimeManager());
+
             //Navigable elements
             _container.RegisterType<object, WelcomePageView>(typeof(WelcomePageView).FullName);
 
@@ -32,6 +37,9 @@ namespace MyBudget.UI.Main
 
             //Configuration
             _container.RegisterType<object, LanguageSetupView>(typeof(LanguageSetupView).FullName);
+
+            var langSettings = _container.Resolve<ILanguageSettings>();
+            langSettings.CurrentUICulture = CultureInfo.InvariantCulture;
         }
     }
 }

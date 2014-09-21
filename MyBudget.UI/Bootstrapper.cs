@@ -3,9 +3,11 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using MyBudget.Core;
 using MyBudget.UI.Accounts;
+using MyBudget.UI.Localization;
 using MyBudget.UI.Main;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -45,7 +47,8 @@ namespace MyBudget.UI
             ModuleCatalog.AddModule(new ModuleInfo()
             {
                 ModuleName = mainModuleType.Name,
-                ModuleType = mainModuleType.AssemblyQualifiedName
+                ModuleType = mainModuleType.AssemblyQualifiedName,
+                InitializationMode = InitializationMode.WhenAvailable
             });
         }
     }

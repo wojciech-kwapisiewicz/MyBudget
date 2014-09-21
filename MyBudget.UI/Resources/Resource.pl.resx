@@ -118,9 +118,30 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ButtonNavigateAccounts" xml:space="preserve">
-    <value>Accounts</value>
+    <value>Konta</value>
   </data>
   <data name="ButtonNavigateLanguageSetup" xml:space="preserve">
-    <value>Lang</value>
+    <value>Język</value>
+  </data>
+  <data name="ButtonNavigateOperations" xml:space="preserve">
+    <value>Operacje</value>
+  </data>
+  <data name="ButtonNavigateRules" xml:space="preserve">
+    <value>Reguły</value>
+  </data>
+  <data name="ButtonNavigateStatements" xml:space="preserve">
+    <value>Wyciągi</value>
+  </data>
+  <data name="ButtonNavigateWelcomePage" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="ExpanderConfiguration" xml:space="preserve">
+    <value>Konfiguracja</value>
+  </data>
+  <data name="TextBlockNavigation" xml:space="preserve">
+    <value>Nawigacja</value>
+  </data>
+  <data name="TextChooseLanguage" xml:space="preserve">
+    <value>Język aplikacji</value>
   </data>
 </root>
