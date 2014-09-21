@@ -52,7 +52,10 @@
                                    VerticalContentAlignment="Center"/>
             <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:Month}" 
                    Margin="10 0 0 0"/>
-            <xctk:DateTimeUpDown Format="YearMonth" Width="120" Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" />
+            <xctk:DateTimeUpDown Format="YearMonth" 
+                                 Width="120" 
+                                 Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" 
+                                 CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
         </StackPanel>
         <!--<ownGrid:ExtendedDataGrid Grid.Row="1" 
                                   AutoGenerateColumns="False"
