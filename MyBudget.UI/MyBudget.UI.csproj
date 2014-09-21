@@ -163,10 +163,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
-    <Compile Include="Resources\Resource.en-us.Designer.cs">
+    <Compile Include="Resources\Resource.en.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.en-us.resx</DependentUpon>
+      <DependentUpon>Resource.en.resx</DependentUpon>
     </Compile>
     <Compile Include="Shell.xaml.cs">
       <DependentUpon>Shell.xaml</DependentUpon>
@@ -211,9 +211,9 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resource.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.en-us.resx">
+    <EmbeddedResource Include="Resources\Resource.en.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.en-us.Designer.cs</LastGenOutput>
+      <LastGenOutput>Resource.en.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
