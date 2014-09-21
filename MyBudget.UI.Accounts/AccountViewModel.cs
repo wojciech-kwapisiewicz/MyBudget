@@ -42,12 +42,10 @@ namespace MyBudget.UI.Accounts
         public DelegateCommand Save { get; set; }
         private void DoSave()
         {
-            if(EditMode==EditMode.Add)
+            if (EditMode == EditMode.Add)
             {
                 _bankAccountRepository.Add(Data);
             }
-            //Xceed.Wpf.DataGrid.DataGridCollectionView v;
-            //v.
             _context.SaveChanges();
             _regionManager.RequestNavigate(RegionNames.MainContent, typeof(AccountsView).FullName);
         }
@@ -57,6 +55,5 @@ namespace MyBudget.UI.Accounts
         {
             Journal.GoBack();
         }
-
     }
 }

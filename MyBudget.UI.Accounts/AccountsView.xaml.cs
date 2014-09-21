@@ -20,6 +20,11 @@ namespace MyBudget.UI.Accounts
     /// </summary>
     public partial class AccountsView : UserControl
     {
+        public AccountsView()
+        {
+
+        }
+
         public AccountsView(AccountsViewModel viewModel)
         {
             ViewModel = viewModel;

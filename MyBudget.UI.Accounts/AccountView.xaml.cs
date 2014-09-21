@@ -24,6 +24,11 @@ namespace MyBudget.UI.Accounts
     /// </summary>
     public partial class AccountView : UserControl, INavigationAware
     {
+        public AccountView()
+        {
+
+        }
+
         public AccountView(AccountViewModel viewModel)
         {
             ViewModel = viewModel;

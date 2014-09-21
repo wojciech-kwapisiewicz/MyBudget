@@ -26,6 +26,11 @@ namespace MyBudget.UI.Accounts
     /// </summary>
     public partial class StatementsView : UserControl
     {
+        public StatementsView()
+        {
+
+        }
+
         public StatementsView(StatementsViewModel viewModel)
         {
             ViewModel = viewModel;

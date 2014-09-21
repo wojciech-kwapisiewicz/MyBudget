@@ -28,6 +28,11 @@ namespace MyBudget.UI.Accounts
     /// </summary>
     public partial class OperationsView : UserControl, IRegionMemberLifetime
     {
+        public OperationsView()
+        {
+
+        }
+
         public OperationsView(OperationsViewModel viewModel)
         {
             ViewModel = viewModel;

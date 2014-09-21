@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:ownGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"  
              >
@@ -14,27 +15,27 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Text="Grupowanie" 
+            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}"
                        VerticalAlignment="Center"
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
             <ComboBox Width="200" 
                       ItemsSource="{Binding ViewModel.ObjectProperties}" 
                       SelectedItem="{Binding ViewModel.GroupProperty, Mode=TwoWay}"/>
-            <TextBlock Text="Filtrowanie" 
+            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}" 
                        VerticalAlignment="Center"
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
-            <Label Content="Pole " />
+            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelField}" />
             <ComboBox Width="200" 
                       ItemsSource="{Binding ViewModel.ObjectProperties}" 
                       SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}"/>
-            <Label Content=" zawiera " />
-            <xctk:WatermarkTextBox Watermark="filtr"
+            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelContains}" />
+            <xctk:WatermarkTextBox Watermark="{lex:Loc MyBudget.UI.Accounts:Translations:WatermarkFilter}"
                                    Text="{Binding ViewModel.Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                                    MinWidth="200" 
                                    VerticalContentAlignment="Center"/>
-            <Label Content="Miesiąc:" 
+            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:Month}" 
                    Margin="10 0 0 0"/>
             <xctk:DateTimeUpDown Format="YearMonth" Width="120" Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" />
         </StackPanel>

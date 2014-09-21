@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:customGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
@@ -15,7 +16,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="Dodaj z pliku"
+            <Button Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}"
                     Command="{Binding ViewModel.LoadFileCommand}" />
         </StackPanel>
         <DataGrid Grid.Row="1"
@@ -24,8 +25,11 @@
                   ItemsSource="{Binding ViewModel.Data}"
                   >
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Data wczytania" Binding="{Binding LoadTime, Converter={StaticResource dateConverter}, ConverterParameter=g}" />
-                <DataGridTextColumn Header="Nazwa pliku" Binding="{Binding FileName}" Width="*"/>
+                <DataGridTextColumn Header="{lex:Loc MyBudget.UI.Accounts:Translations:LoadTime}" 
+                                    Binding="{Binding LoadTime, Converter={StaticResource dateConverter}, ConverterParameter=g}" />
+                <DataGridTextColumn Header="{lex:Loc MyBudget.UI.Accounts:Translations:FileName}" 
+                                    Binding="{Binding FileName}" 
+                                    Width="*"/>
             </DataGrid.Columns>
             
         </DataGrid>
