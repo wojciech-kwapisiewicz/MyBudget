@@ -70,6 +70,7 @@
     <Compile Include="Controls\DecimalToStringConverter.cs" />
     <Compile Include="Controls\ExtendedDataGrid.cs" />
     <Compile Include="Controls\DateToStringConverter.cs" />
+    <Compile Include="Controls\FixedUiToStringConverter.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ResourceManagerHelper.cs" />

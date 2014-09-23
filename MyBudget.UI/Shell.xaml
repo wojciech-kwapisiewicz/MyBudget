@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:MyBudget.UI"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
         Title="Shell" Height="500" Width="900"
+        WindowState="Maximized"
         >
     <Window.Resources>
         <ResourceDictionary>
@@ -29,7 +30,6 @@
                         Margin="5 5 5 5"
                         Grid.Column="1"
                         prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainContent}"/>
-
         <StatusBar Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
             <WrapPanel>
                 <Button Content="{lex:Loc MyBudget.UI:Resource:Test}" />

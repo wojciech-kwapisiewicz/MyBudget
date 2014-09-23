@@ -7,10 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.Model
 {
-    public class BankAccount : IIdentifiable<int>, IIdentifiable<string>
+    public class BankAccount : IIdentifiable<string>
     {
-        public int Id { get; set; }
-        string IIdentifiable<string>.Id
+        public string Id
         {
             get { return Number; }
         }
@@ -19,5 +18,9 @@ namespace MyBudget.Core.Model
         public string Number { get; set; }
         public string Description { get; set; }
 
+        public override string ToString()
+        {
+            return Name ?? Number;
+        }
     }
 }

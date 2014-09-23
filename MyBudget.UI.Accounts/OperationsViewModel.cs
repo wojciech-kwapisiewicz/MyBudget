@@ -33,15 +33,62 @@ namespace MyBudget.UI.Accounts
             IRepository<BankOperation> operationRepository)
         {
             _operationRepository = operationRepository;
-
+            InitializeFilteringProperties();
+            InitializeGrouppingProperties();
             FilterDate = DateTime.Now;
-
             ResetListData();
-
             defferedDataUpdate = new DeferredAction(
                 Dispatcher.CurrentDispatcher,
                 () => { if (Data != null) Data.Refresh(); },
                 500);
+        }
+
+        private void InitializeGrouppingProperties()
+        {
+            string[] groupProperties = new[] 
+                { 
+                    null,
+                    "BankAccount",
+                    "Type", 
+                    "OrderDate", 
+                    "ExecutionDate", 
+                    "Title" 
+                };
+            GrouppingProperties = BuildPropertyList(groupProperties);
+        }
+
+        private static List<PropertyDescription> BuildPropertyList(string[] groupProperties)
+        {
+            List<PropertyDescription> _groupProperties = new List<PropertyDescription>();
+            foreach (var item in groupProperties)
+            {
+                if (item == null)
+                {
+                    _groupProperties.Add(new PropertyDescription());
+                }
+                else
+                {
+                    _groupProperties.Add(new PropertyDescription()
+                    {
+                        Name = item,
+                        Translation = ResourceManagerHelper.GetTranslation(typeof(BankOperation), item)
+                    });
+                }
+            }
+            return _groupProperties;
+        }
+
+        private void InitializeFilteringProperties()
+        {
+            string[] filterProperties = new[] { 
+                    "BankAccount", 
+                    "Type", 
+                    "OrderDate", 
+                    "ExecutionDate", 
+                    "Amount", 
+                    "Title",
+                    "Description"};
+            FilteringProperties = BuildPropertyList(filterProperties);
         }
 
         private void ResetListData()
@@ -120,24 +167,8 @@ namespace MyBudget.UI.Accounts
 
         public IEnumerable<PropertyDescription> FilteringProperties
         {
-            get
-            {
-                string[] filterProperties = new[] { 
-                    "BankAccount", 
-                    "Type", 
-                    "OrderDate", 
-                    "ExecutionDate", 
-                    "Amount", 
-                    "Title",
-                    "Description"};
-
-                return filterProperties.Select(a =>
-                    new PropertyDescription()
-                    {
-                        Name = a,
-                        Translation = ResourceManagerHelper.GetTranslation(typeof(BankOperation), a)
-                    });
-            }
+            get;
+            private set;
         }
 
         public List<CustomFilterProperty<BankOperation>> CustomFilterProperties = new List<CustomFilterProperty<BankOperation>>
@@ -164,7 +195,7 @@ namespace MyBudget.UI.Accounts
             {
                 _filterProperty = value;
                 OnPropertyChanged(() => FilterProperty);
-                if(Data!=null)
+                if (Data != null)
                 {
                     Data.Refresh();
                 }
@@ -194,16 +225,7 @@ namespace MyBudget.UI.Accounts
 
         public IEnumerable<PropertyDescription> GrouppingProperties
         {
-            get
-            {
-                string[] groupProperties = new[] { "Type", "OrderDate", "ExecutionDate", "Title" };
-                return groupProperties.Select(a =>
-                    new PropertyDescription()
-                    {
-                        Name = a,
-                        Translation = ResourceManagerHelper.GetTranslation(typeof(BankOperation), a)
-                    });
-            }
+            get; private set;
         }
 
         private PropertyDescription _groupProperty;
@@ -217,12 +239,16 @@ namespace MyBudget.UI.Accounts
             {
                 _groupProperty = value;
                 OnPropertyChanged(() => GroupProperty);
+                UpdateGroupProperty();
+            }
+        }
 
-                Data.GroupDescriptions.Clear();
-                if (_groupProperty != null)
-                {
-                    Data.GroupDescriptions.Add(new PropertyGroupDescription(value.Name));
-                }
+        private void UpdateGroupProperty()
+        {
+            Data.GroupDescriptions.Clear();
+            if (_groupProperty != null && _groupProperty.Name != null)
+            {
+                Data.GroupDescriptions.Add(new PropertyGroupDescription(_groupProperty.Name, new MyBudget.UI.Core.Controls.FixedUiToStringConverter()));
             }
         }
 

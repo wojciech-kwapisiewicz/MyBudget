@@ -141,6 +141,9 @@
   <data name="TextBlockNavigation" xml:space="preserve">
     <value>Nawigacja</value>
   </data>
+  <data name="TextChooseInputLanguage" xml:space="preserve">
+    <value>Format daty i wartości</value>
+  </data>
   <data name="TextChooseLanguage" xml:space="preserve">
     <value>Język aplikacji</value>
   </data>

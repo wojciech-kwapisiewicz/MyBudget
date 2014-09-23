@@ -14,8 +14,8 @@ namespace MyBudget.Core.Model
         public int Id { get; set; }
         public BankAccount BankAccount { get; set; }
 
-        public int LpOnStatement { get; set; }        
         public BankOperationType Type { get; set; }
+        public int LpOnStatement { get; set; }        
         public DateTime OrderDate { get; set; }
         public DateTime ExecutionDate { get; set; }
         public decimal Amount { get; set; }

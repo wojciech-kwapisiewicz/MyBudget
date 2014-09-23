@@ -13,7 +13,6 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}"
@@ -35,7 +34,7 @@
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
             <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelField}" />
-            <ComboBox Width="200" 
+            <ComboBox Width="200"                       
                       ItemsSource="{Binding ViewModel.FilteringProperties}" 
                       SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
@@ -57,13 +56,6 @@
                                  Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" 
                                  CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
         </StackPanel>
-        <!--<ownGrid:ExtendedDataGrid Grid.Row="1" 
-                                  AutoGenerateColumns="False"
-                                  ItemsSource="{Binding ViewModel.Data}"
-                                  IsReadOnly="True"
-                                  GridForType="{Binding ViewModel.GridType}"
-                                  >
-        </ownGrid:ExtendedDataGrid>-->
         <DataGrid Grid.Row="1"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
@@ -83,7 +75,7 @@
                             <Setter Property="Template">
                                 <Setter.Value>
                                     <ControlTemplate TargetType="{x:Type GroupItem}">
-                                        <Expander>
+                                        <Expander HorizontalAlignment="Left">
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Path=Name}" Margin="0 0 5 0" />
@@ -100,17 +92,28 @@
                 </GroupStyle>
             </DataGrid.GroupStyle>
             <DataGrid.Columns>
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_BankAccount}"
+                                    Binding="{Binding BankAccount}"
+                                    />
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Type}"
+                                    Binding="{Binding Type}"
+                                    />
                 <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
                                             Binding="{Binding OrderDate}"/>
                 <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
                                             Binding="{Binding ExecutionDate}"
                                             />
-                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Description}" 
+                <ownGrid:DataGridDecimalColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" 
+                                               Binding="{Binding Amount}"
+                                               />                
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Title}"
+                                    Binding="{Binding Title}"                            
+                                    />                    
+                <!--<DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Description}"
                                     Binding="{Binding Description}" 
                                     MinWidth="100"
-                                    Width="*"
-                                    />
-                
+                                    Width="*"  
+                                    />-->                
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

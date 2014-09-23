@@ -133,6 +133,15 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Dates and values format.
+        /// </summary>
+        internal static string TextChooseInputLanguage {
+            get {
+                return ResourceManager.GetString("TextChooseInputLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         internal static string TextChooseLanguage {

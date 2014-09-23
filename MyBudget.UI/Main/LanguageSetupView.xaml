@@ -20,7 +20,7 @@
         <ComboBox Grid.Column="1"
                   SelectedItem="{Binding ViewModel.CurrentUICulture, Mode=TwoWay}"
                   ItemsSource="{Binding ViewModel.AvailableUICultures}" />
-        <Label Content="2" Grid.Row="1" />
+        <Label Content="{lex:Loc MyBudget.UI:Resource:TextChooseInputLanguage}" Grid.Row="1" />
         <ComboBox Grid.Column="1" Grid.Row="1"
                   SelectedItem="{Binding ViewModel.CurrentCulture, Mode=TwoWay}"
                   ItemsSource="{Binding ViewModel.AvailableCultures}" />
