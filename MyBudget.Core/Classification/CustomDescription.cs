@@ -1,15 +1,13 @@
-﻿using System;
+﻿using MyBudget.Core.Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
-namespace MyBudget.Core.Model
+namespace MyBudget.Core.Classification
 {
     public class CustomDescription
     {
-        public int Id { get; set; }
-
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public Card Card { get; set; }

@@ -22,7 +22,9 @@ namespace MyBudget.Core.Model
         public decimal EndingBalance { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        
-        public CustomDescription CustomDescription { get; set; }
+
+        public string Category { get; set; }
+        public string SubCategory { get; set; }
+        public Card Card { get; set; }
     }
 }

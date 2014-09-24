@@ -135,6 +135,12 @@
   <data name="BankOperation_BankAccount" xml:space="preserve">
     <value>Konto bankowe</value>
   </data>
+  <data name="BankOperation_Card" xml:space="preserve">
+    <value>Numer karty</value>
+  </data>
+  <data name="BankOperation_Category" xml:space="preserve">
+    <value>Kategoria</value>
+  </data>
   <data name="BankOperation_Description" xml:space="preserve">
     <value>Opis</value>
   </data>
@@ -150,19 +156,13 @@
   <data name="BankOperation_OrderDate" xml:space="preserve">
     <value>Data zlecenia</value>
   </data>
+  <data name="BankOperation_SubCategory" xml:space="preserve">
+    <value>Podkategoria</value>
+  </data>
   <data name="BankOperation_Title" xml:space="preserve">
     <value>Tytułem</value>
   </data>
   <data name="BankOperation_Type" xml:space="preserve">
     <value>Typ operacji</value>
-  </data>
-  <data name="CustomDescription_CardNumber" xml:space="preserve">
-    <value>Numer karty</value>
-  </data>
-  <data name="CustomDescription_Category" xml:space="preserve">
-    <value>Kategoria</value>
-  </data>
-  <data name="CustomDescription_SubCategory" xml:space="preserve">
-    <value>Podkategoria</value>
   </data>
 </root>

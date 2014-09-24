@@ -106,6 +106,24 @@ namespace MyBudget.Core.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Card number.
+        /// </summary>
+        public static string BankOperation_Card {
+            get {
+                return ResourceManager.GetString("BankOperation_Card", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string BankOperation_Category {
+            get {
+                return ResourceManager.GetString("BankOperation_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string BankOperation_Description {
@@ -151,6 +169,15 @@ namespace MyBudget.Core.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sub category.
+        /// </summary>
+        public static string BankOperation_SubCategory {
+            get {
+                return ResourceManager.GetString("BankOperation_SubCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Title.
         /// </summary>
         public static string BankOperation_Title {
@@ -174,33 +201,6 @@ namespace MyBudget.Core.Model {
         public static string BankOperationType_Name {
             get {
                 return ResourceManager.GetString("BankOperationType_Name", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Card number.
-        /// </summary>
-        public static string CustomDescription_CardNumber {
-            get {
-                return ResourceManager.GetString("CustomDescription_CardNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Category.
-        /// </summary>
-        public static string CustomDescription_Category {
-            get {
-                return ResourceManager.GetString("CustomDescription_Category", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Sub category.
-        /// </summary>
-        public static string CustomDescription_SubCategory {
-            get {
-                return ResourceManager.GetString("CustomDescription_SubCategory", resourceCulture);
             }
         }
     }

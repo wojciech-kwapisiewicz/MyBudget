@@ -4,15 +4,22 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:ownGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:converters="clr-namespace:MyBudget.UI.Core.Converters;assembly=MyBudget.UI.Core"
+             xmlns:customGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"  
              >
+    <UserControl.Resources>
+        <converters:MergeStringsMultiValueConverter x:Key="mergeString" />
+        <customGrid:DateToStringConverter x:Key="dateConverter" />
+        <customGrid:FixedUiToStringConverter x:Key="fixConverter" />
+    </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}"
@@ -60,6 +67,7 @@
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding ViewModel.Data}"
+                  SelectedItem="{Binding ViewModel.SelectedOperation, Mode=OneWayToSource}"
                   >
             <DataGrid.GroupStyle>
                 <GroupStyle>
@@ -98,17 +106,20 @@
                 <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Type}"
                                     Binding="{Binding Type}"
                                     />
-                <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
+                <customGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
                                             Binding="{Binding OrderDate}"/>
-                <ownGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
+                <customGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
                                             Binding="{Binding ExecutionDate}"
                                             />
-                <ownGrid:DataGridDecimalColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" 
+                <customGrid:DataGridDecimalColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" 
                                                Binding="{Binding Amount}"
                                                />                
                 <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Title}"
                                     Binding="{Binding Title}"                            
-                                    />                    
+                                    />
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}"
+                                    Binding="{Binding Category}"                            
+                                    />
                 <!--<DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Description}"
                                     Binding="{Binding Description}" 
                                     MinWidth="100"
@@ -116,5 +127,66 @@
                                     />-->                
             </DataGrid.Columns>
         </DataGrid>
+        <Grid Grid.Row="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Label Grid.ColumnSpan="4">
+                <Label.Content>
+                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}{0} ({1} - {2})">                        
+                        <Binding Path="ViewModel.SelectedOperation.Amount" Converter="{StaticResource fixConverter}" FallbackValue="0" />
+                        <Binding Path="ViewModel.SelectedOperation.Type" FallbackValue="N/N" />
+                        <Binding Path="ViewModel.SelectedOperation.BankAccount" FallbackValue="N/N" />
+                    </MultiBinding>
+                </Label.Content>
+            </Label>
+
+            <Label Grid.ColumnSpan="4" Grid.Row="1"
+                   Content="{Binding ViewModel.SelectedOperation.Title}" 
+                   />
+
+            <Label Grid.ColumnSpan="4" Grid.Row="2" >
+                <Label.Content>
+                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}{0}: {1}, {2}:{3}">
+                        <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_OrderDate" />
+                        <Binding Path="ViewModel.SelectedOperation.OrderDate" Converter="{StaticResource dateConverter}" ConverterParameter="d" FallbackValue="N/N" />
+                        <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_ExecutionDate" />
+                        <Binding Path="ViewModel.SelectedOperation.ExecutionDate" Converter="{StaticResource dateConverter}" FallbackValue="N/N" />                    
+                    </MultiBinding>
+                </Label.Content>
+            </Label>
+
+            <Label Grid.ColumnSpan="2" Grid.RowSpan="4" Grid.Row="3" 
+                     Content="{Binding ViewModel.SelectedOperation.Description}" 
+                     />
+
+            <Label Grid.Column="3" Grid.Row="4" 
+                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}" />
+            <TextBox Grid.Column="4" Grid.Row="4" 
+                     Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
+                     />
+            <Label Grid.Column="3" Grid.Row="5"  
+                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_SubCategory}" />
+            <TextBox Grid.Column="4" Grid.Row="5"  
+                     Text="{Binding ViewModel.SelectedOperation.SubCategory, Mode=TwoWay}" 
+                     />
+            <Label Grid.Column="3" Grid.Row="6"  
+                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Card}" />
+            <ComboBox Grid.Column="4" Grid.Row="6"
+                      Text="{Binding ViewModel.SelectedOperation.Card}" />
+        </Grid>
     </Grid>
 </UserControl>

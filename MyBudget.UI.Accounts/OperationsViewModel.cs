@@ -46,14 +46,15 @@ namespace MyBudget.UI.Accounts
         private void InitializeGrouppingProperties()
         {
             string[] groupProperties = new[] 
-                { 
-                    null,
-                    "BankAccount",
-                    "Type", 
-                    "OrderDate", 
-                    "ExecutionDate", 
-                    "Title" 
-                };
+            { 
+                null,
+                "BankAccount",
+                "Type", 
+                "OrderDate", 
+                "ExecutionDate", 
+                "Title",
+                "Category"
+            };
             GrouppingProperties = BuildPropertyList(groupProperties);
         }
 
@@ -80,14 +81,18 @@ namespace MyBudget.UI.Accounts
 
         private void InitializeFilteringProperties()
         {
-            string[] filterProperties = new[] { 
-                    "BankAccount", 
-                    "Type", 
-                    "OrderDate", 
-                    "ExecutionDate", 
-                    "Amount", 
-                    "Title",
-                    "Description"};
+            string[] filterProperties = new[] 
+            { 
+                "BankAccount", 
+                "Type", 
+                "OrderDate", 
+                "ExecutionDate", 
+                "Amount", 
+                "Title",
+                "Description",
+                "Category",
+                "SubCategory",
+            };
             FilteringProperties = BuildPropertyList(filterProperties);
         }
 
@@ -96,6 +101,20 @@ namespace MyBudget.UI.Accounts
             var list = new ListCollectionView(_operationRepository.GetAll().ToList());
             list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
             Data = list;
+        }
+
+        private BankOperation _SelectedOperation;
+        public BankOperation SelectedOperation
+        {
+            get
+            {
+                return _SelectedOperation;
+            }
+            set
+            {
+                _SelectedOperation = value;
+                OnPropertyChanged(() => SelectedOperation);
+            }
         }
 
         private ListCollectionView _data;

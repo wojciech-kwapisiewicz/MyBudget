@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.Classification
 {
     public class RegularExpressionClassifier : IClassifier
     {
