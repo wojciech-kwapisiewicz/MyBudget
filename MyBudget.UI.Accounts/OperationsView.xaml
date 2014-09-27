@@ -11,6 +11,8 @@
              d:DesignHeight="300" d:DesignWidth="300"  
              >
     <UserControl.Resources>
+        <converters:NullToVisibilityConverer x:Key="nullConverter" />
+        <converters:InverseNullToVisibilityConverer x:Key="inverseNullConverter" />
         <converters:MergeStringsMultiValueConverter x:Key="mergeString" />
         <customGrid:DateToStringConverter x:Key="dateConverter" />
         <customGrid:FixedUiToStringConverter x:Key="fixConverter" />
@@ -119,20 +121,27 @@
                                     />
                 <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}"
                                     Binding="{Binding Category}"                            
-                                    />
-                <!--<DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Description}"
-                                    Binding="{Binding Description}" 
-                                    MinWidth="100"
-                                    Width="*"  
-                                    />-->                
+                                    />         
             </DataGrid.Columns>
         </DataGrid>
-        <Grid Grid.Row="2">
+
+
+        <TextBlock Grid.Row="2"
+                   TextAlignment="Center"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Visibility="{Binding ViewModel.SelectedOperation, Converter={StaticResource inverseNullConverter}}"
+                   Text="{lex:Loc MyBudget.UI.Accounts:Translations:OperationNotLoaded}"
+                   Style="{StaticResource HeaderTextBlockStyle}"
+                   />
+
+        <Grid Grid.Row="2" Margin="10 10 10 10"
+              Visibility="{Binding ViewModel.SelectedOperation, Converter={StaticResource nullConverter}}">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -141,27 +150,23 @@
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <Label Grid.ColumnSpan="4">
-                <Label.Content>
-                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}{0} ({1} - {2})">                        
-                        <Binding Path="ViewModel.SelectedOperation.Amount" Converter="{StaticResource fixConverter}" FallbackValue="0" />
-                        <Binding Path="ViewModel.SelectedOperation.Type" FallbackValue="N/N" />
-                        <Binding Path="ViewModel.SelectedOperation.BankAccount" FallbackValue="N/N" />
-                    </MultiBinding>
-                </Label.Content>
-            </Label>
+            <TextBlock Grid.RowSpan="2" 
+                       Text="{Binding ViewModel.SelectedOperation.Title}"
+                       Style="{StaticResource HeaderTextBlockStyle}"
+                       />
 
-            <Label Grid.ColumnSpan="4" Grid.Row="1"
-                   Content="{Binding ViewModel.SelectedOperation.Title}" 
-                   />
+            <TextBlock Grid.RowSpan="2" Grid.Column="1" MinWidth="100" TextAlignment="Right"
+                       Text="{Binding ViewModel.SelectedOperation.Amount}"
+                       Style="{StaticResource HeaderTextBlockStyle}"
+                       />
 
-            <Label Grid.ColumnSpan="4" Grid.Row="2" >
+            <Label Grid.ColumnSpan="2" Grid.Column="2" HorizontalContentAlignment="Right"
+                   Padding="5 5 5 0"
+                   >
                 <Label.Content>
-                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}{0}: {1}, {2}:{3}">
-                        <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_OrderDate" />
+                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}{0} ({1} - {2})">
                         <Binding Path="ViewModel.SelectedOperation.OrderDate" Converter="{StaticResource dateConverter}" ConverterParameter="d" FallbackValue="N/N" />
                         <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_ExecutionDate" />
                         <Binding Path="ViewModel.SelectedOperation.ExecutionDate" Converter="{StaticResource dateConverter}" FallbackValue="N/N" />                    
@@ -169,23 +174,36 @@
                 </Label.Content>
             </Label>
 
-            <Label Grid.ColumnSpan="2" Grid.RowSpan="4" Grid.Row="3" 
-                     Content="{Binding ViewModel.SelectedOperation.Description}" 
-                     />
+            <Label Grid.ColumnSpan="2" Grid.Column="2" Grid.Row="1" HorizontalContentAlignment="Right"
+                   Padding="5 0 5 10"
+                   >
+                <Label.Content>
+                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}({0} - {1})">                        
+                        <!--<Binding Path="ViewModel.SelectedOperation.Amount" Converter="{StaticResource fixConverter}" FallbackValue="0" />-->
+                        <Binding Path="ViewModel.SelectedOperation.Type" FallbackValue="N/N" />
+                        <Binding Path="ViewModel.SelectedOperation.BankAccount" FallbackValue="N/N" />
+                    </MultiBinding>
+                </Label.Content>
+            </Label>
 
-            <Label Grid.Column="3" Grid.Row="4" 
+
+            <ScrollViewer Grid.RowSpan="3" Grid.Row="3" Height="90">                
+                <Label Content="{Binding ViewModel.SelectedOperation.Description}" />
+            </ScrollViewer>
+
+            <Label Grid.Column="2" Grid.Row="3" 
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}" />
-            <TextBox Grid.Column="4" Grid.Row="4" 
+            <TextBox Grid.Column="3" Grid.Row="3" Width="400" 
                      Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
                      />
-            <Label Grid.Column="3" Grid.Row="5"  
+            <Label Grid.Column="2" Grid.Row="4"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_SubCategory}" />
-            <TextBox Grid.Column="4" Grid.Row="5"  
+            <TextBox Grid.Column="3" Grid.Row="4" Width="400"
                      Text="{Binding ViewModel.SelectedOperation.SubCategory, Mode=TwoWay}" 
                      />
-            <Label Grid.Column="3" Grid.Row="6"  
+            <Label Grid.Column="2" Grid.Row="5"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Card}" />
-            <ComboBox Grid.Column="4" Grid.Row="6"
+            <ComboBox Grid.Column="3" Grid.Row="5" Width="400"
                       Text="{Binding ViewModel.SelectedOperation.Card}" />
         </Grid>
     </Grid>

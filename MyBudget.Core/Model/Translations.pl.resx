@@ -148,7 +148,7 @@
     <value>Saldo po operacji</value>
   </data>
   <data name="BankOperation_ExecutionDate" xml:space="preserve">
-    <value>Data wykonania</value>
+    <value>Data księgowania</value>
   </data>
   <data name="BankOperation_LpOnStatement" xml:space="preserve">
     <value>Numer na wyciągu</value>

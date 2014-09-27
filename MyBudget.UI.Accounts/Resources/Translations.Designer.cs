@@ -142,6 +142,15 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No operation selected.
+        /// </summary>
+        internal static string OperationNotLoaded {
+            get {
+                return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string TextBlockFilter {

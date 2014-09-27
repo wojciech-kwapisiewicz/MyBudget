@@ -71,6 +71,8 @@
     <Compile Include="Controls\ExtendedDataGrid.cs" />
     <Compile Include="Controls\DateToStringConverter.cs" />
     <Compile Include="Controls\FixedUiToStringConverter.cs" />
+    <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
+    <Compile Include="Converters\NullToVisibilityConverer.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="Converters\MergeStringsMultiValueConverter.cs" />
     <Compile Include="RegionNames.cs" />

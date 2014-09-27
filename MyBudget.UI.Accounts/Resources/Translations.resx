@@ -144,6 +144,9 @@
   <data name="Month" xml:space="preserve">
     <value>Month</value>
   </data>
+  <data name="OperationNotLoaded" xml:space="preserve">
+    <value>No operation selected</value>
+  </data>
   <data name="TextBlockFilter" xml:space="preserve">
     <value>Filter</value>
   </data>
