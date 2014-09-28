@@ -14,21 +14,21 @@ namespace MyBudget.Core
     {
         public void Configure(IUnityContainer unityContainer)
         {
-            unityContainer.RegisterType<BankAccountInMemoryRepository>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<BankOperationInMemoryRepository>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<BankOperationTypeInMemoryRepository>(new ContainerControlledLifetimeManager());
-            unityContainer.RegisterType<BankStatementInMemoryRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankAccountXmlRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankOperationXmlRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankOperationTypeXmlRepository>(new ContainerControlledLifetimeManager());
+            unityContainer.RegisterType<BankStatementXmlRepository>(new ContainerControlledLifetimeManager());
 
-            unityContainer.RegisterType<IContext, Context>();
+            unityContainer.RegisterType<IContext, XmlContext>();
 
-            unityContainer.RegisterType<IRepository<BankAccount>, BankAccountInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankOperation>, BankOperationInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankOperation, int>, BankOperationInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankOperationType>, BankOperationTypeInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankOperationType, string>, BankOperationTypeInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankStatement>, BankStatementInMemoryRepository>();
-            unityContainer.RegisterType<IRepository<BankStatement, int>, BankStatementInMemoryRepository>();
+            unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankOperation>, BankOperationXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankOperation, int>, BankOperationXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankOperationType>, BankOperationTypeXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankOperationType, string>, BankOperationTypeXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankStatement>, BankStatementXmlRepository>();
+            unityContainer.RegisterType<IRepository<BankStatement, int>, BankStatementXmlRepository>();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using MyBudget.Core.Model;
+﻿using MyBudget.Core.DataContext;
+using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.InMemoryPersistance
 {
-    public class BankAccountInMemoryRepository : AbstractInMemoryRepository<BankAccount, string>
+    public class BankOperationTypeXmlRepository : AbstractXmlRepository<BankOperationType, string>
     {
     }
 }

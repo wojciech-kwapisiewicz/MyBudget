@@ -8,6 +8,7 @@ namespace MyBudget.Core.DataContext
 {
     public interface IContext
     {
+        T GetRepository<T>() where T : IRepository;
         bool SaveChanges();
     }
 }

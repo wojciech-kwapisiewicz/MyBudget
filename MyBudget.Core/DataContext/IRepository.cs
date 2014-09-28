@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MyBudget.Core.DataContext
 {
-    public interface IRepository<T>
+    public interface IRepository
+    {
+        void Load(XElement element);
+        XElement Save();
+    }
+
+    public interface IRepository<T> : IRepository
     {
         IEnumerable<T> GetAll();
         void Add(T obj);

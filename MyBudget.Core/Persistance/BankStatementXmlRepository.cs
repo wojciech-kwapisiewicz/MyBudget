@@ -1,4 +1,5 @@
-﻿using MyBudget.Core.Model;
+﻿using MyBudget.Core.DataContext;
+using MyBudget.Core.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.InMemoryPersistance
 {
-    public class BankOperationInMemoryRepository : AbstractInMemoryRepository<BankOperation, int>
+    public class BankStatementXmlRepository : AbstractXmlRepository<BankStatement, int>
     {
-        public override void Add(BankOperation obj)
+        public override void Add(BankStatement obj)
         {
             obj.Id = StoredElemets + 1;
             base.Add(obj);

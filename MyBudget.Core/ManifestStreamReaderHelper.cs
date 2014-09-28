@@ -21,5 +21,10 @@ namespace MyBudget.Core
                 return result;
             }
         }
+
+        public static string ReadEmbeddedResource(Type type, string relativeResource)
+        {
+            return ReadEmbeddedResource(type.Assembly, type.Namespace + "." + relativeResource);
+        }
     }
 }
