@@ -39,9 +39,9 @@ namespace MyBudget.Core
         }
         public IEnumerable<BankOperation> Parse(string inputString)
         {
-            if(!File.Exists(inputString))
+            if(string.IsNullOrEmpty(inputString))
             {
-                throw new ArgumentException("File does not exist.", inputString);
+                throw new ArgumentException("No content to parse", inputString);
             }
             XDocument doc = XDocument.Parse(inputString);
             return GetEntriesFromXDocument(doc);

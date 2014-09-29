@@ -31,7 +31,6 @@ namespace MyBudget.Core.InMemoryPersistance
             element.Save(ms);
             ms.Position = 0;
 
-
             TObject[] loaded = serializer.Deserialize(ms) as TObject[];
             storedObjects = loaded.ToDictionary(a => a.Id);
         }

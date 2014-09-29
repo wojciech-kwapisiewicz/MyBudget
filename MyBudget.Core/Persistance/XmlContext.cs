@@ -14,20 +14,23 @@ namespace MyBudget.Core.InMemoryPersistance
 {
     public class XmlContext : IContext
     {
-        RepositoryFactory rf = new RepositoryFactory();
+        private RepositoryFactory rf = new RepositoryFactory();
 
         public T GetRepository<T>() where T : IRepository
         {
             return rf.GetRepository<T>();
         }
 
-        public XmlContext()
-        {
+        IXmlSaveHandler _saveHandler;
 
-        }
-
-        public XmlContext(XElement dataToLoad)
+        public XmlContext(IXmlSaveHandler saveHandler)
         {
+            if (saveHandler == null)
+                throw new ArgumentNullException("saveHandler");
+
+            _saveHandler = saveHandler;
+
+            XElement dataToLoad = _saveHandler.Load();       
             XElement accountsElement = dataToLoad.Element("ArrayOfBankAccount");
             if (accountsElement != null)
             {
@@ -40,6 +43,8 @@ namespace MyBudget.Core.InMemoryPersistance
         {
             XElement el = new XElement("savedData");
             el.Add(rf.GetRepository<BankAccountXmlRepository>().Save());
+
+            _saveHandler.Save(el);
 
             return true;
         }

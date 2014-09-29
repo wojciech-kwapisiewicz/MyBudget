@@ -1,6 +1,8 @@
-﻿using MyBudget.Core.DataContext;
+﻿using Moq;
+using MyBudget.Core.DataContext;
 using MyBudget.Core.InMemoryPersistance;
 using MyBudget.Core.Model;
+using MyBudget.Core.Persistance;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
 
-namespace MyBudget.Core.UnitTests.InMemoryPersistance
+namespace MyBudget.Core.UnitTests.Persistance
 {
     [TestFixture]
     public class XmlContextTests
@@ -18,7 +20,9 @@ namespace MyBudget.Core.UnitTests.InMemoryPersistance
         public void GivenEmptyContext_WhenBankAccountAddedAndSaved_ThenXElementContainsAccount()
         {
             //Given
-            var context = new XmlContext(new XElement("root"));
+            Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
+            saveMock.Setup(a => a.Load()).Returns(new XElement("root"));
+            var context = new XmlContext(saveMock.Object);
             
             //When
             var accountsRepository = context.GetRepository<IRepository<BankAccount>>();
@@ -37,9 +41,11 @@ namespace MyBudget.Core.UnitTests.InMemoryPersistance
             string xmlToLoad = ManifestStreamReaderHelper
                 .ReadEmbeddedResource(typeof(XmlContextTests), "saved1Account.xml");
             XElement el = XElement.Parse(xmlToLoad);
+            Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
+            saveMock.Setup(a => a.Load()).Returns(el);
 
             //When
-            var context = new XmlContext(el);
+            var context = new XmlContext(saveMock.Object);
 
             //Then
             var repository = context.GetRepository<IRepository<BankAccount>>();

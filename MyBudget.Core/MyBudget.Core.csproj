@@ -58,6 +58,7 @@
     <Compile Include="Persistance\BankOperationTypeXmlRepository.cs" />
     <Compile Include="Persistance\BankStatementXmlRepository.cs" />
     <Compile Include="Persistance\InMemoryContext.cs" />
+    <Compile Include="Persistance\IXmlSaveHandler.cs" />
     <Compile Include="Persistance\RepositoryFactory.cs" />
     <Compile Include="Persistance\XmlContext.cs" />
     <Compile Include="Classification\IClassifier.cs" />
@@ -73,6 +74,7 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Persistance\XmlSaveHandler.cs" />
     <Compile Include="PkoBpParser.cs" />
     <Compile Include="ManifestStreamReaderHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
