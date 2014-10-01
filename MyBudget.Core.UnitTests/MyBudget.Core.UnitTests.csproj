@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Persistance\BankOperationXmlRepositoryTests.cs" />
     <Compile Include="Persistance\XmlContextTests.cs" />
     <Compile Include="PkoBpParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -65,13 +66,18 @@
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Persistance\savedData.xml" />
+    <EmbeddedResource Include="Persistance\expectedOutput_savedData.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Persistance\saved1Account.xml" />
+    <EmbeddedResource Include="Persistance\input_saved1Account.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Persistance\expectedOutput_fullSavedModel.xml">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

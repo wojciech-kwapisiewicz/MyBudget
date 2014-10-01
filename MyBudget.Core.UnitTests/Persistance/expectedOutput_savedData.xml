@@ -1,0 +1,12 @@
+﻿<savedData>
+  <ArrayOfBankAccount xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <BankAccount>
+      <Name>B</Name>
+      <Number>A</Number>
+      <Description>C</Description>
+    </BankAccount>
+  </ArrayOfBankAccount>
+  <ArrayOfBankStatement xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+  <ArrayOfBankOperationType xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+  <ArrayOfBankOperation xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" />
+</savedData>

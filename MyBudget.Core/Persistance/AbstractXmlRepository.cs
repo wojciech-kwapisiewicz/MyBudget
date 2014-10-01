@@ -25,8 +25,10 @@ namespace MyBudget.Core.InMemoryPersistance
 
         private XmlSerializer serializer = new XmlSerializer(typeof(TObject[]));
 
-        public void Load(XElement element)
+        public virtual void Load(XElement element)
         {
+            if (element == null)
+                return;
             MemoryStream ms = new MemoryStream();
             element.Save(ms);
             ms.Position = 0;
@@ -35,7 +37,7 @@ namespace MyBudget.Core.InMemoryPersistance
             storedObjects = loaded.ToDictionary(a => a.Id);
         }
 
-        public XElement Save()
+        public virtual XElement Save()
         {
             TObject[] toSave = storedObjects.Select(a => a.Value).ToArray();
             

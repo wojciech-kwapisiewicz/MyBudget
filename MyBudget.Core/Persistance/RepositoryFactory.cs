@@ -10,13 +10,14 @@ namespace MyBudget.Core.Persistance
 {
     public class RepositoryFactory
     {
-        Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
+        private Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
         public Dictionary<Type, IRepository> Repositories { get
             {
                 return _repositories;
             }
         }
-        Dictionary<Type, IRepository> _extendedRepositories = new Dictionary<Type, IRepository>();
+        
+        private Dictionary<Type, IRepository> _extendedRepositories = new Dictionary<Type, IRepository>();
         public Dictionary<Type, IRepository> ExtendedRepositories
         {
             get
@@ -25,10 +26,17 @@ namespace MyBudget.Core.Persistance
             }
         }
 
-        public RepositoryFactory()
+        public RepositoryFactory(
+            BankAccountXmlRepository ba,
+            BankOperationTypeXmlRepository bot,
+            BankStatementXmlRepository bs,
+            BankOperationXmlRepository bo
+            )
         {
-            BankAccountXmlRepository accountsRepository = new BankAccountXmlRepository();
-            RegisterRepository(accountsRepository);
+            foreach (var repo in new IRepository[] { ba, bot, bs, bo })
+            {
+                RegisterRepository(repo);
+            }              
         }
 
         private void RegisterRepository(IRepository accountsRepository)
@@ -36,7 +44,8 @@ namespace MyBudget.Core.Persistance
             Type repositoryType = accountsRepository.GetType();
             _repositories.Add(repositoryType, accountsRepository);
             foreach (var repositoryInterface in
-                repositoryType.GetInterfaces().Where(a => typeof(IRepository).IsAssignableFrom(a)))
+                repositoryType.GetInterfaces().Where(a => 
+                    a!= typeof(IRepository) && typeof(IRepository).IsAssignableFrom(a)))
             {
                 _extendedRepositories.Add(repositoryInterface, accountsRepository);
             }

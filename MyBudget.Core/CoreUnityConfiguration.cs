@@ -19,7 +19,7 @@ namespace MyBudget.Core
             unityContainer.RegisterType<BankOperationTypeXmlRepository>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<BankStatementXmlRepository>(new ContainerControlledLifetimeManager());
 
-            unityContainer.RegisterType<IContext, XmlContext>();
+            unityContainer.RegisterType<IContext, InMemoryContext>();
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();

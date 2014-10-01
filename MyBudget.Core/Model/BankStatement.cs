@@ -14,6 +14,7 @@ namespace MyBudget.Core.Model
         public string FileName { get; set; }
         public DateTime LoadTime { get; set; }
         
+        [System.Xml.Serialization.XmlIgnore]
         public List<BankOperation> Operations { get; set; }
     }
 }
