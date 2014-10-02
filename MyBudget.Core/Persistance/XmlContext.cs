@@ -14,7 +14,7 @@ namespace MyBudget.Core.InMemoryPersistance
 {
     public class XmlContext : IContext
     {
-        private RepositoryFactory _repositoryFactory;
+        private XmlRepositoryFactory _repositoryFactory;
 
         public T GetRepository<T>() where T : IRepository
         {
@@ -24,7 +24,7 @@ namespace MyBudget.Core.InMemoryPersistance
         IXmlSaveHandler _saveHandler;
 
         public XmlContext(IXmlSaveHandler saveHandler,
-            RepositoryFactory repositoryFactory)
+            XmlRepositoryFactory repositoryFactory)
         {
             if (saveHandler == null)
                 throw new ArgumentNullException("saveHandler");
@@ -50,7 +50,7 @@ namespace MyBudget.Core.InMemoryPersistance
             {
                 _repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Load(operationTypesElement);
             }
-            XElement operatiosElement = dataToLoad.Element("ArrayOfBankOperationSaveModel");
+            XElement operatiosElement = dataToLoad.Element("ArrayOfBankOperation");
             if (accountsElement != null)
             {
                 _repositoryFactory.GetRepository<BankOperationXmlRepository>().Load(operatiosElement);

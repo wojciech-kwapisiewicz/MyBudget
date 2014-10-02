@@ -17,13 +17,13 @@ namespace MyBudget.Core.UnitTests.Persistance
     [TestFixture]
     public class XmlContextTests
     {
-        private static RepositoryFactory GetRepoFactory()
+        private static XmlRepositoryFactory GetRepoFactory()
         {
             BankAccountXmlRepository ba = new BankAccountXmlRepository();
             BankOperationTypeXmlRepository bt = new BankOperationTypeXmlRepository();
             BankStatementXmlRepository bs = new BankStatementXmlRepository();
             BankOperationXmlRepository bo = new BankOperationXmlRepository(ba, bt, bs);
-            return new RepositoryFactory(ba, bt, bs, bo);
+            return new XmlRepositoryFactory(ba, bt, bs, bo);
         }
 
         [Test]

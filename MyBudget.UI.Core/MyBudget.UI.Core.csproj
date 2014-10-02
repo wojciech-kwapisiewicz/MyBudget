@@ -73,8 +73,11 @@
     <Compile Include="Controls\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />
+    <Compile Include="CustomFilterProperty.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="Converters\MergeStringsMultiValueConverter.cs" />
+    <Compile Include="EditMode.cs" />
+    <Compile Include="PropertyDescription.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ResourceManagerHelper.cs" />
     <Compile Include="Services\FileDialogService.cs" />

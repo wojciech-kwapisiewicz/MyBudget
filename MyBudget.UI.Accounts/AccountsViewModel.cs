@@ -18,13 +18,13 @@ namespace MyBudget.UI.Accounts
     {
         IRegionManager _regionManager;
         IRepository<BankAccount> _bankAccountsRepository;
+        IContext _context;
 
-        public AccountsViewModel(
-            IRegionManager regionManager,
-            IRepository<BankAccount> bankAccountsRepository)
+        public AccountsViewModel(IContext context,IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _bankAccountsRepository = bankAccountsRepository;
+            _context = context;
+            _bankAccountsRepository = context.GetRepository<IRepository<BankAccount>>();
 
             AddAccount = new DelegateCommand(NavigateToAdd);
             EditAccount = new DelegateCommand(NavigateToEdit, () => SelectedItem != null);
@@ -68,6 +68,7 @@ namespace MyBudget.UI.Accounts
         private void GoDeleteAccount()
         {
             _bankAccountsRepository.Delete(SelectedItem);
+            _context.SaveChanges();
             OnPropertyChanged(() => Data);
         }
     }

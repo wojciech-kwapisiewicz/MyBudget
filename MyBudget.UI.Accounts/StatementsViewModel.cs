@@ -21,14 +21,14 @@ namespace MyBudget.UI.Accounts
         PkoBpParser _parser;
         IRepository<BankOperation> _operationRepository;
         IRepository<BankStatement> _statementsRepository;
+        IContext _context;
 
-        public StatementsViewModel(PkoBpParser parser,
-            IRepository<BankOperation> operationRepository,
-            IRepository<BankStatement> statementsRepository)
+        public StatementsViewModel(IContext context, PkoBpParser parser)
         {
+            _context = context;
             _parser = parser;
-            _operationRepository = operationRepository;
-            _statementsRepository = statementsRepository;
+            _operationRepository = context.GetRepository<IRepository<BankOperation>>();
+            _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
         }
@@ -66,7 +66,8 @@ namespace MyBudget.UI.Accounts
                 BankStatement statement = new BankStatement()
                 {
                     FileName = file.FileName,
-                    LoadTime = DateTime.UtcNow
+                    LoadTime = DateTime.UtcNow,
+                    Operations = new List<BankOperation>(),
                 };
 
                 _statementsRepository.Add(statement);
@@ -75,8 +76,10 @@ namespace MyBudget.UI.Accounts
                     _parser.Parse(file.Stream), 
                     _operationRepository.GetAll()))
                 {
+                    statement.Operations.Add(item);
                     _operationRepository.Add(item);
                 }
+                _context.SaveChanges();
             }
 
             ResetListData();

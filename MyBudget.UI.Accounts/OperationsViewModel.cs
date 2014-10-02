@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
-using MyBudget.Core;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core;
@@ -11,28 +10,13 @@ using System.Windows.Threading;
 
 namespace MyBudget.UI.Accounts
 {
-
-    public class PropertyDescription
-    {
-        public string Translation { get; set; }
-        public string Name { get; set; }
-    }
-
-    public class CustomFilterProperty<T>
-    {
-        public string PropertyName{get;set;}
-        public Func<T, string, bool> FilteringFunction { get; set; }
-    }
-
     public class OperationsViewModel : BindableBase
     {
         IRepository<BankOperation> _operationRepository;
 
-        public OperationsViewModel(
-            PkoBpParser parser,
-            IRepository<BankOperation> operationRepository)
+        public OperationsViewModel(IContext context)
         {
-            _operationRepository = operationRepository;
+            _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
             FilterDate = DateTime.Now;

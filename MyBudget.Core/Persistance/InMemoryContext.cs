@@ -10,9 +10,9 @@ namespace MyBudget.Core.InMemoryPersistance
 {
     public class InMemoryContext : IContext
     {
-        private RepositoryFactory _repositoryFactory;
+        private XmlRepositoryFactory _repositoryFactory;
 
-        public InMemoryContext(RepositoryFactory repositoryFactory)
+        public InMemoryContext(XmlRepositoryFactory repositoryFactory)
         {
             if (repositoryFactory == null)
                 throw new ArgumentNullException("repositoryFactory");

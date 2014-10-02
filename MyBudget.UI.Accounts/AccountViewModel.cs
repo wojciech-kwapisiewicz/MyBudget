@@ -13,17 +13,15 @@ namespace MyBudget.UI.Accounts
 
         public IRegionNavigationJournal Journal { get; set; }
         private IRegionManager _regionManager;
+
         private IRepository<BankAccount> _bankAccountRepository;
         private IContext _context;
 
-        public AccountViewModel(
-            IRepository<BankAccount> bankAccountRepository,
-            IRegionManager regionManager,
-            IContext context)
+        public AccountViewModel(IContext context,IRegionManager regionManager)
         {
             _regionManager = regionManager;
-            _bankAccountRepository = bankAccountRepository;
             _context = context;
+            _bankAccountRepository = context.GetRepository<IRepository<BankAccount>>();
             GoBack = new DelegateCommand(DoGoBack);
             Save = new DelegateCommand(DoSave);
         }

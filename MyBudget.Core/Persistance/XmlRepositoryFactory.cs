@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.Persistance
 {
-    public class RepositoryFactory
+    public class XmlRepositoryFactory
     {
         private Dictionary<Type, IRepository> _repositories = new Dictionary<Type, IRepository>();
         public Dictionary<Type, IRepository> Repositories { get
@@ -26,7 +26,7 @@ namespace MyBudget.Core.Persistance
             }
         }
 
-        public RepositoryFactory(
+        public XmlRepositoryFactory(
             BankAccountXmlRepository ba,
             BankOperationTypeXmlRepository bot,
             BankStatementXmlRepository bs,

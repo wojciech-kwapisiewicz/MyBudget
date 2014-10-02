@@ -2,6 +2,7 @@
 using MyBudget.Core.DataContext;
 using MyBudget.Core.InMemoryPersistance;
 using MyBudget.Core.Model;
+using MyBudget.Core.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,9 @@ namespace MyBudget.Core
             unityContainer.RegisterType<BankOperationTypeXmlRepository>(new ContainerControlledLifetimeManager());
             unityContainer.RegisterType<BankStatementXmlRepository>(new ContainerControlledLifetimeManager());
 
-            unityContainer.RegisterType<IContext, InMemoryContext>();
+            //unityContainer.RegisterType<IContext, InMemoryContext>();
+            unityContainer.RegisterType<IContext, XmlContext>();
+            unityContainer.RegisterType<IXmlSaveHandler, XmlSaveHandler>();
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();

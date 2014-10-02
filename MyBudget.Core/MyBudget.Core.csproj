@@ -59,7 +59,7 @@
     <Compile Include="Persistance\BankStatementXmlRepository.cs" />
     <Compile Include="Persistance\InMemoryContext.cs" />
     <Compile Include="Persistance\IXmlSaveHandler.cs" />
-    <Compile Include="Persistance\RepositoryFactory.cs" />
+    <Compile Include="Persistance\XmlRepositoryFactory.cs" />
     <Compile Include="Persistance\XmlContext.cs" />
     <Compile Include="Classification\IClassifier.cs" />
     <Compile Include="IParser.cs" />
