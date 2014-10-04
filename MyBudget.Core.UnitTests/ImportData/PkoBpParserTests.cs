@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace MyBudget.Core.UnitTests
+namespace MyBudget.Core.UnitTests.ImportData
 {
     [TestFixture]
     public class PkoBpParserTests
@@ -34,7 +34,7 @@ namespace MyBudget.Core.UnitTests
 
             string pkoBpList = ManifestStreamReaderHelper.ReadEmbeddedResource(
                 typeof(PkoBpParserTests).Assembly, 
-                "MyBudget.Core.UnitTests.PkoBp1Entry.xml");
+                "MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml");
             
             //When
             var list = new PkoBpParser(accountRepo.Object, typeRepo.Object)
@@ -63,7 +63,7 @@ namespace MyBudget.Core.UnitTests
 
             //Given
             using(Stream pkoBpList = typeof(PkoBpParserTests).Assembly
-                .GetManifestResourceStream("MyBudget.Core.UnitTests.PkoBp1Entry.xml"))
+                .GetManifestResourceStream("MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml"))
             {
                 //When
                 var list = new PkoBpParser(accountRepo.Object, typeRepo.Object)

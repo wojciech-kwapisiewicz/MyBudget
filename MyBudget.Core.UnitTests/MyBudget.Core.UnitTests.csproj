@@ -45,9 +45,10 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ManifestStreamReaderHelper.cs" />
     <Compile Include="Persistance\BankOperationXmlRepositoryTests.cs" />
     <Compile Include="Persistance\XmlContextTests.cs" />
-    <Compile Include="PkoBpParserTests.cs" />
+    <Compile Include="ImportData\PkoBpParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -60,7 +61,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PkoBp1Entry.xml" />
+    <EmbeddedResource Include="ImportData\PkoBp1Entry.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />

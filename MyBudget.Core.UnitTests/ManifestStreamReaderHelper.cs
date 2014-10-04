@@ -6,7 +6,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.UnitTests
 {
     public static class ManifestStreamReaderHelper
     {

@@ -1,4 +1,6 @@
-﻿using MyBudget.Core.InMemoryPersistance;
+﻿using Moq;
+using MyBudget.Core.DataContext;
+using MyBudget.Core.InMemoryPersistance;
 using MyBudget.Core.Model;
 using NUnit.Framework;
 using System;
@@ -15,18 +17,21 @@ namespace MyBudget.Core.UnitTests.Persistance
         [Test]
         public void GivenBankOperationXmlRepository_WhenElementAdded_ThenNextIdAssigned()
         {
-            ////Given
-            //var repo = new BankOperationXmlRepository();
+            //Given
+            var repo = new BankOperationXmlRepository(
+                new Mock<IRepository<BankAccount, string>>().Object,
+                new Mock<IRepository<BankOperationType, string>>().Object,
+                new Mock<IRepository<BankStatement, int>>().Object);
 
-            ////When
-            //var bo1 = new BankOperation();
-            //var bo2 = new BankOperation();
-            //repo.Add(bo1);
-            //repo.Add(bo2);
+            //When
+            var bo1 = new BankOperation();
+            var bo2 = new BankOperation();
+            repo.Add(bo1);
+            repo.Add(bo2);
 
-            ////Then
-            //Assert.AreEqual(1, bo1.Id);
-            //Assert.AreEqual(2, bo2.Id);
+            //Then
+            Assert.AreEqual(1, bo1.Id);
+            Assert.AreEqual(2, bo2.Id);
         }
     }
 }
