@@ -64,6 +64,8 @@
                                  Width="120" 
                                  Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" 
                                  CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
+
+            <Button Margin="10 0 0 0" Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" Command="{Binding ViewModel.Save}" />
         </StackPanel>
         <DataGrid Grid.Row="1"
                   AutoGenerateColumns="False"

@@ -1,4 +1,5 @@
-﻿using Microsoft.Practices.Prism.Mvvm;
+﻿using Microsoft.Practices.Prism.Commands;
+using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core;
@@ -12,10 +13,12 @@ namespace MyBudget.UI.Accounts
 {
     public class OperationsViewModel : BindableBase
     {
-        IRepository<BankOperation> _operationRepository;
+        private IContext _context;
+        private IRepository<BankOperation> _operationRepository;
 
         public OperationsViewModel(IContext context)
         {
+            _context = context;
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
@@ -25,6 +28,7 @@ namespace MyBudget.UI.Accounts
                 Dispatcher.CurrentDispatcher,
                 () => { if (Data != null) Data.Refresh(); },
                 500);
+            Save = new DelegateCommand(DoSave);
         }
 
         private void InitializeGrouppingProperties()
@@ -256,5 +260,11 @@ namespace MyBudget.UI.Accounts
         }
 
         #endregion
+
+        public DelegateCommand Save { get; set; }
+        private void DoSave()
+        {            
+            _context.SaveChanges();
+        }
     }
 }
