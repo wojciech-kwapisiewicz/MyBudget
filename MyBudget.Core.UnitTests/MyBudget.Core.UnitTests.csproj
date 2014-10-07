@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ImportData\MilleniumParserTests.cs" />
     <Compile Include="ManifestStreamReaderHelper.cs" />
     <Compile Include="Persistance\BankOperationXmlRepositoryTests.cs" />
     <Compile Include="Persistance\XmlContextTests.cs" />
@@ -52,6 +53,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ImportData\sampleInput.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

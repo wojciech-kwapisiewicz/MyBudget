@@ -52,6 +52,9 @@
     <Compile Include="CoreUnityConfiguration.cs" />
     <Compile Include="DataContext\IContext.cs" />
     <Compile Include="DataContext\IIdentifiable.cs" />
+    <Compile Include="ImportData\IParseHelper.cs" />
+    <Compile Include="ImportData\MilleniumParser.cs" />
+    <Compile Include="ImportData\ParseHelper.cs" />
     <Compile Include="Persistance\AbstractXmlRepository.cs" />
     <Compile Include="Persistance\BankAccountXmlRepository.cs" />
     <Compile Include="Persistance\BankOperationXmlRepository.cs" />

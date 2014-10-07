@@ -1,5 +1,6 @@
 ﻿using Moq;
 using MyBudget.Core.DataContext;
+using MyBudget.Core.ImportData;
 using MyBudget.Core.Model;
 using NUnit.Framework;
 using System;
@@ -17,62 +18,46 @@ namespace MyBudget.Core.UnitTests.ImportData
     public class PkoBpParserTests
     {
         [Test]
-        public void GivenPkoBpXmlTextWith1Entry_WhenParse_ThenListOf1EntryReturned()
+        public void GivenEmptyRepositoriesAndPkoBpXmlTextWith1Entry_WhenParse_ThenBankAccountAddedAndListOf1EntryReturned()
         {
             //Given
-            BankAccount ba = new BankAccount();
             Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
-            accountRepo
-                .Setup(a => a.Get(It.IsAny<string>()))
-                .Returns(ba);
-
-            BankOperationType type = new BankOperationType();
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
-            typeRepo
-                .Setup(a=>a.Get(It.IsAny<string>()))
-                .Returns(type);
 
             string pkoBpList = ManifestStreamReaderHelper.ReadEmbeddedResource(
                 typeof(PkoBpParserTests).Assembly, 
                 "MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml");
             
             //When
-            var list = new PkoBpParser(accountRepo.Object, typeRepo.Object)
+            var list = new PkoBpParser(
+                new ParseHelper(accountRepo.Object, typeRepo.Object))
                 .Parse(pkoBpList).ToArray();
 
             //Then
             Assert.AreEqual(1, list.Count());
-            Assert.AreEqual(ba, list.First().BankAccount);
-            Assert.AreEqual(type, list.First().Type);
+            accountRepo.Verify(a => a.Add(It.IsAny<BankAccount>()));
+            typeRepo.Verify(a => a.Add(It.IsAny<BankOperationType>()));
         }
 
         [Test]
-        public void GivenPkoBpXmlFileWith1Entry_WhenParse_ThenListOf1EntryReturned()
+        public void GivenEmptyRepositoriesAndPkoBpXmlFileWith1Entry_WhenParse_ThenAccountAndTypeAddedAndListOf1EntryReturned()
         {
-            BankAccount ba = new BankAccount();
             Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
-            accountRepo
-                .Setup(a => a.Get(It.IsAny<string>()))
-                .Returns(ba);
-
-            BankOperationType type = new BankOperationType();
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
-            typeRepo
-                .Setup(a => a.Get(It.IsAny<string>()))
-                .Returns(type);
 
             //Given
             using(Stream pkoBpList = typeof(PkoBpParserTests).Assembly
                 .GetManifestResourceStream("MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml"))
             {
                 //When
-                var list = new PkoBpParser(accountRepo.Object, typeRepo.Object)
+                var list = new PkoBpParser(
+                    new ParseHelper(accountRepo.Object, typeRepo.Object))
                     .Parse(pkoBpList).ToArray();
 
                 //Then
                 Assert.AreEqual(1, list.Count());
-                Assert.AreEqual(ba, list.First().BankAccount);
-                Assert.AreEqual(type, list.First().Type);
+                accountRepo.Verify(a => a.Add(It.IsAny<BankAccount>()));
+                typeRepo.Verify(a => a.Add(It.IsAny<BankOperationType>()));
             }
         }
     }

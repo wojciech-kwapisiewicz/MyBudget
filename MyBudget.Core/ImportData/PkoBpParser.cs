@@ -11,23 +11,17 @@ using System.Threading.Tasks;
 using System.Xml.Linq;
 using System.Xml.XPath;
 
-namespace MyBudget.Core
+namespace MyBudget.Core.ImportData
 {
     public class PkoBpParser : IParser
     {
-        private IRepository<BankAccount,string> _bankAccountRepository;
-        private IRepository<BankOperationType,string> _bankOperationTypeRepository;
+        IParseHelper _parseHelper;
 
-        public PkoBpParser(
-            IRepository<BankAccount, string> bankAccountRepository,
-            IRepository<BankOperationType, string> bankOperationTypeRepository)
+        public PkoBpParser(IParseHelper parseHelper)
         {
-            if (bankAccountRepository == null)
-                throw new ArgumentNullException("bankAccountRepository");
-            if (bankOperationTypeRepository == null)
-                throw new ArgumentNullException("bankOperationTypeRepository");
-            _bankAccountRepository = bankAccountRepository;
-            _bankOperationTypeRepository = bankOperationTypeRepository;
+            if (parseHelper == null)
+                throw new ArgumentNullException("parseHelper");
+            _parseHelper = parseHelper;
         }
 
         public IEnumerable<BankOperation> Parse(Stream stream)
@@ -49,7 +43,8 @@ namespace MyBudget.Core
 
         private IEnumerable<BankOperation> GetEntriesFromXDocument(XDocument document)
         {
-            BankAccount account = GetAccount(document);
+            var accountNumber = document.XPathSelectElements("/account-history/search/account").Single().Value;
+            BankAccount account = _parseHelper.GetAccount(accountNumber);
 
             int lp = 0;
 
@@ -72,13 +67,13 @@ namespace MyBudget.Core
                 {
                     LpOnStatement = lp,
                     BankAccount = account,
-                    OrderDate = ParseDate(orderDate),
-                    ExecutionDate = ParseDate(executionDate),
-                    Amount = ParseDecimal(amount),
-                    EndingBalance = ParseDecimal(endingBalance),
+                    OrderDate = _parseHelper.ParseDate(orderDate, "yyyy-MM-dd"),
+                    ExecutionDate = _parseHelper.ParseDate(executionDate, "yyyy-MM-dd"),
+                    Amount = _parseHelper.ParseDecimal(amount),
+                    EndingBalance = _parseHelper.ParseDecimal(endingBalance),
                     Title = title,
                     Description = description,
-                    Type = GetType(typeName)
+                    Type = _parseHelper.GetOperationType(typeName)
                 };
             }
         }
@@ -103,50 +98,7 @@ namespace MyBudget.Core
                 description : 
                 string.Empty;
         }
-
-        private BankAccount GetAccount(XDocument document)
-        {
-            var accountNumber = document.XPathSelectElements("/account-history/search/account").Single().Value;
-
-            BankAccount account = _bankAccountRepository.Get(accountNumber);
-            if (account == null)
-            {
-                account = new BankAccount();
-                account.Number = accountNumber;
-                _bankAccountRepository.Add(account);
-            }
-            return account;
-        }
-
-        private BankOperationType GetType(string typeName)
-        {
-            BankOperationType operationType = _bankOperationTypeRepository.Get(typeName);
-            if (operationType == null)
-            {
-                operationType = new BankOperationType();
-                operationType.Name = typeName;
-                _bankOperationTypeRepository.Add(operationType);
-            }
-            return operationType;
-        }
-
-        private static decimal ParseDecimal(string amount)
-        {
-            decimal parsedAmount = decimal.Parse(
-                amount,
-                NumberStyles.Number,
-                CultureInfo.InvariantCulture.NumberFormat);
-            return parsedAmount;
-        }
-
-        private static DateTime ParseDate(string executionDate)
-        {
-            DateTime parsedExecutionDate = DateTime.ParseExact(
-                executionDate,
-                "yyyy-MM-dd",
-                CultureInfo.InvariantCulture,
-                DateTimeStyles.None);
-            return parsedExecutionDate;
-        }
     }
+
+
 }
