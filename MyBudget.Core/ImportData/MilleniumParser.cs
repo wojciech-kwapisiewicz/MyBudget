@@ -22,7 +22,7 @@ namespace MyBudget.Core.ImportData
 
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
-            using (var reader = new StreamReader(File.OpenRead(@"C:\test.csv")))
+            using (var reader = new StreamReader(stream))
             {
                 reader.ReadLine();
                 //ignore headers

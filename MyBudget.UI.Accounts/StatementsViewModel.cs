@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core;
 using MyBudget.Core.DataContext;
+using MyBudget.Core.ImportData;
 using MyBudget.Core.Model;
 using MyBudget.UI.Core.Services;
 using System;

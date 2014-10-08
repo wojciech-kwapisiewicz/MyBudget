@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using MyBudget.Core.DataContext;
+using MyBudget.Core.ImportData;
 using MyBudget.Core.InMemoryPersistance;
 using MyBudget.Core.Model;
 using MyBudget.Core.Persistance;
@@ -23,6 +24,7 @@ namespace MyBudget.Core
             //unityContainer.RegisterType<IContext, InMemoryContext>();
             unityContainer.RegisterType<IContext, XmlContext>();
             unityContainer.RegisterType<IXmlSaveHandler, XmlSaveHandler>();
+            unityContainer.RegisterType<IParseHelper, ParseHelper>();
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();
