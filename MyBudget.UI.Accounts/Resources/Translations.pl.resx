@@ -129,6 +129,9 @@
   <data name="AddFromFile" xml:space="preserve">
     <value>Dodaj z pliku</value>
   </data>
+  <data name="AddFromRawText" xml:space="preserve">
+    <value>Wczytaj tekst wyciągu</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>Nazwa pliku</value>
   </data>
@@ -146,6 +149,12 @@
   </data>
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>Wybierz operację</value>
+  </data>
+  <data name="StatementRawText" xml:space="preserve">
+    <value>Podaj treść wyciągu</value>
+  </data>
+  <data name="StatementType" xml:space="preserve">
+    <value>Rodzaj wyciągu</value>
   </data>
   <data name="TextBlockFilter" xml:space="preserve">
     <value>Filtrowanie</value>

@@ -26,6 +26,10 @@ namespace MyBudget.Core
             unityContainer.RegisterType<IXmlSaveHandler, XmlSaveHandler>();
             unityContainer.RegisterType<IParseHelper, ParseHelper>();
 
+            //Parsers
+            unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
+            unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
+
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankOperation>, BankOperationXmlRepository>();

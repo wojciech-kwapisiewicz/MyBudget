@@ -97,6 +97,15 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Load from statement text.
+        /// </summary>
+        internal static string AddFromRawText {
+            get {
+                return ResourceManager.GetString("AddFromRawText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name.
         /// </summary>
         internal static string FileName {
@@ -147,6 +156,24 @@ namespace MyBudget.UI.Accounts.Resources {
         internal static string OperationNotLoaded {
             get {
                 return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Text of statement.
+        /// </summary>
+        internal static string StatementRawText {
+            get {
+                return ResourceManager.GetString("StatementRawText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Type of statement.
+        /// </summary>
+        internal static string StatementType {
+            get {
+                return ResourceManager.GetString("StatementType", resourceCulture);
             }
         }
         

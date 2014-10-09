@@ -13,13 +13,34 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="250" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <Button Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromRawText}"
+                    Command="{Binding ViewModel.LoadRawTextCommand}" />
             <Button Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}"
                     Command="{Binding ViewModel.LoadFileCommand}" />
         </StackPanel>
-        <DataGrid Grid.Row="1"
+
+        <Label Grid.Row="1" 
+               Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementType}" />
+        <ComboBox Grid.Row="2"
+                  ItemsSource="{Binding ViewModel.SupportedParsers}"
+                  SelectedItem="{Binding ViewModel.ChosenParser, Mode=TwoWay}"
+                  />
+
+        <Label Grid.Row="3" 
+               Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementRawText}" />
+        <ScrollViewer Grid.Row="4" >            
+            <TextBox MinLines="3" AcceptsReturn="True"
+                     Text="{Binding ViewModel.RawStatementText, Mode=TwoWay}"/>
+        </ScrollViewer>
+                          
+        <DataGrid Grid.Row="5"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding ViewModel.Data}"

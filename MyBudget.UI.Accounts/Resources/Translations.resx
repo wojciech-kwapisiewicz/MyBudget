@@ -129,6 +129,9 @@
   <data name="AddFromFile" xml:space="preserve">
     <value>Add from file</value>
   </data>
+  <data name="AddFromRawText" xml:space="preserve">
+    <value>Load from statement text</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>File name</value>
   </data>
@@ -146,6 +149,12 @@
   </data>
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>No operation selected</value>
+  </data>
+  <data name="StatementRawText" xml:space="preserve">
+    <value>Text of statement</value>
+  </data>
+  <data name="StatementType" xml:space="preserve">
+    <value>Type of statement</value>
   </data>
   <data name="TextBlockFilter" xml:space="preserve">
     <value>Filter</value>

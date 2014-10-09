@@ -19,19 +19,43 @@ namespace MyBudget.UI.Accounts
 {
     public class StatementsViewModel : BindableBase
     {
-        PkoBpParser _parser;
+        IParser[] _supportedParsers;
         IRepository<BankOperation> _operationRepository;
         IRepository<BankStatement> _statementsRepository;
         IContext _context;
 
-        public StatementsViewModel(IContext context, PkoBpParser parser)
+        public StatementsViewModel(IContext context, IParser[] supportedParsers)
         {
             _context = context;
-            _parser = parser;
+            _supportedParsers = supportedParsers;
+            ChosenParser = SupportedParsers.FirstOrDefault();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
+            LoadRawTextCommand = new DelegateCommand(LoadFromRawText, CanLoadFromRawText);
+        }
+
+        public IParser[] SupportedParsers
+        {
+            get
+            {
+                return _supportedParsers;
+            }
+        }
+
+        private IParser _supportedParser;
+        public IParser ChosenParser
+        {
+            get
+            {
+                return _supportedParser;
+            }
+            set
+            {
+                _supportedParser = value;
+                OnPropertyChanged(() => SupportedParsers);
+            }
         }
 
         private void ResetListData()
@@ -55,7 +79,7 @@ namespace MyBudget.UI.Accounts
             }
         }
 
-        public ICommand LoadFileCommand { get; set; }
+        public DelegateCommand LoadFileCommand { get; set; }
 
         public void LoadFromFile()
         {
@@ -74,7 +98,7 @@ namespace MyBudget.UI.Accounts
                 _statementsRepository.Add(statement);
 
                 foreach (var item in OnlyNew(
-                    _parser.Parse(file.Stream), 
+                    ChosenParser.Parse(file.Stream), 
                     _operationRepository.GetAll()))
                 {
                     statement.Operations.Add(item);
@@ -103,6 +127,52 @@ namespace MyBudget.UI.Accounts
                     yield return item;
                 }
             }
+        }
+
+        public DelegateCommand LoadRawTextCommand { get; set; }
+
+        private string _rawStatementText;
+        public string RawStatementText
+        {
+            get
+            {
+                return _rawStatementText;
+            }
+            set
+            {
+                _rawStatementText = value;
+                OnPropertyChanged(() => RawStatementText);
+                LoadRawTextCommand.RaiseCanExecuteChanged();
+            }
+        }
+
+        public bool CanLoadFromRawText()
+        {
+            return !string.IsNullOrWhiteSpace(RawStatementText);
+        }
+
+        public void LoadFromRawText()
+        {
+            var now = DateTime.UtcNow;
+            BankStatement statement = new BankStatement()
+            {
+                FileName = "FromText" + now,
+                LoadTime = now,
+                Operations = new List<BankOperation>(),
+            };
+
+            _statementsRepository.Add(statement);
+
+            foreach (var item in OnlyNew(
+                ChosenParser.Parse(RawStatementText),
+                _operationRepository.GetAll()))
+            {
+                statement.Operations.Add(item);
+                _operationRepository.Add(item);
+            }
+            _context.SaveChanges();
+
+            ResetListData();
         }
     }
 }

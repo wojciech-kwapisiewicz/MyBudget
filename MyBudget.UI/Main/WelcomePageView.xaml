@@ -13,6 +13,10 @@
             <Button Content="Op1" />
             <Button Content="Op1" />
             <Button Content="Op1" />
-        </StackPanel>   
-    </StackPanel>
+        </StackPanel> 
+        <TextBlock Text="Notatnik" />
+        <ScrollViewer Height="200">           
+            <TextBox MinLines="4"  AcceptsReturn="True" />
+        </ScrollViewer>
+    </StackPanel>    
 </UserControl>
