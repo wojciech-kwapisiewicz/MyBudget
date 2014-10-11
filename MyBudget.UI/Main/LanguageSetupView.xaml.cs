@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Commands;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -27,9 +28,17 @@ namespace MyBudget.UI.Main
 
         public LanguageSetupView(LanguageSetupViewModel viewModel)
         {
+            RestartCommand = new DelegateCommand(Restart);
             ViewModel = viewModel;
             DataContext = this;
             InitializeComponent();
+        }
+
+        public ICommand RestartCommand { get; set; }
+        public void Restart()
+        {
+            System.Diagnostics.Process.Start(Application.ResourceAssembly.Location);
+            Application.Current.Shutdown();
         }
 
         public LanguageSetupViewModel ViewModel { get; set; }

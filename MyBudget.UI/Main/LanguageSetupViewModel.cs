@@ -1,5 +1,4 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
-using MyBudget.UI.Localization;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -11,50 +10,50 @@ namespace MyBudget.UI.Main
 {
     public class LanguageSetupViewModel : BindableBase
     {
-        ILanguageSettings _languageSettings;
+        ApplicationSettings _applicationSettings;
 
-        public LanguageSetupViewModel(ILanguageSettings languageSettings)
+        public LanguageSetupViewModel(ApplicationSettings applicationSettings)
         {
-            _languageSettings = languageSettings;
+            _applicationSettings = applicationSettings;
         }
 
-        public CultureInfo CurrentCulture
+        public CultureMapping Language
         {
             get
             {
-                return _languageSettings.CurrentCulture;
+                return _applicationSettings.Language;
             }
             set
             {
-                _languageSettings.CurrentCulture = value;
+                _applicationSettings.Language = value;
             }
         }
 
-        public CultureInfo CurrentUICulture
+        public CultureMapping InputLanguage
         {
             get
             {
-                return _languageSettings.CurrentUICulture;
+                return _applicationSettings.InputLanguage;
             }
             set
             {
-                _languageSettings.CurrentUICulture = value;
+                _applicationSettings.InputLanguage = value;
             }
         }
 
-        public IEnumerable<CultureInfo> AvailableUICultures
+        public IEnumerable<CultureMapping> AvailableInputLanguages
         {
             get
             {
-                return _languageSettings.AvailableUICultures;
+                return _applicationSettings.AvailableInputLanguages;
             }
         }
 
-        public IEnumerable<CultureInfo> AvailableCultures
+        public IEnumerable<CultureMapping> AvailableLanguages
         {
             get
             {
-                return _languageSettings.AvailableCultures;
+                return _applicationSettings.AvailableLanguages;
             }
         }
     }

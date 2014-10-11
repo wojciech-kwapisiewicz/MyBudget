@@ -68,6 +68,7 @@
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Controls.Input.Toolkit">
       <HintPath>..\packages\WPFToolkit.3.5.50211.1\lib\System.Windows.Controls.Input.Toolkit.dll</HintPath>
@@ -143,9 +144,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ApplicationSettings.cs" />
     <Compile Include="Bootstrapper.cs" />
-    <Compile Include="Localization\ILanguageSettings.cs" />
-    <Compile Include="Localization\LanguageSettings.cs" />
     <Compile Include="Main\LanguageSetupViewModel.cs" />
     <Compile Include="Main\LanguageSetupView.xaml.cs">
       <DependentUpon>LanguageSetupView.xaml</DependentUpon>
@@ -261,6 +261,7 @@
       <Name>MyBudget.UI.Core</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

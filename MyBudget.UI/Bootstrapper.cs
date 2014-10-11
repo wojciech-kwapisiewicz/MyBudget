@@ -3,7 +3,6 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using MyBudget.Core;
 using MyBudget.UI.Accounts;
-using MyBudget.UI.Localization;
 using MyBudget.UI.Main;
 using System;
 using System.Collections.Generic;
