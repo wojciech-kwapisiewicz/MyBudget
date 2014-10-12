@@ -24,7 +24,7 @@ namespace MyBudget.Core.UnitTests.ImportData
 
             string milleniumCsv = ManifestStreamReaderHelper.ReadEmbeddedResource(
                 typeof(PkoBpParserTests).Assembly,
-                "MyBudget.Core.UnitTests.ImportData.sampleInput.csv");
+                "MyBudget.Core.UnitTests.ImportData.MilleniumParser_Sample.csv");
 
             //When
             var list = new MilleniumParser(

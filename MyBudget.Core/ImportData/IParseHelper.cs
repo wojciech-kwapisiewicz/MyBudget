@@ -12,6 +12,7 @@ namespace MyBudget.Core.ImportData
         BankAccount GetAccount(string accountNumber);
         BankOperationType GetOperationType(string typeName);
         DateTime ParseDate(string executionDate, string format);
-        decimal ParseDecimal(string amount);
+        decimal ParseDecimalInvariant(string amount);
+        decimal ParseDecimalPolish(string amount);
     }
 }

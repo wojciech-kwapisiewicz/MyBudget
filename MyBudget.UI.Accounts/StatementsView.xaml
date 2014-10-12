@@ -36,7 +36,7 @@
         <Label Grid.Row="3" 
                Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementRawText}" />
         <ScrollViewer Grid.Row="4" >            
-            <TextBox MinLines="3" AcceptsReturn="True"
+            <TextBox MinLines="3" AcceptsReturn="True" AcceptsTab="True"
                      Text="{Binding ViewModel.RawStatementText, Mode=TwoWay}"/>
         </ScrollViewer>
                           

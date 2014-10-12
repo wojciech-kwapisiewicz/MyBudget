@@ -25,8 +25,8 @@ namespace MyBudget.Core.UnitTests.ImportData
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
 
             string pkoBpList = ManifestStreamReaderHelper.ReadEmbeddedResource(
-                typeof(PkoBpParserTests).Assembly, 
-                "MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml");
+                typeof(PkoBpParserTests).Assembly,
+                "MyBudget.Core.UnitTests.ImportData.PkoBpParser_1Entry.xml");
             
             //When
             var list = new PkoBpParser(
@@ -47,7 +47,7 @@ namespace MyBudget.Core.UnitTests.ImportData
 
             //Given
             using(Stream pkoBpList = typeof(PkoBpParserTests).Assembly
-                .GetManifestResourceStream("MyBudget.Core.UnitTests.ImportData.PkoBp1Entry.xml"))
+                .GetManifestResourceStream("MyBudget.Core.UnitTests.ImportData.PkoBpParser_1Entry.xml"))
             {
                 //When
                 var list = new PkoBpParser(

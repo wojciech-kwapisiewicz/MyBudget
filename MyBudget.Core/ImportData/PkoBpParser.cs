@@ -69,8 +69,8 @@ namespace MyBudget.Core.ImportData
                     BankAccount = account,
                     OrderDate = _parseHelper.ParseDate(orderDate, "yyyy-MM-dd"),
                     ExecutionDate = _parseHelper.ParseDate(executionDate, "yyyy-MM-dd"),
-                    Amount = _parseHelper.ParseDecimal(amount),
-                    EndingBalance = _parseHelper.ParseDecimal(endingBalance),
+                    Amount = _parseHelper.ParseDecimalInvariant(amount),
+                    EndingBalance = _parseHelper.ParseDecimalInvariant(endingBalance),
                     Title = title,
                     Description = description,
                     Type = _parseHelper.GetOperationType(typeName)

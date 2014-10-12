@@ -50,8 +50,7 @@ namespace MyBudget.Core.ImportData
             string back = accountNumber.Substring(accountNumber.Length - backCiphersCount, backCiphersCount);
             string mask = new string('*', accountNumber.Length - frontCiphersCount - backCiphersCount);
 
-            accountNumber = front + "***" + back;
-            return accountNumber;
+            return string.Format("{0}{1}{2}", front, mask, back);
         }
 
         public BankOperationType GetOperationType(string typeName)
@@ -79,12 +78,21 @@ namespace MyBudget.Core.ImportData
             return parsedExecutionDate;
         }
 
-        public decimal ParseDecimal(string amount)
+        public decimal ParseDecimalInvariant(string amount)
         {
             decimal parsedAmount = decimal.Parse(
                 amount,
                 NumberStyles.Number,
                 CultureInfo.InvariantCulture.NumberFormat);
+            return parsedAmount;
+        }
+
+        public decimal ParseDecimalPolish(string amount)
+        {
+            decimal parsedAmount = decimal.Parse(
+                amount,
+                NumberStyles.Number,
+                CultureInfo.GetCultureInfo("pl"));
             return parsedAmount;
         }
     }

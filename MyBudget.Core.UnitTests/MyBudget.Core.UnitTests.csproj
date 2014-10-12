@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ImportData\MilleniumParserTests.cs" />
+    <Compile Include="ImportData\PkoBpCreditCardParserTests.cs" />
     <Compile Include="ManifestStreamReaderHelper.cs" />
     <Compile Include="Persistance\BankOperationXmlRepositoryTests.cs" />
     <Compile Include="Persistance\XmlContextTests.cs" />
@@ -53,7 +54,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImportData\sampleInput.csv" />
+    <EmbeddedResource Include="ImportData\MilleniumParser_Sample.csv" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
@@ -63,7 +64,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ImportData\PkoBp1Entry.xml" />
+    <EmbeddedResource Include="ImportData\PkoBpParser_1Entry.xml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
@@ -81,6 +82,9 @@
     <EmbeddedResource Include="Persistance\expectedOutput_fullSavedModel.xml">
       <SubType>Designer</SubType>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="ImportData\PkoBpCreditCardParser_Sample.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

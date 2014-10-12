@@ -1,0 +1,59 @@
+﻿[logo iPKO]
+Klient: XYZ | Numer klienta: 1111111 | Czas do końca sesji: 09:45s odśwież
+Ostatnie logowanie: udane 2000-01-01 10:00:00 | nieudane 2000-01-01 10:00:00
+Rachunki
+Transakcje
+Karty
+IKO
+Fundusze
+Usługi 
+maklerskie
+Ubezpieczenia
+Doładowania
+Dostęp
+Kontakt
+Poczta 
+iPKO
+Oferta 
+dla Ciebie
+Wyloguj
+Karty debetowe
+Karty kredytowe
+Szczegóły karty kredytowej
+Operacje bieżące
+Zestawienia operacji
+Przelew z karty
+Spłać kartę
+Karty obciążeniowe
+Karty przedpłacone
+
+ [logo iPKO] [logo iPKO]
+Informacje podstawowe
+Karta	*1234
+Nazwa karty: Karta ABC
+Użytkownik karty: XYZ	
+Saldo bieżące	200,00 PLN  ?	
+Operacje nierozliczone  ?  Operacje rozliczone  ?  Przelewy niezrealizowane  ?
+Data operacji	Data księgowania	Opis	Kwota operacji	Kwota w PLN	
+2014-10-10	2014-10-10	SPŁATA NALEŻNOŚCI - DZIĘKUJEMY	-2 000,00 PLN	-2 000,00	
+ 	
+Drukuj
+2014-10-08	2014-10-08	Kontrahent POL	100,00 PLN	100,00	
+ 	
+Drukuj
+2014-10-07	2014-10-07	ABCDEF
+Data przetworzenia: 2014-10-07 00:00:00 
+Wartość rozliczenia: 20.00
+Kurs Banku sprzedaży dewiz: 5,00 EUR	20,00 EUR	100,00	
+ 	
+Drukuj
+Suma operacji rozliczonych	-1 800,00 PLN
+Kup online
+
+Centrum Kontaktu
+Sprawdź Pocztę iPKO
+Napisz do nas
+Infolinia 801 307 307
+Oddziały i Agencje
+Przewodnik Demo Bezpieczeństwo Regulaminy Opłaty Oprocentowanie Kursy walut Gwarantowanie depozytów Kod BIC (Swift): BPKOPLPW© 2014 PKO Bank 
+Polski
