@@ -86,8 +86,11 @@ namespace MyBudget.UI.Accounts
 
         private void ResetListData()
         {
-            var list = new ListCollectionView(_operationRepository.GetAll().ToList());
-            list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
+            var list = new ListCollectionView(_operationRepository.GetAll()
+                .OrderBy(a => a.OrderDate)
+                .ThenBy(b => b.ExecutionDate)
+                .ToList());
+            //list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
             Data = list;
         }
 

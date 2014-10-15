@@ -15,7 +15,11 @@
         <converters:InverseNullToVisibilityConverer x:Key="inverseNullConverter" />
         <converters:MergeStringsMultiValueConverter x:Key="mergeString" />
         <customGrid:DateToStringConverter x:Key="dateConverter" />
+        <customGrid:DecimalToStringConverter x:Key="decimalConverter" />
         <customGrid:FixedUiToStringConverter x:Key="fixConverter" />
+        <Style x:Key="RightAligned" TargetType="TextBlock">
+            <Setter Property="HorizontalAlignment" Value="Right"/>
+        </Style>
     </UserControl.Resources>
     <Grid>
         <Grid.RowDefinitions>
@@ -110,14 +114,23 @@
                 <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Type}"
                                     Binding="{Binding Type}"
                                     />
-                <customGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
-                                            Binding="{Binding OrderDate}"/>
-                <customGrid:DataGridDateColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
-                                            Binding="{Binding ExecutionDate}"
-                                            />
-                <customGrid:DataGridDecimalColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" 
-                                               Binding="{Binding Amount}"
-                                               />                
+
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" 
+                                    Binding="{Binding OrderDate, Converter={StaticResource dateConverter}}"
+                                    MinWidth="70"
+                                    ElementStyle="{StaticResource RightAligned}"
+                                    />
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" 
+                                    Binding="{Binding ExecutionDate, Converter={StaticResource dateConverter}}"
+                                    MinWidth="70"
+                                    ElementStyle="{StaticResource RightAligned}"
+                                    />
+
+                <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" 
+                                    Binding="{Binding Amount, Converter={StaticResource decimalConverter}}"
+                                    MinWidth="70"     
+                                    ElementStyle="{StaticResource RightAligned}"
+                                    />                
                 <DataGridTextColumn Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Title}"
                                     Binding="{Binding Title}"                            
                                     />

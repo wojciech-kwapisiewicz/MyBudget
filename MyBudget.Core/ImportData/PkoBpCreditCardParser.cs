@@ -14,7 +14,7 @@ namespace MyBudget.Core.ImportData
         const string RepaymentType = "Spłata karty";
         const string RepaymentOperationName = "SPŁATA NALEŻNOŚCI - DZIĘKUJEMY";
 
-        const string Start = "[logo iPKO] [logo iPKO]";
+        const string Start = "Data operacji	Data księgowania	Opis	Kwota operacji	Kwota w PLN";
         const string EndForCurrent = "Suma operacji rozliczonych";
         const string EndForHistory = "Przewodnik Demo Bezpieczeństwo Regulaminy Opłaty Oprocentowanie Kursy walut Gwarantowanie depozytów Kod BIC (Swift)";
 
@@ -99,7 +99,7 @@ namespace MyBudget.Core.ImportData
 
         private string[] ExtractOperationsLines(ref string body)
         {
-            body = RemoveLine(body, 8);
+            body = RemoveLine(body, 1);
             string splitter = "Drukuj";
             string[] ops = body
                 .Split(new[] { splitter }, StringSplitOptions.RemoveEmptyEntries)
