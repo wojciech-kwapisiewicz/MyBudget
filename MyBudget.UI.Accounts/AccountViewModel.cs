@@ -14,14 +14,14 @@ namespace MyBudget.UI.Accounts
         public IRegionNavigationJournal Journal { get; set; }
         private IRegionManager _regionManager;
 
-        private IRepository<BankAccount> _bankAccountRepository;
+        private IRepository<BankAccount, string> _bankAccountRepository;
         private IContext _context;
 
         public AccountViewModel(IContext context,IRegionManager regionManager)
         {
             _regionManager = regionManager;
             _context = context;
-            _bankAccountRepository = context.GetRepository<IRepository<BankAccount>>();
+            _bankAccountRepository = context.GetRepository<IRepository<BankAccount, string>>();
             GoBack = new DelegateCommand(DoGoBack);
             Save = new DelegateCommand(DoSave);
         }
@@ -52,6 +52,20 @@ namespace MyBudget.UI.Accounts
         private void DoGoBack()
         {
             Journal.GoBack();
+        }
+
+        public void OnNavigatedTo(BankAccount selected)
+        {
+            if (selected == null)
+            {
+                Data = new BankAccount();
+                EditMode = EditMode.Add;
+            }
+            else
+            {
+                Data = _bankAccountRepository.Get(selected.Id);
+                EditMode = EditMode.Edit;
+            }
         }
     }
 }

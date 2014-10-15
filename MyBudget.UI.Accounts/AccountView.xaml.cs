@@ -52,16 +52,7 @@ namespace MyBudget.UI.Accounts
         {
             ViewModel.Journal = navigationContext.NavigationService.Journal;
             BankAccount selected = navigationContext.Parameters["selected"] as BankAccount;
-            if(selected==null)
-            {
-                ViewModel.Data = new BankAccount();
-                ViewModel.EditMode = EditMode.Add;
-            }
-            else
-            {
-                ViewModel.Data = selected;
-                ViewModel.EditMode = EditMode.Edit;
-            }
+            ViewModel.OnNavigatedTo(selected);
         }
     }
 }

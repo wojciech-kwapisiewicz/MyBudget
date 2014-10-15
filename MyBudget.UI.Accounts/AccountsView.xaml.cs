@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace MyBudget.UI.Accounts
     /// <summary>
     /// Interaction logic for AccountsView.xaml
     /// </summary>
-    public partial class AccountsView : UserControl
+    public partial class AccountsView : UserControl, IRegionMemberLifetime
     {
         public AccountsView()
         {
@@ -33,5 +34,10 @@ namespace MyBudget.UI.Accounts
         }
 
         public AccountsViewModel ViewModel { get; set; }
+
+        public bool KeepAlive
+        {
+            get { return false; }
+        }
     }
 }
