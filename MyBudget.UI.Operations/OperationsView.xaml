@@ -1,4 +1,4 @@
-﻿<UserControl x:Class="MyBudget.UI.Accounts.OperationsView"
+﻿<UserControl x:Class="MyBudget.UI.Operations.OperationsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -6,7 +6,6 @@
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:converters="clr-namespace:MyBudget.UI.Core.Converters;assembly=MyBudget.UI.Core"
-             xmlns:customGrid="clr-namespace:MyBudget.UI.Core.Controls;assembly=MyBudget.UI.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"  
              >
@@ -14,9 +13,9 @@
         <converters:NullToVisibilityConverer x:Key="nullConverter" />
         <converters:InverseNullToVisibilityConverer x:Key="inverseNullConverter" />
         <converters:MergeStringsMultiValueConverter x:Key="mergeString" />
-        <customGrid:DateToStringConverter x:Key="dateConverter" />
-        <customGrid:DecimalToStringConverter x:Key="decimalConverter" />
-        <customGrid:FixedUiToStringConverter x:Key="fixConverter" />
+        <converters:DateToStringConverter x:Key="dateConverter" />
+        <converters:DecimalToStringConverter x:Key="decimalConverter" />
+        <converters:FixedUiToStringConverter x:Key="fixConverter" />
         <Style x:Key="RightAligned" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>

@@ -3,7 +3,9 @@ using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using MyBudget.Core;
 using MyBudget.UI.Accounts;
+using MyBudget.UI.Accounts.UnityConfig;
 using MyBudget.UI.Main;
+using MyBudget.UI.Operations.UnityConfig;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -33,6 +35,7 @@ namespace MyBudget.UI
         {
             RegisterModule(typeof(MainModule));
             RegisterModule(typeof(AccountsModule));
+            RegisterModule(typeof(OperationsModule));
         }
 
         protected override void ConfigureContainer()

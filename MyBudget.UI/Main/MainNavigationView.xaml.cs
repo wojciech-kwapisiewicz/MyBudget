@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.UI.Accounts;
 using MyBudget.UI.Core;
+using MyBudget.UI.Operations;
 using System;
 using System.Collections.Generic;
 using System.Linq;

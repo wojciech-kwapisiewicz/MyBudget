@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace MyBudget.UI.Core.Controls
+namespace MyBudget.UI.Core.Converters
 {
     [ValueConversion(typeof(object), typeof(string))]
     public class FixedUiToStringConverter : IValueConverter

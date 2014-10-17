@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.UI.Accounts", "MyB
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.UI.Core", "MyBudget.UI.Core\MyBudget.UI.Core.csproj", "{F2CC466B-4F35-47CC-8305-BDCF6F5D71D6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.UI.Operations", "MyBudget.UI.Operations\MyBudget.UI.Operations.csproj", "{ABF818D9-8D87-40CA-8C20-03606E27A09C}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{F2CC466B-4F35-47CC-8305-BDCF6F5D71D6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2CC466B-4F35-47CC-8305-BDCF6F5D71D6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F2CC466B-4F35-47CC-8305-BDCF6F5D71D6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ABF818D9-8D87-40CA-8C20-03606E27A09C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ABF818D9-8D87-40CA-8C20-03606E27A09C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ABF818D9-8D87-40CA-8C20-03606E27A09C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ABF818D9-8D87-40CA-8C20-03606E27A09C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

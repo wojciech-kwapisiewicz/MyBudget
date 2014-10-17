@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Regions;
 using System.Windows.Controls;
 
-namespace MyBudget.UI.Accounts
+namespace MyBudget.UI.Operations
 {
     /// <summary>
     /// Interaction logic for OperationsView.xaml

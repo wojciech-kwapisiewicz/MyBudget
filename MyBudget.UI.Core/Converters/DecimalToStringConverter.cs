@@ -6,25 +6,25 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Data;
 
-namespace MyBudget.UI.Core.Controls
+namespace MyBudget.UI.Core.Converters
 {
-    [ValueConversion(typeof(DateTime), typeof(string))] 
-    public class DateToStringConverter : IValueConverter
+    [ValueConversion(typeof(decimal), typeof(string))] 
+    public class DecimalToStringConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             //By default inproper CurrentUICulture is passed so we ignore culture parameter.
-            //Should be CurrentCulture because DateTime setttings are in CurrentCulture setting.
-            DateTime date = (DateTime)value;
+            //Should be CurrentCulture because monetary setttings are in CurrentCulture setting.
+            decimal number = (decimal)value;
             string format = parameter as string;
             if (!string.IsNullOrEmpty(format))
             {
-                return date.ToLocalTime().ToString(format, CultureInfo.CurrentCulture);
+                return number.ToString(format, CultureInfo.CurrentCulture);
             }
             else
             {
                 //By default just date is returned
-                return date.ToString("d", CultureInfo.CurrentCulture);
+                return number.ToString(CultureInfo.CurrentCulture);
             }
         }
 
@@ -33,4 +33,5 @@ namespace MyBudget.UI.Core.Controls
             return null;
         }
     }
+            
 }

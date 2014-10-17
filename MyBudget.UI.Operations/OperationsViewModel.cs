@@ -9,7 +9,7 @@ using System.Linq;
 using System.Windows.Data;
 using System.Windows.Threading;
 
-namespace MyBudget.UI.Accounts
+namespace MyBudget.UI.Operations
 {
     public class OperationsViewModel : BindableBase
     {
@@ -90,7 +90,7 @@ namespace MyBudget.UI.Accounts
                 .OrderBy(a => a.OrderDate)
                 .ThenBy(b => b.ExecutionDate)
                 .ToList());
-            //list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
+            list.Filter = a => DatePredicateFilter(a) && FieldPredicateFilter(a);
             Data = list;
         }
 
@@ -258,7 +258,7 @@ namespace MyBudget.UI.Accounts
             Data.GroupDescriptions.Clear();
             if (_groupProperty != null && _groupProperty.Name != null)
             {
-                Data.GroupDescriptions.Add(new PropertyGroupDescription(_groupProperty.Name, new MyBudget.UI.Core.Controls.FixedUiToStringConverter()));
+                Data.GroupDescriptions.Add(new PropertyGroupDescription(_groupProperty.Name, new MyBudget.UI.Core.Converters.FixedUiToStringConverter()));
             }
         }
 

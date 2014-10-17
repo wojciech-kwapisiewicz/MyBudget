@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.UI.Accounts
+namespace MyBudget.UI.Accounts.UnityConfig
 {
     public class AccountsModule : IModule
     {
@@ -25,7 +25,6 @@ namespace MyBudget.UI.Accounts
             //Navigable elements
             _container.RegisterType<object, AccountView>(typeof(AccountView).FullName);
             _container.RegisterType<object, AccountsView>(typeof(AccountsView).FullName);
-            _container.RegisterType<object, OperationsView>(typeof(OperationsView).FullName);
             _container.RegisterType<object, StatementsView>(typeof(StatementsView).FullName);
         }
     }

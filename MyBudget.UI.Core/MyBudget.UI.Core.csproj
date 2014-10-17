@@ -65,9 +65,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controls\DecimalToStringConverter.cs" />
-    <Compile Include="Controls\DateToStringConverter.cs" />
-    <Compile Include="Controls\FixedUiToStringConverter.cs" />
+    <Compile Include="Converters\DecimalToStringConverter.cs" />
+    <Compile Include="Converters\DateToStringConverter.cs" />
+    <Compile Include="Converters\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />
     <Compile Include="CustomFilterProperty.cs" />
