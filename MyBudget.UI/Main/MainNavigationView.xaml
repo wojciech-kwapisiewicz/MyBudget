@@ -20,6 +20,8 @@
                     Command="{Binding NavigateStatements}" />
             <Button Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateOperations}"  
                     Command="{Binding NavigateOperations}" />
+            <Button Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatistics}"  
+                    Command="{Binding NavigateStatistics}" />
             <Expander Header="{lex:Loc MyBudget.UI:Resource:ExpanderConfiguration}">      
                 <StackPanel>
                     <Button Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateRules}" 

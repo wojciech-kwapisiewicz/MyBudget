@@ -106,6 +106,15 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Statistics.
+        /// </summary>
+        internal static string ButtonNavigateStatistics {
+            get {
+                return ResourceManager.GetString("ButtonNavigateStatistics", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         internal static string ButtonNavigateWelcomePage {

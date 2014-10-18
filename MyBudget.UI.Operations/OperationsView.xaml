@@ -58,15 +58,19 @@
             </ComboBox>
 
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelContains}" />
+            
+
             <xctk:WatermarkTextBox Watermark="{lex:Loc MyBudget.UI.Operations:Translations:WatermarkFilter}"
                                    Text="{Binding ViewModel.Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                                    MinWidth="200" 
                                    VerticalContentAlignment="Center"/>
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:Month}" 
                    Margin="10 0 0 0"/>
-            <xctk:DateTimeUpDown Format="YearMonth" 
-                                 Width="120" 
-                                 Value="{Binding ViewModel.FilterDate, Mode=TwoWay}" 
+ 
+            <xctk:DateTimePicker Value="{Binding ViewModel.FilterDate, Mode=TwoWay}"                     
+                                 Width="140"
+                                 Format="YearMonth"
+                                 TimePickerVisibility="Collapsed"
                                  CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
 
             <Button Margin="10 0 0 0" Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" Command="{Binding ViewModel.Save}" />

@@ -3,9 +3,68 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:MyBudget.UI.Operations"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:converters="clr-namespace:MyBudget.UI.Core.Converters;assembly=MyBudget.UI.Core"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
+    <UserControl.Resources>
+        <converters:EmptyToDefaultTextConverter x:Key="EmptyToDefaultText" />
+        <converters:DecimalToStringConverter x:Key="DecimalConverter" />
+    </UserControl.Resources>
     <Grid>
-            
-    </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+            <CheckBox IsChecked="{Binding ViewModel.FilterByRange, Mode=TwoWay}" 
+                                            Content="{lex:Loc MyBudget.UI.Operations:Translations:FilterByRange}" />
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:StartDate}"
+                   Margin="10 0 0 0"/>
+            <xctk:DateTimePicker Value="{Binding ViewModel.StartDate, Mode=TwoWay}"
+                                 IsReadOnly="{Binding ViewModel.FilterByMonth}"
+                                 Height="30"                        
+                                 Width="160"
+                                 Format="LongDate"
+                                 TimePickerVisibility="Collapsed"
+                                 CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:EndDate}"
+                   Margin="10 0 0 0"/>
+            <xctk:DateTimePicker Value="{Binding ViewModel.EndDate, Mode=TwoWay}"
+                                 IsReadOnly="{Binding ViewModel.FilterByMonth}"
+                                 Height="30"                        
+                                 Width="160"
+                                 Format="LongDate"
+                                 TimePickerVisibility="Collapsed"
+                                 CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
+
+            <CheckBox IsChecked="{Binding ViewModel.FilterByMonth, Mode=TwoWay}" 
+                      Content="{lex:Loc MyBudget.UI.Operations:Translations:FilterByMonth}" />
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:Month}" 
+                   Margin="10 0 0 0"/>
+            <xctk:DateTimePicker Value="{Binding ViewModel.FilterMonth, Mode=TwoWay}"    
+                                 IsReadOnly="{Binding ViewModel.FilterByRange}"
+                                 Width="140"
+                                 Format="YearMonth"
+                                 TimePickerVisibility="Collapsed"
+                                 CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=Culture, Mode=OneWay}" />
+        </StackPanel>
+        <TreeView Name="treeStatistics" ItemsSource="{Binding ViewModel.Items}" Grid.Row="1">
+            <TreeView.ItemTemplate>
+                <HierarchicalDataTemplate DataType="{x:Type local:StatisticsGroup}" ItemsSource="{Binding SubGroups}">
+                    <StackPanel Orientation="Horizontal">                        
+                        <TextBlock Text="{Binding Key, Converter={StaticResource EmptyToDefaultText}, ConverterParameter={lex:Loc MyBudget.UI.Operations:Translations:UnclassifiedDefaultText}}" 
+                                   MinWidth="200"
+                                   />
+                        <TextBlock Text="{Binding Sum, Converter={StaticResource DecimalConverter}}" 
+                                   MinWidth="200"    
+                                   TextAlignment="Right"
+                                   HorizontalAlignment="Right" />
+                    </StackPanel>
+                </HierarchicalDataTemplate>
+            </TreeView.ItemTemplate>
+        </TreeView>
+    </Grid> 
 </UserControl>

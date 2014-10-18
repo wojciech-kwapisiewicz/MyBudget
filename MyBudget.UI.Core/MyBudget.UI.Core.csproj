@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Converters\DecimalToStringConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
+    <Compile Include="Converters\EmptyToDefaultTextConverter.cs" />
     <Compile Include="Converters\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />

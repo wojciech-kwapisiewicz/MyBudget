@@ -24,5 +24,14 @@ namespace MyBudget.UI.Operations
         {
             InitializeComponent();
         }
+
+        public StatisticsView(StatisticsViewModel viewModel)
+        {           
+            ViewModel = viewModel;
+            DataContext = this;
+            InitializeComponent();
+        }
+
+        public StatisticsViewModel ViewModel { get; set; }
     }
 }

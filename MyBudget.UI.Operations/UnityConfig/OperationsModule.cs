@@ -24,6 +24,7 @@ namespace MyBudget.UI.Operations.UnityConfig
         {
             //Navigable elements
             _container.RegisterType<object, OperationsView>(typeof(OperationsView).FullName);
+            _container.RegisterType<object, StatisticsView>(typeof(StatisticsView).FullName);
         }
     }
 }

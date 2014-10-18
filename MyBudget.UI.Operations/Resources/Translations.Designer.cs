@@ -61,6 +61,33 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to End date.
+        /// </summary>
+        internal static string EndDate {
+            get {
+                return ResourceManager.GetString("EndDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by month.
+        /// </summary>
+        internal static string FilterByMonth {
+            get {
+                return ResourceManager.GetString("FilterByMonth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by range.
+        /// </summary>
+        internal static string FilterByRange {
+            get {
+                return ResourceManager.GetString("FilterByRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  contains .
         /// </summary>
         internal static string LabelContains {
@@ -106,6 +133,15 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Start date.
+        /// </summary>
+        internal static string StartDate {
+            get {
+                return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string TextBlockFilter {
@@ -120,6 +156,15 @@ namespace MyBudget.UI.Operations.Resources {
         internal static string TextBlockGroup {
             get {
                 return ResourceManager.GetString("TextBlockGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unclassified.
+        /// </summary>
+        internal static string UnclassifiedDefaultText {
+            get {
+                return ResourceManager.GetString("UnclassifiedDefaultText", resourceCulture);
             }
         }
         

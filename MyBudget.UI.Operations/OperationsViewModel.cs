@@ -22,7 +22,8 @@ namespace MyBudget.UI.Operations
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
-            FilterDate = DateTime.Now;
+            FilterDate = DateTime.Now.Date;
+            
             ResetListData();
             defferedDataUpdate = new DeferredAction(
                 Dispatcher.CurrentDispatcher,

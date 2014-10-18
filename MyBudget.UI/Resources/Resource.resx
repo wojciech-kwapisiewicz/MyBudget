@@ -132,6 +132,9 @@
   <data name="ButtonNavigateStatements" xml:space="preserve">
     <value>Statements</value>
   </data>
+  <data name="ButtonNavigateStatistics" xml:space="preserve">
+    <value>Statistics</value>
+  </data>
   <data name="ButtonNavigateWelcomePage" xml:space="preserve">
     <value>Home</value>
   </data>
