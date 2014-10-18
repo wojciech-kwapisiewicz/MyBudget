@@ -117,24 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="AccountDescription" xml:space="preserve">
-    <value>Opis konta</value>
-  </data>
-  <data name="AccountName" xml:space="preserve">
-    <value>Nazwa konta</value>
-  </data>
-  <data name="AccountNumber" xml:space="preserve">
-    <value>Numer konta</value>
-  </data>
-  <data name="AddFromFile" xml:space="preserve">
-    <value>Dodaj z pliku</value>
-  </data>
-  <data name="AddFromRawText" xml:space="preserve">
-    <value>Wczytaj tekst wyciągu</value>
-  </data>
-  <data name="FileName" xml:space="preserve">
-    <value>Nazwa pliku</value>
-  </data>
   <data name="LabelContains" xml:space="preserve">
     <value> zawiera </value>
   </data>
@@ -149,12 +131,6 @@
   </data>
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>Wybierz operację</value>
-  </data>
-  <data name="StatementRawText" xml:space="preserve">
-    <value>Podaj treść wyciągu</value>
-  </data>
-  <data name="StatementType" xml:space="preserve">
-    <value>Rodzaj wyciągu</value>
   </data>
   <data name="TextBlockFilter" xml:space="preserve">
     <value>Filtrowanie</value>

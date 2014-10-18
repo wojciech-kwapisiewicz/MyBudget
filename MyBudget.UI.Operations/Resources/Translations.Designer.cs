@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBudget.UI.Accounts.Resources {
+namespace MyBudget.UI.Operations.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MyBudget.UI.Accounts.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Accounts.Resources.Translations", typeof(Translations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Operations.Resources.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -57,60 +57,6 @@ namespace MyBudget.UI.Accounts.Resources {
             }
             set {
                 resourceCulture = value;
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account description.
-        /// </summary>
-        internal static string AccountDescription {
-            get {
-                return ResourceManager.GetString("AccountDescription", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account name.
-        /// </summary>
-        internal static string AccountName {
-            get {
-                return ResourceManager.GetString("AccountName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Account number.
-        /// </summary>
-        internal static string AccountNumber {
-            get {
-                return ResourceManager.GetString("AccountNumber", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Add from file.
-        /// </summary>
-        internal static string AddFromFile {
-            get {
-                return ResourceManager.GetString("AddFromFile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Load from statement text.
-        /// </summary>
-        internal static string AddFromRawText {
-            get {
-                return ResourceManager.GetString("AddFromRawText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to File name.
-        /// </summary>
-        internal static string FileName {
-            get {
-                return ResourceManager.GetString("FileName", resourceCulture);
             }
         }
         
@@ -156,24 +102,6 @@ namespace MyBudget.UI.Accounts.Resources {
         internal static string OperationNotLoaded {
             get {
                 return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Text of statement.
-        /// </summary>
-        internal static string StatementRawText {
-            get {
-                return ResourceManager.GetString("StatementRawText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Type of statement.
-        /// </summary>
-        internal static string StatementType {
-            get {
-                return ResourceManager.GetString("StatementType", resourceCulture);
             }
         }
         

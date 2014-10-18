@@ -70,6 +70,7 @@
     <Compile Include="Converters\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />
+    <Compile Include="Converters\SumConverter.cs" />
     <Compile Include="CustomFilterProperty.cs" />
     <Compile Include="DeferredAction.cs" />
     <Compile Include="Converters\MergeStringsMultiValueConverter.cs" />

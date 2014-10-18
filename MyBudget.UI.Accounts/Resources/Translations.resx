@@ -135,34 +135,13 @@
   <data name="FileName" xml:space="preserve">
     <value>File name</value>
   </data>
-  <data name="LabelContains" xml:space="preserve">
-    <value> contains </value>
-  </data>
-  <data name="LabelField" xml:space="preserve">
-    <value>Field</value>
-  </data>
   <data name="LoadTime" xml:space="preserve">
     <value>Load time</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>Month</value>
-  </data>
-  <data name="OperationNotLoaded" xml:space="preserve">
-    <value>No operation selected</value>
   </data>
   <data name="StatementRawText" xml:space="preserve">
     <value>Text of statement</value>
   </data>
   <data name="StatementType" xml:space="preserve">
     <value>Type of statement</value>
-  </data>
-  <data name="TextBlockFilter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="TextBlockGroup" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="WatermarkFilter" xml:space="preserve">
-    <value>Filter</value>
   </data>
 </root>

@@ -115,47 +115,11 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  contains .
-        /// </summary>
-        internal static string LabelContains {
-            get {
-                return ResourceManager.GetString("LabelContains", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Field.
-        /// </summary>
-        internal static string LabelField {
-            get {
-                return ResourceManager.GetString("LabelField", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Load time.
         /// </summary>
         internal static string LoadTime {
             get {
                 return ResourceManager.GetString("LoadTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Month.
-        /// </summary>
-        internal static string Month {
-            get {
-                return ResourceManager.GetString("Month", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to No operation selected.
-        /// </summary>
-        internal static string OperationNotLoaded {
-            get {
-                return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
             }
         }
         
@@ -174,33 +138,6 @@ namespace MyBudget.UI.Accounts.Resources {
         internal static string StatementType {
             get {
                 return ResourceManager.GetString("StatementType", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter.
-        /// </summary>
-        internal static string TextBlockFilter {
-            get {
-                return ResourceManager.GetString("TextBlockFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Group.
-        /// </summary>
-        internal static string TextBlockGroup {
-            get {
-                return ResourceManager.GetString("TextBlockGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter.
-        /// </summary>
-        internal static string WatermarkFilter {
-            get {
-                return ResourceManager.GetString("WatermarkFilter", resourceCulture);
             }
         }
     }

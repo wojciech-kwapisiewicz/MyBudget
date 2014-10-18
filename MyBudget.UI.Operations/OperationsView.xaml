@@ -16,6 +16,7 @@
         <converters:DateToStringConverter x:Key="dateConverter" />
         <converters:DecimalToStringConverter x:Key="decimalConverter" />
         <converters:FixedUiToStringConverter x:Key="fixConverter" />
+        <converters:SumConverter x:Key="SumConverter" />
         <Style x:Key="RightAligned" TargetType="TextBlock">
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
@@ -27,7 +28,7 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockGroup}"
+            <TextBlock Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockGroup}"
                        VerticalAlignment="Center"
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
@@ -40,12 +41,12 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            
-            <TextBlock Text="{lex:Loc MyBudget.UI.Accounts:Translations:TextBlockFilter}" 
+
+            <TextBlock Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockFilter}" 
                        VerticalAlignment="Center"
                        Margin="10 0 10 5" 
                        Style="{StaticResource SubHeaderTextBlockStyle}"  />
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelField}" />
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelField}" />
             <ComboBox Width="200"                       
                       ItemsSource="{Binding ViewModel.FilteringProperties}" 
                       SelectedItem="{Binding ViewModel.FilterProperty, Mode=TwoWay}">
@@ -55,13 +56,13 @@
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:LabelContains}" />
-            <xctk:WatermarkTextBox Watermark="{lex:Loc MyBudget.UI.Accounts:Translations:WatermarkFilter}"
+
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelContains}" />
+            <xctk:WatermarkTextBox Watermark="{lex:Loc MyBudget.UI.Operations:Translations:WatermarkFilter}"
                                    Text="{Binding ViewModel.Filter, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                                    MinWidth="200" 
                                    VerticalContentAlignment="Center"/>
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:Month}" 
+            <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:Month}" 
                    Margin="10 0 0 0"/>
             <xctk:DateTimeUpDown Format="YearMonth" 
                                  Width="120" 
@@ -94,7 +95,8 @@
                                             <Expander.Header>
                                                 <StackPanel Orientation="Horizontal">
                                                     <TextBlock Text="{Binding Path=Name}" Margin="0 0 5 0" />
-                                                    <TextBlock Text="{Binding Path=ItemCount, StringFormat=({0})}"/>
+                                                    <TextBlock Text="{Binding Path=ItemCount, StringFormat=({0})}" Margin="0 0 5 0"/>
+                                                    <TextBlock Text="{Binding Path=Items, Converter={StaticResource SumConverter}}" />
                                                 </StackPanel>
                                             </Expander.Header>
                                             <ItemsPresenter />
@@ -145,7 +147,7 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"
                    Visibility="{Binding ViewModel.SelectedOperation, Converter={StaticResource inverseNullConverter}}"
-                   Text="{lex:Loc MyBudget.UI.Accounts:Translations:OperationNotLoaded}"
+                   Text="{lex:Loc MyBudget.UI.Operations:Translations:OperationNotLoaded}"
                    Style="{StaticResource HeaderTextBlockStyle}"
                    />
 

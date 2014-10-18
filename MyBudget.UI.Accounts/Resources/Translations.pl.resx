@@ -135,34 +135,13 @@
   <data name="FileName" xml:space="preserve">
     <value>Nazwa pliku</value>
   </data>
-  <data name="LabelContains" xml:space="preserve">
-    <value> zawiera </value>
-  </data>
-  <data name="LabelField" xml:space="preserve">
-    <value>Pole </value>
-  </data>
   <data name="LoadTime" xml:space="preserve">
     <value>Data wczytania</value>
-  </data>
-  <data name="Month" xml:space="preserve">
-    <value>Miesiąc</value>
-  </data>
-  <data name="OperationNotLoaded" xml:space="preserve">
-    <value>Wybierz operację</value>
   </data>
   <data name="StatementRawText" xml:space="preserve">
     <value>Podaj treść wyciągu</value>
   </data>
   <data name="StatementType" xml:space="preserve">
     <value>Rodzaj wyciągu</value>
-  </data>
-  <data name="TextBlockFilter" xml:space="preserve">
-    <value>Filtrowanie</value>
-  </data>
-  <data name="TextBlockGroup" xml:space="preserve">
-    <value>Grupowanie</value>
-  </data>
-  <data name="WatermarkFilter" xml:space="preserve">
-    <value>Filtr</value>
   </data>
 </root>

@@ -143,6 +143,10 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="StatisticsView.xaml.cs">
+      <DependentUpon>StatisticsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="StatisticsViewModel.cs" />
     <Compile Include="UnityConfig\OperationsModule.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -170,6 +174,10 @@
     <Page Include="OperationsView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="StatisticsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup />
