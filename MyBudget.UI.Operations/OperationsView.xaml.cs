@@ -1,4 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Regions;
+using MyBudget.UI.Operations.Resources;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace MyBudget.UI.Operations
@@ -6,7 +8,7 @@ namespace MyBudget.UI.Operations
     /// <summary>
     /// Interaction logic for OperationsView.xaml
     /// </summary>
-    public partial class OperationsView : UserControl, IRegionMemberLifetime
+    public partial class OperationsView : UserControl, IConfirmNavigationRequest, IRegionMemberLifetime
     {
         public OperationsView()
         {
@@ -16,8 +18,8 @@ namespace MyBudget.UI.Operations
         public OperationsView(OperationsViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
             InitializeComponent();
+            Wrapper.DataContext = this;
         }
 
         public OperationsViewModel ViewModel { get; set; }
@@ -25,6 +27,49 @@ namespace MyBudget.UI.Operations
         public bool KeepAlive
         {
             get { return false; }
+        }
+
+        public void ConfirmNavigationRequest(NavigationContext navigationContext, System.Action<bool> continuationCallback)
+        {
+            if (ViewModel.ModelChanged)
+            {
+                var result = MessageBox.Show(
+                    Translations.ShouldSaveCaption,
+                    Translations.ShouldSave,
+                    MessageBoxButton.YesNoCancel);
+                if (result == MessageBoxResult.Cancel)
+                {
+                    continuationCallback(false);
+                }
+                else if (result == MessageBoxResult.No)
+                {
+                    continuationCallback(true);
+                }
+                else if (result == MessageBoxResult.Yes)
+                {
+                    ViewModel.Save.Execute();
+                    continuationCallback(true);
+                }
+            }
+            else
+            {
+                continuationCallback(true);
+            }          
+        }
+
+        public bool IsNavigationTarget(NavigationContext navigationContext)
+        {
+            return true;
+        }
+
+        public void OnNavigatedFrom(NavigationContext navigationContext)
+        {
+
+        }
+
+        public void OnNavigatedTo(NavigationContext navigationContext)
+        {
+
         }
     }
 }

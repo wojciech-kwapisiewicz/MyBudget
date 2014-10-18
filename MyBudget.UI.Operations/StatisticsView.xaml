@@ -13,7 +13,7 @@
         <converters:EmptyToDefaultTextConverter x:Key="EmptyToDefaultText" />
         <converters:DecimalToStringConverter x:Key="DecimalConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />

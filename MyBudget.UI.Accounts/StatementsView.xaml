@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <converters:DateToStringConverter x:Key="dateConverter" />
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />

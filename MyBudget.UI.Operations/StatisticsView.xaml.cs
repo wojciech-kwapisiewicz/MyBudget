@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace MyBudget.UI.Operations
     /// <summary>
     /// Interaction logic for StatisticsView.xaml
     /// </summary>
-    public partial class StatisticsView : UserControl
+    public partial class StatisticsView : UserControl, IRegionMemberLifetime
     {
         public StatisticsView()
         {
@@ -28,10 +29,15 @@ namespace MyBudget.UI.Operations
         public StatisticsView(StatisticsViewModel viewModel)
         {           
             ViewModel = viewModel;
-            DataContext = this;
             InitializeComponent();
+            Wrapper.DataContext = this;
         }
 
         public StatisticsViewModel ViewModel { get; set; }
+
+        public bool KeepAlive
+        {
+            get { return false; }
+        }
     }
 }

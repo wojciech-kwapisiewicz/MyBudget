@@ -29,8 +29,8 @@ namespace MyBudget.UI.Accounts
         public AccountsView(AccountsViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
             InitializeComponent();
+            Wrapper.DataContext = this;
         }
 
         public AccountsViewModel ViewModel { get; set; }

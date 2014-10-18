@@ -6,7 +6,7 @@
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300">
-    <StackPanel>
+    <StackPanel x:Name="Wrapper">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
             <Button Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" Command="{Binding ViewModel.Save}" />
             <Button Content="{lex:Loc MyBudget.UI:Generic:ButtonCancel}" Command="{Binding ViewModel.GoBack}" />

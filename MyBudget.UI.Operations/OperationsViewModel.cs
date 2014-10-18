@@ -32,6 +32,8 @@ namespace MyBudget.UI.Operations
             Save = new DelegateCommand(DoSave);
         }
 
+        public bool ModelChanged { get; set; }
+
         private void InitializeGrouppingProperties()
         {
             string[] groupProperties = new[] 
@@ -105,7 +107,13 @@ namespace MyBudget.UI.Operations
             set
             {
                 _SelectedOperation = value;
+                if(value!=null)
+                {
+                    ModelChanged = true;
+                }
                 OnPropertyChanged(() => SelectedOperation);
+                OnPropertyChanged(() => Categories);
+                OnPropertyChanged(() => SubCategories);
             }
         }
 
@@ -264,6 +272,22 @@ namespace MyBudget.UI.Operations
         }
 
         #endregion
+
+        public IEnumerable<string> Categories
+        {
+            get
+            {
+                return _operationRepository.GetAll().Select(a => a.Category).Distinct();
+            }
+        }
+
+        public IEnumerable<string> SubCategories
+        {
+            get
+            {
+                return _operationRepository.GetAll().Select(a => a.SubCategory).Distinct();
+            }
+        }
 
         public DelegateCommand Save { get; set; }
         private void DoSave()

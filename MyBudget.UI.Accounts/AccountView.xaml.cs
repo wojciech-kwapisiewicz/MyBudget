@@ -33,8 +33,8 @@ namespace MyBudget.UI.Accounts
         public AccountView(AccountViewModel viewModel)
         {
             ViewModel = viewModel;
-            DataContext = this;
             InitializeComponent();
+            Wrapper.DataContext = this;
         }
 
         public AccountViewModel ViewModel { get; set; }

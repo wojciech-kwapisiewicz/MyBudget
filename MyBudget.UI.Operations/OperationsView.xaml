@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:toolkitInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit" 
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:converters="clr-namespace:MyBudget.UI.Core.Converters;assembly=MyBudget.UI.Core"
              mc:Ignorable="d" 
@@ -21,7 +22,7 @@
             <Setter Property="HorizontalAlignment" Value="Right"/>
         </Style>
     </UserControl.Resources>
-    <Grid>
+    <Grid x:Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
@@ -198,8 +199,7 @@
                    Padding="5 0 5 10"
                    >
                 <Label.Content>
-                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}({0} - {1})">                        
-                        <!--<Binding Path="ViewModel.SelectedOperation.Amount" Converter="{StaticResource fixConverter}" FallbackValue="0" />-->
+                    <MultiBinding Converter="{StaticResource mergeString}" ConverterParameter="{}({0} - {1})">                                                
                         <Binding Path="ViewModel.SelectedOperation.Type" FallbackValue="N/N" />
                         <Binding Path="ViewModel.SelectedOperation.BankAccount" FallbackValue="N/N" />
                     </MultiBinding>
@@ -213,14 +213,25 @@
 
             <Label Grid.Column="2" Grid.Row="3" 
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}" />
-            <TextBox Grid.Column="3" Grid.Row="3" Width="400" 
+            <toolkitInput:AutoCompleteBox Grid.Column="3" Grid.Row="3" Width="400" 
                      Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
+                                          ItemsSource="{Binding ViewModel.Categories}"
+                                          IsTextCompletionEnabled="True"
                      />
+            <!--<TextBox Grid.Column="3" Grid.Row="3" Width="400" 
+                     Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
+                     />-->
             <Label Grid.Column="2" Grid.Row="4"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_SubCategory}" />
-            <TextBox Grid.Column="3" Grid.Row="4" Width="400"
-                     Text="{Binding ViewModel.SelectedOperation.SubCategory, Mode=TwoWay}" 
+            <toolkitInput:AutoCompleteBox Grid.Column="3" Grid.Row="4" Width="400" 
+                     Text="{Binding ViewModel.SelectedOperation.SubCategory,Mode=TwoWay}" 
+                                          ItemsSource="{Binding ViewModel.SubCategories}"
+                                          IsTextCompletionEnabled="True"
+
                      />
+            <!--<TextBox Grid.Column="3" Grid.Row="4" Width="400"
+                     Text="{Binding ViewModel.SelectedOperation.SubCategory, Mode=TwoWay}" 
+                     />-->
             <Label Grid.Column="2" Grid.Row="5"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Card}" />
             <ComboBox Grid.Column="3" Grid.Row="5" Width="400"
