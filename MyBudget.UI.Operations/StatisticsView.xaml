@@ -11,7 +11,7 @@
              d:DesignHeight="300" d:DesignWidth="300">
     <UserControl.Resources>
         <converters:EmptyToDefaultTextConverter x:Key="EmptyToDefaultText" />
-        <converters:DecimalToStringConverter x:Key="DecimalConverter" />
+        <converters:FixedUiToStringConverter x:Key="FixUiConverter" />
     </UserControl.Resources>
     <Grid x:Name="Wrapper">
         <Grid.RowDefinitions>
@@ -58,7 +58,7 @@
                         <TextBlock Text="{Binding Key, Converter={StaticResource EmptyToDefaultText}, ConverterParameter={lex:Loc MyBudget.UI.Operations:Translations:UnclassifiedDefaultText}}" 
                                    MinWidth="200"
                                    />
-                        <TextBlock Text="{Binding Sum, Converter={StaticResource DecimalConverter}}" 
+                        <TextBlock Text="{Binding Sum, Converter={StaticResource FixUiConverter}}" 
                                    MinWidth="200"    
                                    TextAlignment="Right"
                                    HorizontalAlignment="Right" />

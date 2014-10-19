@@ -160,6 +160,15 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Overall sum.
+        /// </summary>
+        internal static string SumText {
+            get {
+                return ResourceManager.GetString("SumText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Filter.
         /// </summary>
         internal static string TextBlockFilter {

@@ -10,14 +10,6 @@ using System.Threading.Tasks;
 
 namespace MyBudget.UI.Operations
 {
-    public class StatisticsGroup
-    {
-        public string Key { get; set; }
-        public decimal Sum { get; set; }
-        public IEnumerable<BankOperation> Elements { get; set; }
-        public IEnumerable<StatisticsGroup> SubGroups { get; set; }
-    }
-
     public class StatisticsViewModel : BindableBase
     {
         IRepository<BankOperation> _bankOperationRepository;
@@ -48,19 +40,28 @@ namespace MyBudget.UI.Operations
                     a.OrderDate.Date <= EndDate.Date);
             }
 
-            var its = GetGroup(itemsToDisplay.GroupBy(l1 => l1.Category));
+            var groupping = itemsToDisplay.GroupBy(l1 => l1.Category ?? string.Empty);
+            var roots = GetGroup(groupping);
 
-            foreach (var item in its.Where(a => a.Key != null))
+            foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType <StatisticsGroup>())
             {
-                item.SubGroups = GetGroup(item.Elements.GroupBy(a => a.SubCategory));
+                var subGroupping = item.Elements.GroupBy(a => a.SubCategory ?? string.Empty);
+                if (subGroupping.Any(a => !string.IsNullOrEmpty(a.Key)))
+                {
+                    item.SubGroups = GetGroup(subGroupping);
+                }
             }
 
-            Items = its;
+            var overall = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+            roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
+            roots.Add(new StatisticsGroup() { Key = Resources.Translations.SumText, Sum = overall });
+
+            Items = roots;
         }
 
-        private IEnumerable<StatisticsGroup> GetGroup(IEnumerable<IGrouping<string, BankOperation>> groupping)
+        private ObservableCollection<IGroupItem> GetGroup(IEnumerable<IGrouping<string, BankOperation>> groupping)
         {
-            return new ObservableCollection<StatisticsGroup>(groupping.Select(group =>
+            return new ObservableCollection<IGroupItem>(groupping.Select(group =>
                     new StatisticsGroup()
                     {
                         Key = group.Key,
@@ -69,8 +70,8 @@ namespace MyBudget.UI.Operations
                     }));
         }
 
-        private IEnumerable<StatisticsGroup> _items { get; set; }
-        public IEnumerable<StatisticsGroup> Items
+        private IEnumerable<IGroupItem> _items { get; set; }
+        public IEnumerable<IGroupItem> Items
         {
             get
             {

@@ -150,6 +150,9 @@
   <data name="StartDate" xml:space="preserve">
     <value>Data początkowa</value>
   </data>
+  <data name="SumText" xml:space="preserve">
+    <value>Podsumowanie</value>
+  </data>
   <data name="TextBlockFilter" xml:space="preserve">
     <value>Filtrowanie</value>
   </data>
