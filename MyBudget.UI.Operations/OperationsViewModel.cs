@@ -30,6 +30,7 @@ namespace MyBudget.UI.Operations
                 () => { if (Data != null) Data.Refresh(); },
                 500);
             Save = new DelegateCommand(DoSave);
+            SelectNext = new DelegateCommand(DoSelectNext);
         }
 
         public bool ModelChanged { get; set; }
@@ -140,7 +141,9 @@ namespace MyBudget.UI.Operations
         bool DatePredicateFilter(object obj)
         {
             BankOperation ba = obj as BankOperation;
-            return ba.ExecutionDate.Month == FilterDate.Month && ba.ExecutionDate.Year == FilterDate.Year;
+            return 
+                ba.OrderDate.Month == FilterDate.Month && 
+                ba.OrderDate.Year == FilterDate.Year;
         }
 
         private DateTime _filterDate;
@@ -294,5 +297,19 @@ namespace MyBudget.UI.Operations
         {            
             _context.SaveChanges();
         }
+
+        public DelegateCommand SelectNext { get; set; }
+        private void DoSelectNext()
+        {
+            if (Data.MoveCurrentToNext())
+            {
+                if (OnNextSelected != null)
+                {
+                    OnNextSelected();                    
+                }
+            }
+        }
+
+        public Action OnNextSelected { private get; set; }
     }
 }

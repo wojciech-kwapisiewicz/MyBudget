@@ -2,6 +2,7 @@
 using MyBudget.UI.Operations.Resources;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Input;
 
 namespace MyBudget.UI.Operations
 {
@@ -16,8 +17,15 @@ namespace MyBudget.UI.Operations
         }
 
         public OperationsView(OperationsViewModel viewModel)
-        {
+        {         
             ViewModel = viewModel;
+            viewModel.OnNextSelected = () =>
+                {
+                    var operationCategoryTextBox = OperationCategoryElement.Template
+                        .FindName("Text", OperationCategoryElement) as TextBox;
+                    operationCategoryTextBox.SelectAll();
+                    operationsGrid.ScrollIntoView(viewModel.SelectedOperation);
+                };
             InitializeComponent();
             Wrapper.DataContext = this;
         }

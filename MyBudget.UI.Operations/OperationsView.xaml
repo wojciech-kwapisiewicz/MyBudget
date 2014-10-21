@@ -77,6 +77,7 @@
             <Button Margin="10 0 0 0" Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" Command="{Binding ViewModel.Save}" />
         </StackPanel>
         <DataGrid Grid.Row="1"
+                  x:Name="operationsGrid"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding ViewModel.Data}"
@@ -158,6 +159,11 @@
 
         <Grid Grid.Row="2" Margin="10 10 10 10"
               Visibility="{Binding ViewModel.SelectedOperation, Converter={StaticResource nullConverter}}">
+            <Grid.InputBindings>
+                <KeyBinding Command="{Binding ViewModel.SelectNext}"
+                            Key="F2"
+                            />
+            </Grid.InputBindings>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
@@ -206,7 +212,6 @@
                 </Label.Content>
             </Label>
 
-
             <ScrollViewer Grid.RowSpan="3" Grid.Row="3" Height="90">                
                 <Label Content="{Binding ViewModel.SelectedOperation.Description}" />
             </ScrollViewer>
@@ -217,21 +222,17 @@
                      Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
                                           ItemsSource="{Binding ViewModel.Categories}"
                                           IsTextCompletionEnabled="True"
+                                          x:Name="OperationCategoryElement"
                      />
-            <!--<TextBox Grid.Column="3" Grid.Row="3" Width="400" 
-                     Text="{Binding ViewModel.SelectedOperation.Category,Mode=TwoWay}" 
-                     />-->
+
             <Label Grid.Column="2" Grid.Row="4"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_SubCategory}" />
             <toolkitInput:AutoCompleteBox Grid.Column="3" Grid.Row="4" Width="400" 
                      Text="{Binding ViewModel.SelectedOperation.SubCategory,Mode=TwoWay}" 
                                           ItemsSource="{Binding ViewModel.SubCategories}"
                                           IsTextCompletionEnabled="True"
-
                      />
-            <!--<TextBox Grid.Column="3" Grid.Row="4" Width="400"
-                     Text="{Binding ViewModel.SelectedOperation.SubCategory, Mode=TwoWay}" 
-                     />-->
+
             <Label Grid.Column="2" Grid.Row="5"
                    Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Card}" />
             <ComboBox Grid.Column="3" Grid.Row="5" Width="400"
