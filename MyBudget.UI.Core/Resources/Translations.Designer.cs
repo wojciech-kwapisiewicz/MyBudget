@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBudget.UI.Operations.Resources {
+namespace MyBudget.UI.Core.Resources {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MyBudget.UI.Operations.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Operations.Resources.Translations", typeof(Translations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Core.Resources.Translations", typeof(Translations).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,101 +61,47 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to  contains .
+        ///   Looks up a localized string similar to End date.
         /// </summary>
-        internal static string LabelContains {
+        internal static string EndDate {
             get {
-                return ResourceManager.GetString("LabelContains", resourceCulture);
+                return ResourceManager.GetString("EndDate", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Field.
+        ///   Looks up a localized string similar to Filter by month.
         /// </summary>
-        internal static string LabelField {
+        internal static string FilterByMonth {
             get {
-                return ResourceManager.GetString("LabelField", resourceCulture);
+                return ResourceManager.GetString("FilterByMonth", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Load time.
+        ///   Looks up a localized string similar to Filter by range.
         /// </summary>
-        internal static string LoadTime {
+        internal static string FilterByRange {
             get {
-                return ResourceManager.GetString("LoadTime", resourceCulture);
+                return ResourceManager.GetString("FilterByRange", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to No operation selected.
+        ///   Looks up a localized string similar to Month.
         /// </summary>
-        internal static string OperationNotLoaded {
+        internal static string Month {
             get {
-                return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
+                return ResourceManager.GetString("Month", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations has changed, would you like to save?.
+        ///   Looks up a localized string similar to Start date.
         /// </summary>
-        internal static string ShouldSave {
+        internal static string StartDate {
             get {
-                return ResourceManager.GetString("ShouldSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save?.
-        /// </summary>
-        internal static string ShouldSaveCaption {
-            get {
-                return ResourceManager.GetString("ShouldSaveCaption", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Overall sum.
-        /// </summary>
-        internal static string SumText {
-            get {
-                return ResourceManager.GetString("SumText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter.
-        /// </summary>
-        internal static string TextBlockFilter {
-            get {
-                return ResourceManager.GetString("TextBlockFilter", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Group.
-        /// </summary>
-        internal static string TextBlockGroup {
-            get {
-                return ResourceManager.GetString("TextBlockGroup", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unclassified.
-        /// </summary>
-        internal static string UnclassifiedDefaultText {
-            get {
-                return ResourceManager.GetString("UnclassifiedDefaultText", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Filter.
-        /// </summary>
-        internal static string WatermarkFilter {
-            get {
-                return ResourceManager.GetString("WatermarkFilter", resourceCulture);
+                return ResourceManager.GetString("StartDate", resourceCulture);
             }
         }
     }

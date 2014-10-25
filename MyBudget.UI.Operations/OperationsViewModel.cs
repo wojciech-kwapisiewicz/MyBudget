@@ -22,16 +22,34 @@ namespace MyBudget.UI.Operations
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
-            FilterDate = DateTime.Now.Date;
             
             ResetListData();
             defferedDataUpdate = new DeferredAction(
                 Dispatcher.CurrentDispatcher,
                 () => { if (Data != null) Data.Refresh(); },
                 500);
+
             Save = new DelegateCommand(DoSave);
             SelectNext = new DelegateCommand(DoSelectNext);
         }
+
+        private Func<DateTime, bool> _filterFunction;
+        public Func<DateTime, bool> FilterFunction
+        {
+            get
+            {
+                return _filterFunction;
+            }
+            set
+            {
+                _filterFunction = value;
+                OnPropertyChanged(() => FilterFunction);
+                if (Data != null)
+                {
+                    Data.Refresh();
+                }
+            }
+        }        
 
         public bool ModelChanged { get; set; }
 
@@ -140,30 +158,10 @@ namespace MyBudget.UI.Operations
 
         bool DatePredicateFilter(object obj)
         {
+            if (FilterFunction == null) return true;
             BankOperation ba = obj as BankOperation;
-            return 
-                ba.OrderDate.Month == FilterDate.Month && 
-                ba.OrderDate.Year == FilterDate.Year;
+            return FilterFunction(ba.OrderDate);
         }
-
-        private DateTime _filterDate;
-        public DateTime FilterDate
-        {
-            get
-            {
-                return _filterDate;
-            }
-            set
-            {
-                _filterDate = value;
-                OnPropertyChanged(() => FilterDate);
-                if (Data != null)
-                {
-                    Data.Refresh();
-                }
-            }
-        }
-
 
         bool FieldPredicateFilter(object obj)
         {

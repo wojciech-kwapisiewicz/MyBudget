@@ -17,27 +17,31 @@ namespace MyBudget.UI.Operations
         public StatisticsViewModel(IContext context)
         {
             _bankOperationRepository = context.GetRepository<IRepository<BankOperation>>();
-            FilterMonth = DateTime.Now.Date;
-            StartDate = DateTime.Now.Date.AddMonths(-1);
-            EndDate = DateTime.Now.Date.AddMonths(1);
             ReloadView();
         }
+
+        private Func<DateTime, bool> _filterFunction;
+        public Func<DateTime, bool> FilterFunction
+        {
+            get
+            {
+                return _filterFunction;
+            }
+            set
+            {
+                _filterFunction = value;
+                OnPropertyChanged(() => FilterFunction);
+                ReloadView();
+            }
+        }
+        
 
         private void ReloadView()
         {
             var itemsToDisplay = _bankOperationRepository.GetAll();
-
-            if(FilterByMonth)
+            if(FilterFunction!=null)
             {
-                itemsToDisplay = itemsToDisplay.Where(a => 
-                    a.OrderDate.Month == FilterMonth.Month && 
-                    a.OrderDate.Year == FilterMonth.Year);
-            }
-            else
-            {
-                itemsToDisplay = itemsToDisplay.Where(a =>
-                    a.OrderDate.Date >= StartDate.Date &&
-                    a.OrderDate.Date <= EndDate.Date);
+                itemsToDisplay = itemsToDisplay.Where(a => FilterFunction(a.OrderDate));
             }
 
             var groupping = itemsToDisplay.GroupBy(l1 => l1.Category ?? string.Empty);
@@ -81,79 +85,6 @@ namespace MyBudget.UI.Operations
             {
                 _items = value;
                 OnPropertyChanged(() => Items);
-            }
-        }
-
-        private bool _filterByMonth;
-        public bool FilterByMonth
-        {
-            get
-            {
-                return _filterByMonth;
-            }
-            set
-            {
-                _filterByMonth = value;
-                OnPropertyChanged(() => FilterByMonth);
-                OnPropertyChanged(() => FilterByRange);
-                ReloadView();
-            }
-        }
-
-        private DateTime _filterMonth;
-        public DateTime FilterMonth
-        {
-            get
-            {
-                return _filterMonth;
-            }
-            set
-            {
-                _filterMonth = value;
-                OnPropertyChanged(() => FilterMonth);
-                ReloadView();
-            }
-        }
-
-        public bool FilterByRange
-        {
-            get
-            {
-                return !_filterByMonth;
-            }
-            set
-            {
-                FilterByMonth = !value;                
-            }
-        }
-
-        private DateTime _startDate;
-        public DateTime StartDate
-        {
-            get
-            {
-                return _startDate;
-            }
-            set
-            {
-                _startDate = value;
-                OnPropertyChanged(() => StartDate);
-                ReloadView();
-            }
-        }
-
-        private DateTime _endDate;
-        public DateTime EndDate
-        {
-            get
-            {
-                return _endDate;
-            }
-            set
-            {
-                _endDate = value;
-                OnPropertyChanged(() => EndDate);
-                ReloadView();
             }
         }
     }

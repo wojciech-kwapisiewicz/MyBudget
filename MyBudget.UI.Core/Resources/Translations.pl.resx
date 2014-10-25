@@ -117,37 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="LabelContains" xml:space="preserve">
-    <value> contains </value>
+  <data name="EndDate" xml:space="preserve">
+    <value>Data końcowa</value>
   </data>
-  <data name="LabelField" xml:space="preserve">
-    <value>Field</value>
+  <data name="FilterByMonth" xml:space="preserve">
+    <value>Wg miesiąca</value>
   </data>
-  <data name="LoadTime" xml:space="preserve">
-    <value>Load time</value>
+  <data name="FilterByRange" xml:space="preserve">
+    <value>Wg zakresu</value>
   </data>
-  <data name="OperationNotLoaded" xml:space="preserve">
-    <value>No operation selected</value>
+  <data name="Month" xml:space="preserve">
+    <value>Miesiąc</value>
   </data>
-  <data name="ShouldSave" xml:space="preserve">
-    <value>Operations has changed, would you like to save?</value>
-  </data>
-  <data name="ShouldSaveCaption" xml:space="preserve">
-    <value>Save?</value>
-  </data>
-  <data name="SumText" xml:space="preserve">
-    <value>Overall sum</value>
-  </data>
-  <data name="TextBlockFilter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="TextBlockGroup" xml:space="preserve">
-    <value>Group</value>
-  </data>
-  <data name="UnclassifiedDefaultText" xml:space="preserve">
-    <value>Unclassified</value>
-  </data>
-  <data name="WatermarkFilter" xml:space="preserve">
-    <value>Filter</value>
+  <data name="StartDate" xml:space="preserve">
+    <value>Data początkowa</value>
   </data>
 </root>

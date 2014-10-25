@@ -1,0 +1,73 @@
+﻿<UserControl x:Class="MyBudget.UI.Core.Controls.DateRangeControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:conv="clr-namespace:MyBudget.UI.Core.Converters"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:local="clr-namespace:MyBudget.UI.Core.Controls"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
+    <UserControl.Resources>
+        <conv:EnumToBoolConverter x:Key="enum" />
+        <conv:InversedEnumToBoolConverter x:Key="inv" />
+    </UserControl.Resources>
+    <StackPanel x:Name="MainWrapper"
+                HorizontalAlignment="Right"
+                Orientation="Horizontal">
+        <CheckBox Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByRange}"
+                  IsChecked="{Binding RangeType,
+                                      Converter={StaticResource enum},
+                                      ConverterParameter={x:Static local:DateRangeType.ByRange},
+                                      Mode=TwoWay}" />
+        <Label Margin="10 0 0 0"
+               Content="{lex:Loc MyBudget.UI.Core:Translations:StartDate}" />
+        <xctk:DateTimePicker Width="160"
+                             Height="30"
+                             CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
+                                                   Path=Culture,
+                                                   Mode=OneWay}"
+                             Format="LongDate"
+                             IsReadOnly="{Binding RangeType,
+                                                  Converter={StaticResource inv},
+                                                  ConverterParameter={x:Static local:DateRangeType.ByRange}}"
+                             TimePickerVisibility="Collapsed"
+                             Value="{Binding StartDate,
+                                             Mode=TwoWay}" />
+        <Label Margin="10 0 0 0"
+               Content="{lex:Loc MyBudget.UI.Core:Translations:EndDate}" />
+        <xctk:DateTimePicker Width="160"
+                             Height="30"
+                             CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
+                                                   Path=Culture,
+                                                   Mode=OneWay}"
+                             Format="LongDate"
+                             IsReadOnly="{Binding RangeType,
+                                                  Converter={StaticResource inv},
+                                                  ConverterParameter={x:Static local:DateRangeType.ByRange}}"
+                             TimePickerVisibility="Collapsed"
+                             Value="{Binding EndDate,
+                                             Mode=TwoWay}" />
+
+        <CheckBox Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByMonth}"
+                  IsChecked="{Binding RangeType,
+                                      Converter={StaticResource enum},
+                                      ConverterParameter={x:Static local:DateRangeType.ByMonth},
+                                      Mode=TwoWay}" />
+        <Label Margin="10 0 0 0"
+               Content="{lex:Loc MyBudget.UI.Core:Translations:Month}" />
+        <xctk:DateTimePicker Width="140"
+                             CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
+                                                   Path=Culture,
+                                                   Mode=OneWay}"
+                             Format="YearMonth"
+                             IsReadOnly="{Binding RangeType,
+                                                  Converter={StaticResource inv},
+                                                  ConverterParameter={x:Static local:DateRangeType.ByMonth}}"
+                             TimePickerVisibility="Collapsed"
+                             Value="{Binding FilterMonth,
+                                             Mode=TwoWay}" />
+    </StackPanel>
+</UserControl>

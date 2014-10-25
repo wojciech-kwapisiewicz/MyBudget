@@ -45,6 +45,14 @@
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WPFLocalizeExtension, Version=2.2.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WpfLocalizeExtension.2.2.1\lib\net35\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions, Version=1.1.6.3, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\XAMLMarkupExtensions.1.1.6.3\lib\net40\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
     <Reference Include="Xceed.Wpf.AvalonDock">
       <HintPath>..\packages\Extended.Wpf.Toolkit.2.2.1\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
     </Reference>
@@ -65,6 +73,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\DateRangeControl.xaml.cs">
+      <DependentUpon>DateRangeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DateRangeType.cs" />
+    <Compile Include="Converters\InversedEnumToBoolConverter.cs" />
+    <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\DecimalToStringConverter.cs" />
     <Compile Include="Converters\DateToStringConverter.cs" />
     <Compile Include="Converters\EmptyToDefaultTextConverter.cs" />
@@ -79,6 +93,16 @@
     <Compile Include="PropertyDescription.cs" />
     <Compile Include="RegionNames.cs" />
     <Compile Include="ResourceManagerHelper.cs" />
+    <Compile Include="Resources\Translations.Designer.cs">
+      <DependentUpon>Translations.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="Resources\Translations.pl.Designer.cs">
+      <DependentUpon>Translations.pl.resx</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Services\FileDialogService.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -99,6 +123,14 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Translations.pl.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translations.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Translations.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Translations.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -111,6 +143,12 @@
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Controls\DateRangeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
