@@ -23,10 +23,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             //Given
             Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
-
-            string pkoBpList = ManifestStreamReaderHelper.ReadEmbeddedResource(
-                typeof(PkoBpParserTests).Assembly,
-                "MyBudget.Core.UnitTests.ImportData.PkoBpParser_1Entry.xml");
+            string pkoBpList = TestFiles.PkoBpParser_1Entry;
             
             //When
             var list = new PkoBpParser(
@@ -46,8 +43,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
 
             //Given
-            using(Stream pkoBpList = typeof(PkoBpParserTests).Assembly
-                .GetManifestResourceStream("MyBudget.Core.UnitTests.ImportData.PkoBpParser_1Entry.xml"))
+            using (Stream pkoBpList = ToStream(TestFiles.PkoBpParser_1Entry))
             {
                 //When
                 var list = new PkoBpParser(
@@ -59,6 +55,16 @@ namespace MyBudget.Core.UnitTests.ImportData
                 accountRepo.Verify(a => a.Add(It.IsAny<BankAccount>()));
                 typeRepo.Verify(a => a.Add(It.IsAny<BankOperationType>()));
             }
+        }
+
+        public Stream ToStream(string text)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }

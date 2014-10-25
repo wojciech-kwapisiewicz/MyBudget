@@ -21,10 +21,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             BankAccountXmlRepository bankRepo = new BankAccountXmlRepository();
             BankOperationTypeXmlRepository typeRepo = new BankOperationTypeXmlRepository();
             //Given
-
-            string milleniumCsv = ManifestStreamReaderHelper.ReadEmbeddedResource(
-                typeof(PkoBpParserTests).Assembly,
-                "MyBudget.Core.UnitTests.ImportData.MilleniumParser_Sample.csv");
+            string milleniumCsv = TestFiles.MilleniumParser_Sample;
 
             //When
             var list = new MilleniumParser(

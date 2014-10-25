@@ -19,9 +19,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             BankOperationTypeXmlRepository typeRepo = new BankOperationTypeXmlRepository();
             //Given
 
-            string creditCardText = ManifestStreamReaderHelper.ReadEmbeddedResource(
-                typeof(PkoBpParserTests).Assembly,
-                "MyBudget.Core.UnitTests.ImportData.PkoBpCreditCardParser_Sample.txt");
+            string creditCardText = TestFiles.PkoBpCreditCardParser_Sample;
 
             //When
             var list = new PkoBpCreditCardParser(
