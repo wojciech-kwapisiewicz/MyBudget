@@ -80,25 +80,69 @@ namespace MyBudget.Core.ImportData
 
         private string ExtractTitle(string description)
         {
-            string titlePrefix = "Tytuł: ";
-            int start = description.IndexOf(titlePrefix, StringComparison.InvariantCultureIgnoreCase);
-            if (start != -1)
+            string[] lines = description.Split(
+                new string[] { Environment.NewLine, "\n", "\r\n" },
+                StringSplitOptions.RemoveEmptyEntries).Select(a => a.Trim()).ToArray();
+
+            string titleLinePrefix = "Tytuł: ";
+            string titleLine = lines.FirstOrDefault(a =>
+                a.StartsWith(titleLinePrefix, StringComparison.OrdinalIgnoreCase));
+            if (string.IsNullOrWhiteSpace(titleLine))
             {
-                int end = description.IndexOf('\n', start);
-                if (end == -1)
-                {
-                    return description.Substring(start + titlePrefix.Length);
-                }
-                else
-                {
-                    return description.Substring(start + titlePrefix.Length, end - start - titlePrefix.Length);
-                }
+                return description;
             }
-            return description.IndexOf('\n') == -1 ? 
-                description : 
-                string.Empty;
+            else
+            {
+                titleLine = titleLine.Replace(titleLinePrefix, "");
+            }
+
+            string title = string.Empty;
+
+            string refNumber = string.Empty;
+            string refLinePrefix = "Numer referencyjny: ";
+            string refLine = lines.FirstOrDefault(a => 
+                a.StartsWith(refLinePrefix, StringComparison.OrdinalIgnoreCase));
+
+            string locationPrefix = "Lokalizacja: ";
+            string locationLine = lines.FirstOrDefault(a =>
+                a.StartsWith(locationPrefix, StringComparison.OrdinalIgnoreCase));
+
+
+            if (!string.IsNullOrWhiteSpace(refLine) &&
+                !string.IsNullOrWhiteSpace(locationPrefix) &&
+                titleLine.Contains(refLine.Replace(refLinePrefix, "")))
+            {
+                return ReorderLocationLine(locationLine);
+            }
+
+            return titleLine;
+        }
+
+        private string ReorderLocationLine(string line)
+        {          
+            string addressPrefix = "Adres: ";
+            string countryPrefix = "Kraj: ";
+            string cityPrefix = "Miasto: ";
+
+            string regex = string.Format(
+                "{0}(.*){1}(.*){2}(.*)",
+                countryPrefix,
+                cityPrefix,
+                addressPrefix);
+
+            var match = Regex.Match(line, regex);
+
+            if (match.Success && match.Groups.Count == 4)
+            {
+                return string.Format("{0} {1}{2}{3}{4}", 
+                    match.Groups[3],
+                    cityPrefix, 
+                    match.Groups[2], 
+                    countryPrefix, 
+                    match.Groups[1]).TrimEnd();
+            }
+
+            return line;
         }
     }
-
-
 }

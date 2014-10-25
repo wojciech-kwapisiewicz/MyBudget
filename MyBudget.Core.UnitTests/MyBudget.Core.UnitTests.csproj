@@ -81,7 +81,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Persistance\expectedOutput_savedData.xml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\PkoBpParser_ZerosInTitle.xml" />
+  </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Persistance\input_saved1Account.xml" />
   </ItemGroup>

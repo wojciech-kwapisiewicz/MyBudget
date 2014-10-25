@@ -32,6 +32,7 @@ namespace MyBudget.Core.UnitTests.ImportData
 
             //Then
             Assert.AreEqual(1, list.Count());
+            Assert.IsTrue(list.Any(a => a.Title == "SomeTitle"));
             accountRepo.Verify(a => a.Add(It.IsAny<BankAccount>()));
             typeRepo.Verify(a => a.Add(It.IsAny<BankOperationType>()));
         }
@@ -65,6 +66,25 @@ namespace MyBudget.Core.UnitTests.ImportData
             writer.Flush();
             stream.Position = 0;
             return stream;
+        }
+
+        [Test]
+        public void GivenWithdrawalAndCardOperation_WhenParse_TitleIsTakenFromLocation()
+        {
+            //Given
+            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
+            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
+            string pkoBpList = TestFiles.PkoBpParser_ZerosInTitle;
+
+            //When
+            var list = new PkoBpParser(
+                new ParseHelper(accountRepo.Object, typeRepo.Object))
+                .Parse(pkoBpList).ToArray();
+
+            //
+            Assert.AreEqual(2, list.Count());
+            Assert.IsTrue(list.Any(a => a.Title == "U AAA 222 Miasto: CityOfSth Kraj: POLSKA"));
+            Assert.IsTrue(list.Any(a => a.Title == "Supermarket ABC Miasto: CityOfSth Kraj: POLSKA"));
         }
     }
 }

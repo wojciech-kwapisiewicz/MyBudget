@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="iso-8859-2"?>
+<account-history>
+  <search>
+    <account>03102039580000123456789000</account>
+    <date since='2013-02-01' to='2012-02-20'/>
+    <filtering>Wszystkie</filtering>
+  </search>
+  <operations>
+    <operation>
+      <exec-date>2013-02-03</exec-date>
+      <order-date>2013-02-03</order-date>
+      <type>Wypłata z bankomatu</type>
+      <description>Tytuł: 12345678901234567890123
+Lokalizacja: Kraj: POLSKA Miasto: CityOfSth Adres: U AAA 222
+Data i czas operacji: 2013-02-03
+Numer referencyjny: 12345678901234567890123
+Oryginalna kwota operacji: 100,00 PLN
+Numer karty: ************1234</description>
+      <amount curr='PLN'>-150.00</amount>
+      <ending-balance curr='PLN'>+500.00</ending-balance>
+    </operation>
+    <operation>
+      <exec-date>2013-02-06</exec-date>
+      <order-date>2013-02-06</order-date>
+      <type>Płatność kartą</type>
+      <description>Tytuł: 012345678 12345678901234567890124
+Lokalizacja: Kraj: POLSKA Miasto: CityOfSth Adres: Supermarket ABC
+Data i czas operacji: 2013-02-06
+Numer referencyjny: 12345678901234567890124
+Oryginalna kwota operacji: 50,00 PLN
+Numer karty: ************1234</description>
+    <amount curr='PLN'>-100.00</amount>
+    <ending-balance curr='PLN'>+500.00</ending-balance>
+    </operation>
+  </operations>
+</account-history>

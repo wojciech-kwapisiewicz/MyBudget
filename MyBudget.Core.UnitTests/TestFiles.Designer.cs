@@ -133,5 +133,29 @@ namespace MyBudget.Core.UnitTests {
                 return ResourceManager.GetString("PkoBpParser_1Entry", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-2&quot;?&gt;
+        ///&lt;account-history&gt;
+        ///  &lt;search&gt;
+        ///    &lt;account&gt;03102039580000123456789000&lt;/account&gt;
+        ///    &lt;date since=&apos;2013-02-01&apos; to=&apos;2012-02-20&apos;/&gt;
+        ///    &lt;filtering&gt;Wszystkie&lt;/filtering&gt;
+        ///  &lt;/search&gt;
+        ///  &lt;operations&gt;
+        ///    &lt;operation&gt;
+        ///      &lt;exec-date&gt;2013-02-03&lt;/exec-date&gt;
+        ///      &lt;order-date&gt;2013-02-03&lt;/order-date&gt;
+        ///      &lt;type&gt;Wypłata z bankomatu&lt;/type&gt;
+        ///      &lt;description&gt;
+        ///        Tytuł: 12345678901234567890123
+        ///        Lokalizacja: Kraj: POLSKA Miasto: CityOfSth Adres: U AAA 222
+        ///        Data  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PkoBpParser_ZerosInTitle {
+            get {
+                return ResourceManager.GetString("PkoBpParser_ZerosInTitle", resourceCulture);
+            }
+        }
     }
 }
