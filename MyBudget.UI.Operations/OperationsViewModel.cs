@@ -278,15 +278,27 @@ namespace MyBudget.UI.Operations
         {
             get
             {
-                return _operationRepository.GetAll().Select(a => a.Category).Distinct();
+                if (SelectedOperation == null)
+                    return Enumerable.Empty<string>();
+                return SortByCount(_operationRepository.GetAll().Select(a => a.Category));
             }
+        }
+
+        public IEnumerable<string> SortByCount(IEnumerable<string> source)
+        {
+            return source.GroupBy(a => a)
+                    .OrderBy(b => b.Count())
+                    .Select(c => c.Key);
         }
 
         public IEnumerable<string> SubCategories
         {
             get
             {
-                return _operationRepository.GetAll().Select(a => a.SubCategory).Distinct();
+                if (SelectedOperation == null)
+                    return Enumerable.Empty<string>();
+                return SortByCount(_operationRepository.GetAll()
+                    .Where(a => a.Category == SelectedOperation.Category).Select(b => b.SubCategory));
             }
         }
 
