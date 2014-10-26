@@ -1,12 +1,13 @@
 ﻿<UserControl x:Class="MyBudget.UI.Accounts.StatementsView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:converters="clr-namespace:MyBudget.UI.Core.Converters;assembly=MyBudget.UI.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <UserControl.Resources>
         <converters:DateToStringConverter x:Key="dateConverter" />
     </UserControl.Resources>
@@ -19,40 +20,46 @@
             <RowDefinition Height="250" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromRawText}"
-                    Command="{Binding ViewModel.LoadRawTextCommand}" />
-            <Button Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}"
-                    Command="{Binding ViewModel.LoadFileCommand}" />
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Command="{Binding ViewModel.LoadRawTextCommand}"
+                    Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromRawText}" />
+            <Button Command="{Binding ViewModel.LoadFileCommand}"
+                    Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}" />
         </StackPanel>
 
-        <Label Grid.Row="1" 
+        <Label Grid.Row="1"
                Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementType}" />
         <ComboBox Grid.Row="2"
                   ItemsSource="{Binding ViewModel.SupportedParsers}"
-                  SelectedItem="{Binding ViewModel.ChosenParser, Mode=TwoWay}"
-                  />
+                  SelectedItem="{Binding ViewModel.ChosenParser,
+                                         Mode=TwoWay}" />
 
-        <Label Grid.Row="3" 
+        <Label Grid.Row="3"
                Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementRawText}" />
-        <ScrollViewer Grid.Row="4" >            
-            <TextBox MinLines="3" AcceptsReturn="True" AcceptsTab="True"
-                     Text="{Binding ViewModel.RawStatementText, Mode=TwoWay}"/>
+        <ScrollViewer Grid.Row="4">
+            <TextBox AcceptsReturn="True"
+                     AcceptsTab="True"
+                     MinLines="3"
+                     Text="{Binding ViewModel.RawStatementText,
+                                    Mode=TwoWay,
+                                    UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
-                          
+
         <DataGrid Grid.Row="5"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  ItemsSource="{Binding ViewModel.Data}"
-                  >
+                  ItemsSource="{Binding ViewModel.Data}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="{lex:Loc MyBudget.UI.Accounts:Translations:LoadTime}" 
-                                    Binding="{Binding LoadTime, Converter={StaticResource dateConverter}, ConverterParameter=g}" />
-                <DataGridTextColumn Header="{lex:Loc MyBudget.UI.Accounts:Translations:FileName}" 
-                                    Binding="{Binding FileName}" 
-                                    Width="*"/>
+                <DataGridTextColumn Binding="{Binding LoadTime,
+                                                      Converter={StaticResource dateConverter},
+                                                      ConverterParameter=g}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:LoadTime}" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding FileName}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:FileName}" />
             </DataGrid.Columns>
-            
+
         </DataGrid>
     </Grid>
 </UserControl>
