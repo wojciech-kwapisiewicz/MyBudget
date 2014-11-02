@@ -22,8 +22,7 @@ namespace MyBudget.UI.Operations
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
-            
-            ResetListData();
+                        
             defferedDataUpdate = new DeferredAction(
                 Dispatcher.CurrentDispatcher,
                 () => { if (Data != null) Data.Refresh(); },
@@ -42,11 +41,14 @@ namespace MyBudget.UI.Operations
             }
             set
             {
-                _filterFunction = value;
-                OnPropertyChanged(() => FilterFunction);
+                _filterFunction = value;                
                 if (Data != null)
                 {
                     Data.Refresh();
+                }
+                else
+                {
+                    ResetListData();
                 }
             }
         }        
@@ -157,8 +159,7 @@ namespace MyBudget.UI.Operations
         #region Filtering
 
         bool DatePredicateFilter(object obj)
-        {
-            if (FilterFunction == null) return true;
+        {            
             BankOperation ba = obj as BankOperation;
             return FilterFunction(ba.OrderDate);
         }

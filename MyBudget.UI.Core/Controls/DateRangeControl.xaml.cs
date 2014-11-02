@@ -31,7 +31,9 @@ namespace MyBudget.UI.Core.Controls
                 return a.Date >= StartDate.Date && a.Date <= EndDate.Date;
             };
             InitializeComponent();
-            MainWrapper.DataContext = this;
+            Action filterInitializer = () => FilteringFunction = byRange;
+            this.Dispatcher.BeginInvoke(filterInitializer);
+            MainWrapper.DataContext = this;            
         }
 
         public Func<DateTime, bool> FilteringFunction
@@ -42,7 +44,7 @@ namespace MyBudget.UI.Core.Controls
 
         // Using a DependencyProperty as the backing store for FilteringFunction.  This enables animation, styling, binding, etc...
         public static readonly DependencyProperty FilteringFunctionProperty =
-            DependencyProperty.Register("FilteringFunction", typeof(Func<DateTime, bool>), typeof(DateRangeControl), new PropertyMetadata(_allIn));
+            DependencyProperty.Register("FilteringFunction", typeof(Func<DateTime, bool>), typeof(DateRangeControl));
 
         public DateTime StartDate
         {
@@ -88,6 +90,11 @@ namespace MyBudget.UI.Core.Controls
         {
             var currentControl = d as DateRangeControl;
 
+            SyncFilterInternal(currentControl);
+        }
+
+        private static void SyncFilterInternal(DateRangeControl currentControl)
+        {
             switch (currentControl.RangeType)
             {
                 case DateRangeType.ByMonth:
