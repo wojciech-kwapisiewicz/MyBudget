@@ -138,10 +138,22 @@
   <data name="LoadTime" xml:space="preserve">
     <value>Load time</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>Added</value>
+  </data>
+  <data name="Replaced" xml:space="preserve">
+    <value>Replaced</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Skipped</value>
+  </data>
   <data name="StatementRawText" xml:space="preserve">
     <value>Text of statement</value>
   </data>
   <data name="StatementType" xml:space="preserve">
     <value>Type of statement</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Updated</value>
   </data>
 </root>

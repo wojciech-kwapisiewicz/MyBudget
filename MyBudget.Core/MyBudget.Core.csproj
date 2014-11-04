@@ -52,8 +52,11 @@
     <Compile Include="CoreUnityConfiguration.cs" />
     <Compile Include="DataContext\IContext.cs" />
     <Compile Include="DataContext\IIdentifiable.cs" />
+    <Compile Include="ImportData\CheckResult.cs" />
+    <Compile Include="ImportData\CheckStatus.cs" />
     <Compile Include="ImportData\IParseHelper.cs" />
     <Compile Include="ImportData\MilleniumParser.cs" />
+    <Compile Include="ImportData\OperationsImporter.cs" />
     <Compile Include="ImportData\ParseHelper.cs" />
     <Compile Include="ImportData\PkoBpCreditCardParser.cs" />
     <Compile Include="Persistance\AbstractXmlRepository.cs" />
@@ -87,11 +90,17 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Translations.pl.resx</DependentUpon>
     </Compile>
+    <Compile Include="ImportData\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ImportData\Resources.pl.resx" />
     <EmbeddedResource Include="Model\Translations.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Translations.Designer.cs</LastGenOutput>
@@ -99,6 +108,10 @@
     <EmbeddedResource Include="Model\Translations.pl.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Translations.pl.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ImportData\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup />

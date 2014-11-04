@@ -33,7 +33,13 @@
         <ComboBox Grid.Row="2"
                   ItemsSource="{Binding ViewModel.SupportedParsers}"
                   SelectedItem="{Binding ViewModel.ChosenParser,
-                                         Mode=TwoWay}" />
+                                         Mode=TwoWay}">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock Text="{Binding Name}" />
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
 
         <Label Grid.Row="3"
                Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementRawText}" />
@@ -58,6 +64,14 @@
                 <DataGridTextColumn Width="*"
                                     Binding="{Binding FileName}"
                                     Header="{lex:Loc MyBudget.UI.Accounts:Translations:FileName}" />
+                <DataGridTextColumn Binding="{Binding New}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:New}" />
+                <DataGridTextColumn Binding="{Binding Skipped}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:Skipped}" />
+                <DataGridTextColumn Binding="{Binding Updated}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:Updated}" />
+                <DataGridTextColumn Binding="{Binding Replaced}"
+                                    Header="{lex:Loc MyBudget.UI.Accounts:Translations:Replaced}" />
             </DataGrid.Columns>
 
         </DataGrid>

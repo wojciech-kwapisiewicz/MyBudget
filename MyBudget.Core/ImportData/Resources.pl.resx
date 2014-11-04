@@ -117,25 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="EndDate" xml:space="preserve">
-    <value>End date</value>
+  <data name="MilleniumFilter" xml:space="preserve">
+    <value>Millenium (.csv)|*.csv</value>
   </data>
-  <data name="FilterAllFiles" xml:space="preserve">
-    <value>All files (*.*)|*.*</value>
+  <data name="MilleniumName" xml:space="preserve">
+    <value>Millenium</value>
   </data>
-  <data name="FilterAllSupported" xml:space="preserve">
-    <value>Supported (*.txt,*.csv,*.xml,*.pdf)|*.txt;*.csv;*.xml;*.pdf</value>
+  <data name="PkoBpCardFilter" xml:space="preserve">
+    <value>Pko BP - nierozliczone operacje karta kredytowa (.txt)|*.txt</value>
   </data>
-  <data name="FilterByMonth" xml:space="preserve">
-    <value>Filter by month</value>
+  <data name="PkoBpCardName" xml:space="preserve">
+    <value>Pko BP - nierozliczone operacje karta kredytowa</value>
   </data>
-  <data name="FilterByRange" xml:space="preserve">
-    <value>Filter by range</value>
+  <data name="PkoBpFilter" xml:space="preserve">
+    <value>Pko BP (.xml)|*.xml</value>
   </data>
-  <data name="Month" xml:space="preserve">
-    <value>Month</value>
-  </data>
-  <data name="StartDate" xml:space="preserve">
-    <value>Start date</value>
+  <data name="PkoBpName" xml:space="preserve">
+    <value>Pko BP</value>
   </data>
 </root>

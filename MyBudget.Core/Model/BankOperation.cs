@@ -13,6 +13,7 @@ namespace MyBudget.Core.Model
     {
         public int Id { get; set; }
         public BankAccount BankAccount { get; set; }
+        public bool Cleared { get; set; }
 
         public BankOperationType Type { get; set; }
         public int LpOnStatement { get; set; }        

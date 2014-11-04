@@ -120,6 +120,12 @@
   <data name="EndDate" xml:space="preserve">
     <value>Data końcowa</value>
   </data>
+  <data name="FilterAllFiles" xml:space="preserve">
+    <value>Wszystkie pliki (*.*)|*.*</value>
+  </data>
+  <data name="FilterAllSupported" xml:space="preserve">
+    <value>Wspierane (*.txt,*.csv,*.xml,*.pdf)|*.txt;*.csv;*.xml;*.pdf</value>
+  </data>
   <data name="FilterByMonth" xml:space="preserve">
     <value>Wg miesiąca</value>
   </data>

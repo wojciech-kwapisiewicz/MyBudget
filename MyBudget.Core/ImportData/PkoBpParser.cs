@@ -15,6 +15,22 @@ namespace MyBudget.Core.ImportData
 {
     public class PkoBpParser : IParser
     {
+        public string Name
+        {
+            get
+            {
+                return Resources.PkoBpName;
+            }
+        }
+
+        public string SupportedFileExtensions
+        {
+            get
+            {
+                return Resources.PkoBpFilter;
+            }
+        }
+        
         IParseHelper _parseHelper;
 
         public PkoBpParser(IParseHelper parseHelper)
@@ -73,7 +89,8 @@ namespace MyBudget.Core.ImportData
                     EndingBalance = _parseHelper.ParseDecimalInvariant(endingBalance),
                     Title = title,
                     Description = description,
-                    Type = _parseHelper.GetOperationType(typeName)
+                    Type = _parseHelper.GetOperationType(typeName),
+                    Cleared = true
                 };
             }
         }

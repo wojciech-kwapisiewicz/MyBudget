@@ -11,6 +11,9 @@ namespace MyBudget.Core
 {
     public interface IParser
     {
+        string Name { get; }
+        string SupportedFileExtensions { get; }
+
         IEnumerable<BankOperation> Parse(Stream stream);
         IEnumerable<BankOperation> Parse(string inputString);
     }

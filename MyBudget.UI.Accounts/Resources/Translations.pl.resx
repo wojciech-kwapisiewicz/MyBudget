@@ -138,10 +138,22 @@
   <data name="LoadTime" xml:space="preserve">
     <value>Data wczytania</value>
   </data>
+  <data name="New" xml:space="preserve">
+    <value>Dodano</value>
+  </data>
+  <data name="Replaced" xml:space="preserve">
+    <value>Zastąpiono</value>
+  </data>
+  <data name="Skipped" xml:space="preserve">
+    <value>Pominięto</value>
+  </data>
   <data name="StatementRawText" xml:space="preserve">
     <value>Podaj treść wyciągu</value>
   </data>
   <data name="StatementType" xml:space="preserve">
     <value>Rodzaj wyciągu</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Zaktualizowano</value>
   </data>
 </root>

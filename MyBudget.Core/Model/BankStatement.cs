@@ -16,5 +16,11 @@ namespace MyBudget.Core.Model
         
         [System.Xml.Serialization.XmlIgnore]
         public List<BankOperation> Operations { get; set; }
+
+
+        public int New { get; set; }
+        public int Skipped { get; set; }
+        public int Updated { get; set; }
+        public int Replaced { get; set; }
     }
 }

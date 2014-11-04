@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyBudget.UI.Core.Resources {
+namespace MyBudget.Core.ImportData {
     using System;
     
     
@@ -22,14 +22,14 @@ namespace MyBudget.UI.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Translations {
+    internal class Resources {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
         private static global::System.Globalization.CultureInfo resourceCulture;
         
         [global::System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal Translations() {
+        internal Resources() {
         }
         
         /// <summary>
@@ -39,7 +39,7 @@ namespace MyBudget.UI.Core.Resources {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Core.Resources.Translations", typeof(Translations).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.Core.ImportData.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -61,65 +61,56 @@ namespace MyBudget.UI.Core.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to End date.
+        ///   Looks up a localized string similar to Millenium operations (.csv)|*.csv.
         /// </summary>
-        internal static string EndDate {
+        internal static string MilleniumFilter {
             get {
-                return ResourceManager.GetString("EndDate", resourceCulture);
+                return ResourceManager.GetString("MilleniumFilter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to All files (*.*)|*.*.
+        ///   Looks up a localized string similar to Millenium operations.
         /// </summary>
-        internal static string FilterAllFiles {
+        internal static string MilleniumName {
             get {
-                return ResourceManager.GetString("FilterAllFiles", resourceCulture);
+                return ResourceManager.GetString("MilleniumName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Supported (*.txt,*.csv,*.xml,*.pdf)|*.txt;*.csv;*.xml;*.pdf.
+        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations (.txt)|*.txt.
         /// </summary>
-        internal static string FilterAllSupported {
+        internal static string PkoBpCardFilter {
             get {
-                return ResourceManager.GetString("FilterAllSupported", resourceCulture);
+                return ResourceManager.GetString("PkoBpCardFilter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter by month.
+        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations.
         /// </summary>
-        internal static string FilterByMonth {
+        internal static string PkoBpCardName {
             get {
-                return ResourceManager.GetString("FilterByMonth", resourceCulture);
+                return ResourceManager.GetString("PkoBpCardName", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filter by range.
+        ///   Looks up a localized string similar to Pko BP operations (.xml)|*.xml.
         /// </summary>
-        internal static string FilterByRange {
+        internal static string PkoBpFilter {
             get {
-                return ResourceManager.GetString("FilterByRange", resourceCulture);
+                return ResourceManager.GetString("PkoBpFilter", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Month.
+        ///   Looks up a localized string similar to Pko BP operations.
         /// </summary>
-        internal static string Month {
+        internal static string PkoBpName {
             get {
-                return ResourceManager.GetString("Month", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start date.
-        /// </summary>
-        internal static string StartDate {
-            get {
-                return ResourceManager.GetString("StartDate", resourceCulture);
+                return ResourceManager.GetString("PkoBpName", resourceCulture);
             }
         }
     }

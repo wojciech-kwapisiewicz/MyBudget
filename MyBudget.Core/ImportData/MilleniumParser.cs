@@ -11,6 +11,24 @@ namespace MyBudget.Core.ImportData
 {
     public class MilleniumParser : IParser
     {
+        public string Name
+        {
+            get
+            {
+                return Resources.MilleniumName;
+            }
+        }
+
+        public string SupportedFileExtensions
+        {
+            get
+            {
+
+                return Resources.MilleniumFilter;
+            }
+        }
+
+
         IParseHelper _parseHelper;
 
         public MilleniumParser(IParseHelper parseHelper)
@@ -87,7 +105,8 @@ namespace MyBudget.Core.ImportData
                 EndingBalance = _parseHelper.ParseDecimalInvariant(entries[9]),
                 Title = title,
                 Description = description,
-                Type = _parseHelper.GetOperationType(typeName)
+                Type = _parseHelper.GetOperationType(typeName),
+                Cleared = true
             };
         }
 

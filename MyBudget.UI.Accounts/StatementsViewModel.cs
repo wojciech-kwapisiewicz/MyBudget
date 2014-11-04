@@ -19,24 +19,26 @@ namespace MyBudget.UI.Accounts
 {
     public class StatementsViewModel : BindableBase
     {
-        IParser[] _supportedParsers;
+        IEnumerable<IParser> _supportedParsers;
         IRepository<BankOperation> _operationRepository;
         IRepository<BankStatement> _statementsRepository;
+        OperationsImporter _importer;
         IContext _context;
 
         public StatementsViewModel(IContext context, IParser[] supportedParsers)
         {
             _context = context;
-            _supportedParsers = supportedParsers;
+            _supportedParsers = supportedParsers.OrderBy(a => a.Name);
             ChosenParser = SupportedParsers.FirstOrDefault();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
+            _importer = new OperationsImporter(_operationRepository, _statementsRepository);
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
             LoadRawTextCommand = new DelegateCommand(LoadFromRawText, CanLoadFromRawText);
         }
 
-        public IParser[] SupportedParsers
+        public IEnumerable<IParser> SupportedParsers
         {
             get
             {
@@ -83,50 +85,17 @@ namespace MyBudget.UI.Accounts
 
         public void LoadFromFile()
         {
-            using (OpenFileResult file = new FileDialogService().OpenFile())
+            using (OpenFileResult file = new FileDialogService().OpenFile(ChosenParser.SupportedFileExtensions))
             {
                 if (file.Stream == null)
                     return;
 
-                BankStatement statement = new BankStatement()
-                {
-                    FileName = file.FileName,
-                    LoadTime = DateTime.UtcNow,
-                    Operations = new List<BankOperation>(),
-                };
-
-                _statementsRepository.Add(statement);
-
-                foreach (var item in OnlyNew(
-                    ChosenParser.Parse(file.Stream), 
-                    _operationRepository.GetAll()))
-                {
-                    statement.Operations.Add(item);
-                    _operationRepository.Add(item);
-                }
+                _importer.ImportOperations(file.FileName, ChosenParser.Parse(file.Stream));
+                
                 _context.SaveChanges();
             }
 
             ResetListData();
-        }
-
-        public IEnumerable<BankOperation> OnlyNew(
-            IEnumerable<BankOperation> toAdd, 
-            IEnumerable<BankOperation> existing)
-        {
-            foreach (var item in toAdd)
-            {
-                var alreadyExist = existing.Any(a =>
-                    a.OrderDate == item.OrderDate &&
-                    a.ExecutionDate == item.ExecutionDate &&
-                    a.Amount == item.Amount &&
-                    a.EndingBalance == item.EndingBalance &&
-                    a.Description == item.Description);
-                if (!alreadyExist)
-                {
-                    yield return item;
-                }
-            }
         }
 
         public DelegateCommand LoadRawTextCommand { get; set; }
@@ -152,26 +121,10 @@ namespace MyBudget.UI.Accounts
         }
 
         public void LoadFromRawText()
-        {
-            var now = DateTime.UtcNow;
-            BankStatement statement = new BankStatement()
-            {
-                FileName = "FromText" + now,
-                LoadTime = now,
-                Operations = new List<BankOperation>(),
-            };
-
-            _statementsRepository.Add(statement);
-
-            foreach (var item in OnlyNew(
-                ChosenParser.Parse(RawStatementText),
-                _operationRepository.GetAll()))
-            {
-                statement.Operations.Add(item);
-                _operationRepository.Add(item);
-            }
+        {                        
+            string statementName = "FromText" + DateTime.Now;
+            _importer.ImportOperations(statementName, ChosenParser.Parse(RawStatementText));
             _context.SaveChanges();
-
             ResetListData();
         }
     }

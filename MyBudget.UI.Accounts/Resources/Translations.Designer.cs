@@ -124,6 +124,33 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added.
+        /// </summary>
+        internal static string New {
+            get {
+                return ResourceManager.GetString("New", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Replaced.
+        /// </summary>
+        internal static string Replaced {
+            get {
+                return ResourceManager.GetString("Replaced", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Skipped.
+        /// </summary>
+        internal static string Skipped {
+            get {
+                return ResourceManager.GetString("Skipped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Text of statement.
         /// </summary>
         internal static string StatementRawText {
@@ -138,6 +165,15 @@ namespace MyBudget.UI.Accounts.Resources {
         internal static string StatementType {
             get {
                 return ResourceManager.GetString("StatementType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Updated.
+        /// </summary>
+        internal static string Updated {
+            get {
+                return ResourceManager.GetString("Updated", resourceCulture);
             }
         }
     }

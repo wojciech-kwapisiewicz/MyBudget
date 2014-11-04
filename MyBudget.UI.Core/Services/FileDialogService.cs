@@ -30,10 +30,21 @@ namespace MyBudget.UI.Core.Services
 
     public class FileDialogService
     {
-        public OpenFileResult OpenFile()
+        public OpenFileResult OpenFile(string customFilter)
         {
+            List<string> baseFilters = new List<string>();
+            if (!string.IsNullOrEmpty(customFilter))
+            {
+                baseFilters.Add(customFilter);
+            }
+            baseFilters.Add(Resources.Translations.FilterAllSupported);
+            baseFilters.Add(Resources.Translations.FilterAllFiles);
+
+            string delimiter = "|";
+            string filter = baseFilters.Aggregate((i, j) => i + delimiter + j);
+
             OpenFileDialog dialog = new OpenFileDialog();
-            dialog.Filter = "Xml Files (.xml)|*.xml|Text Files (.txt)|*.txt|All Files (*.*)|*.*";
+            dialog.Filter = filter;
             dialog.FilterIndex = 1;
             if (dialog.ShowDialog() == true)
             {

@@ -10,6 +10,22 @@ namespace MyBudget.Core.ImportData
 {
     public class PkoBpCreditCardParser : IParser
     {
+        public string Name
+        {
+            get
+            {
+                return Resources.PkoBpCardName;
+            }
+        }
+
+        public string SupportedFileExtensions
+        {
+            get
+            {
+                return Resources.PkoBpCardFilter;
+            }
+        }
+
         const string StandardType = "Karta kredytowa";
         const string RepaymentType = "Spłata karty";
         const string RepaymentOperationName = "SPŁATA NALEŻNOŚCI - DZIĘKUJEMY";
@@ -85,7 +101,9 @@ namespace MyBudget.Core.ImportData
             string cardNumber = string.Empty;
             if (indexOfStartCard < 0)
             {
-                cardNumber = "CRED";
+                throw new InvalidOperationException(
+                    "Loading of cleared operations is not supported. Pick different parser.");
+                //cardNumber = "CRED";
             }
             else
             {
