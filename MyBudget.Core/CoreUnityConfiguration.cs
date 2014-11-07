@@ -29,7 +29,7 @@ namespace MyBudget.Core
             //Parsers
             unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
             unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
-            unityContainer.RegisterType<IParser, PkoBpCreditCardParser>("Pko BP credit card parser");
+            unityContainer.RegisterType<IParser, PkoBpCreditCardUnclearedParser>("Pko BP credit card parser");
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();

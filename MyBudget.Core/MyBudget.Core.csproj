@@ -58,7 +58,7 @@
     <Compile Include="ImportData\MilleniumParser.cs" />
     <Compile Include="ImportData\OperationsImporter.cs" />
     <Compile Include="ImportData\ParseHelper.cs" />
-    <Compile Include="ImportData\PkoBpCreditCardParser.cs" />
+    <Compile Include="ImportData\PkoBpCreditCardUnclearedParser.cs" />
     <Compile Include="Persistance\AbstractXmlRepository.cs" />
     <Compile Include="Persistance\BankAccountXmlRepository.cs" />
     <Compile Include="Persistance\BankOperationXmlRepository.cs" />

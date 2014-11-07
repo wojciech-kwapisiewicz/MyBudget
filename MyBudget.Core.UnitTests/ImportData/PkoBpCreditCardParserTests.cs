@@ -22,7 +22,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             string creditCardText = TestFiles.PkoBpCreditCardParser_Sample;
 
             //When
-            var list = new PkoBpCreditCardParser(
+            var list = new PkoBpCreditCardUnclearedParser(
                 new ParseHelper(bankRepo, typeRepo))
                 .Parse(creditCardText).ToArray();
 

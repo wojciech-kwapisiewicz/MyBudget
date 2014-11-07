@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Core.ImportData
 {
-    public class PkoBpCreditCardParser : IParser
+    public class PkoBpCreditCardUnclearedParser : IParser
     {
         public string Name
         {
@@ -36,7 +36,7 @@ namespace MyBudget.Core.ImportData
 
         IParseHelper _parseHelper;
 
-        public PkoBpCreditCardParser(IParseHelper parseHelper)
+        public PkoBpCreditCardUnclearedParser(IParseHelper parseHelper)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
@@ -46,7 +46,7 @@ namespace MyBudget.Core.ImportData
 
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
-            using (var reader = new StreamReader(stream))
+            using (var reader = new StreamReader(stream, Encoding.UTF8))
             {
                 return Parse(reader.ReadToEnd());
             }
@@ -55,7 +55,7 @@ namespace MyBudget.Core.ImportData
         public IEnumerable<BankOperation> Parse(string inputString)
         {
             string body = ExtractBody(inputString);
-            string cardNumber = ExtractCardNumber(body);
+            string cardNumber = ExtractCardNumber(inputString);
 
             BankAccount account = _parseHelper.GetAccount(cardNumber);
 
