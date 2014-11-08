@@ -9,14 +9,17 @@ namespace MyBudget.Core.Model
 {
     public class BankStatement : IIdentifiable<int>
     {
+        public BankStatement()
+        {
+            Operations = new List<BankOperation>();
+        }
         public int Id { get; set; }
 
         public string FileName { get; set; }
         public DateTime LoadTime { get; set; }
-        
+
         [System.Xml.Serialization.XmlIgnore]
         public List<BankOperation> Operations { get; set; }
-
 
         public int New { get; set; }
         public int Skipped { get; set; }

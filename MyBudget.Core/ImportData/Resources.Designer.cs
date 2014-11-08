@@ -79,6 +79,33 @@ namespace MyBudget.Core.ImportData {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No credit card number was found..
+        /// </summary>
+        internal static string NoCreditCardFound {
+            get {
+                return ResourceManager.GetString("NoCreditCardFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations (.pdf)|*.pdf.
+        /// </summary>
+        internal static string PkoBpCardClearedFilter {
+            get {
+                return ResourceManager.GetString("PkoBpCardClearedFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pko BP cleared CreditCard operations.
+        /// </summary>
+        internal static string PkoBpCardClearedName {
+            get {
+                return ResourceManager.GetString("PkoBpCardClearedName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations (.txt)|*.txt.
         /// </summary>
         internal static string PkoBpCardFilter {

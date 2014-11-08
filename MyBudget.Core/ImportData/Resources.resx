@@ -123,6 +123,15 @@
   <data name="MilleniumName" xml:space="preserve">
     <value>Millenium operations</value>
   </data>
+  <data name="NoCreditCardFound" xml:space="preserve">
+    <value>No credit card number was found.</value>
+  </data>
+  <data name="PkoBpCardClearedFilter" xml:space="preserve">
+    <value>Pko BP uncleared CreditCard operations (.pdf)|*.pdf</value>
+  </data>
+  <data name="PkoBpCardClearedName" xml:space="preserve">
+    <value>Pko BP cleared CreditCard operations</value>
+  </data>
   <data name="PkoBpCardFilter" xml:space="preserve">
     <value>Pko BP uncleared CreditCard operations (.txt)|*.txt</value>
   </data>

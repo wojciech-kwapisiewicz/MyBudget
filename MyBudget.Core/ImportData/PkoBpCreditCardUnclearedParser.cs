@@ -26,23 +26,26 @@ namespace MyBudget.Core.ImportData
             }
         }
 
-        const string StandardType = "Karta kredytowa";
-        const string RepaymentType = "Spłata karty";
-        const string RepaymentOperationName = "SPŁATA NALEŻNOŚCI - DZIĘKUJEMY";
+        private IParseHelper _parseHelper;
+        private CreditCardTextParsing _ccTextParsing;
+        private CreditCardUnclearedTextParsing _unclearedParsing;
 
-        const string Start = "Data operacji	Data księgowania	Opis	Kwota operacji	Kwota w PLN";
-        const string EndForCurrent = "Suma operacji rozliczonych";
-        const string EndForHistory = "Przewodnik Demo Bezpieczeństwo Regulaminy Opłaty Oprocentowanie Kursy walut Gwarantowanie depozytów Kod BIC (Swift)";
-
-        IParseHelper _parseHelper;
-
-        public PkoBpCreditCardUnclearedParser(IParseHelper parseHelper)
+        public PkoBpCreditCardUnclearedParser(
+            IParseHelper parseHelper,
+            CreditCardTextParsing ccTextParsing,
+            CreditCardUnclearedTextParsing unclearedParsing)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
-            _parseHelper = parseHelper;
-        }
+            if (ccTextParsing == null)
+                throw new ArgumentNullException("ccTextParsing");
+            if (unclearedParsing == null)
+                throw new ArgumentNullException("unclearedParsing");
 
+            _parseHelper = parseHelper;
+            _ccTextParsing = ccTextParsing;
+            _unclearedParsing = unclearedParsing;
+        }
 
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
@@ -54,18 +57,21 @@ namespace MyBudget.Core.ImportData
 
         public IEnumerable<BankOperation> Parse(string inputString)
         {
-            string body = ExtractBody(inputString);
-            string cardNumber = ExtractCardNumber(inputString);
+            string body = _unclearedParsing.ExtractBody(inputString);
+            string cardNumber = _ccTextParsing.ExtractCardNumber(
+                inputString,
+                CreditCardTextParsing.CardNumberStartStringUncleared);
 
             BankAccount account = _parseHelper.GetAccount(cardNumber);
 
-            string[] ops = ExtractOperationsLines(ref body);
+            string[] ops = _unclearedParsing.ExtractOperationsLines(body);
 
             for (int i = 0; i < ops.Length; i++)
             {
                 string[] details = ops[i].Split('\t');
-                string operationType = details[2].Contains(RepaymentOperationName) ?
-                    RepaymentType : StandardType;
+                string operationType = 
+                    details[2].Contains(CreditCardTextParsing.RepaymentOperationName) ?
+                    CreditCardTextParsing.RepaymentType : CreditCardTextParsing.StandardType;
 
                 yield return new BankOperation()
                 {
@@ -74,88 +80,11 @@ namespace MyBudget.Core.ImportData
                     OrderDate = _parseHelper.ParseDate(details[0], "yyyy-MM-dd"),
                     ExecutionDate = _parseHelper.ParseDate(details[1], "yyyy-MM-dd"),
                     Amount = -_parseHelper.ParseDecimalPolish(details[4]),
-                    Title = ExtractTitle(details[2]),
+                    Title = _ccTextParsing.ExtractTitle(details[2]),
                     Description = details[2],
                     Type = _parseHelper.GetOperationType(operationType)
                 };
             }
-        }
-
-        private static string ExtractBody(string inputString)
-        {
-            
-            int startIndex = inputString.IndexOf(Start);
-            int endIndex = inputString.IndexOf(EndForCurrent);
-            if (endIndex < 0)
-            {
-                endIndex = inputString.IndexOf(EndForHistory);
-            }
-            string body = inputString.Substring(startIndex, endIndex - startIndex);
-            return body;
-        }
-        
-        private string ExtractCardNumber(string body)
-        {
-            string cardNumberStartString = "Informacje podstawowe\r\nKarta";
-            var indexOfStartCard = body.IndexOf(cardNumberStartString);
-            string cardNumber = string.Empty;
-            if (indexOfStartCard < 0)
-            {
-                throw new InvalidOperationException(
-                    "Loading of cleared operations is not supported. Pick different parser.");
-                //cardNumber = "CRED";
-            }
-            else
-            {
-                indexOfStartCard += cardNumberStartString.Length;
-                int x = body.IndexOf("\r\n", indexOfStartCard);
-                cardNumber = body.Substring(indexOfStartCard, x - indexOfStartCard);
-            }
-
-            return cardNumber.Trim().PadLeft(26, '*');
-        }
-
-        private string[] ExtractOperationsLines(ref string body)
-        {
-            body = RemoveLine(body, 1);
-            string splitter = "Drukuj";
-            string[] ops = body
-                .Split(new[] { splitter }, StringSplitOptions.RemoveEmptyEntries)
-                .Where(a => !string.IsNullOrWhiteSpace(a))
-                .Select(b => b.Trim()).ToArray();
-            return ops;
-        }
-
-        public string RemoveLine(string input)
-        {
-            int newLine = input.IndexOf("\r\n");
-            return input.Substring(newLine + 2);
-        }
-
-        public string RemoveLine(string input, int no)
-        {
-            for (int i = 0; i < no; i++)
-            {
-                input = RemoveLine(input);
-            }
-            return input;
-        }
-
-        private string ExtractTitle(string description)
-        {
-            int maxDesc = 20;
-            int newLine = description.IndexOf('\r');
-            int toExtract = maxDesc;
-            if(newLine>=0 && newLine < maxDesc)
-            {
-                toExtract = newLine;
-            }
-
-            if (description.Length > toExtract)
-            {
-                return description.Substring(0, toExtract);
-            }
-            return description;
         }
     }
 }

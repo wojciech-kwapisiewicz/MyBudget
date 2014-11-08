@@ -30,6 +30,7 @@ namespace MyBudget.Core
             unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
             unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
             unityContainer.RegisterType<IParser, PkoBpCreditCardUnclearedParser>("Pko BP credit card parser");
+            unityContainer.RegisterType<IParser, PkoBpCreditClearedParser>("Pko BP credit card cleared parser");
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();
@@ -40,5 +41,5 @@ namespace MyBudget.Core
             unityContainer.RegisterType<IRepository<BankStatement>, BankStatementXmlRepository>();
             unityContainer.RegisterType<IRepository<BankStatement, int>, BankStatementXmlRepository>();
         }
-    }
+    }   
 }

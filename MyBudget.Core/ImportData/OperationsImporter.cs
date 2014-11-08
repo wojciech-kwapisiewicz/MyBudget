@@ -26,8 +26,7 @@ namespace MyBudget.Core.ImportData
             BankStatement statement = new BankStatement()
             {
                 FileName = fileName,
-                LoadTime = DateTime.UtcNow,
-                Operations = new List<BankOperation>(),
+                LoadTime = DateTime.UtcNow,                
             };
 
             var allOps = _operationRepository.GetAll();

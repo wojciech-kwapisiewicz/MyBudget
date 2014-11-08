@@ -122,7 +122,7 @@ namespace MyBudget.Core.InMemoryPersistance
             BankOperationSaveModel[] toSave = storedObjects.Select(a =>
                 BankOperationSaveModel.FromOperation(
                 a.Value,
-                statements.FirstOrDefault(x => x.Operations.Contains(a.Value)),
+                statements.FirstOrDefault(x => x.Operations.Any(b => b.Id == a.Value.Id)),
                 a.Value.BankAccount, a.Value.Type)).ToArray();
 
             MemoryStream ms = new MemoryStream();
@@ -146,8 +146,8 @@ namespace MyBudget.Core.InMemoryPersistance
             foreach (var groupedByStatement in loaded.GroupBy(a=>a.StatementId))
             {
                 var operationsForStatement = groupedByStatement
-                    .Select(ops => ops.ToOperation(this)).ToList();
-                _statements.Get(groupedByStatement.Key).Operations = operationsForStatement;
+                    .Select(ops => ops.ToOperation(this));
+                _statements.Get(groupedByStatement.Key).Operations.AddRange(operationsForStatement);
                 allOperations.AddRange(operationsForStatement);
             }
 

@@ -23,7 +23,9 @@ namespace MyBudget.Core.UnitTests.ImportData
 
             //When
             var list = new PkoBpCreditCardUnclearedParser(
-                new ParseHelper(bankRepo, typeRepo))
+                new ParseHelper(bankRepo, typeRepo),
+                new CreditCardTextParsing(),
+                new CreditCardUnclearedTextParsing())
                 .Parse(creditCardText).ToArray();
 
             //Then

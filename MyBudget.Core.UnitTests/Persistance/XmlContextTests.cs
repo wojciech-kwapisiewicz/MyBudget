@@ -147,7 +147,6 @@ namespace MyBudget.Core.UnitTests.Persistance
             saveMock2.Setup(a => a.Load()).Returns(new XElement(savedXElement));
 
             var context2 = new XmlContext(saveMock.Object, GetRepoFactory());
-
         }
     }
 }
