@@ -203,5 +203,50 @@ namespace MyBudget.Core.Model {
                 return ResourceManager.GetString("BankOperationType_Name", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Category.
+        /// </summary>
+        public static string ClassificationRule_Category {
+            get {
+                return ResourceManager.GetString("ClassificationRule_Category", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        public static string ClassificationRule_Description {
+            get {
+                return ResourceManager.GetString("ClassificationRule_Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Field name.
+        /// </summary>
+        public static string ClassificationRule_FieldName {
+            get {
+                return ResourceManager.GetString("ClassificationRule_FieldName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Parameter.
+        /// </summary>
+        public static string ClassificationRule_Parameter {
+            get {
+                return ResourceManager.GetString("ClassificationRule_Parameter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sub category.
+        /// </summary>
+        public static string ClassificationRule_SubCategory {
+            get {
+                return ResourceManager.GetString("ClassificationRule_SubCategory", resourceCulture);
+            }
+        }
     }
 }

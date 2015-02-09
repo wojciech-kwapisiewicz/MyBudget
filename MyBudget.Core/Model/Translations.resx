@@ -165,4 +165,19 @@
   <data name="BankOperation_Type" xml:space="preserve">
     <value>Type</value>
   </data>
+  <data name="ClassificationRule_Category" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="ClassificationRule_Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="ClassificationRule_FieldName" xml:space="preserve">
+    <value>Field name</value>
+  </data>
+  <data name="ClassificationRule_Parameter" xml:space="preserve">
+    <value>Parameter</value>
+  </data>
+  <data name="ClassificationRule_SubCategory" xml:space="preserve">
+    <value>Sub category</value>
+  </data>
 </root>

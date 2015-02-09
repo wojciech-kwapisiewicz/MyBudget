@@ -229,7 +229,9 @@
             <ScrollViewer Grid.Row="3"
                           Grid.RowSpan="3"
                           Height="90">
-                <Label Content="{Binding ViewModel.SelectedOperation.Description}" />
+                <TextBox AcceptsReturn="True"
+                         IsReadOnly="True"
+                         Text="{Binding ViewModel.SelectedOperation.Description}" />
             </ScrollViewer>
 
             <Label Grid.Row="3"

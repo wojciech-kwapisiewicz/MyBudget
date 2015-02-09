@@ -23,7 +23,8 @@ namespace MyBudget.UI.Configuration.UnityConfig
         public void Initialize()
         {
             //Navigable elements
-            _container.RegisterType<object, RulesView>(typeof(RulesView).FullName);            
+            _container.RegisterType<object, RulesView>(typeof(RulesView).FullName);
+            _container.RegisterType<object, RuleView>(typeof(RuleView).FullName);
         }
     }
 }

@@ -120,12 +120,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Resources\Resource.Designer.cs">
+    <Compile Include="Resources\Translations.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Resource.resx</DependentUpon>
+      <DependentUpon>Translations.resx</DependentUpon>
     </Compile>
     <Compile Include="RulesViewModel.cs" />
+    <Compile Include="RuleView.xaml.cs">
+      <DependentUpon>RuleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RuleViewModel.cs" />
     <Compile Include="UnityConfig\ConfigurationModule.cs" />
     <Page Include="RulesView.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -135,6 +139,10 @@
       <DependentUpon>RulesView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="RuleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -154,9 +162,10 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Resource.resx">
+    <EmbeddedResource Include="Resources\Translations.pl.resx" />
+    <EmbeddedResource Include="Resources\Translations.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+      <LastGenOutput>Translations.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="packages.config" />

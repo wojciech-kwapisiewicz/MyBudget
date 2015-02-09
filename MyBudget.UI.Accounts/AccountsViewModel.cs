@@ -20,7 +20,7 @@ namespace MyBudget.UI.Accounts
         IRepository<BankAccount> _bankAccountsRepository;
         IContext _context;
 
-        public AccountsViewModel(IContext context,IRegionManager regionManager)
+        public AccountsViewModel(IContext context, IRegionManager regionManager)
         {
             _regionManager = regionManager;
             _context = context;
