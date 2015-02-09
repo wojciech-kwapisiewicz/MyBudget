@@ -44,7 +44,8 @@ namespace MyBudget.UI.Configuration
         {
             ViewModel.Journal = navigationContext.NavigationService.Journal;
             ClassificationRule selected = navigationContext.Parameters["selected"] as ClassificationRule;
-            ViewModel.OnNavigatedTo(selected);
+            string patternParameter = navigationContext.Parameters["patternParameter"] as string;
+            ViewModel.OnNavigatedTo(selected, patternParameter);
         }
     }
 }

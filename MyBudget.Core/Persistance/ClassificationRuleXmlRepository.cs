@@ -12,7 +12,7 @@ namespace MyBudget.Core.InMemoryPersistance
     {
         public override void Add(ClassificationRule obj)
         {
-            obj.Id = StoredElemets + 1;
+            obj.Id = LastKey + 1;
             base.Add(obj);
         }
     }

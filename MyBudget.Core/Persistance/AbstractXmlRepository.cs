@@ -14,12 +14,12 @@ namespace MyBudget.Core.InMemoryPersistance
         where TObject : IIdentifiable<TKey>
     {
         protected Dictionary<TKey, TObject> storedObjects = new Dictionary<TKey, TObject>();
-        
-        protected int StoredElemets
+
+        protected TKey LastKey
         {
             get
             {
-                return storedObjects.Count;
+                return storedObjects.OrderBy(a => a.Key).Last().Key;
             }
         }
 

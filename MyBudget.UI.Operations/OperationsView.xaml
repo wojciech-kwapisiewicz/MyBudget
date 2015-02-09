@@ -31,7 +31,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <controls:DateRangeControl FilteringFunction="{Binding ViewModel.FilterFunction, Mode=OneWayToSource}" />
+        <controls:DateRangeControl FilteringFunction="{Binding FilterFunction, Mode=OneWayToSource}" />
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
@@ -40,8 +40,8 @@
                        Style="{StaticResource SubHeaderTextBlockStyle}"
                        Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockGroup}" />
             <ComboBox Width="200"
-                      ItemsSource="{Binding ViewModel.GrouppingProperties}"
-                      SelectedItem="{Binding ViewModel.GroupProperty,
+                      ItemsSource="{Binding GrouppingProperties}"
+                      SelectedItem="{Binding GroupProperty,
                                              Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -56,8 +56,8 @@
                        Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockFilter}" />
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelField}" />
             <ComboBox Width="200"
-                      ItemsSource="{Binding ViewModel.FilteringProperties}"
-                      SelectedItem="{Binding ViewModel.FilterProperty,
+                      ItemsSource="{Binding FilteringProperties}"
+                      SelectedItem="{Binding FilterProperty,
                                              Mode=TwoWay}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -69,22 +69,29 @@
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelContains}" />
             <xctk:WatermarkTextBox MinWidth="200"
                                    VerticalContentAlignment="Center"
-                                   Text="{Binding ViewModel.Filter,
+                                   Text="{Binding Filter,
                                                   Mode=OneWayToSource,
                                                   UpdateSourceTrigger=PropertyChanged}"
                                    Watermark="{lex:Loc MyBudget.UI.Operations:Translations:WatermarkFilter}" />
 
             <Button Margin="10 0 0 0"
-                    Command="{Binding ViewModel.Save}"
+                    Command="{Binding Save}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
         </StackPanel>
         <DataGrid x:Name="operationsGrid"
                   Grid.Row="2"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  ItemsSource="{Binding ViewModel.Data}"
-                  SelectedItem="{Binding ViewModel.SelectedOperation,
-                                         Mode=OneWayToSource}">
+                  ItemsSource="{Binding Data}"
+                  SelectedItem="{Binding SelectedOperation,
+                                         Mode=OneWayToSource}"
+                  SelectionMode="Single">
+            <DataGrid.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Command="{Binding CreateRule}"
+                              Header="{lex:Loc MyBudget.UI.Operations:Translations:ContextMenu_CreateRule}" />
+                </ContextMenu>
+            </DataGrid.ContextMenu>
             <DataGrid.GroupStyle>
                 <GroupStyle>
                     <GroupStyle.HeaderTemplate>
@@ -154,16 +161,16 @@
                    Style="{StaticResource HeaderTextBlockStyle}"
                    Text="{lex:Loc MyBudget.UI.Operations:Translations:OperationNotLoaded}"
                    TextAlignment="Center"
-                   Visibility="{Binding ViewModel.SelectedOperation,
+                   Visibility="{Binding SelectedOperation,
                                         Converter={StaticResource inverseNullConverter}}" />
 
         <Grid Grid.Row="3"
               Margin="10 10 10 10"
-              Visibility="{Binding ViewModel.SelectedOperation,
+              Visibility="{Binding SelectedOperation,
                                    Converter={StaticResource nullConverter}}">
             <Grid.InputBindings>
                 <KeyBinding Key="F2"
-                            Command="{Binding ViewModel.SelectNext}" />
+                            Command="{Binding SelectNext}" />
             </Grid.InputBindings>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
@@ -182,13 +189,13 @@
 
             <TextBlock Grid.RowSpan="2"
                        Style="{StaticResource HeaderTextBlockStyle}"
-                       Text="{Binding ViewModel.SelectedOperation.Title}" />
+                       Text="{Binding SelectedOperation.Title}" />
 
             <TextBlock Grid.RowSpan="2"
                        Grid.Column="1"
                        MinWidth="100"
                        Style="{StaticResource HeaderTextBlockStyle}"
-                       Text="{Binding ViewModel.SelectedOperation.Amount}"
+                       Text="{Binding SelectedOperation.Amount}"
                        TextAlignment="Right" />
 
             <Label Grid.Column="2"
@@ -201,11 +208,11 @@
                         <Binding Converter="{StaticResource dateConverter}"
                                  ConverterParameter="d"
                                  FallbackValue="N/N"
-                                 Path="ViewModel.SelectedOperation.OrderDate" />
+                                 Path="SelectedOperation.OrderDate" />
                         <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_ExecutionDate" />
                         <Binding Converter="{StaticResource dateConverter}"
                                  FallbackValue="N/N"
-                                 Path="ViewModel.SelectedOperation.ExecutionDate" />
+                                 Path="SelectedOperation.ExecutionDate" />
                     </MultiBinding>
                 </Label.Content>
             </Label>
@@ -219,9 +226,9 @@
                     <MultiBinding Converter="{StaticResource mergeString}"
                                   ConverterParameter="{}({0} - {1})">
                         <Binding FallbackValue="N/N"
-                                 Path="ViewModel.SelectedOperation.Type" />
+                                 Path="SelectedOperation.Type" />
                         <Binding FallbackValue="N/N"
-                                 Path="ViewModel.SelectedOperation.BankAccount" />
+                                 Path="SelectedOperation.BankAccount" />
                     </MultiBinding>
                 </Label.Content>
             </Label>
@@ -231,7 +238,7 @@
                           Height="90">
                 <TextBox AcceptsReturn="True"
                          IsReadOnly="True"
-                         Text="{Binding ViewModel.SelectedOperation.Description}" />
+                         Text="{Binding SelectedOperation.Description}" />
             </ScrollViewer>
 
             <Label Grid.Row="3"
@@ -242,8 +249,8 @@
                                           Grid.Column="3"
                                           Width="400"
                                           IsTextCompletionEnabled="True"
-                                          ItemsSource="{Binding ViewModel.Categories}"
-                                          Text="{Binding ViewModel.SelectedOperation.Category,
+                                          ItemsSource="{Binding Categories}"
+                                          Text="{Binding SelectedOperation.Category,
                                                          Mode=TwoWay}" />
 
             <Label Grid.Row="4"
@@ -253,8 +260,8 @@
                                           Grid.Column="3"
                                           Width="400"
                                           IsTextCompletionEnabled="True"
-                                          ItemsSource="{Binding ViewModel.SubCategories}"
-                                          Text="{Binding ViewModel.SelectedOperation.SubCategory,
+                                          ItemsSource="{Binding SubCategories}"
+                                          Text="{Binding SelectedOperation.SubCategory,
                                                          Mode=TwoWay}" />
 
             <Label Grid.Row="5"
@@ -263,7 +270,7 @@
             <ComboBox Grid.Row="5"
                       Grid.Column="3"
                       Width="400"
-                      Text="{Binding ViewModel.SelectedOperation.Card}" />
+                      Text="{Binding SelectedOperation.Card}" />
         </Grid>
     </Grid>
 </UserControl>

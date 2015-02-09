@@ -108,7 +108,7 @@ namespace MyBudget.Core.InMemoryPersistance
 
         public override void Add(BankOperation obj)
         {
-            obj.Id = StoredElemets + 1;
+            obj.Id = LastKey + 1;
             base.Add(obj);
         }
 

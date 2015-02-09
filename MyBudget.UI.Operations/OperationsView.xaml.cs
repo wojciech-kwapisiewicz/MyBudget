@@ -27,7 +27,7 @@ namespace MyBudget.UI.Operations
                     operationsGrid.ScrollIntoView(viewModel.SelectedOperation);
                 };
             InitializeComponent();
-            Wrapper.DataContext = this;
+            this.DataContext = viewModel;
         }
 
         public OperationsViewModel ViewModel { get; set; }

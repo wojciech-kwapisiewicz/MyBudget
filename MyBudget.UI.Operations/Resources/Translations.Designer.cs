@@ -61,6 +61,15 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create rule.
+        /// </summary>
+        internal static string ContextMenu_CreateRule {
+            get {
+                return ResourceManager.GetString("ContextMenu_CreateRule", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to  contains .
         /// </summary>
         internal static string LabelContains {

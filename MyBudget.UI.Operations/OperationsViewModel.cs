@@ -1,7 +1,9 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
 using MyBudget.Core.Model;
+using MyBudget.UI.Configuration;
 using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,11 @@ namespace MyBudget.UI.Operations
     {
         private IContext _context;
         private IRepository<BankOperation> _operationRepository;
+        private IRegionManager _regionManager;
 
-        public OperationsViewModel(IContext context)
+        public OperationsViewModel(IContext context, IRegionManager regionManager)
         {
+            _regionManager = regionManager;
             _context = context;
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             InitializeFilteringProperties();
@@ -30,6 +34,7 @@ namespace MyBudget.UI.Operations
 
             Save = new DelegateCommand(DoSave);
             SelectNext = new DelegateCommand(DoSelectNext);
+            CreateRule = new DelegateCommand(DoCreateRule, () => SelectedOperation != null);
         }
 
         private Func<DateTime, bool> _filterFunction;
@@ -135,6 +140,7 @@ namespace MyBudget.UI.Operations
                 OnPropertyChanged(() => SelectedOperation);
                 OnPropertyChanged(() => Categories);
                 OnPropertyChanged(() => SubCategories);
+                CreateRule.RaiseCanExecuteChanged();
             }
         }
 
@@ -322,5 +328,14 @@ namespace MyBudget.UI.Operations
         }
 
         public Action OnNextSelected { private get; set; }
+
+        public DelegateCommand CreateRule { get; set; }       
+
+        private void DoCreateRule()
+        {
+            var parameters = new NavigationParameters();
+            parameters.Add("patternParameter", SelectedOperation.Description);
+            _regionManager.RequestNavigate(RegionNames.MainContent, typeof(RuleView).FullName, parameters);
+        }        
     }
 }

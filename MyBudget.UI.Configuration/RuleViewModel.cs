@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MyBudget.UI.Configuration
-{
+{    
     public class RuleViewModel : BindableBase
     {
         public EditMode EditMode { get; set; }
@@ -61,13 +61,19 @@ namespace MyBudget.UI.Configuration
             Journal.GoBack();
         }
 
-        public void OnNavigatedTo(ClassificationRule selected)
+        public void OnNavigatedTo(ClassificationRule selected, string patternParameter)
         {
             if (selected == null)
             {
                 EditMode = EditMode.Add;
                 ClassificationRule newRule = new ClassificationRule();
                 newRule.FieldName = GetNameFromExpression(a => a.Description);
+
+                if(patternParameter!=null)
+                {
+                    newRule.Parameter = patternParameter;
+                }
+
                 Data = newRule;
             }
             else
