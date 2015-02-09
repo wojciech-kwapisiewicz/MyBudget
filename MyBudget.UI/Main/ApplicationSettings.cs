@@ -7,14 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.UI
+namespace MyBudget.UI.Main
 {
-    public class CultureMapping
-    {
-        public string CultureName { get; set; }
-        public CultureInfo Culture { get; set; }
-    }
-
     public class ApplicationSettings : BindableBase
     {
         public const string LanguageKey = "language";
@@ -123,7 +117,7 @@ namespace MyBudget.UI
 
         private static void SetKeyInConfig(string key, string value)
         {
-            Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            System.Configuration.Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             var set = configuration.AppSettings.Settings[key];
             if (set != null)
             {

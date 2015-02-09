@@ -4,6 +4,7 @@ using Microsoft.Practices.Unity;
 using MyBudget.Core;
 using MyBudget.UI.Accounts;
 using MyBudget.UI.Accounts.UnityConfig;
+using MyBudget.UI.Configuration.UnityConfig;
 using MyBudget.UI.Main;
 using MyBudget.UI.Operations.UnityConfig;
 using System;
@@ -36,6 +37,7 @@ namespace MyBudget.UI
             RegisterModule(typeof(MainModule));
             RegisterModule(typeof(AccountsModule));
             RegisterModule(typeof(OperationsModule));
+            RegisterModule(typeof(ConfigurationModule));
         }
 
         protected override void ConfigureContainer()

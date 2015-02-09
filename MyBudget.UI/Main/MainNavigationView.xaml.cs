@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.UI.Accounts;
+using MyBudget.UI.Configuration;
 using MyBudget.UI.Core;
 using MyBudget.UI.Operations;
 using System;
@@ -44,6 +45,9 @@ namespace MyBudget.UI.Main
             NavigateStatistics = new DelegateCommand(() =>
     regionManager.RequestNavigate(RegionNames.MainContent, typeof(StatisticsView).FullName));
 
+            NavigateRules = new DelegateCommand(() =>
+    regionManager.RequestNavigate(RegionNames.MainContent, typeof(RulesView).FullName));
+
             NavigateLanguageSetup = new DelegateCommand(() =>
     regionManager.RequestNavigate(RegionNames.MainContent, typeof(LanguageSetupView).FullName));
 
@@ -55,6 +59,7 @@ namespace MyBudget.UI.Main
         public ICommand NavigateStatements { get; set; }
         public ICommand NavigateOperations { get; set; }
         public ICommand NavigateStatistics { get; set; }
+        public ICommand NavigateRules { get; set; }
         public ICommand NavigateLanguageSetup { get; set; }
     }
 }

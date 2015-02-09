@@ -23,7 +23,8 @@ namespace MyBudget.Core.UnitTests.Persistance
             BankOperationTypeXmlRepository bt = new BankOperationTypeXmlRepository();
             BankStatementXmlRepository bs = new BankStatementXmlRepository();
             BankOperationXmlRepository bo = new BankOperationXmlRepository(ba, bt, bs);
-            return new XmlRepositoryFactory(ba, bt, bs, bo);
+            ClassificationRuleXmlRepository cr = new ClassificationRuleXmlRepository();
+            return new XmlRepositoryFactory(ba, bt, bs, bo, cr);
         }
 
         [Test]
