@@ -41,19 +41,24 @@ namespace MyBudget.Core.InMemoryPersistance
                 _repositoryFactory.GetRepository<BankAccountXmlRepository>().Load(accountsElement);
             }
             XElement statementsElement = dataToLoad.Element("ArrayOfBankStatement");
-            if (accountsElement != null)
+            if (statementsElement != null)
             {
                 _repositoryFactory.GetRepository<BankStatementXmlRepository>().Load(statementsElement);
             }
             XElement operationTypesElement = dataToLoad.Element("ArrayOfBankOperationType");
-            if (accountsElement != null)
+            if (operationTypesElement != null)
             {
                 _repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Load(operationTypesElement);
             }
-            XElement operatiosElement = dataToLoad.Element("ArrayOfBankOperation");
-            if (accountsElement != null)
+            XElement operationsElement = dataToLoad.Element("ArrayOfBankOperation");
+            if (operationsElement != null)
             {
-                _repositoryFactory.GetRepository<BankOperationXmlRepository>().Load(operatiosElement);
+                _repositoryFactory.GetRepository<BankOperationXmlRepository>().Load(operationsElement);
+            }
+            XElement rulesElement = dataToLoad.Element("ArrayOfClassificationRule");
+            if (rulesElement != null)
+            {
+                _repositoryFactory.GetRepository<ClassificationRuleXmlRepository>().Load(rulesElement);
             }
         }
 
@@ -64,7 +69,7 @@ namespace MyBudget.Core.InMemoryPersistance
             el.Add(_repositoryFactory.GetRepository<BankStatementXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationXmlRepository>().Save());
-            
+            el.Add(_repositoryFactory.GetRepository<ClassificationRuleXmlRepository>().Save());
             _saveHandler.Save(el);
 
             return true;

@@ -76,12 +76,15 @@
     <Compile Include="ImportData\PkoBpCreditCardUnclearedParser.cs" />
     <Compile Include="ImportData\PkoBpCreditClearedParser.cs" />
     <Compile Include="ImportData\StringOperations.cs" />
+    <Compile Include="Model\ClassificationRule.cs" />
+    <Compile Include="Model\RuleType.cs" />
     <Compile Include="Pdf\JavaIoWrapper.cs" />
     <Compile Include="Pdf\PdfReader.cs" />
     <Compile Include="Persistance\AbstractXmlRepository.cs" />
     <Compile Include="Persistance\BankAccountXmlRepository.cs" />
     <Compile Include="Persistance\BankOperationXmlRepository.cs" />
     <Compile Include="Persistance\BankOperationTypeXmlRepository.cs" />
+    <Compile Include="Persistance\ClassificationRuleXmlRepository.cs" />
     <Compile Include="Persistance\BankStatementXmlRepository.cs" />
     <Compile Include="Persistance\InMemoryContext.cs" />
     <Compile Include="Persistance\IXmlSaveHandler.cs" />

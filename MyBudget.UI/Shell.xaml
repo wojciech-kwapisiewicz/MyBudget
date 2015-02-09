@@ -1,13 +1,14 @@
 ﻿<Window x:Class="MyBudget.UI.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"  
-        xmlns:lex="http://wpflocalizeextension.codeplex.com"        
-        xmlns:prism="http://www.codeplex.com/prism"        
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:local="clr-namespace:MyBudget.UI"
+        xmlns:prism="http://www.codeplex.com/prism"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
-        Title="Shell" Height="500" Width="900"
-        WindowState="Maximized"
-        >
+        Title="Shell"
+        Width="900"
+        Height="500"
+        WindowState="Maximized">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -17,34 +18,36 @@
     </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <ContentControl x:Name="MainToolbar"
-                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainNavigation}"/>
-        <ContentControl x:Name="MainControl" 
-                        Margin="5 5 5 5"
+                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainNavigation}" />
+        <ContentControl x:Name="MainControl"
                         Grid.Column="1"
-                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainContent}"/>
-        <StatusBar Grid.Row="1" Grid.ColumnSpan="2" HorizontalAlignment="Stretch">
+                        Margin="5 5 5 5"
+                        prism:RegionManager.RegionName="{x:Static uiCore:RegionNames.MainContent}" />
+        <StatusBar Grid.Row="1"
+                   Grid.ColumnSpan="2"
+                   HorizontalAlignment="Stretch">
             <WrapPanel>
                 <Button Content="{lex:Loc MyBudget.UI:Resource:Test}" />
-                <TextBlock Text="# Główna " 
-                   Margin="0 0 0 5" 
-                   HorizontalAlignment="Right" 
-                   Style="{StaticResource SubHeaderTextBlockStyle}"  />
-                <TextBlock Text=" > Dodaj " 
-                   Margin="0 0 0 5" 
-                   HorizontalAlignment="Right" 
-                   Style="{StaticResource SubHeaderTextBlockStyle}"  />
-                <TextBlock Text=" > Nowy " 
-                   Margin="0 0 0 5" 
-                   HorizontalAlignment="Right" 
-                   Style="{StaticResource SubHeaderTextBlockStyle}"  />
+                <TextBlock Margin="0 0 0 5"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource SubHeaderTextBlockStyle}"
+                           Text="# Główna " />
+                <TextBlock Margin="0 0 0 5"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource SubHeaderTextBlockStyle}"
+                           Text=" &gt; Dodaj " />
+                <TextBlock Margin="0 0 0 5"
+                           HorizontalAlignment="Right"
+                           Style="{StaticResource SubHeaderTextBlockStyle}"
+                           Text=" &gt; Nowy " />
             </WrapPanel>
         </StatusBar>
     </Grid>
