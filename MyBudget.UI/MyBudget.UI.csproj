@@ -161,6 +161,7 @@
     <Compile Include="Main\WelcomePageView.xaml.cs">
       <DependentUpon>WelcomePageView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="Resources\Generic.pl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -253,6 +254,10 @@
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyBudget.OperationsLoading\MyBudget.OperationsLoading.csproj">
+      <Project>{ad7e9cc7-fbcc-4b8a-8273-00c74f8836ef}</Project>
+      <Name>MyBudget.OperationsLoading</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBudget.UI.Accounts\MyBudget.UI.Accounts.csproj">
       <Project>{fa2fadc7-9dd1-49b8-a630-b21977114afc}</Project>
       <Name>MyBudget.UI.Accounts</Name>
@@ -268,6 +273,10 @@
     <ProjectReference Include="..\MyBudget.UI.Operations\MyBudget.UI.Operations.csproj">
       <Project>{abf818d9-8d87-40ca-8c20-03606e27a09c}</Project>
       <Name>MyBudget.UI.Operations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyBudget.XmlPersistance\MyBudget.XmlPersistance.csproj">
+      <Project>{b4617019-a46e-441d-a91b-e995153f7781}</Project>
+      <Name>MyBudget.XmlPersistance</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup />

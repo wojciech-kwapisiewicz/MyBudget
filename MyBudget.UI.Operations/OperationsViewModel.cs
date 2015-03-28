@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using MyBudget.UI.Configuration;
 using MyBudget.UI.Core;
 using System;
@@ -17,13 +17,21 @@ namespace MyBudget.UI.Operations
     {
         private IContext _context;
         private IRepository<BankOperation> _operationRepository;
+        private IRepository<ClassificationRule> rulesRepo;
         private IRegionManager _regionManager;
 
         public OperationsViewModel(IContext context, IRegionManager regionManager)
         {
             _regionManager = regionManager;
             _context = context;
+            rulesRepo = context.GetRepository<IRepository<ClassificationRule>>();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
+
+            #region Apply rule - move somwhere else and rework rule applying
+            ApplyRules = new DelegateCommand(() => DoApplyRules(false));
+            ClearRules = new DelegateCommand(() => DoApplyRules(true));
+            #endregion
+
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
                         
@@ -317,7 +325,8 @@ namespace MyBudget.UI.Operations
 
         public DelegateCommand SelectNext { get; set; }
         private void DoSelectNext()
-        {
+        {            
+
             if (Data.MoveCurrentToNext())
             {
                 if (OnNextSelected != null)
@@ -327,6 +336,34 @@ namespace MyBudget.UI.Operations
             }
         }
 
+        public DelegateCommand ApplyRules { get; set; }
+        public DelegateCommand ClearRules { get; set; }
+        private void DoApplyRules(bool clear)
+        {
+            var all = _operationRepository.GetAll().Count();
+            var withCategory = _operationRepository.GetAll().Count(a => !string.IsNullOrEmpty(a.Category));
+
+            foreach (var item in _operationRepository.GetAll())
+            {
+                //if (clear)
+                //{
+                //    item.Category = string.Empty;
+                //    item.SubCategory = string.Empty;
+                //    continue;
+                //}
+                foreach (var rule in rulesRepo.GetAll())
+                {
+                    if (System.Text.RegularExpressions.Regex.IsMatch(item.Description, rule.Parameter, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
+                    {
+                        item.Category = rule.Category;
+                        item.SubCategory = rule.SubCategory;
+                    }
+                }
+            }
+        }
+
+
+        
         public Action OnNextSelected { private get; set; }
 
         public DelegateCommand CreateRule { get; set; }       
@@ -334,7 +371,7 @@ namespace MyBudget.UI.Operations
         private void DoCreateRule()
         {
             var parameters = new NavigationParameters();
-            parameters.Add("patternParameter", SelectedOperation.Description);
+            parameters.Add("template", SelectedOperation);
             _regionManager.RequestNavigate(RegionNames.MainContent, typeof(RuleView).FullName, parameters);
         }        
     }

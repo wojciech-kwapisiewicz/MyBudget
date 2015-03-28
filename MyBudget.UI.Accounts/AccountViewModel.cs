@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using MyBudget.UI.Core;
 
 namespace MyBudget.UI.Accounts

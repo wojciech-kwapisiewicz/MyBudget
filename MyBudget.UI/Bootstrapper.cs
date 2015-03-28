@@ -2,11 +2,13 @@
 using Microsoft.Practices.Prism.UnityExtensions;
 using Microsoft.Practices.Unity;
 using MyBudget.Core;
+using MyBudget.OperationsLoading.Configuration;
 using MyBudget.UI.Accounts;
 using MyBudget.UI.Accounts.UnityConfig;
 using MyBudget.UI.Configuration.UnityConfig;
 using MyBudget.UI.Main;
 using MyBudget.UI.Operations.UnityConfig;
+using MyBudget.XmlPersistance.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -42,7 +44,8 @@ namespace MyBudget.UI
 
         protected override void ConfigureContainer()
         {
-            new CoreUnityConfiguration().Configure(base.Container);
+            new OperationsLoadingUnityConfiguration().Configure(base.Container);
+            new XmlPersistanceUnityConfiguration().Configure(base.Container);
             base.ConfigureContainer();
         }
 

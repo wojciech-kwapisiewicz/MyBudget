@@ -30,11 +30,11 @@
                     <StackPanel>
                         <TextBlock Style="{StaticResource SubHeaderTextBlockStyle}"
                                    Text="{Binding Description}" />
-                        <TextBlock Text="{Binding FieldName}" />
+                        <!--  <TextBlock Text="{Binding FieldName}" />  -->
                         <TextBlock Text="{Binding Parameter}" />
                         <TextBlock Text="{Binding Category}" />
                         <TextBlock Text="{Binding SubCategory}" />
-                        <TextBlock Text="{Binding Type}" />
+                        <!--  <TextBlock Text="{Binding Type}" />  -->
                     </StackPanel>
                 </DataTemplate>
             </ListBox.ItemTemplate>

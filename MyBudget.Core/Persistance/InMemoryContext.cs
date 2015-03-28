@@ -1,18 +1,17 @@
 ﻿using MyBudget.Core.DataContext;
-using MyBudget.Core.Persistance;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.Core.InMemoryPersistance
+namespace MyBudget.Core.Persistance
 {
     public class InMemoryContext : IContext
     {
-        private XmlRepositoryFactory _repositoryFactory;
+        private IRepositoryFactory _repositoryFactory;
 
-        public InMemoryContext(XmlRepositoryFactory repositoryFactory)
+        public InMemoryContext(IRepositoryFactory repositoryFactory)
         {
             if (repositoryFactory == null)
                 throw new ArgumentNullException("repositoryFactory");

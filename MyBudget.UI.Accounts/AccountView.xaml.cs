@@ -1,7 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;

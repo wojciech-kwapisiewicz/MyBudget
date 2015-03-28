@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
@@ -31,7 +31,12 @@ namespace MyBudget.UI.Configuration
 
         public IEnumerable<ClassificationRule> Data
         {
-            get { return _rulesRepository.GetAll(); }
+            get
+            {
+                return _rulesRepository.GetAll()
+                    .OrderBy(a => a.Category)
+                    .ThenBy(b => b.SubCategory);
+            }
         }
 
         private ClassificationRule _SelectedItem;

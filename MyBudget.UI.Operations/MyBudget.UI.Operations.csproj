@@ -185,9 +185,17 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
+    <ProjectReference Include="..\MyBudget.Classification\MyBudget.Classification.csproj">
+      <Project>{15546896-defc-4843-a2a4-d6aa4cc8f671}</Project>
+      <Name>MyBudget.Classification</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyBudget.Model\MyBudget.Model.csproj">
+      <Project>{38c098d6-7a2f-4333-b10b-eb150971f0b7}</Project>
+      <Name>MyBudget.Model</Name>
     </ProjectReference>
     <ProjectReference Include="..\MyBudget.UI.Configuration\MyBudget.UI.Configuration.csproj">
       <Project>{fc584294-00e8-4f87-841c-85945e4b7c04}</Project>

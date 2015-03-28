@@ -191,6 +191,14 @@
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\MyBudget.Model\MyBudget.Model.csproj">
+      <Project>{38c098d6-7a2f-4333-b10b-eb150971f0b7}</Project>
+      <Name>MyBudget.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\MyBudget.OperationsLoading\MyBudget.OperationsLoading.csproj">
+      <Project>{ad7e9cc7-fbcc-4b8a-8273-00c74f8836ef}</Project>
+      <Name>MyBudget.OperationsLoading</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBudget.UI.Core\MyBudget.UI.Core.csproj">
       <Project>{f2cc466b-4f35-47cc-8305-bdcf6f5d71d6}</Project>
       <Name>MyBudget.UI.Core</Name>

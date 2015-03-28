@@ -1,5 +1,5 @@
 ﻿using Microsoft.Practices.Prism.Regions;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -44,7 +44,7 @@ namespace MyBudget.UI.Configuration
         {
             ViewModel.Journal = navigationContext.NavigationService.Journal;
             ClassificationRule selected = navigationContext.Parameters["selected"] as ClassificationRule;
-            string patternParameter = navigationContext.Parameters["patternParameter"] as string;
+            BankOperation patternParameter = navigationContext.Parameters["template"] as BankOperation;
             ViewModel.OnNavigatedTo(selected, patternParameter);
         }
     }

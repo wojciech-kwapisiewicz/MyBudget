@@ -2,7 +2,7 @@
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
@@ -61,7 +61,7 @@ namespace MyBudget.UI.Configuration
             Journal.GoBack();
         }
 
-        public void OnNavigatedTo(ClassificationRule selected, string patternParameter)
+        public void OnNavigatedTo(ClassificationRule selected, BankOperation templateOperation)
         {
             if (selected == null)
             {
@@ -69,9 +69,11 @@ namespace MyBudget.UI.Configuration
                 ClassificationRule newRule = new ClassificationRule();
                 newRule.FieldName = GetNameFromExpression(a => a.Description);
 
-                if(patternParameter!=null)
+                if (templateOperation != null)
                 {
-                    newRule.Parameter = patternParameter;
+                    newRule.Parameter = templateOperation.Description;
+                    newRule.Category = templateOperation.Category;
+                    newRule.SubCategory = templateOperation.SubCategory;
                 }
 
                 Data = newRule;

@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core.DataContext;
-using MyBudget.Core.Model;
+using MyBudget.Model;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -56,9 +56,19 @@ namespace MyBudget.UI.Operations
                 }
             }
 
-            var overall = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+            var sum1 = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+            var sum2 = roots.OfType<StatisticsGroup>().Where(b => b.Key != "Wewnetrzne").Sum(a => a.Sum);
             roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
-            roots.Add(new StatisticsGroup() { Key = Resources.Translations.SumText, Sum = overall });
+            roots.Add(new StatisticsGroup() 
+            { 
+                Key = Resources.Translations.SumText, 
+                Sum = sum1
+            });
+            roots.Add(new StatisticsGroup()
+            {
+                Key = "Bez wewnetrznych",
+                Sum = sum2
+            });
 
             Items = roots;
         }

@@ -45,12 +45,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ImportData\MilleniumParserTests.cs" />
-    <Compile Include="ImportData\PkoBpCreditCardParserTests.cs" />
-    <Compile Include="ManifestStreamReaderHelper.cs" />
-    <Compile Include="Persistance\BankOperationXmlRepositoryTests.cs" />
-    <Compile Include="Persistance\XmlContextTests.cs" />
-    <Compile Include="ImportData\PkoBpParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestFiles.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -59,7 +53,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\MilleniumParser_Sample.csv" />
     <EmbeddedResource Include="TestFiles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>TestFiles.Designer.cs</LastGenOutput>
@@ -67,33 +60,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">
+    <ProjectReference Include="..\..\MyBudget.Core\MyBudget.Core.csproj">
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\PkoBpParser_1Entry.xml" />
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Persistance\expectedOutput_savedData.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\PkoBpParser_ZerosInTitle.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Persistance\input_saved1Account.xml" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Persistance\expectedOutput_fullSavedModel.xml">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resources\PkoBpCreditCardParser_Sample.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

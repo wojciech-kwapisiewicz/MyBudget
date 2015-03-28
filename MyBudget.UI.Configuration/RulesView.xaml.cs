@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Practices.Prism.Regions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -18,7 +19,7 @@ namespace MyBudget.UI.Configuration
     /// <summary>
     /// Interaction logic for RulesView.xaml
     /// </summary>
-    public partial class RulesView : UserControl
+    public partial class RulesView : UserControl, IRegionMemberLifetime
     {
         public RulesViewModel ViewModel { get; set; }
 
@@ -27,6 +28,11 @@ namespace MyBudget.UI.Configuration
             ViewModel = viewModel;
             this.DataContext = ViewModel;
             InitializeComponent();
+        }
+
+        public bool KeepAlive
+        {
+            get { return false; }
         }
     }
 }

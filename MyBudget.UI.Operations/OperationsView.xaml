@@ -75,6 +75,12 @@
                                    Watermark="{lex:Loc MyBudget.UI.Operations:Translations:WatermarkFilter}" />
 
             <Button Margin="10 0 0 0"
+                    Command="{Binding ApplyRules}"
+                    Content="ApplyRules" />
+            <Button Margin="10 0 0 0"
+                    Command="{Binding ClearRules}"
+                    Content="ClearRules" />
+            <Button Margin="10 0 0 0"
                     Command="{Binding Save}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
         </StackPanel>
@@ -128,30 +134,30 @@
             </DataGrid.GroupStyle>
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding BankAccount}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_BankAccount}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_BankAccount}" />
                 <DataGridTextColumn Binding="{Binding Type}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Type}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Type}" />
 
                 <DataGridTextColumn MinWidth="70"
                                     Binding="{Binding OrderDate,
                                                       Converter={StaticResource dateConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_OrderDate}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_OrderDate}" />
                 <DataGridTextColumn MinWidth="70"
                                     Binding="{Binding ExecutionDate,
                                                       Converter={StaticResource dateConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_ExecutionDate}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_ExecutionDate}" />
 
                 <DataGridTextColumn MinWidth="70"
                                     Binding="{Binding Amount,
                                                       Converter={StaticResource decimalConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Amount}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Amount}" />
                 <DataGridTextColumn Binding="{Binding Title}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Title}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Title}" />
                 <DataGridTextColumn Binding="{Binding Category}"
-                                    Header="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}" />
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Category}" />
             </DataGrid.Columns>
         </DataGrid>
 
@@ -209,7 +215,7 @@
                                  ConverterParameter="d"
                                  FallbackValue="N/N"
                                  Path="SelectedOperation.OrderDate" />
-                        <lex:BLoc Key="MyBudget.Core:Model.Translations:BankOperation_ExecutionDate" />
+                        <lex:BLoc Key="MyBudget.Model:Translations:BankOperation_ExecutionDate" />
                         <Binding Converter="{StaticResource dateConverter}"
                                  FallbackValue="N/N"
                                  Path="SelectedOperation.ExecutionDate" />
@@ -243,7 +249,7 @@
 
             <Label Grid.Row="3"
                    Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Category}" />
+                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Category}" />
             <toolkitInput:AutoCompleteBox x:Name="OperationCategoryElement"
                                           Grid.Row="3"
                                           Grid.Column="3"
@@ -255,7 +261,7 @@
 
             <Label Grid.Row="4"
                    Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_SubCategory}" />
+                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_SubCategory}" />
             <toolkitInput:AutoCompleteBox Grid.Row="4"
                                           Grid.Column="3"
                                           Width="400"
@@ -266,7 +272,7 @@
 
             <Label Grid.Row="5"
                    Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Core:Model.Translations:BankOperation_Card}" />
+                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Card}" />
             <ComboBox Grid.Row="5"
                       Grid.Column="3"
                       Width="400"
