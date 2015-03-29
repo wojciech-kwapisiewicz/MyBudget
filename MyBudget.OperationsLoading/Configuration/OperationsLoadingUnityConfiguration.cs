@@ -14,7 +14,7 @@ namespace MyBudget.OperationsLoading.Configuration
     {
         public void Configure(IUnityContainer unityContainer)
         {
-            unityContainer.RegisterType<IParseHelper, ParseHelper>();
+            unityContainer.RegisterType<IRepositoryHelper, RepositoryHelper>();
 
             //Parsers
             unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");

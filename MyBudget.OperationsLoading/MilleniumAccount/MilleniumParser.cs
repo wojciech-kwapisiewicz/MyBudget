@@ -28,14 +28,17 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
             }
         }
 
+        ParseHelper _parseHelper;
+        IRepositoryHelper _repositoryHelper;
 
-        IParseHelper _parseHelper;
-
-        public MilleniumParser(IParseHelper parseHelper)
+        public MilleniumParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
             _parseHelper = parseHelper;
+            if (repositoryHelper == null)
+                throw new ArgumentNullException("repositoryHelper");
+            _repositoryHelper = repositoryHelper;
         }
 
         public IEnumerable<BankOperation> Parse(Stream stream)
@@ -83,7 +86,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
             string description = entries[6];
             string title = ExtractTitle(description);
 
-            BankAccount account = _parseHelper.GetAccount(accountNumber);
+            BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
 
             string amount = entries[7];
             if (string.IsNullOrEmpty(amount))
@@ -105,7 +108,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                 EndingBalance = _parseHelper.ParseDecimalInvariant(entries[9]),
                 Title = title,
                 Description = description,
-                Type = _parseHelper.GetOperationType(typeName),
+                Type = _repositoryHelper.GetOrAddOperationType(typeName),
                 Cleared = true
             };
         }

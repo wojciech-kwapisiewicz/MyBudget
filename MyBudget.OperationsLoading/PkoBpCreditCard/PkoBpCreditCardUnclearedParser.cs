@@ -26,23 +26,28 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
             }
         }
 
-        private IParseHelper _parseHelper;
+        private ParseHelper _parseHelper;
+        private IRepositoryHelper _repositoryHelper;
         private CreditCardTextParsing _ccTextParsing;
         private CreditCardUnclearedTextParsing _unclearedParsing;
 
         public PkoBpCreditCardUnclearedParser(
-            IParseHelper parseHelper,
+            ParseHelper parseHelper,
+            IRepositoryHelper repositoryHelper,
             CreditCardTextParsing ccTextParsing,
             CreditCardUnclearedTextParsing unclearedParsing)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
+            if (repositoryHelper == null)
+                throw new ArgumentNullException("repositoryHelper");
             if (ccTextParsing == null)
                 throw new ArgumentNullException("ccTextParsing");
             if (unclearedParsing == null)
                 throw new ArgumentNullException("unclearedParsing");
 
             _parseHelper = parseHelper;
+            _repositoryHelper = repositoryHelper;
             _ccTextParsing = ccTextParsing;
             _unclearedParsing = unclearedParsing;
         }
@@ -62,7 +67,7 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
                 inputString,
                 CreditCardTextParsing.CardNumberStartStringUncleared);
 
-            BankAccount account = _parseHelper.GetAccount(cardNumber);
+            BankAccount account = _repositoryHelper.GetOrAddAccount(cardNumber);
 
             string[] ops = _unclearedParsing.ExtractOperationsLines(body);
 
@@ -82,7 +87,7 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
                     Amount = -_parseHelper.ParseDecimalPolish(details[4]),
                     Title = _ccTextParsing.ExtractTitle(details[2]),
                     Description = details[2],
-                    Type = _parseHelper.GetOperationType(operationType)
+                    Type = _repositoryHelper.GetOrAddOperationType(operationType)
                 };
             }
         }

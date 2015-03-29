@@ -30,13 +30,17 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
             }
         }
         
-        IParseHelper _parseHelper;
+        ParseHelper _parseHelper;
+        IRepositoryHelper _repositoryHelper;
 
-        public PkoBpParser(IParseHelper parseHelper)
+        public PkoBpParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
             _parseHelper = parseHelper;
+            if (repositoryHelper == null)
+                throw new ArgumentNullException("repositoryHelper");
+            _repositoryHelper = repositoryHelper;
         }
 
         public IEnumerable<BankOperation> Parse(Stream stream)
@@ -59,7 +63,7 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
         private IEnumerable<BankOperation> GetEntriesFromXDocument(XDocument document)
         {
             var accountNumber = document.XPathSelectElements("/account-history/search/account").Single().Value;
-            BankAccount account = _parseHelper.GetAccount(accountNumber);
+            BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
 
             int lp = 0;
 
@@ -88,7 +92,7 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
                     EndingBalance = _parseHelper.ParseDecimalInvariant(endingBalance),
                     Title = title,
                     Description = description,
-                    Type = _parseHelper.GetOperationType(typeName),
+                    Type = _repositoryHelper.GetOrAddOperationType(typeName),
                     Cleared = true
                 };
             }

@@ -25,8 +25,9 @@ namespace MyBudget.Core.UnitTests.ImportData
             string milleniumCsv = TestFiles.MilleniumParser_Sample;
 
             //When
-            var list = new MilleniumParser(
-                new ParseHelper(accountRepo.Object, typeRepo.Object))
+            var list = new MilleniumParser(                
+                new ParseHelper(),
+                new RepositoryHelper(accountRepo.Object, typeRepo.Object))
                 .Parse(milleniumCsv).ToArray();
 
             //Then

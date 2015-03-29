@@ -19,18 +19,27 @@ namespace MyBudget.Core.UnitTests.ImportData
     [TestFixture]
     public class PkoBpParserTests
     {
+        Mock<IRepository<BankAccount, string>> accountRepo;
+        Mock<IRepository<BankOperationType, string>> typeRepo;
+        PkoBpParser parser;
+
+
+        [SetUp]
+        public void Init()
+        {
+            this.accountRepo = new Mock<IRepository<BankAccount, string>>();
+            this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
+            this.parser = new PkoBpParser(new ParseHelper(), new RepositoryHelper(accountRepo.Object, typeRepo.Object));
+        }
+
         [Test]
         public void GivenEmptyRepositoriesAndPkoBpXmlTextWith1Entry_WhenParse_ThenBankAccountAddedAndListOf1EntryReturned()
         {
-            //Given
-            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
-            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
+            //Given            
             string pkoBpList = TestFiles.PkoBpParser_1Entry;
             
             //When
-            var list = new PkoBpParser(
-                new ParseHelper(accountRepo.Object, typeRepo.Object))
-                .Parse(pkoBpList).ToArray();
+            var list = this.parser.Parse(pkoBpList).ToArray();
 
             //Then
             Assert.AreEqual(1, list.Count());
@@ -42,16 +51,11 @@ namespace MyBudget.Core.UnitTests.ImportData
         [Test]
         public void GivenEmptyRepositoriesAndPkoBpXmlFileWith1Entry_WhenParse_ThenAccountAndTypeAddedAndListOf1EntryReturned()
         {
-            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
-            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
-
             //Given
             using (Stream pkoBpList = ToStream(TestFiles.PkoBpParser_1Entry))
             {
                 //When
-                var list = new PkoBpParser(
-                    new ParseHelper(accountRepo.Object, typeRepo.Object))
-                    .Parse(pkoBpList).ToArray();
+                var list = this.parser.Parse(pkoBpList).ToArray();
 
                 //Then
                 Assert.AreEqual(1, list.Count());
@@ -73,15 +77,11 @@ namespace MyBudget.Core.UnitTests.ImportData
         [Test]
         public void GivenWithdrawalAndCardOperation_WhenParse_TitleIsTakenFromLocation()
         {
-            //Given
-            Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
-            Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
+            //Given            
             string pkoBpList = TestFiles.PkoBpParser_ZerosInTitle;
 
             //When
-            var list = new PkoBpParser(
-                new ParseHelper(accountRepo.Object, typeRepo.Object))
-                .Parse(pkoBpList).ToArray();
+            var list = this.parser.Parse(pkoBpList).ToArray();
 
             //
             Assert.AreEqual(2, list.Count());

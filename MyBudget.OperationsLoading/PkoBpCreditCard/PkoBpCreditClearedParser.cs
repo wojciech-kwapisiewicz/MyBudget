@@ -29,14 +29,16 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
             }
         }
 
-        private IParseHelper _parseHelper;
+        private ParseHelper _parseHelper;
+        private IRepositoryHelper _repositoryHelper;
         private PdfReader _pdfReader;
         private CreditCardTextParsing _ccTextParsing;
         private CreditCardClearedTextParsing _clearedTextParsing;
         private CreditCardPagesExtractor _pagesExtractor;
 
         public PkoBpCreditClearedParser(
-            IParseHelper parseHelper,
+            ParseHelper parseHelper,
+            IRepositoryHelper repositoryHelper,
             PdfReader pdfReader,
             CreditCardPagesExtractor pagesExtractor,
             CreditCardTextParsing ccTextParsing,
@@ -44,6 +46,8 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
+            if (repositoryHelper == null)
+                throw new ArgumentNullException("repositoryHelper");
             if (pdfReader == null)
                 throw new ArgumentNullException("pdfReader");
             if (pagesExtractor == null)
@@ -54,6 +58,7 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
                 throw new ArgumentNullException("clearedTextParsing");
 
             _parseHelper = parseHelper;
+            _repositoryHelper = repositoryHelper;
             _pdfReader = pdfReader;
             _pagesExtractor = pagesExtractor;
             _ccTextParsing = ccTextParsing;
@@ -72,7 +77,7 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
             string cardNumber = _ccTextParsing.ExtractCardNumber(
                 inputString,
                 CreditCardTextParsing.CardNumberStartStringCleared);
-            BankAccount account = _parseHelper.GetAccount(cardNumber);
+            BankAccount account = _repositoryHelper.GetOrAddAccount(cardNumber);
             var pages = _pagesExtractor.GetPages(inputString);
             string[] ops = pages
                 .SelectMany(x => _clearedTextParsing.ExtractOperationsLines(x))
@@ -94,7 +99,7 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
                     Amount = -_parseHelper.ParseDecimalPolish(details.Amount),
                     Title = _ccTextParsing.ExtractTitle(details.Description),
                     Description = details.Description,
-                    Type = _parseHelper.GetOperationType(operationType)
+                    Type = _repositoryHelper.GetOrAddOperationType(operationType)
                 };
             }
         }

@@ -52,13 +52,13 @@
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />
     <Compile Include="ImportData\CheckStatus.cs" />
+    <Compile Include="IRepositoryHelper.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardClearedTextParsing.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardOperationDetails.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardPageDefinition.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardPagesExtractor.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardTextParsing.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardUnclearedTextParsing.cs" />
-    <Compile Include="IParseHelper.cs" />
     <Compile Include="IParser.cs" />
     <Compile Include="MilleniumAccount\MilleniumParser.cs" />
     <Compile Include="ImportData\OperationsImporter.cs" />
@@ -66,6 +66,7 @@
     <Compile Include="PkoBpCreditCard\PkoBpCreditCardUnclearedParser.cs" />
     <Compile Include="PkoBpCreditCard\PkoBpCreditClearedParser.cs" />
     <Compile Include="PkoBpAccount\PkoBpParser.cs" />
+    <Compile Include="RepositoryHelper.cs" />
     <Compile Include="Resources.Designer.cs">
       <DependentUpon>Resources.resx</DependentUpon>
       <AutoGen>True</AutoGen>
