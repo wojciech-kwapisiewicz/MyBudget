@@ -28,5 +28,11 @@ namespace MyBudget.Core.Persistance
         {
             return true;
         }
+
+
+        public bool DataHasChanged()
+        {
+            return true;
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace MyBudget.UI.Operations
 
         public void ConfirmNavigationRequest(NavigationContext navigationContext, System.Action<bool> continuationCallback)
         {
-            if (ViewModel.ModelChanged)
+            if (ViewModel.ModelHasChanged)
             {
                 var result = MessageBox.Show(
                     Translations.ShouldSaveText,

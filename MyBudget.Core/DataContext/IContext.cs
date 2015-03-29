@@ -10,5 +10,6 @@ namespace MyBudget.Core.DataContext
     {
         T GetRepository<T>() where T : IRepository;
         bool SaveChanges();
+        bool DataHasChanged();
     }
 }

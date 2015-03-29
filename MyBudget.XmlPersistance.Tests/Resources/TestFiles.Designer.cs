@@ -76,5 +76,18 @@ namespace MyBudget.XmlPersistance.Tests.Resources {
                 return ResourceManager.GetString("input_saved1Account", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;savedData&gt;
+        ///  &lt;ArrayOfBankAccount xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; /&gt;
+        ///  &lt;ArrayOfBankStatement xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; /&gt;
+        ///  &lt;ArrayOfBankOperationType xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLSchema&quot; /&gt;
+        ///  &lt;ArrayOfBankOperation xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot; xmlns:xsd=&quot;http://www.w3.org/2001/XMLS [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string savedEmptyContext {
+            get {
+                return ResourceManager.GetString("savedEmptyContext", resourceCulture);
+            }
+        }
     }
 }

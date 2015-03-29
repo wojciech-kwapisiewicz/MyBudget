@@ -64,10 +64,16 @@ namespace MyBudget.UI.Operations
                     ResetListData();
                 }
             }
-        }        
+        }
 
-        public bool ModelChanged { get; set; }
+        public bool ModelHasChanged
+        {
+            get
+            {
+                return _context.DataHasChanged();
+            }
 
+        }
         private void InitializeGrouppingProperties()
         {
             string[] groupProperties = new[] 
@@ -141,10 +147,6 @@ namespace MyBudget.UI.Operations
             set
             {
                 _SelectedOperation = value;
-                if(value!=null)
-                {
-                    ModelChanged = true;
-                }
                 OnPropertyChanged(() => SelectedOperation);
                 OnPropertyChanged(() => Categories);
                 OnPropertyChanged(() => SubCategories);

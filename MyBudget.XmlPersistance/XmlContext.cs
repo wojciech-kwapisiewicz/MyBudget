@@ -14,6 +14,7 @@ namespace MyBudget.XmlPersistance
     public class XmlContext : IContext
     {
         private XmlRepositoryFactory _repositoryFactory;
+        private string _originalData = string.Empty;
 
         public T GetRepository<T>() where T : IRepository
         {
@@ -33,7 +34,9 @@ namespace MyBudget.XmlPersistance
             _saveHandler = saveHandler;
             _repositoryFactory = repositoryFactory;
 
-            XElement dataToLoad = _saveHandler.Load();       
+            XElement dataToLoad = _saveHandler.Load();
+            _originalData = dataToLoad.ToString(SaveOptions.DisableFormatting);
+
             XElement accountsElement = dataToLoad.Element("ArrayOfBankAccount");           
             if (accountsElement != null)
             {
@@ -63,16 +66,28 @@ namespace MyBudget.XmlPersistance
 
         public bool SaveChanges()
         {
+            XElement el = GenerateDataToSave();
+            _saveHandler.Save(el);
+            _originalData = el.ToString(SaveOptions.DisableFormatting);
+            return true;
+        }
+
+        private XElement GenerateDataToSave()
+        {
             XElement el = new XElement("savedData");
             el.Add(_repositoryFactory.GetRepository<BankAccountXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankStatementXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<ClassificationRuleXmlRepository>().Save());
-            _saveHandler.Save(el);
-
-            return true;
+            return el;
         }
 
+        public bool DataHasChanged()
+        {
+            XElement el = GenerateDataToSave();
+            string currentData = el.ToString(SaveOptions.DisableFormatting);
+            return string.Equals(_originalData, currentData) == false;
+        }
     }
 }

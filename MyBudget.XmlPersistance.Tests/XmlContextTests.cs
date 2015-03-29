@@ -75,8 +75,7 @@ namespace MyBudget.Core.UnitTests.Persistance
         public void GivenXmlWithAccount_WhenContextCreated_ThenItContainsThisAccount()
         {
             //Given
-            string xmlToLoad = TestFiles.input_saved1Account;
-            XElement el = XElement.Parse(xmlToLoad);
+            XElement el = XElement.Parse(TestFiles.input_saved1Account);
             Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
             saveMock.Setup(a => a.Load()).Returns(el);
 
@@ -144,6 +143,63 @@ namespace MyBudget.Core.UnitTests.Persistance
             saveMock2.Setup(a => a.Load()).Returns(new XElement(savedXElement));
 
             var context2 = new XmlContext(saveMock.Object, GetRepoFactory());
+        }
+
+        [Test]
+        public void GivenSomeContext_WhenNoChanges_ThenNoChangesReported()
+        {
+            //Given
+            Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
+            XElement el = XElement.Parse(TestFiles.savedEmptyContext);
+            saveMock.Setup(a => a.Load()).Returns(el);
+            XElement savedXElement = null;
+            saveMock.Setup(b => b.Save(It.IsAny<XElement>()))
+                .Callback<XElement>(c => savedXElement = c);
+            var context = new XmlContext(saveMock.Object, GetRepoFactory());
+
+            //Then
+            Assert.IsFalse(context.DataHasChanged());
+        }
+
+        [Test]
+        public void GivenSomeContext_WhenThereAreChanges_ThenChangesReported()
+        {
+            //Given
+            Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
+            XElement el = XElement.Parse(TestFiles.savedEmptyContext);
+            saveMock.Setup(a => a.Load()).Returns(el);
+            XElement savedXElement = null;
+            saveMock.Setup(b => b.Save(It.IsAny<XElement>()))
+                .Callback<XElement>(c => savedXElement = c);
+            var context = new XmlContext(saveMock.Object, GetRepoFactory());
+
+            //When
+            var accountRepo = context.GetRepository<IRepository<BankAccount>>();
+            accountRepo.Add(new BankAccount() { Description = "a", Name = "b", Number = "c" });
+            
+            //Then
+            Assert.IsTrue(context.DataHasChanged());
+        }
+
+        [Test]
+        public void GivenSomeContext_WhenChangesAreSaved_ThenNoChangesReported()
+        {
+            //Given
+            Mock<IXmlSaveHandler> saveMock = new Mock<IXmlSaveHandler>();
+            XElement el = XElement.Parse(TestFiles.savedEmptyContext);
+            saveMock.Setup(a => a.Load()).Returns(el);
+            XElement savedXElement = null;
+            saveMock.Setup(b => b.Save(It.IsAny<XElement>()))
+                .Callback<XElement>(c => savedXElement = c);
+            var context = new XmlContext(saveMock.Object, GetRepoFactory());
+
+            //When
+            var accountRepo = context.GetRepository<IRepository<BankAccount>>();
+            accountRepo.Add(new BankAccount() { Description = "a", Name = "b", Number = "c" });
+            context.SaveChanges();
+
+            //Then
+            Assert.IsFalse(context.DataHasChanged());
         }
     }
 }
