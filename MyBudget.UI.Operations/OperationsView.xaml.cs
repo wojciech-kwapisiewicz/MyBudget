@@ -42,8 +42,8 @@ namespace MyBudget.UI.Operations
             if (ViewModel.ModelChanged)
             {
                 var result = MessageBox.Show(
+                    Translations.ShouldSaveText,
                     Translations.ShouldSaveCaption,
-                    Translations.ShouldSave,
                     MessageBoxButton.YesNoCancel);
                 if (result == MessageBoxResult.Cancel)
                 {

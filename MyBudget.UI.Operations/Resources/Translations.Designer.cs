@@ -106,20 +106,20 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Operations has changed, would you like to save?.
-        /// </summary>
-        internal static string ShouldSave {
-            get {
-                return ResourceManager.GetString("ShouldSave", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Save?.
+        ///   Looks up a localized string similar to Save changes?.
         /// </summary>
         internal static string ShouldSaveCaption {
             get {
                 return ResourceManager.GetString("ShouldSaveCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operations has changed, would you like to save changes?.
+        /// </summary>
+        internal static string ShouldSaveText {
+            get {
+                return ResourceManager.GetString("ShouldSaveText", resourceCulture);
             }
         }
         

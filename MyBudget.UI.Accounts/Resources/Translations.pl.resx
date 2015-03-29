@@ -132,6 +132,15 @@
   <data name="AddFromRawText" xml:space="preserve">
     <value>Wczytaj tekst wyciągu</value>
   </data>
+  <data name="DeleteStatement" xml:space="preserve">
+    <value>Usuń wyciąg</value>
+  </data>
+  <data name="DeleteStatementWarningCaption" xml:space="preserve">
+    <value>Usunąć wyciąg?</value>
+  </data>
+  <data name="DeleteStatementWarningText" xml:space="preserve">
+    <value>Usunięcie wyciągu spowoduje usunięcie wszystkich operacji które były na wyciągu. Czy na pewno chcesz usunąć wyciąg?</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>Nazwa pliku</value>
   </data>

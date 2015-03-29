@@ -12,8 +12,9 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+//using System.Windows;
 using System.Windows.Data;
-using System.Windows.Input;
+//using System.Windows.Input;
 using Xceed.Wpf.Toolkit;
 
 namespace MyBudget.UI.Accounts
@@ -37,6 +38,7 @@ namespace MyBudget.UI.Accounts
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
             LoadRawTextCommand = new DelegateCommand(LoadFromRawText, CanLoadFromRawText);
+            DeleteStatementCommand = new DelegateCommand(DeleteSelected, () => Selected != null);
         }
 
         public IEnumerable<IParser> SupportedParsers
@@ -79,6 +81,21 @@ namespace MyBudget.UI.Accounts
             {
                 _data = value;
                 OnPropertyChanged(() => Data);
+            }
+        }
+
+        private BankStatement _selected;
+        public BankStatement Selected
+        {
+            get
+            {
+                return _selected;
+            }
+            set
+            {
+                _selected = value;
+                OnPropertyChanged(() => Selected);
+                DeleteStatementCommand.RaiseCanExecuteChanged();
             }
         }
 
@@ -128,5 +145,32 @@ namespace MyBudget.UI.Accounts
             _context.SaveChanges();
             ResetListData();
         }
+
+        public DelegateCommand DeleteStatementCommand { get; set; }
+
+        public void DeleteSelected()
+        {
+            var result = MessageBox.Show(
+                Resources.Translations.DeleteStatementWarningText,
+                Resources.Translations.DeleteStatementWarningCaption,
+                System.Windows.MessageBoxButton.YesNo);
+            if (result == System.Windows.MessageBoxResult.Yes)
+            {
+                DoDelete();
+            }
+        }
+
+        public void DoDelete()
+        {
+            foreach (var item in Selected.Operations)
+            {
+                _operationRepository.Delete(item);
+            }
+            _statementsRepository.Delete(Selected);
+            _context.SaveChanges();
+            ResetListData();
+            OnPropertyChanged(() => Data);
+        }
+        
     }
 }

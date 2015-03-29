@@ -132,6 +132,15 @@
   <data name="AddFromRawText" xml:space="preserve">
     <value>Load from statement text</value>
   </data>
+  <data name="DeleteStatement" xml:space="preserve">
+    <value>Delete statement</value>
+  </data>
+  <data name="DeleteStatementWarningCaption" xml:space="preserve">
+    <value>Delete statement?</value>
+  </data>
+  <data name="DeleteStatementWarningText" xml:space="preserve">
+    <value>Deleting statement will result in all operations of given statement also beeing deleted. Are you sure you want to delete statement?</value>
+  </data>
   <data name="FileName" xml:space="preserve">
     <value>File name</value>
   </data>

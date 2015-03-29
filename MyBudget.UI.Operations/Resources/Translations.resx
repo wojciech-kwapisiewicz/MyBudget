@@ -132,11 +132,11 @@
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>No operation selected</value>
   </data>
-  <data name="ShouldSave" xml:space="preserve">
-    <value>Operations has changed, would you like to save?</value>
-  </data>
   <data name="ShouldSaveCaption" xml:space="preserve">
-    <value>Save?</value>
+    <value>Save changes?</value>
+  </data>
+  <data name="ShouldSaveText" xml:space="preserve">
+    <value>Operations has changed, would you like to save changes?</value>
   </data>
   <data name="SumText" xml:space="preserve">
     <value>Overall sum</value>

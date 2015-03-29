@@ -22,17 +22,19 @@
         </Grid.RowDefinitions>
         <StackPanel HorizontalAlignment="Right"
                     Orientation="Horizontal">
-            <Button Command="{Binding ViewModel.LoadRawTextCommand}"
+            <Button Command="{Binding LoadRawTextCommand}"
                     Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromRawText}" />
-            <Button Command="{Binding ViewModel.LoadFileCommand}"
+            <Button Command="{Binding LoadFileCommand}"
                     Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}" />
+            <Button Command="{Binding DeleteStatementCommand}"
+                    Content="{lex:Loc MyBudget.UI.Accounts:Translations:DeleteStatement}" />
         </StackPanel>
 
         <Label Grid.Row="1"
                Content="{lex:Loc MyBudget.UI.Accounts:Translations:StatementType}" />
         <ComboBox Grid.Row="2"
-                  ItemsSource="{Binding ViewModel.SupportedParsers}"
-                  SelectedItem="{Binding ViewModel.ChosenParser,
+                  ItemsSource="{Binding SupportedParsers}"
+                  SelectedItem="{Binding ChosenParser,
                                          Mode=TwoWay}">
             <ComboBox.ItemTemplate>
                 <DataTemplate>
@@ -47,7 +49,7 @@
             <TextBox AcceptsReturn="True"
                      AcceptsTab="True"
                      MinLines="3"
-                     Text="{Binding ViewModel.RawStatementText,
+                     Text="{Binding RawStatementText,
                                     Mode=TwoWay,
                                     UpdateSourceTrigger=PropertyChanged}" />
         </ScrollViewer>
@@ -55,7 +57,9 @@
         <DataGrid Grid.Row="5"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
-                  ItemsSource="{Binding ViewModel.Data}">
+                  ItemsSource="{Binding Data}"
+                  SelectedItem="{Binding Selected,
+                                         Mode=TwoWay}">
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding LoadTime,
                                                       Converter={StaticResource dateConverter},

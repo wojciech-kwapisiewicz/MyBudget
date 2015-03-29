@@ -106,6 +106,33 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete statement.
+        /// </summary>
+        internal static string DeleteStatement {
+            get {
+                return ResourceManager.GetString("DeleteStatement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete statement?.
+        /// </summary>
+        internal static string DeleteStatementWarningCaption {
+            get {
+                return ResourceManager.GetString("DeleteStatementWarningCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting statement will result in all operations of given statement also beeing deleted. Are you sure you want to delete statement?.
+        /// </summary>
+        internal static string DeleteStatementWarningText {
+            get {
+                return ResourceManager.GetString("DeleteStatementWarningText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to File name.
         /// </summary>
         internal static string FileName {
