@@ -30,7 +30,7 @@ namespace MyBudget.UI.Operations
         {           
             ViewModel = viewModel;
             InitializeComponent();
-            Wrapper.DataContext = this;
+            Wrapper.DataContext = viewModel;
         }
 
         public StatisticsViewModel ViewModel { get; set; }
@@ -38,6 +38,11 @@ namespace MyBudget.UI.Operations
         public bool KeepAlive
         {
             get { return false; }
+        }
+
+        private void CheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

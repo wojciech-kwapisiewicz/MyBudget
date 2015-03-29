@@ -99,7 +99,8 @@ namespace MyBudget.OperationsLoading.PkoBpCreditCard
                     Amount = -_parseHelper.ParseDecimalPolish(details.Amount),
                     Title = _ccTextParsing.ExtractTitle(details.Description),
                     Description = details.Description,
-                    Type = _repositoryHelper.GetOrAddOperationType(operationType)
+                    Type = _repositoryHelper.GetOrAddOperationType(operationType),
+                    Cleared = true,
                 };
             }
         }

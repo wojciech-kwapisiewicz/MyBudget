@@ -34,11 +34,29 @@ namespace MyBudget.UI.Operations
                 ReloadView();
             }
         }
-        
+
+        private bool? _cleared;
+        public bool? Cleared
+        {
+            get
+            {
+                return _cleared;
+            }
+            set
+            {
+                _cleared = value;
+                OnPropertyChanged(() => Cleared);
+                ReloadView();
+            }
+        }        
 
         private void ReloadView()
         {
             var itemsToDisplay = _bankOperationRepository.GetAll();
+            if(Cleared.HasValue)
+            {
+                itemsToDisplay = itemsToDisplay.Where(a => a.Cleared == Cleared.Value);
+            }
             if(FilterFunction!=null)
             {
                 itemsToDisplay = itemsToDisplay.Where(a => FilterFunction(a.OrderDate));

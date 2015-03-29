@@ -40,6 +40,7 @@ namespace MyBudget.XmlPersistance
             public int Id { get; set; }
 
             public string BankAccountId { get; set; }
+            public bool Cleared { get; set; }
             public string TypeId { get; set; }
             public int StatementId { get; set; }
 
@@ -74,7 +75,8 @@ namespace MyBudget.XmlPersistance
                     Title = bo.Title,
                     Description = bo.Description,
                     Category = bo.Category,
-                    SubCategory = bo.SubCategory
+                    SubCategory = bo.SubCategory,
+                    Cleared = bo.Cleared                    
                 };
 
                 sbo.StatementId = statement.Id;
@@ -97,7 +99,8 @@ namespace MyBudget.XmlPersistance
                     Title = this.Title,
                     Description = this.Description,
                     Category = this.Category,
-                    SubCategory = this.SubCategory
+                    SubCategory = this.SubCategory,
+                    Cleared = this.Cleared
                 };
 
                 bo.Type = rp._operationTypes.Get(this.TypeId);
