@@ -36,25 +36,37 @@ namespace MyBudget.OperationsLoading.ImportData
                 switch (status.Status)
                 {
                     case CheckStatus.New:
-                        _operationRepository.Add(item);
-                        statement.Operations.Add(item);
-                        statement.New++;
+                        AddNew(statement, item);
                         break;
                     case CheckStatus.Existing:
                         statement.Skipped++;
                         break;
                     case CheckStatus.ExistingUncleared:
-                        status.ExistingOperation.Cleared = true;
-                        //Should be removed from existing statement??
-                        statement.Operations.Add(status.ExistingOperation);
-                        statement.Updated++;
-                        break;
-                    default:
+                        UpdateExisting(statement, status);
                         break;
                 }
             }
 
             _statementsRepository.Add(statement);
+        }
+
+        private void UpdateExisting(BankStatement statement, CheckResult status)
+        {
+            var currentStatement = _statementsRepository.GetAll()
+                .First(a => a.Operations.Any(b => b.Id == status.ExistingOperation.Id));
+            var opToRemove = currentStatement.Operations.First(a => a.Id == status.ExistingOperation.Id);
+            currentStatement.Operations.Remove(opToRemove);
+            currentStatement.Replaced++;                
+            statement.Operations.Add(status.ExistingOperation);
+            statement.Updated++;
+            status.ExistingOperation.Cleared = true;
+        }
+
+        private void AddNew(BankStatement statement, BankOperation item)
+        {
+            _operationRepository.Add(item);
+            statement.Operations.Add(item);
+            statement.New++;
         }
 
         public CheckResult GetStatus(

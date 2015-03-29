@@ -23,9 +23,8 @@ namespace MyBudget.Core.UnitTests.ImportData
         Mock<IRepository<BankOperationType, string>> typeRepo;
         PkoBpParser parser;
 
-
         [SetUp]
-        public void Init()
+        public void SetUp()
         {
             this.accountRepo = new Mock<IRepository<BankAccount, string>>();
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
