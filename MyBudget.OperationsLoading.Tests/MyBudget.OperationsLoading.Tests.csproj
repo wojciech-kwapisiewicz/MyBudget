@@ -74,6 +74,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <EmbeddedResource Include="Resources\MilleniumParser_Sample1Entry.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">

@@ -7,8 +7,9 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Classification
 {
-    public interface IClassifier
+    public class ClassificationResult
     {
-        CustomDescription GetCustomDescription(BankOperation entry);
+        public BankOperation BankOperation { get; set; }
+        public IEnumerable<RuleMatch> Matches { get; set; }
     }
 }

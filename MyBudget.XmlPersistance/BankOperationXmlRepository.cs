@@ -51,7 +51,7 @@ namespace MyBudget.XmlPersistance
             public decimal EndingBalance { get; set; }
             public string Title { get; set; }
             public string Description { get; set; }
-
+            public string CounterAccount { get; set; }
             public string Category { get; set; }
             public string SubCategory { get; set; }
             public Card Card { get; set; }
@@ -76,6 +76,7 @@ namespace MyBudget.XmlPersistance
                     Description = bo.Description,
                     Category = bo.Category,
                     SubCategory = bo.SubCategory,
+                    CounterAccount = bo.CounterAccount,
                     Cleared = bo.Cleared                    
                 };
 
@@ -100,6 +101,7 @@ namespace MyBudget.XmlPersistance
                     Description = this.Description,
                     Category = this.Category,
                     SubCategory = this.SubCategory,
+                    CounterAccount = this.CounterAccount,
                     Cleared = this.Cleared
                 };
 

@@ -73,6 +73,17 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
+        ///&quot;PL00 0123 4567 8910 0000 1111 1234&quot;,&quot;2014-09-17&quot;,&quot;2014-09-17&quot;,&quot;PRZELEW PRZYCHODZĄCY&quot;,&quot;03 10 2039 5800 0012 3456 7890 00&quot;,&quot;AAA BBB&quot;,&quot;Tytul&quot;,&quot;&quot;,&quot;123.45&quot;,&quot;0.00&quot;,&quot;PLN&quot;
+        ///.
+        /// </summary>
+        internal static string MilleniumParser_Sample1Entry {
+            get {
+                return ResourceManager.GetString("MilleniumParser_Sample1Entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to [logo iPKO]
         ///Klient: XYZ | Numer klienta: 1111111 | Czas do końca sesji: 09:45s odśwież
         ///Ostatnie logowanie: udane 2000-01-01 10:00:00 | nieudane 2000-01-01 10:00:00
@@ -107,6 +118,44 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         internal static string PkoBpCreditCardParser_Sample {
             get {
                 return ResourceManager.GetString("PkoBpCreditCardParser_Sample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to [logo iPKO]
+        ///Klient: XYZ | Numer klienta: 1111111 | Czas do końca sesji: 09:45s odśwież
+        ///Ostatnie logowanie: udane 2000-01-01 10:00:00 | nieudane 2000-01-01 10:00:00
+        ///Rachunki
+        ///Transakcje
+        ///Karty
+        ///IKO
+        ///Fundusze
+        ///Usługi 
+        ///maklerskie
+        ///Ubezpieczenia
+        ///Doładowania
+        ///Dostęp
+        ///Kontakt
+        ///Poczta 
+        ///iPKO
+        ///Oferta 
+        ///dla Ciebie
+        ///Wyloguj
+        ///Karty debetowe
+        ///Karty kredytowe
+        ///Szczegóły karty kredytowej
+        ///Operacje bieżące
+        ///Zestawienia operacji
+        ///Przelew z karty
+        ///Spłać kartę
+        ///Karty obciążeniowe
+        ///Karty przedpłacone
+        ///
+        /// [logo iPKO] [log [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string PkoBpCreditCardParser_Sample1 {
+            get {
+                return ResourceManager.GetString("PkoBpCreditCardParser_Sample1", resourceCulture);
             }
         }
         

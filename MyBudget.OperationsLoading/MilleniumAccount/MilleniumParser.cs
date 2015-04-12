@@ -45,8 +45,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
         {
             using (var reader = new StreamReader(stream))
             {
-                reader.ReadLine();
-                //ignore headers
+                reader.ReadLine();//to ignore headers
                 List<BankOperation> ops = new List<BankOperation>();
                 int i = 0;
                 while (!reader.EndOfStream)
@@ -82,6 +81,8 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
             string accountNumber = entries[0]
                 .Replace(" ", "")
                 .Substring(2, 26);
+            string counterAccount = entries[4]
+                .Replace(" ", "");
             string typeName = entries[3];
             string description = entries[6];
             string title = ExtractTitle(description);
@@ -107,6 +108,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                 Amount = _parseHelper.ParseDecimalInvariant(amount),
                 EndingBalance = _parseHelper.ParseDecimalInvariant(entries[9]),
                 Title = title,
+                CounterAccount = counterAccount,
                 Description = description,
                 Type = _repositoryHelper.GetOrAddOperationType(typeName),
                 Cleared = true

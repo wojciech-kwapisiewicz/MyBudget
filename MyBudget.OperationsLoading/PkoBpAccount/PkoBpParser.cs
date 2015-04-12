@@ -79,8 +79,10 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
                 string description = operation.Descendants("description").Single().Value;
 
                 string typeName = operation.Descendants("type").Single().Value;
-
-                string title = ExtractTitle(description);
+                string[] linesOfDesc = ExtractLines(description);
+                string formattedDescription = string.Join(Environment.NewLine, linesOfDesc);
+                string title = ExtractTitle(linesOfDesc) ?? formattedDescription;
+                string counterAccount = ExtracCounterAccount(linesOfDesc);
 
                 yield return new BankOperation()
                 {
@@ -91,42 +93,65 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
                     Amount = _parseHelper.ParseDecimalInvariant(amount),
                     EndingBalance = _parseHelper.ParseDecimalInvariant(endingBalance),
                     Title = title,
-                    Description = description,
+                    Description = formattedDescription,
                     Type = _repositoryHelper.GetOrAddOperationType(typeName),
+                    CounterAccount = counterAccount,
                     Cleared = true
                 };
             }
         }
 
-        private string ExtractTitle(string description)
+        private string[] ExtractLines(string description)
         {
-            string[] lines = description.Split(
-                new string[] { Environment.NewLine, "\n", "\r\n" },
-                StringSplitOptions.RemoveEmptyEntries).Select(a => a.Trim()).ToArray();
+            string[] linesOfDesc = description
+                .Split(new[] { Environment.NewLine, "\n", "\r\n" }, StringSplitOptions.None)
+                .Select(a => a.Trim())
+                .Where(b => !string.IsNullOrWhiteSpace(b))
+                .ToArray();
+            return linesOfDesc;
+        }
 
+        private string ExtracCounterAccount(string[] linesOfDesc)
+        {
+            string counterAccountLinePrefix = "Nr rach. przeciwst.: ";
+            string counterAccountLine = linesOfDesc.FirstOrDefault(a =>
+                a.StartsWith(counterAccountLinePrefix, StringComparison.OrdinalIgnoreCase));
+
+            if (counterAccountLine == null)
+            {
+                return null;
+            }
+            else
+            {
+                return counterAccountLine
+                    .Replace(counterAccountLinePrefix, "")
+                    .Replace(" ", "");
+            }
+        }
+
+        private string ExtractTitle(string[] lines)
+        {
             string titleLinePrefix = "Tytuł: ";
             string titleLine = lines.FirstOrDefault(a =>
                 a.StartsWith(titleLinePrefix, StringComparison.OrdinalIgnoreCase));
             if (string.IsNullOrWhiteSpace(titleLine))
             {
-                return description;
-            }
-            else
-            {
-                titleLine = titleLine.Replace(titleLinePrefix, "");
+                return null;
             }
 
-            string title = string.Empty;
+            titleLine = titleLine.Replace(titleLinePrefix, "");
 
+            //If title line is of format "Lokalizacja: ... Adres: ... Kraj: ... Miasto: ..."
+            //and it description has "Numer referencyjny: "
+            //then it is card operation and it is better to return location of operation
             string refNumber = string.Empty;
             string refLinePrefix = "Numer referencyjny: ";
-            string refLine = lines.FirstOrDefault(a => 
+            string refLine = lines.FirstOrDefault(a =>
                 a.StartsWith(refLinePrefix, StringComparison.OrdinalIgnoreCase));
 
             string locationPrefix = "Lokalizacja: ";
             string locationLine = lines.FirstOrDefault(a =>
                 a.StartsWith(locationPrefix, StringComparison.OrdinalIgnoreCase));
-
 
             if (!string.IsNullOrWhiteSpace(refLine) &&
                 !string.IsNullOrWhiteSpace(locationPrefix) &&
@@ -134,8 +159,10 @@ namespace MyBudget.OperationsLoading.PkoBpAccount
             {
                 return ReorderLocationLine(locationLine);
             }
-
-            return titleLine;
+            else
+            {
+                return titleLine;
+            }
         }
 
         private string ReorderLocationLine(string line)

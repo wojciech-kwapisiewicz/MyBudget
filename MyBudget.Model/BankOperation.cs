@@ -21,11 +21,13 @@ namespace MyBudget.Model
         public DateTime ExecutionDate { get; set; }
         public decimal Amount { get; set; }
         public decimal EndingBalance { get; set; }
-        public string Title { get; set; }
         public string Description { get; set; }
 
         public string Category { get; set; }
         public string SubCategory { get; set; }
         public Card Card { get; set; }
+
+        public string Title { get; set; }
+        public string CounterAccount { get; set; }
     }
 }

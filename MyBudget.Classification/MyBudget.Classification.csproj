@@ -39,10 +39,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ClassificationResult.cs" />
     <Compile Include="CustomDescription.cs" />
-    <Compile Include="IClassifier.cs" />
+    <Compile Include="IClassificationRule.cs" />
+    <Compile Include="IOperationsClassifier.cs" />
+    <Compile Include="OperationsClassifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RegularExpressionClassifier.cs" />
+    <Compile Include="RegularExpressionClassificationRule.cs" />
+    <Compile Include="RuleMatch.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">

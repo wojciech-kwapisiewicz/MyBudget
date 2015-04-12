@@ -38,7 +38,7 @@ namespace MyBudget.Core.UnitTests.ImportData
             string pkoBpList = TestFiles.PkoBpParser_1Entry;
             
             //When
-            var list = this.parser.Parse(pkoBpList).ToArray();
+            var list = this.parser.Parse(pkoBpList);
 
             //Then
             Assert.AreEqual(1, list.Count());
@@ -82,10 +82,29 @@ namespace MyBudget.Core.UnitTests.ImportData
             //When
             var list = this.parser.Parse(pkoBpList).ToArray();
 
-            //
+            //Then
             Assert.AreEqual(2, list.Count());
             Assert.IsTrue(list.Any(a => a.Title == "U AAA 222 Miasto: CityOfSth Kraj: POLSKA"));
             Assert.IsTrue(list.Any(a => a.Title == "Supermarket ABC Miasto: CityOfSth Kraj: POLSKA"));
+        }
+
+        [Test]
+        public void GivenSamplePkoBpXmlWithOneOperation_WhenParsed_ThenSingleOperationParsedWithProperValuesInFields()
+        {
+            //When
+            var list = this.parser.Parse(TestFiles.PkoBpParser_1Entry);
+
+            //Then
+            var op = list.Single();
+            Assert.AreEqual("03102039580000123456789000", op.BankAccount.Number);
+            Assert.AreEqual(new DateTime(2013, 2, 2), op.OrderDate);
+            Assert.AreEqual(new DateTime(2013, 2, 2), op.ExecutionDate);
+            Assert.AreEqual(-100.00, op.Amount);
+            Assert.AreEqual("Przelew z rachunku", op.Type.Name);
+            Assert.AreEqual(true, op.Cleared);
+            string expectedDesc ="Nr rach. przeciwst.: 11 2222 3333 4444 5555 6666 7777\r\nDane adr. rach. przeciwst.: Name\r\nTytuł: SomeTitle";
+            Assert.AreEqual(expectedDesc, op.Description);
+            Assert.AreEqual("11222233334444555566667777", op.CounterAccount);
         }
     }
 }
