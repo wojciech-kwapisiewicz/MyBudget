@@ -9,12 +9,14 @@ namespace MyBudget.Model
 {
     public class ClassificationRule : IIdentifiable<int>
     {
+        public const string SavedAccount = "SavedAccount";        
+        public const string FieldName = "Description";
+        public const RuleType Type = RuleType.Mixed;
+        
         public int Id { get; set; }
-        public RuleType Type { get; set; }
-        public string Description { get; set; }
-        public string FieldName { get; set; }
-        public string Parameter { get; set; }
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
+
+        public string Account { get; set; }
+        public string CounterAccount { get; set; }
+        public string RegularExpression { get; set; }
     }
 }

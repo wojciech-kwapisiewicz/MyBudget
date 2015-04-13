@@ -13,6 +13,7 @@ namespace MyBudget.Model
         {
             Operations = new List<BankOperation>();
         }
+
         public int Id { get; set; }
 
         public string FileName { get; set; }

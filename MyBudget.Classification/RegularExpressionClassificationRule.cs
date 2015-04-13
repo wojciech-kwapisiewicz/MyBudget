@@ -10,27 +10,29 @@ namespace MyBudget.Classification
 {
     public class RegularExpressionClassificationRule : IClassificationRule
     {
-        private string _fieldName;
-        private string _regularExpression;
+        public ClassificationDefinition Definition { get; private set; }
 
-        public ClassificationRule Rule { get; private set; }
-
-        public RegularExpressionClassificationRule(ClassificationRule rule)
+        public RegularExpressionClassificationRule(ClassificationDefinition definition)
         {
-            _fieldName = rule.FieldName;
-            _regularExpression = rule.Parameter;
-            Rule = rule;
-        }
-
-        public bool DoMatch(BankOperation operation)
-        {
-            string value = typeof(BankOperation).GetField(_fieldName).GetValue(operation) as string;
-            return Regex.IsMatch(value, _regularExpression, RegexOptions.IgnoreCase);
+            Definition = definition;
         }
 
         public CustomDescription GetCustomDescription()
         {
-            return new CustomDescription() { Category = Rule.Category, SubCategory = Rule.SubCategory };
+            return new CustomDescription() { Category = Definition.Category, SubCategory = Definition.SubCategory };
+        }
+
+        public bool DoMatch(BankOperation operation)
+        {
+            return Definition.Rules.Any(a => Matches(a, operation));
+        }
+
+        public bool Matches(ClassificationRule rule, BankOperation operation)
+        {
+            string value = operation.Description;
+                //typeof(BankOperation).GetField(ClassificationRule.FieldName).GetValue(operation) as string;
+            bool matchFound = Regex.IsMatch(value, rule.RegularExpression, RegexOptions.IgnoreCase);
+            return matchFound;
         }
     }
 }

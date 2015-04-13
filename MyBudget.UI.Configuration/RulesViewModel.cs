@@ -15,32 +15,32 @@ namespace MyBudget.UI.Configuration
     public class RulesViewModel : BindableBase
     {
         IRegionManager _regionManager;
-        IRepository<ClassificationRule, int> _rulesRepository;
+        IRepository<ClassificationDefinition, int> _definitionsRepository;
         IContext _context;
 
         public RulesViewModel(IContext context, IRegionManager regionManager)
         {
             _context = context;
             _regionManager = regionManager;
-            _rulesRepository = context.GetRepository<IRepository<ClassificationRule, int>>();
+            _definitionsRepository = context.GetRepository<IRepository<ClassificationDefinition, int>>();
 
             AddRule = new DelegateCommand(NavigateToAdd);
             EditRule = new DelegateCommand(NavigateToEdit, () => SelectedItem != null);
             DeleteRule = new DelegateCommand(GoDelete, () => SelectedItem != null);
         }
 
-        public IEnumerable<ClassificationRule> Data
+        public IEnumerable<ClassificationDefinition> Data
         {
             get
             {
-                return _rulesRepository.GetAll()
+                return _definitionsRepository.GetAll()
                     .OrderBy(a => a.Category)
                     .ThenBy(b => b.SubCategory);
             }
         }
 
-        private ClassificationRule _SelectedItem;
-        public ClassificationRule SelectedItem
+        private ClassificationDefinition _SelectedItem;
+        public ClassificationDefinition SelectedItem
         {
             get { return _SelectedItem; }
             set
@@ -70,7 +70,7 @@ namespace MyBudget.UI.Configuration
         public DelegateCommand DeleteRule { get; set; }
         private void GoDelete()
         {
-            _rulesRepository.Delete(SelectedItem);
+            _definitionsRepository.Delete(SelectedItem);
             _context.SaveChanges();
             OnPropertyChanged(() => Data);
         }

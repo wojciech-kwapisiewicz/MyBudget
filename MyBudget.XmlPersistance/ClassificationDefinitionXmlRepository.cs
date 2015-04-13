@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace MyBudget.XmlPersistance
 {
-    public class ClassificationRuleXmlRepository : AbstractXmlRepository<ClassificationRule, int>
+    public class ClassificationDefinitionXmlRepository : AbstractXmlRepository<ClassificationDefinition, int>
     {
-        public override void Add(ClassificationRule obj)
+        public override void Add(ClassificationDefinition obj)
         {
             obj.Id = LastKey + 1;
             base.Add(obj);

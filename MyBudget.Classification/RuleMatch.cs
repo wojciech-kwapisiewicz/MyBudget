@@ -9,7 +9,7 @@ namespace MyBudget.Classification
 {
     public class RuleMatch
     {
-        public ClassificationRule Rule { get; set; }
+        public ClassificationDefinition MatchedDefinition { get; set; }
         public CustomDescription Description { get; set; }
     }
 }

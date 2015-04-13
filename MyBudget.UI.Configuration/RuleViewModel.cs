@@ -20,21 +20,21 @@ namespace MyBudget.UI.Configuration
         public IRegionNavigationJournal Journal { get; set; }
         private IRegionManager _regionManager;
 
-        private IRepository<ClassificationRule, int> _rulesRepository;
+        private IRepository<ClassificationDefinition, int> _definitionsRepository;
         private IContext _context;
 
         public RuleViewModel(IContext context, IRegionManager regionManager)
         {
             _regionManager = regionManager;
             _context = context;
-            _rulesRepository = context.GetRepository<IRepository<ClassificationRule, int>>();
+            _definitionsRepository = context.GetRepository<IRepository<ClassificationDefinition, int>>();
 
             GoBack = new DelegateCommand(DoGoBack);
             Save = new DelegateCommand(DoSave);
         }
 
-        private ClassificationRule _Data;
-        public ClassificationRule Data
+        private ClassificationDefinition _Data;
+        public ClassificationDefinition Data
         {
             get { return _Data; }
             set
@@ -49,7 +49,7 @@ namespace MyBudget.UI.Configuration
         {
             if (EditMode == EditMode.Add)
             {
-                _rulesRepository.Add(Data);
+                _definitionsRepository.Add(Data);
             }
             _context.SaveChanges();
             _regionManager.RequestNavigate(RegionNames.MainContent, typeof(RulesView).FullName);
@@ -61,27 +61,30 @@ namespace MyBudget.UI.Configuration
             Journal.GoBack();
         }
 
-        public void OnNavigatedTo(ClassificationRule selected, BankOperation templateOperation)
+        public void OnNavigatedTo(ClassificationDefinition selected, BankOperation templateOperation)
         {
             if (selected == null)
             {
                 EditMode = EditMode.Add;
+                ClassificationDefinition newDefinition = new ClassificationDefinition();
                 ClassificationRule newRule = new ClassificationRule();
-                newRule.FieldName = GetNameFromExpression(a => a.Description);
+                newDefinition.Rules.Add(newRule);
 
                 if (templateOperation != null)
                 {
-                    newRule.Parameter = templateOperation.Description;
-                    newRule.Category = templateOperation.Category;
-                    newRule.SubCategory = templateOperation.SubCategory;
+                    newDefinition.Category = templateOperation.Category;
+                    newDefinition.SubCategory = templateOperation.SubCategory;                    
+                    newRule.RegularExpression = templateOperation.Description;
+                    newRule.Account = templateOperation.BankAccount.Number;
+                    newRule.CounterAccount = templateOperation.CounterAccount;
                 }
 
-                Data = newRule;
+                Data = newDefinition;
             }
             else
             {
                 EditMode = EditMode.Edit;
-                Data = _rulesRepository.Get(selected.Id);
+                Data = _definitionsRepository.Get(selected.Id);
             }
         }
 

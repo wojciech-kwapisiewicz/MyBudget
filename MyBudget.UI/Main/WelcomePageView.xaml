@@ -20,5 +20,16 @@
             <TextBox AcceptsReturn="True"
                      MinLines="4" />
         </ScrollViewer>
+        <ComboBox IsEditable="True"
+                  SelectedItem="{Binding Selected,
+                                         Mode=TwoWay}">
+            <ComboBoxItem IsEnabled="False">--Zapisane--</ComboBoxItem>
+            <ComboBoxItem>Zapisane 1</ComboBoxItem>
+            <ComboBoxItem>Zapisane 2</ComboBoxItem>
+            <ComboBoxItem IsEnabled="False">--Istniejace--</ComboBoxItem>
+            <ComboBoxItem>Istniejace 3</ComboBoxItem>
+            <ComboBoxItem IsEnabled="False">--Dodaj nowe----</ComboBoxItem>
+            <ComboBoxItem>Nowe</ComboBoxItem>
+        </ComboBox>
     </StackPanel>
 </UserControl>

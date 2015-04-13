@@ -165,19 +165,22 @@
   <data name="BankOperation_Type" xml:space="preserve">
     <value>Typ operacji</value>
   </data>
-  <data name="ClassificationRule_Category" xml:space="preserve">
+  <data name="ClassificationDefinition_Category" xml:space="preserve">
     <value>Kategoria</value>
   </data>
-  <data name="ClassificationRule_Description" xml:space="preserve">
+  <data name="ClassificationDefinition_Description" xml:space="preserve">
     <value>Opis</value>
   </data>
-  <data name="ClassificationRule_FieldName" xml:space="preserve">
-    <value>Nazwa pola</value>
-  </data>
-  <data name="ClassificationRule_Parameter" xml:space="preserve">
-    <value>Parametr</value>
-  </data>
-  <data name="ClassificationRule_SubCategory" xml:space="preserve">
+  <data name="ClassificationDefinition_SubCategory" xml:space="preserve">
     <value>Podkategoria</value>
+  </data>
+  <data name="ClassificationRule_Account" xml:space="preserve">
+    <value>Konto</value>
+  </data>
+  <data name="ClassificationRule_CounterAccount" xml:space="preserve">
+    <value>Konto przeciwstawne</value>
+  </data>
+  <data name="ClassificationRule_RegularExpression" xml:space="preserve">
+    <value>Szukane wyrażenie</value>
   </data>
 </root>

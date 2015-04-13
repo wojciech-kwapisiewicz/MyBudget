@@ -57,10 +57,10 @@ namespace MyBudget.XmlPersistance
             {
                 _repositoryFactory.GetRepository<BankOperationXmlRepository>().Load(operationsElement);
             }
-            XElement rulesElement = dataToLoad.Element("ArrayOfClassificationRule");
-            if (rulesElement != null)
+            XElement definitionsElement = dataToLoad.Element("ArrayOfClassificationDefinition");
+            if (definitionsElement != null)
             {
-                _repositoryFactory.GetRepository<ClassificationRuleXmlRepository>().Load(rulesElement);
+                _repositoryFactory.GetRepository<ClassificationDefinitionXmlRepository>().Load(definitionsElement);
             }
         }
 
@@ -79,7 +79,7 @@ namespace MyBudget.XmlPersistance
             el.Add(_repositoryFactory.GetRepository<BankStatementXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationXmlRepository>().Save());
-            el.Add(_repositoryFactory.GetRepository<ClassificationRuleXmlRepository>().Save());
+            el.Add(_repositoryFactory.GetRepository<ClassificationDefinitionXmlRepository>().Save());
             return el;
         }
 

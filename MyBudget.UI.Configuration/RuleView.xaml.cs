@@ -22,6 +22,11 @@ namespace MyBudget.UI.Configuration
     /// </summary>
     public partial class RuleView : UserControl, INavigationAware
     {
+        public RuleView()
+        {
+
+        }
+
         public RuleView(RuleViewModel viewModel)
         {
             ViewModel = viewModel;
@@ -43,7 +48,7 @@ namespace MyBudget.UI.Configuration
         public void OnNavigatedTo(NavigationContext navigationContext)
         {
             ViewModel.Journal = navigationContext.NavigationService.Journal;
-            ClassificationRule selected = navigationContext.Parameters["selected"] as ClassificationRule;
+            ClassificationDefinition selected = navigationContext.Parameters["selected"] as ClassificationDefinition;
             BankOperation patternParameter = navigationContext.Parameters["template"] as BankOperation;
             ViewModel.OnNavigatedTo(selected, patternParameter);
         }

@@ -10,22 +10,22 @@ namespace MyBudget.Classification
 {
     public class OperationsClassifier : IOperationsClassifier
     {
-        private IEnumerable<RegularExpressionClassificationRule> _rulesToApply;
+        private IEnumerable<RegularExpressionClassificationRule> _definitionsToApply;
 
-        public OperationsClassifier(IEnumerable<ClassificationRule> rules)
+        public OperationsClassifier(IEnumerable<ClassificationDefinition> classificationDefinitions)
         {
-            _rulesToApply = rules.Select(rule => new RegularExpressionClassificationRule(rule));
+            _definitionsToApply = classificationDefinitions.Select(def => new RegularExpressionClassificationRule(def));
         }
 
         public IEnumerable<ClassificationResult> ClasifyOpearations(IEnumerable<BankOperation> operations)
         {
             foreach (var currentOperation in operations)
             {
-                var foundMatches = _rulesToApply
+                var foundMatches = _definitionsToApply
                     .Where(r1 => r1.DoMatch(currentOperation))
                     .Select(r2 => new RuleMatch()
                         {
-                            Rule = r2.Rule,
+                            MatchedDefinition = r2.Definition,
                             Description = r2.GetCustomDescription()
                         });
 

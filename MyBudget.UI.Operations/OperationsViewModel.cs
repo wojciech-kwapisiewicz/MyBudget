@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
 using Microsoft.Practices.Prism.Regions;
+using MyBudget.Classification;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.UI.Configuration;
@@ -17,14 +18,14 @@ namespace MyBudget.UI.Operations
     {
         private IContext _context;
         private IRepository<BankOperation> _operationRepository;
-        private IRepository<ClassificationRule> rulesRepo;
+        private IRepository<ClassificationDefinition> definitionsRepo;
         private IRegionManager _regionManager;
 
         public OperationsViewModel(IContext context, IRegionManager regionManager)
         {
             _regionManager = regionManager;
             _context = context;
-            rulesRepo = context.GetRepository<IRepository<ClassificationRule>>();
+            definitionsRepo = context.GetRepository<IRepository<ClassificationDefinition>>();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
 
             #region Apply rule - move somwhere else and rework rule applying
@@ -342,29 +343,21 @@ namespace MyBudget.UI.Operations
         public DelegateCommand ClearRules { get; set; }
         private void DoApplyRules(bool clear)
         {
-            var all = _operationRepository.GetAll().Count();
-            var withCategory = _operationRepository.GetAll().Count(a => !string.IsNullOrEmpty(a.Category));
+            var classifier = new OperationsClassifier(definitionsRepo.GetAll());
+            var classificationResult = classifier
+                .ClasifyOpearations(_operationRepository.GetAll());
 
-            foreach (var item in _operationRepository.GetAll())
+            foreach (var item in classificationResult)
             {
-                //if (clear)
-                //{
-                //    item.Category = string.Empty;
-                //    item.SubCategory = string.Empty;
-                //    continue;
-                //}
-                foreach (var rule in rulesRepo.GetAll())
+                if (item.Matches.Count() == 1)
                 {
-                    if (System.Text.RegularExpressions.Regex.IsMatch(item.Description, rule.Parameter, System.Text.RegularExpressions.RegexOptions.IgnoreCase))
-                    {
-                        item.Category = rule.Category;
-                        item.SubCategory = rule.SubCategory;
-                    }
+                    item.BankOperation.Category = item.Matches.Single()
+                        .MatchedDefinition.Category;
+                    item.BankOperation.SubCategory = item.Matches.Single()
+                        .MatchedDefinition.SubCategory;
                 }
             }
         }
-
-
         
         public Action OnNextSelected { private get; set; }
 

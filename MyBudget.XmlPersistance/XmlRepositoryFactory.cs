@@ -30,7 +30,7 @@ namespace MyBudget.XmlPersistance
             BankOperationTypeXmlRepository bot,
             BankStatementXmlRepository bs,
             BankOperationXmlRepository bo,
-            ClassificationRuleXmlRepository cr
+            ClassificationDefinitionXmlRepository cr
             )
         {
             foreach (var repo in new IRepository[] { ba, bot, bs, bo, cr })

@@ -165,19 +165,22 @@
   <data name="BankOperation_Type" xml:space="preserve">
     <value>Type</value>
   </data>
-  <data name="ClassificationRule_Category" xml:space="preserve">
+  <data name="ClassificationDefinition_Category" xml:space="preserve">
     <value>Category</value>
   </data>
-  <data name="ClassificationRule_Description" xml:space="preserve">
+  <data name="ClassificationDefinition_Description" xml:space="preserve">
     <value>Description</value>
   </data>
-  <data name="ClassificationRule_FieldName" xml:space="preserve">
-    <value>Field name</value>
-  </data>
-  <data name="ClassificationRule_Parameter" xml:space="preserve">
-    <value>Parameter</value>
-  </data>
-  <data name="ClassificationRule_SubCategory" xml:space="preserve">
+  <data name="ClassificationDefinition_SubCategory" xml:space="preserve">
     <value>Sub category</value>
+  </data>
+  <data name="ClassificationRule_Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="ClassificationRule_CounterAccount" xml:space="preserve">
+    <value>Counter account</value>
+  </data>
+  <data name="ClassificationRule_RegularExpression" xml:space="preserve">
+    <value>Expression to find</value>
   </data>
 </root>

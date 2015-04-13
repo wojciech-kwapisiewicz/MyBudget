@@ -207,45 +207,54 @@ namespace MyBudget.Model {
         /// <summary>
         ///   Looks up a localized string similar to Category.
         /// </summary>
-        public static string ClassificationRule_Category {
+        public static string ClassificationDefinition_Category {
             get {
-                return ResourceManager.GetString("ClassificationRule_Category", resourceCulture);
+                return ResourceManager.GetString("ClassificationDefinition_Category", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
-        public static string ClassificationRule_Description {
+        public static string ClassificationDefinition_Description {
             get {
-                return ResourceManager.GetString("ClassificationRule_Description", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Field name.
-        /// </summary>
-        public static string ClassificationRule_FieldName {
-            get {
-                return ResourceManager.GetString("ClassificationRule_FieldName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Parameter.
-        /// </summary>
-        public static string ClassificationRule_Parameter {
-            get {
-                return ResourceManager.GetString("ClassificationRule_Parameter", resourceCulture);
+                return ResourceManager.GetString("ClassificationDefinition_Description", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Sub category.
         /// </summary>
-        public static string ClassificationRule_SubCategory {
+        public static string ClassificationDefinition_SubCategory {
             get {
-                return ResourceManager.GetString("ClassificationRule_SubCategory", resourceCulture);
+                return ResourceManager.GetString("ClassificationDefinition_SubCategory", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string ClassificationRule_Account {
+            get {
+                return ResourceManager.GetString("ClassificationRule_Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Counter account.
+        /// </summary>
+        public static string ClassificationRule_CounterAccount {
+            get {
+                return ResourceManager.GetString("ClassificationRule_CounterAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expression to find.
+        /// </summary>
+        public static string ClassificationRule_RegularExpression {
+            get {
+                return ResourceManager.GetString("ClassificationRule_RegularExpression", resourceCulture);
             }
         }
     }

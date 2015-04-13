@@ -8,6 +8,7 @@ namespace MyBudget.Model
 {
     public enum RuleType
     {
-        RegularExpression
+        RegularExpression,
+        Mixed
     }
 }

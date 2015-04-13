@@ -53,7 +53,7 @@
     <Compile Include="BankOperationTypeXmlRepository.cs" />
     <Compile Include="BankOperationXmlRepository.cs" />
     <Compile Include="BankStatementXmlRepository.cs" />
-    <Compile Include="ClassificationRuleXmlRepository.cs" />
+    <Compile Include="ClassificationDefinitionXmlRepository.cs" />
     <Compile Include="Configuration\XmlPersistanceUnityConfiguration.cs" />
     <Compile Include="IXmlSaveHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -23,12 +23,26 @@ namespace MyBudget.UI.Main
     {
         public WelcomePageView()
         {
+            this.DataContext = this;
             InitializeComponent();
         }
 
         public bool KeepAlive
         {
             get { return false; }
+        }
+
+        private object _Selected;
+        public object Selected
+        {
+            get
+            {
+                return _Selected;
+            }
+            set
+            {
+                _Selected = value;
+            }
         }
     }
 }
