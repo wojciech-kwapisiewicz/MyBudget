@@ -6,6 +6,7 @@ using MyBudget.Model;
 using MyBudget.UI.Core;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -31,6 +32,7 @@ namespace MyBudget.UI.Configuration
 
             GoBack = new DelegateCommand(DoGoBack);
             Save = new DelegateCommand(DoSave);
+            DeleteRule = new DelegateCommand<ClassificationRule>(DoDeleteRule);
         }
 
         private ClassificationDefinition _Data;
@@ -41,6 +43,18 @@ namespace MyBudget.UI.Configuration
             {
                 _Data = value;
                 OnPropertyChanged(() => Data);
+                Rules = new ObservableCollection<ClassificationRule>(Data.Rules);
+            }
+        }
+
+        private ObservableCollection<ClassificationRule> _Rules;
+        public ObservableCollection<ClassificationRule> Rules
+        {
+            get { return _Rules; }
+            set
+            {
+                _Rules = value;
+                OnPropertyChanged(() => Rules);
             }
         }
 
@@ -59,6 +73,13 @@ namespace MyBudget.UI.Configuration
         private void DoGoBack()
         {
             Journal.GoBack();
+        }
+
+        public DelegateCommand<ClassificationRule> DeleteRule { get; set; }
+        private void DoDeleteRule(ClassificationRule parameter)
+        {
+            Data.Rules.Remove(parameter);
+            Rules.Remove(parameter);
         }
 
         public void OnNavigatedTo(ClassificationDefinition selected, BankOperation templateOperation)

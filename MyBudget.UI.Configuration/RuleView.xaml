@@ -19,8 +19,6 @@
                 <RowDefinition />
                 <RowDefinition />
                 <RowDefinition />
-                <RowDefinition />
-                <RowDefinition />
             </Grid.RowDefinitions>
             <Label Grid.Row="0"
                    Grid.Column="0"
@@ -40,19 +38,55 @@
             <TextBox Grid.Row="2"
                      Grid.Column="1"
                      Text="{Binding Data.SubCategory}" />
-            <ListBox Grid.Row="3"
-                     Grid.ColumnSpan="2"
-                     ItemsSource="{Binding Data.Rules}">
-                <ListBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel>
-                            <TextBox Text="{Binding RegularExpression}" />
-                            <TextBox Text="{Binding Account}" />
-                            <TextBox Text="{Binding CounterAccount}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ListBox.ItemTemplate>
-            </ListBox>
         </Grid>
+
+        <Label Margin="0 5 0 3"
+               Content="{lex:Loc MyBudget.UI.Configuration:Translations:RulesDefinitions}" />
+
+        <ItemsControl Grid.Row="3"
+                      Grid.ColumnSpan="2"
+                      ItemsSource="{Binding Rules}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderBrush="#FFB9B9B9"
+                            BorderThickness="1"
+                            Padding="2 2 2 2">
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition />
+                                <RowDefinition />
+                            </Grid.RowDefinitions>
+                            <Label Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_Account}" />
+                            <TextBox Grid.Column="1"
+                                     Text="{Binding Account}" />
+                            <Label Grid.Column="2"
+                                   Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_CounterAccount}" />
+                            <TextBox Grid.Column="3"
+                                     Text="{Binding CounterAccount}" />
+                            <Button Grid.Column="4"
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}},
+                                                      Path=DataContext.DeleteRule}"
+                                    CommandParameter="{Binding}"
+                                    Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
+                            <Label Grid.Row="1"
+                                   Grid.ColumnSpan="5"
+                                   Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_RegularExpression}" />
+                            <TextBox Grid.Row="2"
+                                     Grid.ColumnSpan="5"
+                                     Text="{Binding RegularExpression}" />
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
     </StackPanel>
 </UserControl>

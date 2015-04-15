@@ -59,5 +59,14 @@ namespace MyBudget.UI.Configuration.Resources {
                 resourceCulture = value;
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Search if opeartion matches any of below definitions.
+        /// </summary>
+        internal static string RulesDefinitions {
+            get {
+                return ResourceManager.GetString("RulesDefinitions", resourceCulture);
+            }
+        }
     }
 }

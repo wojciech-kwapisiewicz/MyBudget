@@ -20,7 +20,7 @@ namespace MyBudget.UI.Configuration
     /// <summary>
     /// Interaction logic for RuleView.xaml
     /// </summary>
-    public partial class RuleView : UserControl, INavigationAware
+    public partial class RuleView : UserControl, INavigationAware, IRegionMemberLifetime
     {
         public RuleView()
         {
@@ -51,6 +51,11 @@ namespace MyBudget.UI.Configuration
             ClassificationDefinition selected = navigationContext.Parameters["selected"] as ClassificationDefinition;
             BankOperation patternParameter = navigationContext.Parameters["template"] as BankOperation;
             ViewModel.OnNavigatedTo(selected, patternParameter);
+        }
+
+        public bool KeepAlive
+        {
+            get { return false; }
         }
     }
 }
