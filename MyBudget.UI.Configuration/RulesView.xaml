@@ -2,8 +2,10 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
@@ -18,13 +20,17 @@
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonAdd}" />
             <Button Command="{Binding EditRule}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonEdit}" />
+            <Button Command="{Binding MergeRules}"
+                    Content="{lex:Loc MyBudget.UI:Generic:ButtonMerge}" />
             <Button Command="{Binding DeleteRule}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
         </StackPanel>
         <ListBox Grid.Row="1"
                  ItemsSource="{Binding Data}"
-                 SelectedItem="{Binding SelectedItem,
-                                        Mode=TwoWay}">
+                 SelectionMode="Extended">
+            <i:Interaction.Behaviors>
+                <uiCore:MultiSelectedBehaviour SelectedItems="{Binding SelectedItems, Mode=OneWayToSource}" />
+            </i:Interaction.Behaviors>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>

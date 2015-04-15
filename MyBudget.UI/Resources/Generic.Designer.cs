@@ -97,6 +97,15 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge.
+        /// </summary>
+        internal static string ButtonMerge {
+            get {
+                return ResourceManager.GetString("ButtonMerge", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         internal static string ButtonSave {

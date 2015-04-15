@@ -61,6 +61,24 @@ namespace MyBudget.UI.Configuration.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Merge rules conflict.
+        /// </summary>
+        internal static string MergeRulesConflictCaption {
+            get {
+                return ResourceManager.GetString("MergeRulesConflictCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Merge rules conflict occured.{0}Rules will be merged into one: {1} - {2} - {3}.{0}Continue?.
+        /// </summary>
+        internal static string MergeRulesConflictMsg {
+            get {
+                return ResourceManager.GetString("MergeRulesConflictMsg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search if opeartion matches any of below definitions.
         /// </summary>
         internal static string RulesDefinitions {

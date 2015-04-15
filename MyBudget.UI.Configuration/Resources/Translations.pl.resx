@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="MergeRulesConflictCaption" xml:space="preserve">
+    <value>Wystąpił konflikt reguł</value>
+  </data>
+  <data name="MergeRulesConflictMsg" xml:space="preserve">
+    <value>Wystąpił konflikt reguł.{0}Reguły zostaną połączone do jednej: {1} - {2} - {3}.{0}Kontynuować?</value>
+  </data>
   <data name="RulesDefinitions" xml:space="preserve">
     <value>Kategoria zostanie nadana jeśli operacja pasuje do jednej z poniższych definicji</value>
   </data>

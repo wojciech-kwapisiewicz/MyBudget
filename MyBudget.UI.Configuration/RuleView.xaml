@@ -51,7 +51,6 @@
                     <Border BorderBrush="#FFB9B9B9"
                             BorderThickness="1"
                             Padding="2 2 2 2">
-
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -73,7 +72,7 @@
                             <TextBox Grid.Column="3"
                                      Text="{Binding CounterAccount}" />
                             <Button Grid.Column="4"
-                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ListBox}},
+                                    Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
                                                       Path=DataContext.DeleteRule}"
                                     CommandParameter="{Binding}"
                                     Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
