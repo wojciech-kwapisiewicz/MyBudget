@@ -67,6 +67,7 @@
     <Compile Include="Persistance\InMemoryContext.cs" />
     <Compile Include="DataContext\IRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="CustomCompareStrings.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

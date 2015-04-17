@@ -35,7 +35,7 @@ namespace MyBudget.UI.Configuration
             _existingAccounts = context.GetRepository<IRepository<BankAccount>>().GetAll().ToArray();
             GoBack = new DelegateCommand(DoGoBack);
             Save = new DelegateCommand(DoSave);
-            DeleteRule = new DelegateCommand<object>(DoDeleteRule);
+            DeleteRule = new DelegateCommand<WrappedClassificationRule>(DoDeleteRule);
         }
 
         private ClassificationDefinition _Data;
@@ -79,12 +79,11 @@ namespace MyBudget.UI.Configuration
             Journal.GoBack();
         }
 
-        public DelegateCommand<object> DeleteRule { get; set; }
-        private void DoDeleteRule(object parameter)
-        {          
-            var ruleToRemove = Rules.First(a => a.Data == parameter);
-            Data.Rules.Remove(ruleToRemove.Data);
-            Rules.Remove(ruleToRemove);
+        public DelegateCommand<WrappedClassificationRule> DeleteRule { get; set; }
+        private void DoDeleteRule(WrappedClassificationRule wrappedRule)
+        {
+            Data.Rules.Remove(wrappedRule.Data);
+            Rules.Remove(wrappedRule);
         }
 
         public void OnNavigatedTo(ClassificationDefinition selected, BankOperation templateOperation)
