@@ -24,7 +24,6 @@ namespace MyBudget.UI.Configuration
     {
         public RuleView()
         {
-
         }
 
         public RuleView(RuleViewModel viewModel)

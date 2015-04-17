@@ -132,6 +132,7 @@
     </Compile>
     <Compile Include="RuleViewModel.cs" />
     <Compile Include="UnityConfig\ConfigurationModule.cs" />
+    <Compile Include="WrappedClassificationRule.cs" />
     <Page Include="RulesView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

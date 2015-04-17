@@ -3,16 +3,20 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:local="clr-namespace:MyBudget.UI.Main"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              d:DesignHeight="300"
              d:DesignWidth="300"
              mc:Ignorable="d">
+
     <StackPanel>
         <TextBlock Text="Witamy w programie" />
         <StackPanel>
             <Label Content="Ostatnie operacje" />
-            <Button Content="Op1" />
-            <Button Content="Op1" />
+            <Button Command="{Binding ShowStandardMsgBox}"
+                    Content="Standard" />
+            <Button Command="{Binding ShowToolkitMsgBox}"
+                    Content="WpfToolkit" />
             <Button Content="Op1" />
         </StackPanel>
         <TextBlock Text="Notatnik" />
@@ -23,6 +27,7 @@
         <ComboBox IsEditable="True"
                   SelectedItem="{Binding Selected,
                                          Mode=TwoWay}">
+
             <ComboBoxItem IsEnabled="False">--Zapisane--</ComboBoxItem>
             <ComboBoxItem>Zapisane 1</ComboBoxItem>
             <ComboBoxItem>Zapisane 2</ComboBoxItem>

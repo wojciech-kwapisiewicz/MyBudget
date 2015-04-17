@@ -9,7 +9,7 @@ namespace MyBudget.Model
 {
     public class ClassificationRule : IIdentifiable<int>
     {
-        public const string SavedAccount = "SavedAccount";        
+        public const string SavedAccount = "SavedAccount";                
         public const string FieldName = "Description";
         public const RuleType Type = RuleType.Mixed;
         

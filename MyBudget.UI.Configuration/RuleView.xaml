@@ -65,8 +65,18 @@
                                 <RowDefinition />
                             </Grid.RowDefinitions>
                             <Label Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_Account}" />
-                            <TextBox Grid.Column="1"
-                                     Text="{Binding Account}" />
+                            <!--
+                                <TextBox Grid.Column="1"
+                                Text="{Binding Account}" />
+                            -->
+
+                            <ComboBox Grid.Column="1"
+                                      IsEditable="True"
+                                      ItemsSource="{Binding AccountDefinitions}"
+                                      Text="{Binding SelectedAccount,
+                                                     Mode=TwoWay,
+                                                     UpdateSourceTrigger=LostFocus}" />
+
                             <Label Grid.Column="2"
                                    Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_CounterAccount}" />
                             <TextBox Grid.Column="3"
