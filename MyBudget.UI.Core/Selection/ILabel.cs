@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.UI.Core.Converters
+namespace MyBudget.UI.Core.Selection
 {
-    public interface ISelectionMarker
+    public interface ILabel
     {
-        bool IsSelectable { get; }
+        string Text { get; }
     }
 }

@@ -79,6 +79,51 @@ namespace MyBudget.UI.Configuration.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Any.
+        /// </summary>
+        internal static string RulesAccountSelection_Any {
+            get {
+                return ResourceManager.GetString("RulesAccountSelection_Any", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Any saved.
+        /// </summary>
+        internal static string RulesAccountSelection_AnySaved {
+            get {
+                return ResourceManager.GetString("RulesAccountSelection_AnySaved", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (Enter account number).
+        /// </summary>
+        internal static string RulesAccountSelection_PromptEnterAccount {
+            get {
+                return ResourceManager.GetString("RulesAccountSelection_PromptEnterAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ---Accounts entered manually---.
+        /// </summary>
+        internal static string RulesAccountSelection_SeparatorAccountsByHand {
+            get {
+                return ResourceManager.GetString("RulesAccountSelection_SeparatorAccountsByHand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ---Saved accounts---.
+        /// </summary>
+        internal static string RulesAccountSelection_SeparatorOwnAccounts {
+            get {
+                return ResourceManager.GetString("RulesAccountSelection_SeparatorOwnAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Search if opeartion matches any of below definitions.
         /// </summary>
         internal static string RulesDefinitions {

@@ -123,6 +123,21 @@
   <data name="MergeRulesConflictMsg" xml:space="preserve">
     <value>Merge rules conflict occured.{0}Rules will be merged into one: {1} - {2} - {3}.{0}Continue?</value>
   </data>
+  <data name="RulesAccountSelection_Any" xml:space="preserve">
+    <value>Any</value>
+  </data>
+  <data name="RulesAccountSelection_AnySaved" xml:space="preserve">
+    <value>Any saved</value>
+  </data>
+  <data name="RulesAccountSelection_PromptEnterAccount" xml:space="preserve">
+    <value>(Enter account number)</value>
+  </data>
+  <data name="RulesAccountSelection_SeparatorAccountsByHand" xml:space="preserve">
+    <value>---Accounts entered manually---</value>
+  </data>
+  <data name="RulesAccountSelection_SeparatorOwnAccounts" xml:space="preserve">
+    <value>---Saved accounts---</value>
+  </data>
   <data name="RulesDefinitions" xml:space="preserve">
     <value>Search if opeartion matches any of below definitions</value>
   </data>

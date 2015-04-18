@@ -123,6 +123,21 @@
   <data name="MergeRulesConflictMsg" xml:space="preserve">
     <value>Wystąpił konflikt reguł.{0}Reguły zostaną połączone do jednej: {1} - {2} - {3}.{0}Kontynuować?</value>
   </data>
+  <data name="RulesAccountSelection_Any" xml:space="preserve">
+    <value>Dowolne</value>
+  </data>
+  <data name="RulesAccountSelection_AnySaved" xml:space="preserve">
+    <value>Dowolne zapisane</value>
+  </data>
+  <data name="RulesAccountSelection_PromptEnterAccount" xml:space="preserve">
+    <value>(Podaj numer konta)</value>
+  </data>
+  <data name="RulesAccountSelection_SeparatorAccountsByHand" xml:space="preserve">
+    <value>---Ręcznie wprowadzone---</value>
+  </data>
+  <data name="RulesAccountSelection_SeparatorOwnAccounts" xml:space="preserve">
+    <value>---Zapisane konta własne---</value>
+  </data>
   <data name="RulesDefinitions" xml:space="preserve">
     <value>Kategoria zostanie nadana jeśli operacja pasuje do jednej z poniższych definicji</value>
   </data>

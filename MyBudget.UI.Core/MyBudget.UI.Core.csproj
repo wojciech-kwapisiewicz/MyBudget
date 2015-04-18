@@ -82,7 +82,6 @@
       <DependentUpon>DateRangeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DateRangeType.cs" />
-    <Compile Include="Converters\ComboBoxDisableSelectionConverter.cs" />
     <Compile Include="Converters\InversedEnumToBoolConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\DecimalToStringConverter.cs" />
@@ -90,7 +89,7 @@
     <Compile Include="Converters\EmptyToDefaultTextConverter.cs" />
     <Compile Include="Converters\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
-    <Compile Include="Converters\ISelectionMarker.cs" />
+    <Compile Include="Selection\ISelectionMarker.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />
     <Compile Include="Converters\SumConverter.cs" />
     <Compile Include="CustomFilterProperty.cs" />
@@ -111,6 +110,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
+    <Compile Include="Selection\ILabel.cs" />
+    <Compile Include="Selection\SelectableItem.cs" />
+    <Compile Include="Selection\Splitter.cs" />
     <Compile Include="Services\FileDialogService.cs" />
   </ItemGroup>
   <ItemGroup>

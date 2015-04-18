@@ -49,9 +49,12 @@
         </Grid>
         <Label Grid.Row="2"
                Margin="0 10 0 3"
+               HorizontalAlignment="Center"
                Content="{lex:Loc MyBudget.UI.Configuration:Translations:RulesDefinitions}" />
         <ListBox Grid.Row="3"
-                 ItemsSource="{Binding Rules}">
+                 Margin="10 10 10 10"
+                 ItemsSource="{Binding Rules}"
+                 ScrollViewer.CanContentScroll="False">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Margin="10 10 10 10">
@@ -70,6 +73,7 @@
                         <Label Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_Account}" />
                         <ComboBox Grid.Column="1"
                                   IsEditable="True"
+                                  ItemContainerStyle="{DynamicResource ComboBoxItem_NotSelectableDisabled}"
                                   ItemsSource="{Binding AccountDefinitions}"
                                   Text="{Binding SelectedAccount,
                                                  Mode=TwoWay,
@@ -78,6 +82,7 @@
                                Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_CounterAccount}" />
                         <ComboBox Grid.Column="3"
                                   IsEditable="True"
+                                  ItemContainerStyle="{DynamicResource ComboBoxItem_NotSelectableDisabled}"
                                   ItemsSource="{Binding AccountDefinitions}"
                                   Text="{Binding SelectedCounterAccount,
                                                  Mode=TwoWay,
