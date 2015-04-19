@@ -31,7 +31,8 @@ namespace MyBudget.UI.Core.Controls
                 return a.Date >= StartDate.Date && a.Date <= EndDate.Date;
             };
             InitializeComponent();
-            Action filterInitializer = () => FilteringFunction = byRange;
+            Action filterInitializer = () => SyncFilterInternal(this);
+                //() => FilteringFunction = byRange;
             this.Dispatcher.BeginInvoke(filterInitializer);
             MainWrapper.DataContext = this;            
         }

@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>ic_action.ico</ApplicationIcon>
+    <ApplicationIcon>myBudgetIcon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -287,6 +287,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ic_action.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="myBudgetIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

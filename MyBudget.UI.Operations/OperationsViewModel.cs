@@ -43,7 +43,7 @@ namespace MyBudget.UI.Operations
             ApplyRules = new DelegateCommand(() => DoApplyRules());
             ClearRules = new DelegateCommand(() => DoClearRules());
             Save = new DelegateCommand(DoSave);
-            SelectNext = new DelegateCommand(DoSelectNext);
+            SelectNext = new DelegateCommand<bool?>(DoSelectNext);
             CreateRule = new DelegateCommand(DoCreateRule, () => SelectedOperation != null);
         }
 
@@ -129,7 +129,7 @@ namespace MyBudget.UI.Operations
             FilteringProperties = BuildPropertyList(filterProperties);
         }
 
-        private void ResetListData()
+        public void ResetListData()
         {
             var list = new ListCollectionView(_operationRepository.GetAll()
                 .OrderBy(a => a.OrderDate)
@@ -324,16 +324,14 @@ namespace MyBudget.UI.Operations
             _context.SaveChanges();
         }
 
-        public DelegateCommand SelectNext { get; set; }
-        private void DoSelectNext()
-        {            
-
-            if (Data.MoveCurrentToNext())
+        public DelegateCommand<bool?> SelectNext { get; set; }
+        private void DoSelectNext(bool? directionForward)
+        {
+            if (!directionForward.HasValue) return;
+            bool moved = directionForward.Value ? Data.MoveCurrentToNext() : Data.MoveCurrentToPrevious();
+            if (moved && OperationHasBeenSelected != null && Data.CurrentItem is BankOperation)
             {
-                if (OnNextSelected != null)
-                {
-                    OnNextSelected();                    
-                }
+                OperationHasBeenSelected((BankOperation)Data.CurrentItem);
             }
         }
 
@@ -370,7 +368,7 @@ namespace MyBudget.UI.Operations
             }
         }
 
-        public Action OnNextSelected { private get; set; }
+        public Action<BankOperation> OperationHasBeenSelected { private get; set; }
 
         public DelegateCommand CreateRule { get; set; }       
 

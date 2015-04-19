@@ -19,15 +19,17 @@ namespace MyBudget.UI.Operations
         public OperationsView(OperationsViewModel viewModel)
         {         
             ViewModel = viewModel;
-            viewModel.OnNextSelected = () =>
-                {
-                    var operationCategoryTextBox = OperationCategoryElement.Template
-                        .FindName("Text", OperationCategoryElement) as TextBox;
-                    operationCategoryTextBox.SelectAll();
-                    operationsGrid.ScrollIntoView(viewModel.SelectedOperation);
-                };
+            viewModel.OperationHasBeenSelected = MoveFocusToCategoryTextBox;
             InitializeComponent();
             this.DataContext = viewModel;
+        }
+
+        private void MoveFocusToCategoryTextBox(MyBudget.Model.BankOperation selectedOperation)
+        {
+            //Grab focus on proper insertion textBox
+            ((TextBox)OperationCategoryElement.Template.FindName("Text", OperationCategoryElement)).SelectAll();
+            //Scroll grid to current item
+            operationsGrid.ScrollIntoView(selectedOperation);
         }
 
         public OperationsViewModel ViewModel { get; set; }

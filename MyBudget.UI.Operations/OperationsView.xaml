@@ -6,6 +6,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:toolkitInput="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls.Input.Toolkit"
              xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
              d:DesignHeight="300"
@@ -25,13 +26,30 @@
         </Style>
     </UserControl.Resources>
     <Grid x:Name="Wrapper">
+        <Grid.InputBindings>
+            <KeyBinding Key="F2"
+                        Command="{Binding SelectNext}">
+                <KeyBinding.CommandParameter>
+                    <sys:Boolean>true</sys:Boolean>
+                </KeyBinding.CommandParameter>
+            </KeyBinding>
+            <KeyBinding Key="F2"
+                        Command="{Binding SelectNext}"
+                        Modifiers="Shift">
+                <KeyBinding.CommandParameter>
+                    <sys:Boolean>false</sys:Boolean>
+                </KeyBinding.CommandParameter>
+            </KeyBinding>
+        </Grid.InputBindings>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <controls:DateRangeControl FilteringFunction="{Binding FilterFunction, Mode=OneWayToSource}" />
+        <controls:DateRangeControl x:Name="Fff"
+                                   FilteringFunction="{Binding FilterFunction,
+                                                               Mode=OneWayToSource}" />
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
@@ -169,15 +187,10 @@
                    TextAlignment="Center"
                    Visibility="{Binding SelectedOperation,
                                         Converter={StaticResource inverseNullConverter}}" />
-
         <Grid Grid.Row="3"
               Margin="10 10 10 10"
               Visibility="{Binding SelectedOperation,
                                    Converter={StaticResource nullConverter}}">
-            <Grid.InputBindings>
-                <KeyBinding Key="F2"
-                            Command="{Binding SelectNext}" />
-            </Grid.InputBindings>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="Auto" />
