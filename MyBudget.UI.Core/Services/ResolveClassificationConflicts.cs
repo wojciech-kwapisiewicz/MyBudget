@@ -21,13 +21,13 @@ namespace MyBudget.UI.Core.Services
                     txt += abc.BankOperation.Title;
                     foreach (var bcd in abc.Matches)
                     {
-                        txt += Environment.NewLine;
+                        txt += " ";
                         txt += bcd.MatchedDefinition.Description;
                     }
                     txt += Environment.NewLine;
                 }
                 System.Windows.MessageBox.Show(string.Format("Znaleziono {0} operacji z konfliktami{1}{2}",
-                    withConflicts,
+                    withConflicts.Count(),
                     Environment.NewLine,
                     txt));
             }

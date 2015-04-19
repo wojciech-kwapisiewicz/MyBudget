@@ -8,6 +8,7 @@ using MyBudget.OperationsLoading;
 using MyBudget.OperationsLoading.ImportData;
 using MyBudget.UI.Core.Services;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -43,7 +44,7 @@ namespace MyBudget.UI.Accounts
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
             LoadRawTextCommand = new DelegateCommand(LoadFromRawText, CanLoadFromRawText);
-            DeleteStatementCommand = new DelegateCommand(DeleteSelected, () => Selected != null);
+            DeleteStatementCommand = new DelegateCommand(DeleteSelected, CanDelete);
         }
 
         public IEnumerable<IParser> SupportedParsers
@@ -89,17 +90,17 @@ namespace MyBudget.UI.Accounts
             }
         }
 
-        private BankStatement _selected;
-        public BankStatement Selected
+        private IEnumerable _SelectedItems;
+        public IEnumerable SelectedItems
         {
             get
             {
-                return _selected;
+                return _SelectedItems;
             }
             set
             {
-                _selected = value;
-                OnPropertyChanged(() => Selected);
+                _SelectedItems = value;
+                OnPropertyChanged(() => SelectedItems);
                 DeleteStatementCommand.RaiseCanExecuteChanged();
             }
         }
@@ -110,30 +111,38 @@ namespace MyBudget.UI.Accounts
 
         public void LoadFromFile()
         {
-            using (OpenFileResult file = new FileDialogService().OpenFile(ChosenParser.SupportedFileExtensions))
+            List<BankOperation> overallLoadedOperations = new List<BankOperation>();
+            using (OpenFileResult openFileResult = new FileDialogService()
+                .OpenFile(ChosenParser.SupportedFileExtensions, true))
             {
-                if (file.Stream == null)
-                    return;
-
-                var loadedOperations = _importer.ImportOperations(file.FileName, ChosenParser.Parse(file.Stream));
-
-                if (ApplyRules)
+                foreach (var openedFile in openFileResult.OpenedFiles)
                 {
-                    var classifier = new OperationsClassifier(_definitionsRepository.GetAll());
-                    var classificationResult = classifier.ClasifyOpearations(loadedOperations);
-                    _resolveConflicts.ResolveConflicts(classificationResult);
-                    var assigned = classifier.ApplyClassificationResult(classificationResult);
-
-                    MessageBox.Show(
-                        string.Format(
-                            "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
-                            assigned,
-                            Environment.NewLine,
-                            classificationResult.Count() - assigned));
+                    var loadedOperations = _importer.ImportOperations(
+                        openedFile.FileName,
+                        ChosenParser.Parse(openedFile.Stream));
+                    overallLoadedOperations.AddRange(loadedOperations);
                 }
-
-                _context.SaveChanges();
             }
+
+            if (ApplyRules)
+            {
+                var classifier = new OperationsClassifier(_definitionsRepository.GetAll());
+                var classificationResult = classifier.ClasifyOpearations(overallLoadedOperations);
+                
+                _resolveConflicts.ResolveConflicts(classificationResult);
+                
+                var assigned = classifier.ApplyClassificationResult(classificationResult);
+                var unassigned = classificationResult.Count() - assigned;
+
+                MessageBox.Show(
+                    string.Format(
+                        "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
+                        assigned,
+                        Environment.NewLine,
+                        unassigned));
+            }
+
+            _context.SaveChanges();
 
             ResetListData();
         }
@@ -184,15 +193,23 @@ namespace MyBudget.UI.Accounts
 
         public void DoDelete()
         {
-            foreach (var item in Selected.Operations)
+            foreach (var selectedStatement in SelectedItems.OfType<BankStatement>())
             {
-                _operationRepository.Delete(item);
+                foreach (var operation in selectedStatement.Operations)
+                {
+                    _operationRepository.Delete(operation);
+                }
+                _statementsRepository.Delete(selectedStatement);
             }
-            _statementsRepository.Delete(Selected);
+
             _context.SaveChanges();
             ResetListData();
             OnPropertyChanged(() => Data);
         }
-        
+
+        public bool CanDelete()
+        {
+            return SelectedItems != null && SelectedItems.OfType<BankStatement>().Count() > 0;
+        }        
     }
 }

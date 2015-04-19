@@ -106,7 +106,7 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Delete statement.
+        ///   Looks up a localized string similar to Delete selected statements.
         /// </summary>
         internal static string DeleteStatement {
             get {

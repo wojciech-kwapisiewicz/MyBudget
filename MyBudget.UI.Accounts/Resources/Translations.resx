@@ -133,7 +133,7 @@
     <value>Load from statement text</value>
   </data>
   <data name="DeleteStatement" xml:space="preserve">
-    <value>Delete statement</value>
+    <value>Delete selected statements</value>
   </data>
   <data name="DeleteStatementWarningCaption" xml:space="preserve">
     <value>Delete statement?</value>

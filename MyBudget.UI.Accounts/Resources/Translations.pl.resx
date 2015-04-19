@@ -133,7 +133,7 @@
     <value>Wczytaj tekst wyciągu</value>
   </data>
   <data name="DeleteStatement" xml:space="preserve">
-    <value>Usuń wyciąg</value>
+    <value>Usuń zaznaczone wyciągi</value>
   </data>
   <data name="DeleteStatementWarningCaption" xml:space="preserve">
     <value>Usunąć wyciąg?</value>

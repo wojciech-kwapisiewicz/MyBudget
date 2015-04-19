@@ -10,7 +10,7 @@ using System.Windows.Interactivity;
 
 namespace MyBudget.UI.Core
 {
-    public class MultiSelectedBehaviour : Behavior<ListBox>
+    public class MultiSelectedBehaviour : Behavior<System.Windows.Controls.Primitives.Selector>
     {
         protected override void OnAttached()
         {
@@ -24,9 +24,23 @@ namespace MyBudget.UI.Core
 
         void AssociatedObjectSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var array = new object[AssociatedObject.SelectedItems.Count];
-            AssociatedObject.SelectedItems.CopyTo(array, 0);
-            SelectedItems = array;
+            var multiSelector = AssociatedObject as System.Windows.Controls.Primitives.MultiSelector;
+            var listBox = AssociatedObject as ListBox;
+            if (multiSelector != null)
+            {
+                SelectedItems = multiSelector.SelectedItems;
+            }
+            else if(listBox!=null)
+            {
+                //    var array = new object[listBox.SelectedItems.Count];
+                //    listBox.SelectedItems.CopyTo(array, 0);
+                //SelectedItems = array;
+                SelectedItems = listBox.SelectedItems;
+            }
+            else
+            {
+                throw new NotSupportedException(string.Format("Type of {0} is not supported for multiselection", AssociatedObject.GetType()));
+            }
         }
 
         public static readonly DependencyProperty SelectedItemsProperty =
