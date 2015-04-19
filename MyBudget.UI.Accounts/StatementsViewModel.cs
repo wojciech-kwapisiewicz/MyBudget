@@ -22,30 +22,34 @@ namespace MyBudget.UI.Accounts
 {
     public class StatementsViewModel : BindableBase
     {
-        IEnumerable<IParser> _supportedParsers;
-        IRepository<BankOperation> _operationRepository;
-        IRepository<BankStatement> _statementsRepository;
-        IRepository<ClassificationDefinition> _definitionsRepository;
-        OperationsImporter _importer;
-        IContext _context;
-        IResolveClassificationConflicts _resolveConflicts;
+        private IEnumerable<IParser> _supportedParsers;
+        private OperationsImporter _importer;
+        private IResolveClassificationConflicts _resolveConflicts;
+
+        private IContext _context;
+        private IRepository<BankOperation> _operationRepository;
+        private IRepository<BankStatement> _statementsRepository;        
 
         public StatementsViewModel(IContext context, IParser[] supportedParsers, IResolveClassificationConflicts resolveConflicts)
         {
-            ApplyRules = true;
             _context = context;
-            _resolveConflicts = resolveConflicts;
-            _supportedParsers = supportedParsers.OrderBy(a => a.Name);
-            ChosenParser = SupportedParsers.FirstOrDefault();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
-            _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
-            _definitionsRepository = context.GetRepository<IRepository<ClassificationDefinition>>();
+            _statementsRepository = context.GetRepository<IRepository<BankStatement>>();            
+
+            _supportedParsers = supportedParsers.OrderBy(a => a.Name);
             _importer = new OperationsImporter(_operationRepository, _statementsRepository);
+            _resolveConflicts = resolveConflicts;
+            
+            ApplyRules = true;
+            ChosenParser = SupportedParsers.FirstOrDefault();
             ResetListData();
+            
             LoadFileCommand = new DelegateCommand(LoadFromFile);
-            LoadRawTextCommand = new DelegateCommand(LoadFromRawText, CanLoadFromRawText);
+            LoadRawTextCommand = new DelegateCommand(DoLoadFromRawText, CanLoadFromRawText);
             DeleteStatementCommand = new DelegateCommand(DeleteSelected, CanDelete);
         }
+
+        #region Parsers
 
         public IEnumerable<IParser> SupportedParsers
         {
@@ -68,6 +72,10 @@ namespace MyBudget.UI.Accounts
                 OnPropertyChanged(() => SupportedParsers);
             }
         }
+
+        #endregion
+
+        #region List data
 
         private void ResetListData()
         {
@@ -104,6 +112,7 @@ namespace MyBudget.UI.Accounts
                 DeleteStatementCommand.RaiseCanExecuteChanged();
             }
         }
+        #endregion
 
         public bool ApplyRules { get; set; }
 
@@ -115,6 +124,11 @@ namespace MyBudget.UI.Accounts
             using (OpenFileResult openFileResult = new FileDialogService()
                 .OpenFile(ChosenParser.SupportedFileExtensions, true))
             {
+                if(openFileResult.OpenedFiles.Count()==0)
+                {
+                    return;
+                }
+
                 foreach (var openedFile in openFileResult.OpenedFiles)
                 {
                     var loadedOperations = _importer.ImportOperations(
@@ -126,7 +140,9 @@ namespace MyBudget.UI.Accounts
 
             if (ApplyRules)
             {
-                var classifier = new OperationsClassifier(_definitionsRepository.GetAll());
+                var classifier = new OperationsClassifier(
+                    _context.GetRepository<IRepository<ClassificationDefinition>>(),
+                    _context.GetRepository<IRepository<BankAccount>>());
                 var classificationResult = classifier.ClasifyOpearations(overallLoadedOperations);
                 
                 _resolveConflicts.ResolveConflicts(classificationResult);
@@ -134,20 +150,15 @@ namespace MyBudget.UI.Accounts
                 var assigned = classifier.ApplyClassificationResult(classificationResult);
                 var unassigned = classificationResult.Count() - assigned;
 
-                MessageBox.Show(
-                    string.Format(
-                        "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
-                        assigned,
-                        Environment.NewLine,
-                        unassigned));
+                MessageBox.Show(string.Format(
+                    "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
+                    assigned, Environment.NewLine, unassigned));
             }
 
             _context.SaveChanges();
 
             ResetListData();
         }
-
-        public DelegateCommand LoadRawTextCommand { get; set; }
 
         private string _rawStatementText;
         public string RawStatementText
@@ -164,12 +175,14 @@ namespace MyBudget.UI.Accounts
             }
         }
 
+        public DelegateCommand LoadRawTextCommand { get; set; }
+
         public bool CanLoadFromRawText()
         {
             return !string.IsNullOrWhiteSpace(RawStatementText);
         }
 
-        public void LoadFromRawText()
+        public void DoLoadFromRawText()
         {                        
             string statementName = "FromText" + DateTime.Now;
             _importer.ImportOperations(statementName, ChosenParser.Parse(RawStatementText));
@@ -191,6 +204,11 @@ namespace MyBudget.UI.Accounts
             }
         }
 
+        public bool CanDelete()
+        {
+            return SelectedItems != null && SelectedItems.OfType<BankStatement>().Count() > 0;
+        }        
+
         public void DoDelete()
         {
             foreach (var selectedStatement in SelectedItems.OfType<BankStatement>())
@@ -206,10 +224,5 @@ namespace MyBudget.UI.Accounts
             ResetListData();
             OnPropertyChanged(() => Data);
         }
-
-        public bool CanDelete()
-        {
-            return SelectedItems != null && SelectedItems.OfType<BankStatement>().Count() > 0;
-        }        
     }
 }

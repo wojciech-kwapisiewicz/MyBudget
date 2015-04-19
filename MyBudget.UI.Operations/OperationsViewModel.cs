@@ -20,20 +20,17 @@ namespace MyBudget.UI.Operations
     {
         private IContext _context;
         private IRepository<BankOperation> _operationRepository;
-        private IRepository<ClassificationDefinition> definitionsRepo;
-        private IRegionManager _regionManager;
+
         private IResolveClassificationConflicts _resolveConflicts;
+        private IRegionManager _regionManager;
 
         public OperationsViewModel(IContext context, IRegionManager regionManager, IResolveClassificationConflicts resolveConflicts)
         {
-            _regionManager = regionManager;
             _context = context;
-            _resolveConflicts = resolveConflicts;
-            definitionsRepo = context.GetRepository<IRepository<ClassificationDefinition>>();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
 
-            ApplyRules = new DelegateCommand(() => DoApplyRules());
-            ClearRules = new DelegateCommand(() => DoClearRules());
+            _resolveConflicts = resolveConflicts;
+            _regionManager = regionManager;            
 
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
@@ -43,6 +40,8 @@ namespace MyBudget.UI.Operations
                 () => { if (Data != null) Data.Refresh(); },
                 500);
 
+            ApplyRules = new DelegateCommand(() => DoApplyRules());
+            ClearRules = new DelegateCommand(() => DoClearRules());
             Save = new DelegateCommand(DoSave);
             SelectNext = new DelegateCommand(DoSelectNext);
             CreateRule = new DelegateCommand(DoCreateRule, () => SelectedOperation != null);
@@ -341,18 +340,18 @@ namespace MyBudget.UI.Operations
         public DelegateCommand ApplyRules { get; set; }
         private void DoApplyRules()
         {
-            var classifier = new OperationsClassifier(definitionsRepo.GetAll());
+            var classifier = new OperationsClassifier(
+                _context.GetRepository<IRepository<ClassificationDefinition>>(),
+                _context.GetRepository<IRepository<BankAccount>>());
             var classificationResult = classifier.ClasifyOpearations(Data.OfType<BankOperation>());
 
             _resolveConflicts.ResolveConflicts(classificationResult);
             var assigned = classifier.ApplyClassificationResult(classificationResult);
+            var unassigned = classificationResult.Count() - assigned;
 
-            MessageBox.Show(
-                string.Format(
-                    "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
-                    assigned,
-                    Environment.NewLine,
-                    classificationResult.Count() - assigned));
+            MessageBox.Show(string.Format(
+                "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
+                assigned, Environment.NewLine, unassigned));
         }
         
         public DelegateCommand ClearRules { get; set; }

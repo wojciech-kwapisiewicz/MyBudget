@@ -12,9 +12,12 @@ namespace MyBudget.Classification
     {
         private IEnumerable<RegularExpressionClassificationRule> _definitionsToApply;
 
-        public OperationsClassifier(IEnumerable<ClassificationDefinition> classificationDefinitions)
+        public OperationsClassifier(IRepository<ClassificationDefinition> classificationRepository, IRepository<BankAccount> accountsRepository)
         {
-            _definitionsToApply = classificationDefinitions.Select(def => new RegularExpressionClassificationRule(def));
+            _definitionsToApply = classificationRepository
+                .GetAll()
+                .Select(def => 
+                    new RegularExpressionClassificationRule(def, accountsRepository));
         }
 
         public IEnumerable<ClassificationResult> ClasifyOpearations(IEnumerable<BankOperation> operations)
