@@ -26,6 +26,9 @@
                     Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromRawText}" />
             <Button Command="{Binding LoadFileCommand}"
                     Content="{lex:Loc MyBudget.UI.Accounts:Translations:AddFromFile}" />
+            <CheckBox Margin="0 0 10 0"
+                      Content="Zastosuj reguły"
+                      IsChecked="{Binding ApplyRules}" />
             <Button Command="{Binding DeleteStatementCommand}"
                     Content="{lex:Loc MyBudget.UI.Accounts:Translations:DeleteStatement}" />
         </StackPanel>

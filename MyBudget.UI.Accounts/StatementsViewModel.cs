@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Commands;
 using Microsoft.Practices.Prism.Mvvm;
+using MyBudget.Classification;
 using MyBudget.Core;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
@@ -23,16 +24,21 @@ namespace MyBudget.UI.Accounts
         IEnumerable<IParser> _supportedParsers;
         IRepository<BankOperation> _operationRepository;
         IRepository<BankStatement> _statementsRepository;
+        IRepository<ClassificationDefinition> _definitionsRepository;
         OperationsImporter _importer;
         IContext _context;
+        IResolveClassificationConflicts _resolveConflicts;
 
-        public StatementsViewModel(IContext context, IParser[] supportedParsers)
+        public StatementsViewModel(IContext context, IParser[] supportedParsers, IResolveClassificationConflicts resolveConflicts)
         {
+            ApplyRules = true;
             _context = context;
+            _resolveConflicts = resolveConflicts;
             _supportedParsers = supportedParsers.OrderBy(a => a.Name);
             ChosenParser = SupportedParsers.FirstOrDefault();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
             _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
+            _definitionsRepository = context.GetRepository<IRepository<ClassificationDefinition>>();
             _importer = new OperationsImporter(_operationRepository, _statementsRepository);
             ResetListData();
             LoadFileCommand = new DelegateCommand(LoadFromFile);
@@ -98,6 +104,8 @@ namespace MyBudget.UI.Accounts
             }
         }
 
+        public bool ApplyRules { get; set; }
+
         public DelegateCommand LoadFileCommand { get; set; }
 
         public void LoadFromFile()
@@ -107,8 +115,23 @@ namespace MyBudget.UI.Accounts
                 if (file.Stream == null)
                     return;
 
-                _importer.ImportOperations(file.FileName, ChosenParser.Parse(file.Stream));
-                
+                var loadedOperations = _importer.ImportOperations(file.FileName, ChosenParser.Parse(file.Stream));
+
+                if (ApplyRules)
+                {
+                    var classifier = new OperationsClassifier(_definitionsRepository.GetAll());
+                    var classificationResult = classifier.ClasifyOpearations(loadedOperations);
+                    _resolveConflicts.ResolveConflicts(classificationResult);
+                    var assigned = classifier.ApplyClassificationResult(classificationResult);
+
+                    MessageBox.Show(
+                        string.Format(
+                            "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
+                            assigned,
+                            Environment.NewLine,
+                            classificationResult.Count() - assigned));
+                }
+
                 _context.SaveChanges();
             }
 

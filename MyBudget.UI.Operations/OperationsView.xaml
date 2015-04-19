@@ -76,10 +76,10 @@
 
             <Button Margin="10 0 0 0"
                     Command="{Binding ApplyRules}"
-                    Content="ApplyRules" />
+                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ApplyRules}" />
             <Button Margin="10 0 0 0"
                     Command="{Binding ClearRules}"
-                    Content="ClearRules" />
+                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />
             <Button Margin="10 0 0 0"
                     Command="{Binding Save}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />

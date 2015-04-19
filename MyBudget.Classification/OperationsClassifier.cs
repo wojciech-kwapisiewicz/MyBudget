@@ -19,6 +19,7 @@ namespace MyBudget.Classification
 
         public IEnumerable<ClassificationResult> ClasifyOpearations(IEnumerable<BankOperation> operations)
         {
+            List<ClassificationResult> classificationResult = new List<ClassificationResult>();
             foreach (var currentOperation in operations)
             {
                 var foundMatches = _definitionsToApply
@@ -28,13 +29,27 @@ namespace MyBudget.Classification
                             MatchedDefinition = r2.Definition,
                             Description = r2.GetCustomDescription()
                         });
-
-                yield return new ClassificationResult()
-                {
-                    BankOperation = currentOperation,
-                    Matches = foundMatches
-                };
+                var subResult = new ClassificationResult() { BankOperation = currentOperation, Matches = foundMatches };
+                classificationResult.Add(subResult);
             }
+            return classificationResult;
+        }
+
+        public int ApplyClassificationResult(IEnumerable<ClassificationResult> classificationResult)
+        {
+            int i = 0;
+            foreach (var item in classificationResult)
+            {
+                if (item.Matches.Count() == 1)
+                {
+                    item.BankOperation.Category = item.Matches.Single()
+                        .MatchedDefinition.Category;
+                    item.BankOperation.SubCategory = item.Matches.Single()
+                        .MatchedDefinition.SubCategory;
+                    i++;
+                }
+            }
+            return i;
         }
     }
 }

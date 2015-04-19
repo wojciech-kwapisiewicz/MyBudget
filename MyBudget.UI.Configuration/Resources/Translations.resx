@@ -139,6 +139,6 @@
     <value>---Saved accounts---</value>
   </data>
   <data name="RulesDefinitions" xml:space="preserve">
-    <value>Search if opeartion matches any of below definitions</value>
+    <value>Search if opeartion matches any of below criteria</value>
   </data>
 </root>

@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="ApplyRules" xml:space="preserve">
+    <value>Apply rules</value>
+  </data>
+  <data name="ClearCategories" xml:space="preserve">
+    <value>Clear categories</value>
+  </data>
   <data name="ContextMenu_CreateRule" xml:space="preserve">
     <value>Create rule</value>
   </data>

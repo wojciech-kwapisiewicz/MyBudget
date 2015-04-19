@@ -114,6 +114,8 @@
     <Compile Include="Selection\SelectableItem.cs" />
     <Compile Include="Selection\Splitter.cs" />
     <Compile Include="Services\FileDialogService.cs" />
+    <Compile Include="Services\IResolveClassificationConflicts.cs" />
+    <Compile Include="Services\ResolveClassificationConflicts.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -149,6 +151,10 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyBudget.Classification\MyBudget.Classification.csproj">
+      <Project>{15546896-defc-4843-a2a4-d6aa4cc8f671}</Project>
+      <Name>MyBudget.Classification</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">
       <Project>{fd061beb-daeb-4f6b-9e4a-3eb590ed9d51}</Project>
       <Name>MyBudget.Core</Name>

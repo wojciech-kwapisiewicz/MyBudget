@@ -10,5 +10,7 @@ namespace MyBudget.Classification
     public interface IOperationsClassifier
     {
         IEnumerable<ClassificationResult> ClasifyOpearations(IEnumerable<BankOperation> operations);
+
+        int ApplyClassificationResult(IEnumerable<ClassificationResult> classificationResult);
     }
 }

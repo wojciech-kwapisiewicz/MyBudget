@@ -61,6 +61,24 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply rules.
+        /// </summary>
+        internal static string ApplyRules {
+            get {
+                return ResourceManager.GetString("ApplyRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear categories.
+        /// </summary>
+        internal static string ClearCategories {
+            get {
+                return ResourceManager.GetString("ClearCategories", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create rule.
         /// </summary>
         internal static string ContextMenu_CreateRule {

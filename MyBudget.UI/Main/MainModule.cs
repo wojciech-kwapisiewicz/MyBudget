@@ -2,6 +2,7 @@
 using Microsoft.Practices.Prism.Regions;
 using Microsoft.Practices.Unity;
 using MyBudget.UI.Core;
+using MyBudget.UI.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
@@ -36,6 +37,9 @@ namespace MyBudget.UI.Main
 
             //Configuration
             _container.RegisterType<object, LanguageSetupView>(typeof(LanguageSetupView).FullName);
+
+            //Services
+            _container.RegisterType<IResolveClassificationConflicts, ResolveClassificationConflicts>();
 
             var langSettings = _container.Resolve<ApplicationSettings>();
             System.Threading.Thread.CurrentThread.CurrentCulture = langSettings.InputLanguage.Culture;

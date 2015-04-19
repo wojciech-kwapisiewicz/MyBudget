@@ -33,6 +33,13 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>ic_action.ico</ApplicationIcon>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>
+    </StartupObject>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.Practices.Prism.Composition">
       <HintPath>..\packages\Prism.Composition.5.0.0\lib\NET45\Microsoft.Practices.Prism.Composition.dll</HintPath>
@@ -161,7 +168,6 @@
     <Compile Include="Main\WelcomePageView.xaml.cs">
       <DependentUpon>WelcomePageView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="Resources\Generic.pl.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -279,7 +285,9 @@
       <Name>MyBudget.XmlPersistance</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="ic_action.ico" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

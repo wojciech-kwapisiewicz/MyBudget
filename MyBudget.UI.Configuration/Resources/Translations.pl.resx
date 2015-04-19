@@ -139,6 +139,6 @@
     <value>---Zapisane konta własne---</value>
   </data>
   <data name="RulesDefinitions" xml:space="preserve">
-    <value>Kategoria zostanie nadana jeśli operacja pasuje do jednej z poniższych definicji</value>
+    <value>Kategoria zostanie nadana jeśli operacja będzie pasować do dowolnego z poniższych kryteriów</value>
   </data>
 </root>

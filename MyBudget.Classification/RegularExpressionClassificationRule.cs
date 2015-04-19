@@ -27,12 +27,9 @@ namespace MyBudget.Classification
             return Definition.Rules.Any(a => Matches(a, operation));
         }
 
-        public bool Matches(ClassificationRule rule, BankOperation operation)
+        private bool Matches(ClassificationRule rule, BankOperation operation)
         {
-            string value = operation.Description;
-                //typeof(BankOperation).GetField(ClassificationRule.FieldName).GetValue(operation) as string;
-            bool matchFound = Regex.IsMatch(value, rule.RegularExpression, RegexOptions.IgnoreCase);
-            return matchFound;
+            return Regex.IsMatch(operation.Description, rule.RegularExpression, RegexOptions.IgnoreCase);
         }
     }
 }

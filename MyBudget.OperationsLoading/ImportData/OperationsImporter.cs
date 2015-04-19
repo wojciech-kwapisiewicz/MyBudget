@@ -21,7 +21,7 @@ namespace MyBudget.OperationsLoading.ImportData
             _statementsRepository = statementsRepository;
         }
 
-        public void ImportOperations(string fileName, IEnumerable<BankOperation> opsToLoad)
+        public IEnumerable<BankOperation> ImportOperations(string fileName, IEnumerable<BankOperation> opsToLoad)
         {
             BankStatement statement = new BankStatement()
             {
@@ -48,6 +48,8 @@ namespace MyBudget.OperationsLoading.ImportData
             }
 
             _statementsRepository.Add(statement);
+
+            return statement.Operations;
         }
 
         private void UpdateExisting(BankStatement statement, CheckResult status)

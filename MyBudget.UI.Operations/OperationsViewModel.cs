@@ -6,9 +6,11 @@ using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.UI.Configuration;
 using MyBudget.UI.Core;
+using MyBudget.UI.Core.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Data;
 using System.Windows.Threading;
 
@@ -20,18 +22,18 @@ namespace MyBudget.UI.Operations
         private IRepository<BankOperation> _operationRepository;
         private IRepository<ClassificationDefinition> definitionsRepo;
         private IRegionManager _regionManager;
+        private IResolveClassificationConflicts _resolveConflicts;
 
-        public OperationsViewModel(IContext context, IRegionManager regionManager)
+        public OperationsViewModel(IContext context, IRegionManager regionManager, IResolveClassificationConflicts resolveConflicts)
         {
             _regionManager = regionManager;
             _context = context;
+            _resolveConflicts = resolveConflicts;
             definitionsRepo = context.GetRepository<IRepository<ClassificationDefinition>>();
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
 
-            #region Apply rule - move somwhere else and rework rule applying
-            ApplyRules = new DelegateCommand(() => DoApplyRules(false));
-            ClearRules = new DelegateCommand(() => DoApplyRules(true));
-            #endregion
+            ApplyRules = new DelegateCommand(() => DoApplyRules());
+            ClearRules = new DelegateCommand(() => DoClearRules());
 
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
@@ -221,7 +223,6 @@ namespace MyBudget.UI.Operations
             }
         };
 
-
         private PropertyDescription _filterProperty;
         public PropertyDescription FilterProperty
         {
@@ -239,8 +240,6 @@ namespace MyBudget.UI.Operations
                 }
             }
         }
-
-
 
         private string _filter;
         public string Filter
@@ -340,25 +339,38 @@ namespace MyBudget.UI.Operations
         }
 
         public DelegateCommand ApplyRules { get; set; }
-        public DelegateCommand ClearRules { get; set; }
-        private void DoApplyRules(bool clear)
+        private void DoApplyRules()
         {
             var classifier = new OperationsClassifier(definitionsRepo.GetAll());
-            var classificationResult = classifier
-                .ClasifyOpearations(_operationRepository.GetAll());
+            var classificationResult = classifier.ClasifyOpearations(Data.OfType<BankOperation>());
 
-            foreach (var item in classificationResult)
+            _resolveConflicts.ResolveConflicts(classificationResult);
+            var assigned = classifier.ApplyClassificationResult(classificationResult);
+
+            MessageBox.Show(
+                string.Format(
+                    "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
+                    assigned,
+                    Environment.NewLine,
+                    classificationResult.Count() - assigned));
+        }
+        
+        public DelegateCommand ClearRules { get; set; }
+        private void DoClearRules()
+        {
+            if (MessageBoxResult.Yes == MessageBox.Show(
+                "Na pewno usunąć kategorię i podkategorię we wszystkich operacjach?",
+                "Potwierdź",
+                MessageBoxButton.YesNo))
             {
-                if (item.Matches.Count() == 1)
+                foreach (var item in Data.OfType<BankOperation>())
                 {
-                    item.BankOperation.Category = item.Matches.Single()
-                        .MatchedDefinition.Category;
-                    item.BankOperation.SubCategory = item.Matches.Single()
-                        .MatchedDefinition.SubCategory;
+                    item.Category = null;
+                    item.SubCategory = null;
                 }
             }
         }
-        
+
         public Action OnNextSelected { private get; set; }
 
         public DelegateCommand CreateRule { get; set; }       

@@ -124,7 +124,7 @@ namespace MyBudget.UI.Configuration.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Search if opeartion matches any of below definitions.
+        ///   Looks up a localized string similar to Search if opeartion matches any of below criteria.
         /// </summary>
         internal static string RulesDefinitions {
             get {
