@@ -36,9 +36,12 @@ namespace MyBudget.UI.Configuration
         {
             get
             {
-                return _definitionsRepository.GetAll()
-                    .OrderBy(a => a.Category)
-                    .ThenBy(b => b.SubCategory);
+                var allDefinitions = _definitionsRepository.GetAll();
+
+                return allDefinitions
+                    .OrderByDescending(a => allDefinitions.Count(b => b.Category == a.Category))
+                    .ThenBy(c => c.Category)
+                    .ThenBy(d => d.Description);
             }
         }
 

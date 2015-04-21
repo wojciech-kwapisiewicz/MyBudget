@@ -18,16 +18,26 @@
     <Grid x:Name="Wrapper">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal">
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal">
             <CheckBox Content="Tylko rozliczone"
                       IsChecked="{Binding Cleared}"
                       IsThreeState="True" />
             <controls:DateRangeControl FilteringFunction="{Binding FilterFunction, Mode=OneWayToSource}" />
         </StackPanel>
+        <StackPanel Grid.Row="1"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Label Content="Pokazuj osobno" />
+            <TextBox Width="200"
+                     Text="{Binding SeparateCategories,
+                                    Mode=TwoWay}" />
+        </StackPanel>
         <TreeView Name="treeStatistics"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   ItemsSource="{Binding Items}">
             <TreeView.ItemTemplate>
                 <HierarchicalDataTemplate DataType="{x:Type local:StatisticsGroup}"

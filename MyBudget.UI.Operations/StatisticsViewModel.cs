@@ -17,6 +17,7 @@ namespace MyBudget.UI.Operations
         public StatisticsViewModel(IContext context)
         {
             _bankOperationRepository = context.GetRepository<IRepository<BankOperation>>();
+            SeparateCategories = "Wewnetrzne, Oszczędności";
             ReloadView();
         }
 
@@ -48,7 +49,22 @@ namespace MyBudget.UI.Operations
                 OnPropertyChanged(() => Cleared);
                 ReloadView();
             }
-        }        
+        }
+
+        private string _SeparateCategories;
+        public string SeparateCategories
+        {
+            get
+            {
+                return _SeparateCategories;
+            }
+            set
+            {
+                _SeparateCategories = value;
+                OnPropertyChanged(() => SeparateCategories);
+                ReloadView();
+            }
+        }
 
         private void ReloadView()
         {
@@ -74,19 +90,38 @@ namespace MyBudget.UI.Operations
                 }
             }
 
-            var sum1 = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
-            var sum2 = roots.OfType<StatisticsGroup>().Where(b => b.Key != "Wewnetrzne").Sum(a => a.Sum);
+            var sumAll = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+
+            var separateSumaries = SeparateCategories.Split(',')
+                .Select(a => a.Trim());
+
+            var sumWithoutSeparate = roots.OfType<StatisticsGroup>()
+                .Where(b => !separateSumaries.Contains(b.Key))
+                .Sum(a => a.Sum);
             roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
             roots.Add(new StatisticsGroup() 
             { 
                 Key = Resources.Translations.SumText, 
-                Sum = sum1
+                Sum = sumAll
             });
             roots.Add(new StatisticsGroup()
             {
-                Key = "Bez wewnetrznych",
-                Sum = sum2
+                Key = "Nie licząc osobnych kategorii",
+                Sum = sumWithoutSeparate
             });
+
+            roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
+            foreach (var summary in separateSumaries)
+            {
+                var summarySum = roots.OfType<StatisticsGroup>()
+                    .Where(b => summary == b.Key)
+                    .Sum(a => a.Sum);
+                roots.Add(new StatisticsGroup()
+                {
+                    Key = summary,
+                    Sum = summarySum
+                });
+            }
 
             Items = roots;
         }

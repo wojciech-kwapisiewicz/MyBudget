@@ -14,6 +14,15 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
+        <Grid.Resources>
+            <CollectionViewSource x:Key="cvs"
+                                  Source="{Binding Data}">
+                <CollectionViewSource.GroupDescriptions>
+                    <PropertyGroupDescription PropertyName="Category" />
+                </CollectionViewSource.GroupDescriptions>
+            </CollectionViewSource>
+        </Grid.Resources>
+
         <StackPanel HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button Command="{Binding AddRule}"
@@ -25,18 +34,57 @@
             <Button Command="{Binding DeleteRule}"
                     Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
         </StackPanel>
+        <!--  ItemsSource="{Binding Data}"  -->
         <ListBox Grid.Row="1"
-                 ItemsSource="{Binding Data}"
+                 ItemsSource="{Binding Source={StaticResource cvs}}"
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                  SelectionMode="Extended">
             <i:Interaction.Behaviors>
                 <uiCore:MultiSelectedBehaviour SelectedItems="{Binding SelectedItems, Mode=OneWayToSource}" />
             </i:Interaction.Behaviors>
+            <ListBox.GroupStyle>
+                <GroupStyle>
+                    <GroupStyle.ContainerStyle>
+                        <Style TargetType="{x:Type GroupItem}">
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Expander IsExpanded="False">
+                                            <Expander.Header>
+                                                <StackPanel Orientation="Horizontal">
+                                                    <TextBlock VerticalAlignment="Bottom"
+                                                               Style="{StaticResource SubHeaderTextBlockStyle}"
+                                                               Text="{Binding Name}" />
+                                                    <TextBlock Margin="10,0,0,0"
+                                                               VerticalAlignment="Bottom"
+                                                               Text="{Binding ItemCount,
+                                                                              StringFormat=({0})}" />
+                                                </StackPanel>
+                                            </Expander.Header>
+                                            <ItemsPresenter />
+                                        </Expander>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </GroupStyle.ContainerStyle>
+                    <GroupStyle.Panel>
+                        <ItemsPanelTemplate>
+                            <VirtualizingStackPanel Orientation="Vertical" />
+                        </ItemsPanelTemplate>
+                    </GroupStyle.Panel>
+                </GroupStyle>
+            </ListBox.GroupStyle>
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel HorizontalAlignment="Stretch" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <StackPanel>
-                        <TextBlock Style="{StaticResource SubHeaderTextBlockStyle}"
-                                   Text="{Binding Description}" />
-                        <TextBlock Text="{Binding Category}" />
+                        <!--  Style="{StaticResource SubHeaderTextBlockStyle}"  -->
+                        <TextBlock Text="{Binding Description}" />
                         <TextBlock Text="{Binding SubCategory}" />
                     </StackPanel>
                 </DataTemplate>
