@@ -117,6 +117,18 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AboutPage_Header" xml:space="preserve">
+    <value>Informacje o programie:</value>
+  </data>
+  <data name="AboutPage_IconsText" xml:space="preserve">
+    <value>Ikony od Icons8 (http://icons8.com/)</value>
+  </data>
+  <data name="AboutPage_Info" xml:space="preserve">
+    <value>Tu będzie info o programie</value>
+  </data>
+  <data name="ButtonNavigateAboutPage" xml:space="preserve">
+    <value>O aplikacji</value>
+  </data>
   <data name="ButtonNavigateAccounts" xml:space="preserve">
     <value>Konta</value>
   </data>

@@ -13,22 +13,89 @@
                        HorizontalAlignment="Center"
                        Style="{StaticResource HeaderTextBlockStyle}"
                        Text="{lex:Loc MyBudget.UI:Resource:TextBlockNavigation}" />
-            <Button Command="{Binding NavigateWelcomePage}"
-                    Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateWelcomePage}" />
-            <Button Command="{Binding NavigateAccounts}"
-                    Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateAccounts}" />
-            <Button Command="{Binding NavigateStatements}"
-                    Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatements}" />
-            <Button Command="{Binding NavigateOperations}"
-                    Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateOperations}" />
-            <Button Command="{Binding NavigateStatistics}"
-                    Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatistics}" />
+            <Button HorizontalContentAlignment="Left"
+                    Command="{Binding NavigateWelcomePage}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="0 0 5 0"
+                           Source="{StaticResource homeIco}" />
+                    <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateWelcomePage}" />
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Left"
+                    Command="{Binding NavigateStatements}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="0 0 5 0"
+                           Source="{StaticResource statementsIco}" />
+                    <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatements}" />
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Left"
+                    Command="{Binding NavigateOperations}">
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="0 0 5 0"
+                           Source="{StaticResource operationsIco}" />
+                    <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateOperations}" />
+                </StackPanel>
+            </Button>
+            <Button HorizontalContentAlignment="Left"
+                    Command="{Binding NavigateStatistics}">
+                <!--  Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatistics}"  -->
+                <StackPanel Orientation="Horizontal">
+                    <Image Width="20"
+                           Height="20"
+                           Margin="0 0 5 0"
+                           Source="{StaticResource statisticsIco}" />
+                    <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatistics}" />
+                </StackPanel>
+            </Button>
             <Expander Header="{lex:Loc MyBudget.UI:Resource:ExpanderConfiguration}">
                 <StackPanel>
-                    <Button Command="{Binding NavigateRules}"
-                            Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateRules}" />
-                    <Button Command="{Binding NavigateLanguageSetup}"
-                            Content="{lex:Loc MyBudget.UI:Resource:ButtonNavigateLanguageSetup}" />
+                    <Button HorizontalContentAlignment="Left"
+                            Command="{Binding NavigateAccounts}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                   Source="{StaticResource accountsIco}" />
+                            <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateAccounts}" />
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalContentAlignment="Left"
+                            Command="{Binding NavigateRules}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                   Source="{StaticResource settingsIco}" />
+                            <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateRules}" />
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalContentAlignment="Left"
+                            Command="{Binding NavigateLanguageSetup}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                   Source="{StaticResource langSettingsIco}" />
+                            <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateLanguageSetup}" />
+                        </StackPanel>
+                    </Button>
+                    <Button HorizontalContentAlignment="Left"
+                            Command="{Binding NavigateAboutPage}">
+                        <StackPanel Orientation="Horizontal">
+                            <Image Width="20"
+                                   Height="20"
+                                   Margin="0 0 5 0"
+                                   Source="{StaticResource aboutIco}" />
+                            <TextBlock Text="{lex:Loc MyBudget.UI:Resource:ButtonNavigateAboutPage}" />
+                        </StackPanel>
+                    </Button>
                 </StackPanel>
             </Expander>
         </StackPanel>

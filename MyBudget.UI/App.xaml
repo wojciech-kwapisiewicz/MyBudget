@@ -15,5 +15,23 @@
             <Setter Property="FontFamily" Value="Segoe UI" />
             <Setter Property="Foreground" Value="#FF00AADE" />
         </Style>
+
+        <BitmapImage x:Key="homeIco"
+                     UriSource="../Icons/Home-32.png" />
+        <BitmapImage x:Key="statementsIco"
+                     UriSource="../Icons/Purchase Order-32.png" />
+        <BitmapImage x:Key="operationsIco"
+                     UriSource="../Icons/Coins-32.png" />
+        <BitmapImage x:Key="statisticsIco"
+                     UriSource="../Icons/Bullish Filled-32.png" />
+
+        <BitmapImage x:Key="accountsIco"
+                     UriSource="../Icons/List-32.png" />
+        <BitmapImage x:Key="settingsIco"
+                     UriSource="../Icons/Administrative Tools Filled-32.png" />
+        <BitmapImage x:Key="langSettingsIco"
+                     UriSource="../Icons/Translation-32.png" />
+        <BitmapImage x:Key="aboutIco"
+                     UriSource="../Icons/About Filled-32.png" />
     </Application.Resources>
 </Application>

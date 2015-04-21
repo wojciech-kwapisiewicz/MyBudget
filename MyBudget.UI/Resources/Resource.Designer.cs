@@ -61,6 +61,42 @@ namespace MyBudget.UI.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Informations about program:.
+        /// </summary>
+        internal static string AboutPage_Header {
+            get {
+                return ResourceManager.GetString("AboutPage_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Icons by Icons8.
+        /// </summary>
+        internal static string AboutPage_IconsText {
+            get {
+                return ResourceManager.GetString("AboutPage_IconsText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There will be info about program..
+        /// </summary>
+        internal static string AboutPage_Info {
+            get {
+                return ResourceManager.GetString("AboutPage_Info", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to About.
+        /// </summary>
+        internal static string ButtonNavigateAboutPage {
+            get {
+                return ResourceManager.GetString("ButtonNavigateAboutPage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Accounts.
         /// </summary>
         internal static string ButtonNavigateAccounts {

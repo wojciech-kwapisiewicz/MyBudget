@@ -82,6 +82,7 @@
       <DependentUpon>DateRangeControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\DateRangeType.cs" />
+    <Compile Include="Controls\GoToHyperlink.cs" />
     <Compile Include="Converters\InversedEnumToBoolConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\DecimalToStringConverter.cs" />

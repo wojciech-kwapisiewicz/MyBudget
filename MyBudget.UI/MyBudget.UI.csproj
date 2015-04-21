@@ -34,7 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>myBudgetIcon.ico</ApplicationIcon>
+    <ApplicationIcon>myBudget.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>
@@ -139,6 +139,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Main\AboutPageView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Main\WelcomePageView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -164,6 +168,9 @@
     </Compile>
     <Compile Include="Main\StatusView.xaml.cs">
       <DependentUpon>StatusView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Main\AboutPageView.xaml.cs">
+      <DependentUpon>AboutPageView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Main\WelcomePageView.xaml.cs">
       <DependentUpon>WelcomePageView.xaml</DependentUpon>
@@ -286,10 +293,24 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ic_action.ico" />
+    <Resource Include="Icons\Bullish Filled-32.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="myBudgetIcon.ico" />
+    <Resource Include="Icons\About Filled-32.png" />
+    <Resource Include="Icons\Administrative Tools Filled-32.png" />
+    <Resource Include="Icons\Coins-32.png" />
+    <Resource Include="Icons\List-32.png" />
+    <Resource Include="Icons\Purchase Order-32.png" />
+    <Resource Include="Icons\Settings3 Filled-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Home-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Icons\Translation-32.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="myBudget.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
