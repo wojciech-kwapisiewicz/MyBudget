@@ -83,6 +83,9 @@
     </Compile>
     <Compile Include="Controls\DateRangeType.cs" />
     <Compile Include="Controls\GoToHyperlink.cs" />
+    <Compile Include="Controls\MenuButton.xaml.cs">
+      <DependentUpon>MenuButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\InversedEnumToBoolConverter.cs" />
     <Compile Include="Converters\EnumToBoolConverter.cs" />
     <Compile Include="Converters\DecimalToStringConverter.cs" />
@@ -167,6 +170,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Controls\DateRangeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\MenuButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
