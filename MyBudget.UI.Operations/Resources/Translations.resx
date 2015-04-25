@@ -162,4 +162,7 @@
   <data name="WatermarkFilter" xml:space="preserve">
     <value>Filter</value>
   </data>
+  <data name="WithoutSparateCategoriesText" xml:space="preserve">
+    <value>Not counting separate categories</value>
+  </data>
 </root>

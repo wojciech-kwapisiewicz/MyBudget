@@ -32,9 +32,8 @@
                       IsThreeState="True" />
             <CheckBox Margin="10 0 10 0"
                       Content="{lex:Loc MyBudget.UI.Operations:Translations:SeparateText}"
-                      IsChecked="True"
-                      IsEnabled="False" />
-            <TextBox Width="200"
+                      IsChecked="{Binding ShowSeparate}" />
+            <TextBox Width="442"
                      Text="{Binding SeparateCategories,
                                     Mode=TwoWay}" />
         </StackPanel>

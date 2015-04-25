@@ -8,6 +8,7 @@
         Title="Shell"
         Width="900"
         Height="500"
+        MinWidth="1220"
         WindowState="Maximized">
     <Window.Resources>
         <ResourceDictionary>

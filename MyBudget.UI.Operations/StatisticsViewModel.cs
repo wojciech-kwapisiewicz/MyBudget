@@ -17,7 +17,6 @@ namespace MyBudget.UI.Operations
         public StatisticsViewModel(IContext context)
         {
             _bankOperationRepository = context.GetRepository<IRepository<BankOperation>>();
-            SeparateCategories = "Wewnetrzne, Oszczędności";
             ReloadView();
         }
 
@@ -51,7 +50,22 @@ namespace MyBudget.UI.Operations
             }
         }
 
-        private string _SeparateCategories;
+        private bool _showSeparate = true;
+        public bool ShowSeparate
+        {
+            get
+            {
+                return _showSeparate;
+            }
+            set
+            {
+                _showSeparate = value;
+                OnPropertyChanged(() => ShowSeparate);
+                ReloadView();
+            }
+        }
+
+        private string _SeparateCategories = "Wewnetrzne, Oszczędności";
         public string SeparateCategories
         {
             get
@@ -68,62 +82,79 @@ namespace MyBudget.UI.Operations
 
         private void ReloadView()
         {
+            var itemsToDisplay = GetItemsToDisplay();
+
+            var roots = GetGroup(itemsToDisplay.GroupBy(l1 => l1.Category ?? string.Empty));
+
+            foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType<StatisticsGroup>())
+            {
+                var subGroupping = item.Elements.GroupBy(a => a.SubCategory ?? string.Empty)
+                    .Where(a => !string.IsNullOrEmpty(a.Key));
+                item.SubGroups = GetGroup(subGroupping);
+            }
+
+            AddSummary(roots);
+
+            AddSeparateSummaries(roots);
+
+            Items = roots;
+        }
+
+        private void AddSeparateSummaries(ObservableCollection<IGroupItem> roots)
+        {
+            if (ShowSeparate)
+            {
+                var separateSumaries = SeparateCategories.Split(',')
+                    .Select(a => a.Trim());
+
+                var sumWithoutSeparate = roots.OfType<StatisticsGroup>()
+                    .Where(b => !separateSumaries.Contains(b.Key))
+                    .Sum(a => a.Sum);
+
+                roots.Add(new StatisticsGroup()
+                {
+                    Key = Resources.Translations.WithoutSparateCategoriesText,
+                    Sum = sumWithoutSeparate
+                });
+
+                roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
+                foreach (var summary in separateSumaries)
+                {
+                    var summarySum = roots.OfType<StatisticsGroup>()
+                        .Where(b => summary == b.Key)
+                        .Sum(a => a.Sum);
+                    roots.Add(new StatisticsGroup()
+                    {
+                        Key = summary,
+                        Sum = summarySum
+                    });
+                }
+            }
+        }
+
+        private static void AddSummary(ObservableCollection<IGroupItem> roots)
+        {
+            var sumAll = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+            roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
+            roots.Add(new StatisticsGroup()
+            {
+                Key = Resources.Translations.SumText,
+                Sum = sumAll
+            });
+        }
+
+        private IEnumerable<BankOperation> GetItemsToDisplay()
+        {
             var itemsToDisplay = _bankOperationRepository.GetAll();
-            if(Cleared.HasValue)
+            if (Cleared.HasValue)
             {
                 itemsToDisplay = itemsToDisplay.Where(a => a.Cleared == Cleared.Value);
             }
-            if(FilterFunction!=null)
+            if (FilterFunction != null)
             {
                 itemsToDisplay = itemsToDisplay.Where(a => FilterFunction(a.OrderDate));
             }
-
-            var groupping = itemsToDisplay.GroupBy(l1 => l1.Category ?? string.Empty);
-            var roots = GetGroup(groupping);
-
-            foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType <StatisticsGroup>())
-            {
-                var subGroupping = item.Elements.GroupBy(a => a.SubCategory ?? string.Empty);
-                if (subGroupping.Any(a => !string.IsNullOrEmpty(a.Key)))
-                {
-                    item.SubGroups = GetGroup(subGroupping);
-                }
-            }
-
-            var sumAll = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
-
-            var separateSumaries = SeparateCategories.Split(',')
-                .Select(a => a.Trim());
-
-            var sumWithoutSeparate = roots.OfType<StatisticsGroup>()
-                .Where(b => !separateSumaries.Contains(b.Key))
-                .Sum(a => a.Sum);
-            roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
-            roots.Add(new StatisticsGroup() 
-            { 
-                Key = Resources.Translations.SumText, 
-                Sum = sumAll
-            });
-            roots.Add(new StatisticsGroup()
-            {
-                Key = "Nie licząc osobnych kategorii",
-                Sum = sumWithoutSeparate
-            });
-
-            roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
-            foreach (var summary in separateSumaries)
-            {
-                var summarySum = roots.OfType<StatisticsGroup>()
-                    .Where(b => summary == b.Key)
-                    .Sum(a => a.Sum);
-                roots.Add(new StatisticsGroup()
-                {
-                    Key = summary,
-                    Sum = summarySum
-                });
-            }
-
-            Items = roots;
+            return itemsToDisplay;
         }
 
         private ObservableCollection<IGroupItem> GetGroup(IEnumerable<IGrouping<string, BankOperation>> groupping)

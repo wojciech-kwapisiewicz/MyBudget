@@ -194,5 +194,14 @@ namespace MyBudget.UI.Operations.Resources {
                 return ResourceManager.GetString("WatermarkFilter", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Not counting separate categories.
+        /// </summary>
+        internal static string WithoutSparateCategoriesText {
+            get {
+                return ResourceManager.GetString("WithoutSparateCategoriesText", resourceCulture);
+            }
+        }
     }
 }
