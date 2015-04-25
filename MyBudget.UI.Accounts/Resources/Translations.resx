@@ -132,6 +132,9 @@
   <data name="AddFromRawText" xml:space="preserve">
     <value>Load from statement text</value>
   </data>
+  <data name="ApplyRules" xml:space="preserve">
+    <value>Apply rules</value>
+  </data>
   <data name="DeleteStatement" xml:space="preserve">
     <value>Delete selected statements</value>
   </data>

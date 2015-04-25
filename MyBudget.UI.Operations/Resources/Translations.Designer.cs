@@ -115,6 +115,15 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Only cleared.
+        /// </summary>
+        internal static string OnlyCleared {
+            get {
+                return ResourceManager.GetString("OnlyCleared", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No operation selected.
         /// </summary>
         internal static string OperationNotLoaded {

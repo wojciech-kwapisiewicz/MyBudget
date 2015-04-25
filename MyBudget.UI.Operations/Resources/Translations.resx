@@ -135,6 +135,9 @@
   <data name="LoadTime" xml:space="preserve">
     <value>Load time</value>
   </data>
+  <data name="OnlyCleared" xml:space="preserve">
+    <value>Only cleared</value>
+  </data>
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>No operation selected</value>
   </data>

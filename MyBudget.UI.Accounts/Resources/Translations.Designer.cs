@@ -106,6 +106,15 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply rules.
+        /// </summary>
+        internal static string ApplyRules {
+            get {
+                return ResourceManager.GetString("ApplyRules", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete selected statements.
         /// </summary>
         internal static string DeleteStatement {

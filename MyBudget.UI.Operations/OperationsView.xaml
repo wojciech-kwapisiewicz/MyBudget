@@ -196,109 +196,116 @@
                    TextAlignment="Center"
                    Visibility="{Binding SelectedOperation,
                                         Converter={StaticResource inverseNullConverter}}" />
-        <Grid Grid.Row="3"
-              Margin="10 10 10 10"
-              Visibility="{Binding SelectedOperation,
-                                   Converter={StaticResource nullConverter}}">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
 
-            <TextBlock Grid.RowSpan="2"
-                       Style="{StaticResource HeaderTextBlockStyle}"
-                       Text="{Binding SelectedOperation.Title}" />
+        <Border Grid.Row="3"
+                BorderBrush="{StaticResource ListBoxBorderBrush}"
+                BorderThickness="1">
+            <Grid Margin="10 10 10 10"
+                  Visibility="{Binding SelectedOperation,
+                                       Converter={StaticResource nullConverter}}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
 
-            <TextBlock Grid.RowSpan="2"
-                       Grid.Column="1"
-                       MinWidth="100"
-                       Style="{StaticResource HeaderTextBlockStyle}"
-                       Text="{Binding SelectedOperation.Amount}"
-                       TextAlignment="Right" />
+                <TextBlock Grid.RowSpan="2"
+                           Style="{StaticResource HeaderTextBlockStyle}"
+                           Text="{Binding SelectedOperation.Title}" />
 
-            <Label Grid.Column="2"
-                   Grid.ColumnSpan="2"
-                   HorizontalContentAlignment="Right"
-                   Padding="5 5 5 0">
-                <Label.Content>
-                    <MultiBinding Converter="{StaticResource mergeString}"
-                                  ConverterParameter="{}{0} ({1} - {2})">
-                        <Binding Converter="{StaticResource dateConverter}"
-                                 ConverterParameter="d"
-                                 FallbackValue="N/N"
-                                 Path="SelectedOperation.OrderDate" />
-                        <lex:BLoc Key="MyBudget.Model:Translations:BankOperation_ExecutionDate" />
-                        <Binding Converter="{StaticResource dateConverter}"
-                                 FallbackValue="N/N"
-                                 Path="SelectedOperation.ExecutionDate" />
-                    </MultiBinding>
-                </Label.Content>
-            </Label>
+                <TextBlock Grid.RowSpan="2"
+                           Grid.Column="1"
+                           MinWidth="100"
+                           Style="{StaticResource HeaderTextBlockStyle}"
+                           Text="{Binding SelectedOperation.Amount}"
+                           TextAlignment="Right" />
 
-            <Label Grid.Row="1"
-                   Grid.Column="2"
-                   Grid.ColumnSpan="2"
-                   HorizontalContentAlignment="Right"
-                   Padding="5 0 5 10">
-                <Label.Content>
-                    <MultiBinding Converter="{StaticResource mergeString}"
-                                  ConverterParameter="{}({0} - {1})">
-                        <Binding FallbackValue="N/N"
-                                 Path="SelectedOperation.Type" />
-                        <Binding FallbackValue="N/N"
-                                 Path="SelectedOperation.BankAccount" />
-                    </MultiBinding>
-                </Label.Content>
-            </Label>
+                <Label Grid.Column="2"
+                       Grid.ColumnSpan="2"
+                       HorizontalContentAlignment="Right"
+                       Padding="5 5 5 0">
+                    <Label.Content>
+                        <MultiBinding Converter="{StaticResource mergeString}"
+                                      ConverterParameter="{}{0} ({1} - {2})">
+                            <Binding Converter="{StaticResource dateConverter}"
+                                     ConverterParameter="d"
+                                     FallbackValue="N/N"
+                                     Path="SelectedOperation.OrderDate" />
+                            <lex:BLoc Key="MyBudget.Model:Translations:BankOperation_ExecutionDate" />
+                            <Binding Converter="{StaticResource dateConverter}"
+                                     FallbackValue="N/N"
+                                     Path="SelectedOperation.ExecutionDate" />
+                        </MultiBinding>
+                    </Label.Content>
+                </Label>
 
-            <ScrollViewer Grid.Row="3"
-                          Grid.RowSpan="3"
-                          Height="90">
-                <TextBox AcceptsReturn="True"
-                         IsReadOnly="True"
-                         Text="{Binding SelectedOperation.Description}" />
-            </ScrollViewer>
+                <Label Grid.Row="1"
+                       Grid.Column="2"
+                       Grid.ColumnSpan="2"
+                       HorizontalContentAlignment="Right"
+                       Padding="5 0 5 10">
+                    <Label.Content>
+                        <MultiBinding Converter="{StaticResource mergeString}"
+                                      ConverterParameter="{}({0} - {1})">
+                            <Binding FallbackValue="N/N"
+                                     Path="SelectedOperation.Type" />
+                            <Binding FallbackValue="N/N"
+                                     Path="SelectedOperation.BankAccount" />
+                        </MultiBinding>
+                    </Label.Content>
+                </Label>
 
-            <Label Grid.Row="3"
-                   Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Category}" />
-            <toolkitInput:AutoCompleteBox x:Name="OperationCategoryElement"
-                                          Grid.Row="3"
-                                          Grid.Column="3"
-                                          Width="400"
-                                          IsTextCompletionEnabled="True"
-                                          ItemsSource="{Binding Categories}"
-                                          Text="{Binding SelectedOperation.Category,
-                                                         Mode=TwoWay}" />
+                <ScrollViewer Grid.Row="3"
+                              Grid.RowSpan="3"
+                              Height="90">
+                    <TextBox AcceptsReturn="True"
+                             IsReadOnly="True"
+                             Text="{Binding SelectedOperation.Description}" />
+                </ScrollViewer>
 
-            <Label Grid.Row="4"
-                   Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_SubCategory}" />
-            <toolkitInput:AutoCompleteBox Grid.Row="4"
-                                          Grid.Column="3"
-                                          Width="400"
-                                          IsTextCompletionEnabled="True"
-                                          ItemsSource="{Binding SubCategories}"
-                                          Text="{Binding SelectedOperation.SubCategory,
-                                                         Mode=TwoWay}" />
+                <Label Grid.Row="3"
+                       Grid.Column="2"
+                       Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Category}" />
+                <toolkitInput:AutoCompleteBox x:Name="OperationCategoryElement"
+                                              Grid.Row="3"
+                                              Grid.Column="3"
+                                              Width="400"
+                                              IsTextCompletionEnabled="True"
+                                              ItemsSource="{Binding Categories}"
+                                              Text="{Binding SelectedOperation.Category,
+                                                             Mode=TwoWay}" />
 
-            <Label Grid.Row="5"
-                   Grid.Column="2"
-                   Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Card}" />
-            <ComboBox Grid.Row="5"
-                      Grid.Column="3"
-                      Width="400"
-                      Text="{Binding SelectedOperation.Card}" />
-        </Grid>
+                <Label Grid.Row="4"
+                       Grid.Column="2"
+                       Content="{lex:Loc MyBudget.Model:Translations:BankOperation_SubCategory}" />
+                <toolkitInput:AutoCompleteBox Grid.Row="4"
+                                              Grid.Column="3"
+                                              Width="400"
+                                              IsTextCompletionEnabled="True"
+                                              ItemsSource="{Binding SubCategories}"
+                                              Text="{Binding SelectedOperation.SubCategory,
+                                                             Mode=TwoWay}" />
+
+                <Label Grid.Row="5"
+                       Grid.Column="2"
+                       Content="{lex:Loc MyBudget.Model:Translations:BankOperation_Card}"
+                       Visibility="Hidden" />
+                <ComboBox Grid.Row="5"
+                          Grid.Column="3"
+                          Width="400"
+                          Text="{Binding SelectedOperation.Card}"
+                          Visibility="Hidden" />
+            </Grid>
+        </Border>
+
     </Grid>
 </UserControl>

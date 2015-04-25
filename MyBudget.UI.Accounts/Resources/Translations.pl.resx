@@ -132,6 +132,9 @@
   <data name="AddFromRawText" xml:space="preserve">
     <value>Wczytaj tekst wyciągu</value>
   </data>
+  <data name="ApplyRules" xml:space="preserve">
+    <value>Zastosuj reguły</value>
+  </data>
   <data name="DeleteStatement" xml:space="preserve">
     <value>Usuń zaznaczone wyciągi</value>
   </data>

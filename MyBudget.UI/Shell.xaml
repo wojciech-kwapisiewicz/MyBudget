@@ -10,18 +10,6 @@
         Height="500"
         MinWidth="1220"
         WindowState="Maximized">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Metro.MSControls.Core.Implicit.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-            <Style x:Key="ComboBoxItem_NotSelectableDisabled"
-                   BasedOn="{StaticResource {x:Type ComboBoxItem}}"
-                   TargetType="{x:Type ComboBoxItem}">
-                <Setter Property="IsEnabled" Value="{Binding IsSelectable}" />
-            </Style>
-        </ResourceDictionary>
-    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
