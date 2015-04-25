@@ -28,7 +28,7 @@ namespace MyBudget.UI.Configuration
 
             AddRule = new DelegateCommand(NavigateToAdd);
             EditRule = new DelegateCommand(NavigateToEdit, () => SelectedDefinitions.Count() == 1);
-            DeleteRule = new DelegateCommand(GoDelete, () => SelectedDefinitions.Count() == 1);
+            DeleteRule = new DelegateCommand(GoDelete, () => SelectedDefinitions.Count() > 0);
             MergeRules = new DelegateCommand(DoMergeRules, () => SelectedDefinitions.Count() > 1);
         }
 
@@ -90,7 +90,11 @@ namespace MyBudget.UI.Configuration
         public DelegateCommand DeleteRule { get; set; }
         private void GoDelete()
         {
-            _definitionsRepository.Delete(SelectedDefinitions.Single());
+            foreach (var item in SelectedDefinitions)
+            {
+                _definitionsRepository.Delete(item);
+                
+            }     
             _context.SaveChanges();
             OnPropertyChanged(() => Data);
         }
