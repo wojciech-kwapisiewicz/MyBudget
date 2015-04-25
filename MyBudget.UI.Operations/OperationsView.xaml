@@ -47,9 +47,20 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <controls:DateRangeControl x:Name="Fff"
-                                   FilteringFunction="{Binding FilterFunction,
-                                                               Mode=OneWayToSource}" />
+        <StackPanel Margin="0 0 0 2"
+                    HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <controls:DateRangeControl FilteringFunction="{Binding FilterFunction, Mode=OneWayToSource}" />
+            <Button Margin="10 0 0 0"
+                    Command="{Binding ApplyRules}"
+                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ApplyRules}" />
+            <Button Margin="10 0 0 0"
+                    Command="{Binding ClearRules}"
+                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />
+            <Button Margin="10 0 0 0"
+                    Command="{Binding Save}"
+                    Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
+        </StackPanel>
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
@@ -91,22 +102,13 @@
                                                   Mode=OneWayToSource,
                                                   UpdateSourceTrigger=PropertyChanged}"
                                    Watermark="{lex:Loc MyBudget.UI.Operations:Translations:WatermarkFilter}" />
-
-            <Button Margin="10 0 0 0"
-                    Command="{Binding ApplyRules}"
-                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ApplyRules}" />
-            <Button Margin="10 0 0 0"
-                    Command="{Binding ClearRules}"
-                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />
-            <Button Margin="10 0 0 0"
-                    Command="{Binding Save}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
         </StackPanel>
         <DataGrid x:Name="operationsGrid"
                   Grid.Row="2"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   ItemsSource="{Binding Data}"
+                  ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                   SelectedItem="{Binding SelectedOperation,
                                          Mode=OneWayToSource}"
                   SelectionMode="Single">
@@ -153,29 +155,36 @@
             <DataGrid.Columns>
                 <DataGridTextColumn Binding="{Binding BankAccount}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_BankAccount}" />
-                <DataGridTextColumn Binding="{Binding Type}"
-                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Type}" />
-
                 <DataGridTextColumn MinWidth="70"
                                     Binding="{Binding OrderDate,
                                                       Converter={StaticResource dateConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_OrderDate}" />
-                <DataGridTextColumn MinWidth="70"
-                                    Binding="{Binding ExecutionDate,
-                                                      Converter={StaticResource dateConverter}}"
-                                    ElementStyle="{StaticResource RightAligned}"
-                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_ExecutionDate}" />
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding Title}"
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Title}" />
+                <!--
+                    <DataGridTextColumn Binding="{Binding Type}"
+                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Type}" />
+                -->
 
-                <DataGridTextColumn MinWidth="70"
+                <!--
+                    <DataGridTextColumn MinWidth="70"
+                    Binding="{Binding ExecutionDate,
+                    Converter={StaticResource dateConverter}}"
+                    ElementStyle="{StaticResource RightAligned}"
+                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_ExecutionDate}" />
+                -->
+
+                <DataGridTextColumn MinWidth="60"
                                     Binding="{Binding Amount,
                                                       Converter={StaticResource decimalConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Amount}" />
-                <DataGridTextColumn Binding="{Binding Title}"
-                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Title}" />
                 <DataGridTextColumn Binding="{Binding Category}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Category}" />
+                <DataGridTextColumn Binding="{Binding SubCategory}"
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_SubCategory}" />
             </DataGrid.Columns>
         </DataGrid>
 

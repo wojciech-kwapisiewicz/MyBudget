@@ -138,6 +138,9 @@
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>No operation selected</value>
   </data>
+  <data name="SeparateText" xml:space="preserve">
+    <value>Separate categories</value>
+  </data>
   <data name="ShouldSaveCaption" xml:space="preserve">
     <value>Save changes?</value>
   </data>

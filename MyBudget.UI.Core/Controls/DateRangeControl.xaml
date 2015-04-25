@@ -17,13 +17,12 @@
     <StackPanel x:Name="MainWrapper"
                 HorizontalAlignment="Right"
                 Orientation="Horizontal">
-        <CheckBox Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByRange}"
+        <CheckBox Margin="10 0 10 0"
+                  Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByRange}"
                   IsChecked="{Binding RangeType,
                                       Converter={StaticResource enum},
                                       ConverterParameter={x:Static local:DateRangeType.ByRange},
                                       Mode=TwoWay}" />
-        <Label Margin="10 0 0 0"
-               Content="{lex:Loc MyBudget.UI.Core:Translations:StartDate}" />
         <xctk:DateTimePicker Width="160"
                              Height="30"
                              CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
@@ -36,8 +35,8 @@
                              TimePickerVisibility="Collapsed"
                              Value="{Binding StartDate,
                                              Mode=TwoWay}" />
-        <Label Margin="10 0 0 0"
-               Content="{lex:Loc MyBudget.UI.Core:Translations:EndDate}" />
+        <Label Margin="3 0 3 0"
+               Content="-" />
         <xctk:DateTimePicker Width="160"
                              Height="30"
                              CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
@@ -51,13 +50,12 @@
                              Value="{Binding EndDate,
                                              Mode=TwoWay}" />
 
-        <CheckBox Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByMonth}"
+        <CheckBox Margin="10 0 10 0"
+                  Content="{lex:Loc MyBudget.UI.Core:Translations:FilterByMonth}"
                   IsChecked="{Binding RangeType,
                                       Converter={StaticResource enum},
                                       ConverterParameter={x:Static local:DateRangeType.ByMonth},
                                       Mode=TwoWay}" />
-        <Label Margin="10 0 0 0"
-               Content="{lex:Loc MyBudget.UI.Core:Translations:Month}" />
         <xctk:DateTimePicker Width="140"
                              CultureInfo="{Binding Source={x:Static lex:LocalizeDictionary.Instance},
                                                    Path=Culture,

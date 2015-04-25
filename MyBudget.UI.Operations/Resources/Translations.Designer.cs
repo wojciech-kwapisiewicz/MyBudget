@@ -124,6 +124,15 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Separate categories.
+        /// </summary>
+        internal static string SeparateText {
+            get {
+                return ResourceManager.GetString("SeparateText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save changes?.
         /// </summary>
         internal static string ShouldSaveCaption {

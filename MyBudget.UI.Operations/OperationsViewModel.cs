@@ -81,12 +81,12 @@ namespace MyBudget.UI.Operations
             string[] groupProperties = new[] 
             { 
                 null,
-                "BankAccount",
-                "Type", 
                 "OrderDate", 
-                "ExecutionDate", 
+                "BankAccount",
+                "Category",
+                "Type", 
                 "Title",
-                "Category"
+                "ExecutionDate", 
             };
             GrouppingProperties = BuildPropertyList(groupProperties);
         }
@@ -116,15 +116,15 @@ namespace MyBudget.UI.Operations
         {
             string[] filterProperties = new[] 
             { 
-                "BankAccount", 
-                "Type", 
-                "OrderDate", 
-                "ExecutionDate", 
-                "Amount", 
                 "Title",
                 "Description",
                 "Category",
                 "SubCategory",
+                "Amount", 
+                //"Type", 
+                "BankAccount", 
+                "OrderDate", 
+                "ExecutionDate", 
             };
             FilteringProperties = BuildPropertyList(filterProperties);
         }
@@ -196,10 +196,19 @@ namespace MyBudget.UI.Operations
                 return f.FilteringFunction(bo, Filter);
             }
 
-            return typeof(BankOperation)
+            var value = typeof(BankOperation)
                 .GetProperty(FilterProperty.Name)
-                .GetValue(bo).ToString().ToLowerInvariant()
+                .GetValue(bo);
+
+            if (value == null)
+            {
+                return false;
+            }
+            else
+            {
+                return value.ToString().ToLowerInvariant()
                 .Contains(Filter.ToLowerInvariant());
+            }
         }
         
         DeferredAction defferedDataUpdate;
