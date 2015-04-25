@@ -46,6 +46,7 @@
     <Compile Include="Card.cs" />
     <Compile Include="ClassificationDefinition.cs" />
     <Compile Include="ClassificationRule.cs" />
+    <Compile Include="NotifiableObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RuleType.cs" />
     <Compile Include="Translations.Designer.cs">

@@ -1,6 +1,7 @@
 ﻿using MyBudget.Core.DataContext;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using System.Reflection;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Model
 {
-    public class BankOperation : IIdentifiable<int>
+    public class BankOperation : NotifiableObject, IIdentifiable<int>
     {
         public int Id { get; set; }
         public BankAccount BankAccount { get; set; }
@@ -23,11 +24,37 @@ namespace MyBudget.Model
         public decimal EndingBalance { get; set; }
         public string Description { get; set; }
 
-        public string Category { get; set; }
-        public string SubCategory { get; set; }
+        private string _category;
+        public string Category
+        {
+            get
+            {
+                return _category;
+            }
+            set
+            {
+                _category = value;
+                OnPropertyChanged(() => Category);
+            }
+        }
+        
+        private string _subcategory;
+        public string SubCategory
+        {
+            get
+            {
+                return _subcategory;
+            }
+            set
+            {
+                _subcategory = value;
+                OnPropertyChanged(() => SubCategory);
+            }
+        }
+
         public Card Card { get; set; }
 
         public string Title { get; set; }
-        public string CounterAccount { get; set; }
+        public string CounterAccount { get; set; }   
     }
 }
