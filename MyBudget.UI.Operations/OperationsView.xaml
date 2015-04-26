@@ -47,20 +47,25 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <StackPanel Margin="0 0 0 2"
-                    HorizontalAlignment="Right"
-                    Orientation="Horizontal">
-            <controls:DateRangeControl FilteringFunction="{Binding FilterFunction, Mode=OneWayToSource}" />
-            <Button Margin="10 0 0 0"
-                    Command="{Binding ApplyRules}"
-                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ApplyRules}" />
-            <Button Margin="10 0 0 0"
-                    Command="{Binding ClearRules}"
-                    Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />
-            <Button Margin="10 0 0 0"
-                    Command="{Binding Save}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
-        </StackPanel>
+        <controls:AlignableWrapPanel HorizontalAlignment="Right"
+                                     HorizontalContentAlignment="Right">
+            <controls:DateRangeControl Margin="0 0 0 2"
+                                       FilteringFunction="{Binding FilterFunction,
+                                                                   Mode=OneWayToSource}" />
+            <StackPanel Margin="0 0 0 2"
+                        HorizontalAlignment="Right"
+                        Orientation="Horizontal">
+                <Button Margin="10 0 0 0"
+                        Command="{Binding Save}"
+                        Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
+                <Button Margin="10 0 0 0"
+                        Command="{Binding ClearRules}"
+                        Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />
+                <Button Margin="10 0 0 0"
+                        Command="{Binding ApplyRules}"
+                        Content="{lex:Loc MyBudget.UI.Operations:Translations:ApplyRules}" />
+            </StackPanel>
+        </controls:AlignableWrapPanel>
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
@@ -68,7 +73,7 @@
                        VerticalAlignment="Center"
                        Style="{StaticResource SubHeaderTextBlockStyle}"
                        Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockGroup}" />
-            <ComboBox Width="200"
+            <ComboBox Width="140"
                       ItemsSource="{Binding GrouppingProperties}"
                       SelectedItem="{Binding GroupProperty,
                                              Mode=TwoWay}">
@@ -84,7 +89,7 @@
                        Style="{StaticResource SubHeaderTextBlockStyle}"
                        Text="{lex:Loc MyBudget.UI.Operations:Translations:TextBlockFilter}" />
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelField}" />
-            <ComboBox Width="200"
+            <ComboBox Width="160"
                       ItemsSource="{Binding FilteringProperties}"
                       SelectedItem="{Binding FilterProperty,
                                              Mode=TwoWay}">
@@ -96,7 +101,7 @@
             </ComboBox>
 
             <Label Content="{lex:Loc MyBudget.UI.Operations:Translations:LabelContains}" />
-            <xctk:WatermarkTextBox MinWidth="200"
+            <xctk:WatermarkTextBox MinWidth="130"
                                    VerticalContentAlignment="Center"
                                    Text="{Binding Filter,
                                                   Mode=OneWayToSource,
@@ -204,10 +209,10 @@
                   Visibility="{Binding SelectedOperation,
                                        Converter={StaticResource nullConverter}}">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="7*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="4*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -224,7 +229,8 @@
 
                 <TextBlock Grid.RowSpan="2"
                            Grid.Column="1"
-                           MinWidth="100"
+                           MinWidth="110"
+                           Margin="10 0 10 0"
                            Style="{StaticResource HeaderTextBlockStyle}"
                            Text="{Binding SelectedOperation.Amount}"
                            TextAlignment="Right" />
@@ -254,19 +260,25 @@
                        HorizontalContentAlignment="Right"
                        Padding="5 0 5 10">
                     <Label.Content>
-                        <MultiBinding Converter="{StaticResource mergeString}"
-                                      ConverterParameter="{}({0} - {1})">
-                            <Binding FallbackValue="N/N"
-                                     Path="SelectedOperation.Type" />
-                            <Binding FallbackValue="N/N"
-                                     Path="SelectedOperation.BankAccount" />
-                        </MultiBinding>
+                        <TextBlock TextTrimming="CharacterEllipsis">
+                            <TextBlock.Text>
+                                <MultiBinding Converter="{StaticResource mergeString}"
+                                              ConverterParameter="{}({0} - {1})">
+                                    <Binding FallbackValue="N/N"
+                                             Path="SelectedOperation.Type" />
+                                    <Binding FallbackValue="N/N"
+                                             Path="SelectedOperation.BankAccount" />
+                                </MultiBinding>
+                            </TextBlock.Text>
+                        </TextBlock>
                     </Label.Content>
                 </Label>
 
                 <ScrollViewer Grid.Row="3"
                               Grid.RowSpan="3"
-                              Height="90">
+                              Grid.ColumnSpan="2"
+                              Height="90"
+                              Margin="0 0 10 0">
                     <TextBox AcceptsReturn="True"
                              IsReadOnly="True"
                              Text="{Binding SelectedOperation.Description}" />
@@ -278,7 +290,7 @@
                 <toolkitInput:AutoCompleteBox x:Name="OperationCategoryElement"
                                               Grid.Row="3"
                                               Grid.Column="3"
-                                              Width="400"
+                                              HorizontalContentAlignment="Stretch"
                                               IsTextCompletionEnabled="True"
                                               ItemsSource="{Binding Categories}"
                                               Text="{Binding SelectedOperation.Category,
@@ -289,7 +301,7 @@
                        Content="{lex:Loc MyBudget.Model:Translations:BankOperation_SubCategory}" />
                 <toolkitInput:AutoCompleteBox Grid.Row="4"
                                               Grid.Column="3"
-                                              Width="400"
+                                              HorizontalContentAlignment="Stretch"
                                               IsTextCompletionEnabled="True"
                                               ItemsSource="{Binding SubCategories}"
                                               Text="{Binding SelectedOperation.SubCategory,
@@ -301,7 +313,7 @@
                        Visibility="Hidden" />
                 <ComboBox Grid.Row="5"
                           Grid.Column="3"
-                          Width="400"
+                          HorizontalContentAlignment="Stretch"
                           Text="{Binding SelectedOperation.Card}"
                           Visibility="Hidden" />
             </Grid>

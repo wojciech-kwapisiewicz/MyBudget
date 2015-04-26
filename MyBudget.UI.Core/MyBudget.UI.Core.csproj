@@ -78,6 +78,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controls\AlignableWrapPanel.cs" />
     <Compile Include="Controls\DateRangeControl.xaml.cs">
       <DependentUpon>DateRangeControl.xaml</DependentUpon>
     </Compile>

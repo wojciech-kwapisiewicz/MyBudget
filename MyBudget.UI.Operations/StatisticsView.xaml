@@ -27,7 +27,7 @@
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">
-            <CheckBox Content="MyBudget.UI.Operations:Translations:OnlyCleared"
+            <CheckBox Content="{lex:Loc MyBudget.UI.Operations:Translations:OnlyCleared}"
                       IsChecked="{Binding Cleared}"
                       IsThreeState="True" />
             <CheckBox Margin="10 0 10 0"

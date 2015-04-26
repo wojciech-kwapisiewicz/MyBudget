@@ -5,10 +5,10 @@
         xmlns:local="clr-namespace:MyBudget.UI"
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
-        Title="Shell"
+        Title="myBudget"
         Width="900"
         Height="500"
-        MinWidth="1220"
+        MinWidth="900"
         WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>

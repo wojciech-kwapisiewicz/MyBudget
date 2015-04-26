@@ -225,11 +225,22 @@ namespace MyBudget.UI.Operations
             {
                 PropertyName = "BankAccount",
                 FilteringFunction = (operation,filter) => 
-                    operation.BankAccount!=null && 
-                    operation.BankAccount.Description.ToLowerInvariant()
-                        .Contains(filter.ToLowerInvariant())
+                        StringContains(operation.BankAccount.Number, filter) ||
+                        StringContains(operation.BankAccount.Name, filter) ||
+                        StringContains(operation.BankAccount.Description, filter)                          
             }
         };
+
+        private static bool StringContains(string source, string searchedPhrase)
+        {
+            if(string.IsNullOrEmpty(source) &&
+                source.IndexOf(searchedPhrase,StringComparison.InvariantCultureIgnoreCase) >= 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
 
         private PropertyDescription _filterProperty;
         public PropertyDescription FilterProperty
