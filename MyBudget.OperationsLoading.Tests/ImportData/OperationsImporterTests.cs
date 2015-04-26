@@ -102,15 +102,51 @@ namespace MyBudget.OperationsLoading.Tests.ImportData
             Assert.AreEqual(2, currentStatement.Operations.Count);
         }
 
-        private BankOperation GetOperation(bool cleared, string title, decimal amount = 1, int id = 0)
+        [Test]
+        public void ImportOperations_ExistingOperationDescriptionMultilineAndLineFeedIsDifferent_OperationProperlyDiscoveredAsExisting()
         {
+            List<BankOperation> currentOperations = new List<BankOperation>()
+            {
+                GetOperation(true, "Op1", description: "Op1\raaa"),
+                GetOperation(true, "Op2", description: "Op2\r\naaa"),
+                GetOperation(true, "Op3", description: "Op3aaa")
+            };
+
+            var currentStatement = new BankStatement();
+            currentStatement.Operations.AddRange(currentOperations);
+            _operationsRepository.Setup(a => a.GetAll())
+                .Returns(currentOperations);
+
+            List<BankOperation> newOperations = new List<BankOperation>()
+            {
+                GetOperation(true, "Op1", description: "Op1\r\naaa"),
+                GetOperation(true, "Op2", description: "Op2\raaa"),
+                GetOperation(true, "Op3", description: "Op3 aaa")
+            };
+
+            //When
+            var importOperations = _importer.ImportOperations(_fileName, newOperations);
+
+            //Then
+            Assert.AreEqual(0, importOperations.Count());
+            Assert.AreEqual(0, _insertedStatement.New);
+            Assert.AreEqual(3, _insertedStatement.Skipped);
+        }
+
+        private BankOperation GetOperation(bool cleared, string title, decimal amount = 1, int id = 0, string description = null)
+        {
+            if(description==null)
+            {
+                description = title;
+            }
+
             return new BankOperation()
             {
                 Id = id,
                 BankAccount = _account,
                 Cleared = cleared,
                 Title = title,
-                Description = title,
+                Description = description,
                 Amount = amount
             };
         }

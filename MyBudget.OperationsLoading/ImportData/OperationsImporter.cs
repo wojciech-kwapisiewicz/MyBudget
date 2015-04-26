@@ -80,7 +80,7 @@ namespace MyBudget.OperationsLoading.ImportData
                     a.ExecutionDate == boToCheck.ExecutionDate &&
                     a.Amount == boToCheck.Amount &&
                     a.EndingBalance == boToCheck.EndingBalance &&
-                    a.Description == boToCheck.Description);
+                    DescriptionsAreEqual(a.Description, boToCheck.Description));
 
             if (existingOperation == null)
             {
@@ -91,6 +91,19 @@ namespace MyBudget.OperationsLoading.ImportData
                 return new CheckResult() { Status = CheckStatus.ExistingUncleared, ExistingOperation = existingOperation };
             }
             return new CheckResult() { Status = CheckStatus.Existing, ExistingOperation = existingOperation };
+        }
+
+        private string NormalizeString(string input)
+        {
+            return System.Text.RegularExpressions.Regex.Replace(input, @"\s", string.Empty);
+        }
+
+        private bool DescriptionsAreEqual(string description1, string description2)
+        {
+            var ndesc1 = NormalizeString(description1);
+            var ndesc2 = NormalizeString(description2);
+
+            return string.Equals(ndesc1, ndesc2, StringComparison.InvariantCultureIgnoreCase);
         }
     }
 }
