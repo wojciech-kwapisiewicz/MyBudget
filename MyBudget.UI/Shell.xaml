@@ -7,8 +7,9 @@
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
         Title="myBudget"
         Width="900"
-        Height="500"
+        Height="600"
         MinWidth="900"
+        MinHeight="450"
         WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
