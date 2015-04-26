@@ -82,9 +82,9 @@ namespace MyBudget.UI.Operations
 
         private void ReloadView()
         {
-            var itemsToDisplay = GetItemsToDisplay();
+            var operations = FilterOperations();
 
-            var roots = GetGroup(itemsToDisplay.GroupBy(l1 => l1.Category ?? string.Empty));
+            var roots = GetGroup(operations.GroupBy(l1 => l1.Category ?? string.Empty));
 
             foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType<StatisticsGroup>())
             {
@@ -93,23 +93,23 @@ namespace MyBudget.UI.Operations
                 item.SubGroups = GetGroup(subGroupping);
             }
 
-            AddSummary(roots);
+            AddSummary(roots, operations);
 
-            AddSeparateSummaries(roots);
+            AddSeparateSummaries(roots, operations);
 
             Items = roots;
         }
 
-        private void AddSeparateSummaries(ObservableCollection<IGroupItem> roots)
+        private void AddSeparateSummaries(ObservableCollection<IGroupItem> roots, IEnumerable<BankOperation> operations)
         {
             if (ShowSeparate)
             {
                 var separateSumaries = SeparateCategories.Split(',')
                     .Select(a => a.Trim());
 
-                var sumWithoutSeparate = roots.OfType<StatisticsGroup>()
-                    .Where(b => !separateSumaries.Contains(b.Key))
-                    .Sum(a => a.Sum);
+                var sumWithoutSeparate = operations
+                    .Where(op => !separateSumaries.Contains(op.Category))
+                    .Sum(a => a.Amount);
 
                 roots.Add(new StatisticsGroup()
                 {
@@ -120,9 +120,9 @@ namespace MyBudget.UI.Operations
                 roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
                 foreach (var summary in separateSumaries)
                 {
-                    var summarySum = roots.OfType<StatisticsGroup>()
-                        .Where(b => summary == b.Key)
-                        .Sum(a => a.Sum);
+                    var summarySum = operations
+                        .Where(op => summary == op.Category)
+                        .Sum(a => a.Amount);
                     roots.Add(new StatisticsGroup()
                     {
                         Key = summary,
@@ -132,9 +132,9 @@ namespace MyBudget.UI.Operations
             }
         }
 
-        private static void AddSummary(ObservableCollection<IGroupItem> roots)
+        private static void AddSummary(ObservableCollection<IGroupItem> roots, IEnumerable<BankOperation> operations)
         {
-            var sumAll = roots.OfType<StatisticsGroup>().Sum(a => a.Sum);
+            var sumAll = operations.Sum(a => a.Amount);
             roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
             roots.Add(new StatisticsGroup()
             {
@@ -143,7 +143,7 @@ namespace MyBudget.UI.Operations
             });
         }
 
-        private IEnumerable<BankOperation> GetItemsToDisplay()
+        private IEnumerable<BankOperation> FilterOperations()
         {
             var itemsToDisplay = _bankOperationRepository.GetAll();
             if (Cleared.HasValue)
