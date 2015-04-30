@@ -1,0 +1,66 @@
+﻿<UserControl x:Class="MyBudget.UI.Core.Popups.CustomPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:lex="http://wpflocalizeextension.codeplex.com"
+             xmlns:local="clr-namespace:MyBudget.UI.Core.Popups"
+             xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework"
+             Width="250">
+    <Grid>
+        <Grid.Resources>
+            <local:ButtonsToVisibilityConverter x:Key="ButtonConverter" />
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"
+                              MinWidth="50" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="3"
+                   MinWidth="200"
+                   MinHeight="40"
+                   FontFamily="Segoe UI"
+                   FontSize="14.667"
+                   Foreground="{StaticResource ForegroundBrush}"
+                   Padding="10 0 10 2"
+                   Text="{Binding Notification.Content}"
+                   TextWrapping="Wrap" />
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Click="YesButtonClick"
+                Content="{lex:Loc MyBudget.UI.Core:Translations:YesButton}"
+                Visibility="{Binding Notification.Buttons,
+                                     Converter={StaticResource ButtonConverter},
+                                     ConverterParameter={x:Static w:MessageBoxResult.Yes}}" />
+        <Button Grid.Row="1"
+                Grid.Column="2"
+                Margin="5"
+                Click="NoButtonClick"
+                Content="{lex:Loc MyBudget.UI.Core:Translations:NoButton}"
+                Visibility="{Binding Notification.Buttons,
+                                     Converter={StaticResource ButtonConverter},
+                                     ConverterParameter={x:Static w:MessageBoxResult.No}}" />
+        <Button Grid.Row="1"
+                Grid.Column="3"
+                Margin="5"
+                Click="OkButtonClick"
+                Content="{lex:Loc MyBudget.UI.Core:Translations:OkButton}"
+                Visibility="{Binding Notification.Buttons,
+                                     Converter={StaticResource ButtonConverter},
+                                     ConverterParameter={x:Static w:MessageBoxResult.OK}}" />
+        <Button Grid.Row="1"
+                Grid.Column="4"
+                Margin="5"
+                Click="CancelButtonClick"
+                Content="{lex:Loc MyBudget.UI.Core:Translations:CancelButton}"
+                Visibility="{Binding Notification.Buttons,
+                                     Converter={StaticResource ButtonConverter},
+                                     ConverterParameter={x:Static w:MessageBoxResult.Cancel}}" />
+    </Grid>
+</UserControl>
