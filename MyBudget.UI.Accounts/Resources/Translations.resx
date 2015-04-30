@@ -153,6 +153,9 @@
   <data name="New" xml:space="preserve">
     <value>Added</value>
   </data>
+  <data name="OperationsClassificationResultTextTemplate" xml:space="preserve">
+    <value>For {0} operations assigned kategory.{1}For {2} operation category was not assigned.</value>
+  </data>
   <data name="Replaced" xml:space="preserve">
     <value>Replaced</value>
   </data>

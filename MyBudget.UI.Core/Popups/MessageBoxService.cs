@@ -17,6 +17,16 @@ namespace MyBudget.UI.Core.Popups
             _eventAggregator = eventAggregator;
         }
 
+        public void ShowMessageBox(string caption, string conent)
+        {
+            ShowMessageBox(caption, conent, MessageBoxButton.OK);
+        }
+
+        public void ShowMessageBox(string caption, string conent, MessageBoxButton buttons)
+        {
+            ShowMessageBox(caption, conent, buttons, null);
+        }
+
         public void ShowMessageBox(string caption, string conent, MessageBoxButton buttons, Action<MessageBoxResult> continuation)
         {
             _eventAggregator

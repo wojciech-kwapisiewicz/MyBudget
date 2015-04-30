@@ -153,6 +153,9 @@
   <data name="New" xml:space="preserve">
     <value>Dodano</value>
   </data>
+  <data name="OperationsClassificationResultTextTemplate" xml:space="preserve">
+    <value>Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.</value>
+  </data>
   <data name="Replaced" xml:space="preserve">
     <value>Zastąpiono</value>
   </data>

@@ -4,6 +4,7 @@ using Microsoft.Practices.Prism.Regions;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.UI.Core;
+using MyBudget.UI.Core.Popups;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -16,13 +17,15 @@ namespace MyBudget.UI.Configuration
 {
     public class RulesViewModel : BindableBase
     {
-        IRegionManager _regionManager;
-        IRepository<ClassificationDefinition, int> _definitionsRepository;
-        IContext _context;
+        private IRegionManager _regionManager;
+        private IRepository<ClassificationDefinition, int> _definitionsRepository;
+        private IContext _context;
+        private IMessageBoxService _messageBoxService;
 
-        public RulesViewModel(IContext context, IRegionManager regionManager)
+        public RulesViewModel(IContext context, IRegionManager regionManager, IMessageBoxService messageBoxService)
         {
             _context = context;
+            _messageBoxService = messageBoxService;
             _regionManager = regionManager;
             _definitionsRepository = context.GetRepository<IRepository<ClassificationDefinition, int>>();
 
@@ -107,18 +110,22 @@ namespace MyBudget.UI.Configuration
             var first = SelectedDefinitions.First();
             if (noCat != 1 || noSubCat != 1)
             {
-                MessageBoxResult continueResult = MessageBox.Show(
-                    string.Format(
-                        Resources.Translations.MergeRulesConflictMsg, 
-                        Environment.NewLine, first.Description, 
-                        first.Category, 
-                        first.SubCategory),
+                string content = string.Format(
+                    Resources.Translations.MergeRulesConflictMsg,
+                    Environment.NewLine, first.Description,
+                    first.Category,
+                    first.SubCategory);
+                _messageBoxService.ShowMessageBox(
                     Resources.Translations.MergeRulesConflictCaption,
-                    MessageBoxButton.OKCancel);
-                if (continueResult == MessageBoxResult.OK)
-                {
-                    InternalMerge(first, SelectedDefinitions);
-                }
+                    content,
+                    MessageBoxButton.OKCancel,
+                    result =>
+                    {
+                        if (result == MessageBoxResult.OK)
+                        {
+                            InternalMerge(first, SelectedDefinitions);
+                        }
+                    });
             }
             else
             {

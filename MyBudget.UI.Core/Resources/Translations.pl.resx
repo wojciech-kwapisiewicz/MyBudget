@@ -120,6 +120,9 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Anuluj</value>
   </data>
+  <data name="ConflictsTextTemplate" xml:space="preserve">
+    <value>Found {0} operations with conflicts{1}{2}</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Data końcowa</value>
   </data>

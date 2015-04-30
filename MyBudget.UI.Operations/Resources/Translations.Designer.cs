@@ -79,6 +79,24 @@ namespace MyBudget.UI.Operations.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfirmationCaption.
+        /// </summary>
+        internal static string ConfirmationCaption {
+            get {
+                return ResourceManager.GetString("ConfirmationCaption", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Are you sure you want to remove category and subcategory in all visible operations?.
+        /// </summary>
+        internal static string ConfirmationText {
+            get {
+                return ResourceManager.GetString("ConfirmationText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create rule.
         /// </summary>
         internal static string ContextMenu_CreateRule {
@@ -129,6 +147,15 @@ namespace MyBudget.UI.Operations.Resources {
         internal static string OperationNotLoaded {
             get {
                 return ResourceManager.GetString("OperationNotLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to For {0} operations assigned category.{1}For {2} operations category was not assigned..
+        /// </summary>
+        internal static string OperationsClassificationConfirmation {
+            get {
+                return ResourceManager.GetString("OperationsClassificationConfirmation", resourceCulture);
             }
         }
         

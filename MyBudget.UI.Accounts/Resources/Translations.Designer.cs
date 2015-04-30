@@ -169,6 +169,15 @@ namespace MyBudget.UI.Accounts.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to For {0} operations assigned kategory.{1}For {2} operation category was not assigned..
+        /// </summary>
+        internal static string OperationsClassificationResultTextTemplate {
+            get {
+                return ResourceManager.GetString("OperationsClassificationResultTextTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replaced.
         /// </summary>
         internal static string Replaced {

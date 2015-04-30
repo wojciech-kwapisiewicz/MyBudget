@@ -9,6 +9,8 @@ namespace MyBudget.UI.Core.Popups
 {
     public interface IMessageBoxService
     {
+        void ShowMessageBox(string caption, string conent);
+        void ShowMessageBox(string caption, string conent, MessageBoxButton buttons);
         void ShowMessageBox(string caption, string conent, MessageBoxButton buttons, Action<MessageBoxResult> continuation);
     }
 }

@@ -70,6 +70,15 @@ namespace MyBudget.UI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Znaleziono {0} operacji z konfliktami{1}{2}.
+        /// </summary>
+        internal static string ConflictsTextTemplate {
+            get {
+                return ResourceManager.GetString("ConflictsTextTemplate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         internal static string EndDate {

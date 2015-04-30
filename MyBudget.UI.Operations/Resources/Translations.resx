@@ -123,6 +123,12 @@
   <data name="ClearCategories" xml:space="preserve">
     <value>Clear categories</value>
   </data>
+  <data name="ConfirmationCaption" xml:space="preserve">
+    <value>ConfirmationCaption</value>
+  </data>
+  <data name="ConfirmationText" xml:space="preserve">
+    <value>Are you sure you want to remove category and subcategory in all visible operations?</value>
+  </data>
   <data name="ContextMenu_CreateRule" xml:space="preserve">
     <value>Create rule</value>
   </data>
@@ -140,6 +146,9 @@
   </data>
   <data name="OperationNotLoaded" xml:space="preserve">
     <value>No operation selected</value>
+  </data>
+  <data name="OperationsClassificationConfirmation" xml:space="preserve">
+    <value>For {0} operations assigned category.{1}For {2} operations category was not assigned.</value>
   </data>
   <data name="SeparateText" xml:space="preserve">
     <value>Separate categories</value>

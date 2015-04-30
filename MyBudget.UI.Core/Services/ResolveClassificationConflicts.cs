@@ -1,4 +1,5 @@
 ﻿using MyBudget.Classification;
+using MyBudget.UI.Core.Popups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,13 @@ namespace MyBudget.UI.Core.Services
 {
     public class ResolveClassificationConflicts : IResolveClassificationConflicts
     {
+        IMessageBoxService _messageBoxService;
+
+        public ResolveClassificationConflicts(IMessageBoxService messageBoxService)
+        {
+            _messageBoxService = messageBoxService;
+        }
+
         public void ResolveConflicts(IEnumerable<ClassificationResult> classificationResult)
         {
             var withConflicts = classificationResult.Where(a => a.Matches.Count() > 1).ToArray();
@@ -26,10 +34,14 @@ namespace MyBudget.UI.Core.Services
                     }
                     txt += Environment.NewLine;
                 }
-                System.Windows.MessageBox.Show(string.Format("Znaleziono {0} operacji z konfliktami{1}{2}",
+
+                string content = string.Format(
+                    Resources.Translations.ConflictsTextTemplate,
                     withConflicts.Count(),
                     Environment.NewLine,
-                    txt));
+                    txt);
+
+                _messageBoxService.ShowMessageBox("Info", content);
             }
         }
     }

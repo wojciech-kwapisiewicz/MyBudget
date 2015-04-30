@@ -6,6 +6,7 @@ using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.OperationsLoading;
 using MyBudget.OperationsLoading.ImportData;
+using MyBudget.UI.Core.Popups;
 using MyBudget.UI.Core.Services;
 using System;
 using System.Collections;
@@ -25,12 +26,14 @@ namespace MyBudget.UI.Accounts
         private IEnumerable<IParser> _supportedParsers;
         private OperationsImporter _importer;
         private IResolveClassificationConflicts _resolveConflicts;
+        private IMessageBoxService _messageBoxService;
 
         private IContext _context;
         private IRepository<BankOperation> _operationRepository;
         private IRepository<BankStatement> _statementsRepository;        
 
-        public StatementsViewModel(IContext context, IParser[] supportedParsers, IResolveClassificationConflicts resolveConflicts)
+        public StatementsViewModel(IContext context, IParser[] supportedParsers, 
+            IResolveClassificationConflicts resolveConflicts, IMessageBoxService messageBoxService)
         {
             _context = context;
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
@@ -38,6 +41,7 @@ namespace MyBudget.UI.Accounts
 
             _supportedParsers = supportedParsers.OrderBy(a => a.Name);
             _importer = new OperationsImporter(_operationRepository, _statementsRepository);
+            _messageBoxService = messageBoxService;
             _resolveConflicts = resolveConflicts;
             
             ApplyRules = true;
@@ -150,9 +154,11 @@ namespace MyBudget.UI.Accounts
                 var assigned = classifier.ApplyClassificationResult(classificationResult);
                 var unassigned = classificationResult.Count() - assigned;
 
-                MessageBox.Show(string.Format(
-                    "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
-                    assigned, Environment.NewLine, unassigned));
+                string conent = string.Format(
+                    Resources.Translations.OperationsClassificationResultTextTemplate,
+                    assigned, Environment.NewLine, unassigned);
+
+                _messageBoxService.ShowMessageBox("Info", conent);
             }
 
             _context.SaveChanges();
@@ -194,14 +200,17 @@ namespace MyBudget.UI.Accounts
 
         public void DeleteSelected()
         {
-            var result = MessageBox.Show(
-                Resources.Translations.DeleteStatementWarningText,
+            _messageBoxService.ShowMessageBox(
                 Resources.Translations.DeleteStatementWarningCaption,
-                System.Windows.MessageBoxButton.YesNo);
-            if (result == System.Windows.MessageBoxResult.Yes)
-            {
-                DoDelete();
-            }
+                Resources.Translations.DeleteStatementWarningText,
+                System.Windows.MessageBoxButton.YesNo,
+                r =>{
+                        if (r == System.Windows.MessageBoxResult.Yes)
+                        {
+                            DoDelete();
+                        }
+                    }
+                );
         }
 
         public bool CanDelete()

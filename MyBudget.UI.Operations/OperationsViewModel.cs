@@ -6,6 +6,7 @@ using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.UI.Configuration;
 using MyBudget.UI.Core;
+using MyBudget.UI.Core.Popups;
 using MyBudget.UI.Core.Services;
 using System;
 using System.Collections.Generic;
@@ -23,14 +24,17 @@ namespace MyBudget.UI.Operations
 
         private IResolveClassificationConflicts _resolveConflicts;
         private IRegionManager _regionManager;
+        private IMessageBoxService _messageBoxService;
 
-        public OperationsViewModel(IContext context, IRegionManager regionManager, IResolveClassificationConflicts resolveConflicts)
+        public OperationsViewModel(IContext context, IRegionManager regionManager, 
+            IResolveClassificationConflicts resolveConflicts, IMessageBoxService messageBoxService)
         {
             _context = context;
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
 
             _resolveConflicts = resolveConflicts;
-            _regionManager = regionManager;            
+            _regionManager = regionManager;
+            _messageBoxService = messageBoxService;
 
             InitializeFilteringProperties();
             InitializeGrouppingProperties();
@@ -367,25 +371,33 @@ namespace MyBudget.UI.Operations
             var assigned = classifier.ApplyClassificationResult(classificationResult);
             var unassigned = classificationResult.Count() - assigned;
 
-            MessageBox.Show(string.Format(
-                "Dla {0} operacji przypisano kategorię.{1}Dla {2} operacji nie przypisano kategorii.",
-                assigned, Environment.NewLine, unassigned));
+            _messageBoxService.ShowMessageBox(
+                "Info",
+                string.Format(
+                    Resources.Translations.OperationsClassificationConfirmation,
+                    assigned,
+                    Environment.NewLine,
+                    unassigned));
         }
         
         public DelegateCommand ClearRules { get; set; }
         private void DoClearRules()
         {
-            if (MessageBoxResult.Yes == MessageBox.Show(
-                "Na pewno usunąć kategorię i podkategorię we wszystkich operacjach?",
-                "Potwierdź",
-                MessageBoxButton.YesNo))
-            {
-                foreach (var item in Data.OfType<BankOperation>())
+            _messageBoxService.ShowMessageBox(
+                Resources.Translations.ConfirmationCaption,
+                Resources.Translations.ConfirmationText,
+                MessageBoxButton.YesNo,
+                result =>
                 {
-                    item.Category = null;
-                    item.SubCategory = null;
-                }
-            }
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (var item in Data.OfType<BankOperation>())
+                        {
+                            item.Category = null;
+                            item.SubCategory = null;
+                        }
+                    }
+                });
         }
 
         public Action<BankOperation> OperationHasBeenSelected { private get; set; }
