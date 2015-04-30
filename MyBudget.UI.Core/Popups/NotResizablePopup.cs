@@ -14,8 +14,24 @@ namespace MyBudget.UI.Core.Popups
         protected override Window GetWindow(INotification notification)
         {
             var window = base.GetWindow(notification);
-            window.ResizeMode = ResizeMode.NoResize;            
+            window.ResizeMode = ResizeMode.NoResize;
+            window.SizeToContent = SizeToContent.WidthAndHeight;
             return window;
+        }
+
+        protected override void PrepareContentForWindow(INotification notification, Window wrapperWindow)
+        {
+            base.PrepareContentForWindow(notification, wrapperWindow);
+        }
+
+        protected override Freezable CreateInstanceCore()
+        {
+            return base.CreateInstanceCore();
+        }
+
+        protected override void OnAttached()
+        {
+            base.OnAttached();
         }
     }
 }

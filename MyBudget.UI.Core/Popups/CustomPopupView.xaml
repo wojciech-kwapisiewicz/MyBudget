@@ -3,31 +3,29 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
              xmlns:local="clr-namespace:MyBudget.UI.Core.Popups"
-             xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework"
-             Width="250">
-    <Grid>
+             xmlns:w="clr-namespace:System.Windows;assembly=PresentationFramework">
+    <Grid Width="300">
         <Grid.Resources>
             <local:ButtonsToVisibilityConverter x:Key="ButtonConverter" />
         </Grid.Resources>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"
-                              MinWidth="50" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
-        <TextBlock Grid.ColumnSpan="3"
-                   MinWidth="200"
+        <TextBlock Grid.ColumnSpan="6"
                    MinHeight="40"
                    FontFamily="Segoe UI"
                    FontSize="14.667"
                    Foreground="{StaticResource ForegroundBrush}"
-                   Padding="10 0 10 2"
+                   Padding="10 0 10 10"
                    Text="{Binding Notification.Content}"
                    TextWrapping="Wrap" />
         <Button Grid.Row="1"
