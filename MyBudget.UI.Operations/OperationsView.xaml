@@ -57,7 +57,7 @@
                         Orientation="Horizontal">
                 <Button Margin="10 0 0 0"
                         Command="{Binding Save}"
-                        Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
+                        Content="{lex:Loc Piggy:Generic:ButtonSave}" />
                 <Button Margin="10 0 0 0"
                         Command="{Binding ClearRules}"
                         Content="{lex:Loc MyBudget.UI.Operations:Translations:ClearCategories}" />

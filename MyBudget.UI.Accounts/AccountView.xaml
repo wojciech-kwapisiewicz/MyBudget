@@ -1,15 +1,19 @@
 ﻿<UserControl x:Class="MyBudget.UI.Accounts.AccountView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:lex="http://wpflocalizeextension.codeplex.com"
-             mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             mc:Ignorable="d">
     <StackPanel x:Name="Wrapper">
-        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-            <Button Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" Command="{Binding ViewModel.Save}" />
-            <Button Content="{lex:Loc MyBudget.UI:Generic:ButtonCancel}" Command="{Binding ViewModel.GoBack}" />
+        <StackPanel HorizontalAlignment="Right"
+                    Orientation="Horizontal">
+            <Button Command="{Binding ViewModel.Save}"
+                    Content="{lex:Loc Piggy:Generic:ButtonSave}" />
+            <Button Command="{Binding ViewModel.GoBack}"
+                    Content="{lex:Loc Piggy:Generic:ButtonCancel}" />
         </StackPanel>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,12 +25,24 @@
                 <RowDefinition />
                 <RowDefinition />
             </Grid.RowDefinitions>
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountName}" Grid.Row="0" Grid.Column="0" />
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountNumber}" Grid.Row="1" Grid.Column="0" />
-            <Label Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountDescription}" Grid.Row="2" Grid.Column="0" />
-            <TextBox Text="{Binding ViewModel.Data.Name}" Grid.Row="0" Grid.Column="1"/>
-            <TextBox Text="{Binding ViewModel.Data.Number}" Grid.Row="1" Grid.Column="1"/>
-            <TextBox Text="{Binding ViewModel.Data.Description}" Grid.Row="2" Grid.Column="1"/>
+            <Label Grid.Row="0"
+                   Grid.Column="0"
+                   Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountName}" />
+            <TextBox Grid.Row="0"
+                     Grid.Column="1"
+                     Text="{Binding ViewModel.Data.Name}" />
+            <Label Grid.Row="1"
+                   Grid.Column="0"
+                   Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountNumber}" />
+            <TextBox Grid.Row="1"
+                     Grid.Column="1"
+                     Text="{Binding ViewModel.Data.Number}" />
+            <Label Grid.Row="2"
+                   Grid.Column="0"
+                   Content="{lex:Loc MyBudget.UI.Accounts:Translations:AccountDescription}" />
+            <TextBox Grid.Row="2"
+                     Grid.Column="1"
+                     Text="{Binding ViewModel.Data.Description}" />
         </Grid>
     </StackPanel>
 </UserControl>

@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="MyBudget.UI.Core.Services.CustomPopupView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition MinWidth="50" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <TextBlock Grid.ColumnSpan="3"
+                   MinHeight="40"
+                   MaxWidth="250"
+                   FontFamily="Segoe UI"
+                   FontSize="14.667"
+                   Foreground="{StaticResource ForegroundBrush}"
+                   Padding="10 0 10 2"
+                   Text="{Binding Notification.Content}"
+                   TextWrapping="Wrap" />
+        <Button Grid.Row="1"
+                Grid.Column="1"
+                Margin="5"
+                Click="OkButtonClick"
+                Content="Ok" />
+        <Button Grid.Row="1"
+                Grid.Column="2"
+                Margin="5"
+                Click="CancelButtonClick"
+                Content="Cancel" />
+    </Grid>
+</UserControl>

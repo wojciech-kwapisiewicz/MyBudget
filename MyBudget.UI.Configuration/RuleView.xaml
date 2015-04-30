@@ -14,9 +14,9 @@
         <StackPanel HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button Command="{Binding Save}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonSave}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonSave}" />
             <Button Command="{Binding GoBack}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonCancel}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonCancel}" />
         </StackPanel>
         <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
@@ -91,7 +91,7 @@
                                 Command="{Binding RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}},
                                                   Path=DataContext.DeleteRule}"
                                 CommandParameter="{Binding}"
-                                Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
+                                Content="{lex:Loc Piggy:Generic:ButtonDelete}" />
                         <Label Grid.Row="1"
                                Grid.ColumnSpan="5"
                                Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_RegularExpression}" />

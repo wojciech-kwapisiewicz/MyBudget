@@ -26,13 +26,13 @@
         <StackPanel HorizontalAlignment="Right"
                     Orientation="Horizontal">
             <Button Command="{Binding AddRule}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonAdd}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonAdd}" />
             <Button Command="{Binding EditRule}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonEdit}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonEdit}" />
             <Button Command="{Binding MergeRules}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonMerge}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonMerge}" />
             <Button Command="{Binding DeleteRule}"
-                    Content="{lex:Loc MyBudget.UI:Generic:ButtonDelete}" />
+                    Content="{lex:Loc Piggy:Generic:ButtonDelete}" />
         </StackPanel>
         <!--  ItemsSource="{Binding Data}"  -->
         <ListBox Grid.Row="1"

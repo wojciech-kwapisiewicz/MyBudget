@@ -8,41 +8,6 @@ using System.Threading.Tasks;
 
 namespace MyBudget.UI.Core.Services
 {
-    public class OpenFileResult : IDisposable
-    {
-        public OpenFileResult(IEnumerable<OpenedFile> openedFiles)
-        {
-            OpenedFiles = openedFiles; 
-        }
-
-        public IEnumerable<OpenedFile> OpenedFiles { get; private set; }
-
-        public void Dispose()
-        {
-            foreach (var item in OpenedFiles)
-            {
-                item.Stream.Dispose();
-            }
-        }
-    }
-
-    public class OpenedFile : IDisposable
-    {
-        public OpenedFile(Stream stream, string fileName)
-        {
-            FileName = fileName;
-            Stream = stream;
-        }
-
-        public string FileName { get; private set; }
-        public Stream Stream { get; private set; }
-
-        public void Dispose()
-        {
-            this.Stream.Dispose();
-        }
-    }
-
     public class FileDialogService
     {
         public OpenFileResult OpenFile(string customFilter, bool multiselect)

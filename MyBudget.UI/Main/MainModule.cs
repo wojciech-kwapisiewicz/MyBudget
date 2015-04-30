@@ -30,7 +30,7 @@ namespace MyBudget.UI.Main
 
             //Navigable elements
             _container.RegisterType<object, WelcomePageView>(typeof(WelcomePageView).FullName);
-            _container.RegisterType<object, AboutPageView>(typeof(AboutPageView).FullName);
+            _container.RegisterType<object, AboutPageView>(typeof(AboutPageView).FullName);           
 
             //Starting regions registration
             _regionManager.RegisterViewWithRegion(RegionNames.MainNavigation, typeof(MainNavigationView));

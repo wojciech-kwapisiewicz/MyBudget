@@ -11,12 +11,12 @@
              mc:Ignorable="d">
 
     <StackPanel Margin="50">
-        <TextBlock Text="{lex:Loc MyBudget.UI:Resource:AboutPage_Header}" />
-        <TextBlock Text="{lex:Loc MyBudget.UI:Resource:AboutPage_Info}" />
+        <TextBlock Text="{lex:Loc Piggy:Resource:AboutPage_Header}" />
+        <TextBlock Text="{lex:Loc Piggy:Resource:AboutPage_Info}" />
         <TextBlock>
             <Hyperlink NavigateUri="http://icons8.com/"
                        controls:GoToHyperlink.IsExternal="True">
-                <TextBlock Text="{lex:Loc MyBudget.UI:Resource:AboutPage_IconsText}" />
+                <TextBlock Text="{lex:Loc Piggy:Resource:AboutPage_IconsText}" />
             </Hyperlink>
         </TextBlock>
     </StackPanel>

@@ -13,35 +13,35 @@
             <TextBlock Margin="0 0 0 5"
                        HorizontalAlignment="Center"
                        Style="{StaticResource HeaderTextBlockStyle}"
-                       Text="{lex:Loc MyBudget.UI:Resource:TextBlockNavigation}" />
+                       Text="{lex:Loc Piggy:Resource:TextBlockNavigation}" />
             <controls:MenuButton Icon="{StaticResource homeIco}"
                                  MenuCommand="{Binding NavigateWelcomePage}"
-                                 MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateWelcomePage}" />
+                                 MenuText="{lex:Loc Piggy:Resource:ButtonNavigateWelcomePage}" />
             <controls:MenuButton Icon="{StaticResource statementsIco}"
                                  MenuCommand="{Binding NavigateStatements}"
-                                 MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatements}" />
+                                 MenuText="{lex:Loc Piggy:Resource:ButtonNavigateStatements}" />
             <controls:MenuButton Icon="{StaticResource operationsIco}"
                                  MenuCommand="{Binding NavigateOperations}"
-                                 MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateOperations}" />
+                                 MenuText="{lex:Loc Piggy:Resource:ButtonNavigateOperations}" />
             <controls:MenuButton Icon="{StaticResource statisticsIco}"
                                  MenuCommand="{Binding NavigateStatistics}"
-                                 MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateStatistics}" />
+                                 MenuText="{lex:Loc Piggy:Resource:ButtonNavigateStatistics}" />
 
 
-            <Expander Header="{lex:Loc MyBudget.UI:Resource:ExpanderConfiguration}">
+            <Expander Header="{lex:Loc Piggy:Resource:ExpanderConfiguration}">
                 <StackPanel>
                     <controls:MenuButton Icon="{StaticResource accountsIco}"
                                          MenuCommand="{Binding NavigateAccounts}"
-                                         MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateAccounts}" />
+                                         MenuText="{lex:Loc Piggy:Resource:ButtonNavigateAccounts}" />
                     <controls:MenuButton Icon="{StaticResource settingsIco}"
                                          MenuCommand="{Binding NavigateRules}"
-                                         MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateRules}" />
+                                         MenuText="{lex:Loc Piggy:Resource:ButtonNavigateRules}" />
                     <controls:MenuButton Icon="{StaticResource langSettingsIco}"
                                          MenuCommand="{Binding NavigateLanguageSetup}"
-                                         MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateLanguageSetup}" />
+                                         MenuText="{lex:Loc Piggy:Resource:ButtonNavigateLanguageSetup}" />
                     <controls:MenuButton Icon="{StaticResource aboutIco}"
                                          MenuCommand="{Binding NavigateAboutPage}"
-                                         MenuText="{lex:Loc MyBudget.UI:Resource:ButtonNavigateAboutPage}" />
+                                         MenuText="{lex:Loc Piggy:Resource:ButtonNavigateAboutPage}" />
                 </StackPanel>
             </Expander>
         </StackPanel>

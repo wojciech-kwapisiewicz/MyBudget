@@ -25,7 +25,7 @@
                     Content="Restart" />
         </StackPanel>
         <Label Grid.Row="1"
-               Content="{lex:Loc MyBudget.UI:Resource:TextChooseLanguage}" />
+               Content="{lex:Loc Piggy:Resource:TextChooseLanguage}" />
         <ComboBox Grid.Row="1"
                   Grid.Column="1"
                   ItemsSource="{Binding ViewModel.AvailableLanguages}"
@@ -38,7 +38,7 @@
             </ComboBox.ItemTemplate>
         </ComboBox>
         <Label Grid.Row="2"
-               Content="{lex:Loc MyBudget.UI:Resource:TextChooseInputLanguage}" />
+               Content="{lex:Loc Piggy:Resource:TextChooseInputLanguage}" />
         <ComboBox Grid.Row="2"
                   Grid.Column="1"
                   ItemsSource="{Binding ViewModel.AvailableInputLanguages}"

@@ -14,26 +14,45 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.Practices.Prism.Interactivity;
+using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
+using Microsoft.Practices.Prism.Mvvm;
+using MyBudget.UI.Core.Services;
+using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace MyBudget.UI.Main
 {
-    /// <summary>
-    /// Interaction logic for WelcomePageView.xaml
-    /// </summary>
-    public partial class WelcomePageView : UserControl, IRegionMemberLifetime
+    public class WelcomPageViewModel : BindableBase
     {
-        public WelcomePageView()
+        private string InnerText = "Inner text";
+        private string InnerCaption = "Inner caption";
+
+        private IEventAggregator _eventAggregator;
+
+        public WelcomPageViewModel(IEventAggregator eventAggregator)
         {
-            ShowStandardMsgBox = new DelegateCommand(() => MessageBox.Show("Windows"));
+            _eventAggregator = eventAggregator;
+            ShowStandardMsgBox = new DelegateCommand(() => MessageBox.Show(
+                InnerText, 
+                InnerCaption,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Information,
+                MessageBoxResult.No));
             ShowToolkitMsgBox = new DelegateCommand(ShowToolkig);
-            
-            this.DataContext = this;
-            InitializeComponent();
         }
 
-        public bool KeepAlive
+        private object _Status;
+        public object Status
         {
-            get { return false; }
+            get
+            {
+                return _Status;
+            }
+            set
+            {
+                _Status = value;
+                OnPropertyChanged(() => Status);
+            }
         }
 
         private object _Selected;
@@ -54,11 +73,49 @@ namespace MyBudget.UI.Main
 
         void ShowToolkig()
         {
-            System.Windows.Style style = new System.Windows.Style();
-            style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.YesButtonContentProperty, "Yes, FTW!"));
-            style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonContentProperty, "Omg, no"));
+            ShowMessageBoxEventParameter parameter = new ShowMessageBoxEventParameter()
+            {
+                Buttons = MessageBoxButton.OKCancel,
+                Header = "???",
+                Content = "!!!!",
+                Continuation = Mmm
+            };
+            _eventAggregator.GetEvent<ShowMessageBoxEvent>().Publish(parameter);
+            //System.Windows.Style style = new System.Windows.Style();
+            //style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.YesButtonContentProperty, "Yes, FTW!"));
+            //style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonContentProperty, "Omg, no"));
 
-            Xceed.Wpf.Toolkit.MessageBox.Show("a", "b", MessageBoxButton.YesNo, MessageBoxImage.Information, MessageBoxResult.No, style);
+            //Xceed.Wpf.Toolkit.MessageBox.Show(
+            //    InnerText,
+            //    InnerCaption,
+            //    MessageBoxButton.YesNo,
+            //    MessageBoxImage.Information,
+            //    MessageBoxResult.No,
+            //    style);
         }
+
+
+        void Mmm(MessageBoxResult result)
+        {
+            MessageBox.Show("wow1234");
+        }
+    }
+
+
+    /// <summary>
+    /// Interaction logic for WelcomePageView.xaml
+    /// </summary>
+    public partial class WelcomePageView : UserControl, IRegionMemberLifetime
+    {
+        public WelcomePageView(WelcomPageViewModel view)
+        {
+            this.DataContext = view;
+            InitializeComponent();
+        }
+
+        public bool KeepAlive
+        {
+            get { return false; }
+        }            
     }
 }

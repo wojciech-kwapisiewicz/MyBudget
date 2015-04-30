@@ -36,6 +36,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Prism.Interactivity.5.0.0\lib\NET45\Microsoft.Practices.Prism.Interactivity.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.Prism.PubSubEvents, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Prism.PubSubEvents.1.0.0\lib\portable-sl4+wp7+windows8+net40\Microsoft.Practices.Prism.PubSubEvents.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Interactivity, Version=4.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
@@ -118,9 +122,19 @@
     <Compile Include="Selection\ILabel.cs" />
     <Compile Include="Selection\SelectableItem.cs" />
     <Compile Include="Selection\Splitter.cs" />
+    <Compile Include="Services\CustomPopupView.xaml.cs">
+      <DependentUpon>CustomPopupView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Services\FileDialogService.cs" />
+    <Compile Include="Services\IMessageBoxNotification.cs" />
     <Compile Include="Services\IResolveClassificationConflicts.cs" />
+    <Compile Include="Services\MessageBoxNotification.cs" />
+    <Compile Include="Services\NotResizablePopup.cs" />
+    <Compile Include="Services\OpenedFile.cs" />
+    <Compile Include="Services\OpenFileResult.cs" />
     <Compile Include="Services\ResolveClassificationConflicts.cs" />
+    <Compile Include="Services\ShowMessageBoxEvent.cs" />
+    <Compile Include="Services\ShowMessageBoxEventParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -175,6 +189,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\MenuButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Services\CustomPopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

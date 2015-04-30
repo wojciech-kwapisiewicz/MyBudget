@@ -1,6 +1,4 @@
-﻿using MyBudget.UI.Core;
-using System.ComponentModel;
-using System.Windows;
+﻿using System.Windows;
 
 namespace MyBudget.UI
 {
@@ -9,8 +7,11 @@ namespace MyBudget.UI
     /// </summary>
     public partial class Shell : Window
     {
-        public Shell()
+        public AggregationViewModel ViewModel { get; set; }
+
+        public Shell(AggregationViewModel viewModel)
         {
+            this.DataContext = viewModel;
             InitializeComponent();
         }
     }
