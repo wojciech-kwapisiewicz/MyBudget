@@ -1,6 +1,6 @@
 ﻿using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.PubSubEvents;
-using MyBudget.UI.Core.Services;
+using MyBudget.UI.Core.Popups;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,7 +29,7 @@ namespace MyBudget.UI
                 new MessageBoxNotification()
                 {
                     Content = parameter.Content,
-                    Title = parameter.Header,
+                    Title = parameter.Caption,
                     Buttons = parameter.Buttons,
                     Continuation = parameter.Continuation
                 }, Continuation);
@@ -37,7 +37,10 @@ namespace MyBudget.UI
 
         private void Continuation(MessageBoxNotification n)
         {
-            n.Continuation(n.Result);
+            if (n.Continuation != null)
+            {
+                n.Continuation(n.Result);
+            }
         }
     }
 }

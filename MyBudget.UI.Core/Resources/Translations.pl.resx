@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Anuluj</value>
+  </data>
   <data name="EndDate" xml:space="preserve">
     <value>Data końcowa</value>
   </data>
@@ -135,7 +138,16 @@
   <data name="Month" xml:space="preserve">
     <value>Miesiąc</value>
   </data>
+  <data name="NoButton" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="OkButton" xml:space="preserve">
+    <value>Ok</value>
+  </data>
   <data name="StartDate" xml:space="preserve">
     <value>Data początkowa</value>
+  </data>
+  <data name="YesButton" xml:space="preserve">
+    <value>Tak</value>
   </data>
 </root>

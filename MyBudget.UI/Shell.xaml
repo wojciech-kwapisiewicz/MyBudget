@@ -4,8 +4,8 @@
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:lex="http://wpflocalizeextension.codeplex.com"
         xmlns:local="clr-namespace:MyBudget.UI"
+        xmlns:popups="clr-namespace:MyBudget.UI.Core.Popups;assembly=MyBudget.UI.Core"
         xmlns:prism="http://www.codeplex.com/prism"
-        xmlns:svc="clr-namespace:MyBudget.UI.Core.Services;assembly=MyBudget.UI.Core"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
         Title="Piggy - myBudget"
         Width="900"
@@ -15,12 +15,12 @@
         WindowState="Maximized">
     <i:Interaction.Triggers>
         <prism:InteractionRequestTrigger SourceObject="{Binding NotificationRequest}">
-            <svc:NotResizablePopup CenterOverAssociatedObject="True"
-                                   IsModal="True">
+            <popups:NotResizablePopup CenterOverAssociatedObject="True"
+                                      IsModal="True">
                 <prism:PopupWindowAction.WindowContent>
-                    <svc:CustomPopupView />
+                    <popups:CustomPopupView />
                 </prism:PopupWindowAction.WindowContent>
-            </svc:NotResizablePopup>
+            </popups:NotResizablePopup>
         </prism:InteractionRequestTrigger>
     </i:Interaction.Triggers>
     <Grid>

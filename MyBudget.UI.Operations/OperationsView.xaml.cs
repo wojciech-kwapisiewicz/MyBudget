@@ -1,5 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Regions;
+using MyBudget.UI.Core.Popups;
 using MyBudget.UI.Operations.Resources;
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,13 +13,11 @@ namespace MyBudget.UI.Operations
     /// </summary>
     public partial class OperationsView : UserControl, IConfirmNavigationRequest, IRegionMemberLifetime
     {
-        public OperationsView()
+        private IMessageBoxService _messageBoxService;
+
+        public OperationsView(IMessageBoxService messageBoxService, OperationsViewModel viewModel)
         {
-
-        }
-
-        public OperationsView(OperationsViewModel viewModel)
-        {         
+            _messageBoxService = messageBoxService;
             ViewModel = viewModel;
             viewModel.OperationHasBeenSelected = MoveFocusToCategoryTextBox;
             InitializeComponent();
@@ -39,32 +39,37 @@ namespace MyBudget.UI.Operations
             get { return false; }
         }
 
-        public void ConfirmNavigationRequest(NavigationContext navigationContext, System.Action<bool> continuationCallback)
+        public void ConfirmNavigationRequest(NavigationContext navigationContext, Action<bool> navigationCallback)
         {
             if (ViewModel.ModelHasChanged)
             {
-                var result = MessageBox.Show(
-                    Translations.ShouldSaveText,
+                _messageBoxService.ShowMessageBox(
                     Translations.ShouldSaveCaption,
-                    MessageBoxButton.YesNoCancel);
-                if (result == MessageBoxResult.Cancel)
-                {
-                    continuationCallback(false);
-                }
-                else if (result == MessageBoxResult.No)
-                {
-                    continuationCallback(true);
-                }
-                else if (result == MessageBoxResult.Yes)
-                {
-                    ViewModel.Save.Execute();
-                    continuationCallback(true);
-                }
+                    Translations.ShouldSaveText,
+                    MessageBoxButton.YesNoCancel,
+                    (r) => ContinueNavigation(r, navigationCallback));
             }
             else
             {
-                continuationCallback(true);
-            }          
+                navigationCallback(true);
+            }
+        }
+
+        private void ContinueNavigation(MessageBoxResult result, Action<bool> navigationCallback)
+        {
+            if (result == MessageBoxResult.Cancel)
+            {
+                navigationCallback(false);
+            }
+            else if (result == MessageBoxResult.No)
+            {
+                navigationCallback(true);
+            }
+            else if (result == MessageBoxResult.Yes)
+            {
+                ViewModel.Save.Execute();
+                navigationCallback(true);
+            }
         }
 
         public bool IsNavigationTarget(NavigationContext navigationContext)

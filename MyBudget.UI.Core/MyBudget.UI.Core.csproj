@@ -98,6 +98,7 @@
     <Compile Include="Converters\EmptyToDefaultTextConverter.cs" />
     <Compile Include="Converters\FixedUiToStringConverter.cs" />
     <Compile Include="Converters\InverseNullToVisibilityConverer.cs" />
+    <Compile Include="Popups\ButtonsToVisibilityConverter.cs" />
     <Compile Include="Selection\ISelectionMarker.cs" />
     <Compile Include="Converters\NullToVisibilityConverer.cs" />
     <Compile Include="Converters\SumConverter.cs" />
@@ -122,19 +123,21 @@
     <Compile Include="Selection\ILabel.cs" />
     <Compile Include="Selection\SelectableItem.cs" />
     <Compile Include="Selection\Splitter.cs" />
-    <Compile Include="Services\CustomPopupView.xaml.cs">
+    <Compile Include="Popups\CustomPopupView.xaml.cs">
       <DependentUpon>CustomPopupView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\FileDialogService.cs" />
-    <Compile Include="Services\IMessageBoxNotification.cs" />
+    <Compile Include="Popups\IMessageBoxNotification.cs" />
+    <Compile Include="Popups\IMessageBoxService.cs" />
     <Compile Include="Services\IResolveClassificationConflicts.cs" />
-    <Compile Include="Services\MessageBoxNotification.cs" />
-    <Compile Include="Services\NotResizablePopup.cs" />
+    <Compile Include="Popups\MessageBoxNotification.cs" />
+    <Compile Include="Popups\MessageBoxService.cs" />
+    <Compile Include="Popups\NotResizablePopup.cs" />
     <Compile Include="Services\OpenedFile.cs" />
     <Compile Include="Services\OpenFileResult.cs" />
     <Compile Include="Services\ResolveClassificationConflicts.cs" />
-    <Compile Include="Services\ShowMessageBoxEvent.cs" />
-    <Compile Include="Services\ShowMessageBoxEventParameter.cs" />
+    <Compile Include="Popups\ShowMessageBoxEvent.cs" />
+    <Compile Include="Popups\ShowMessageBoxEventParameter.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -192,7 +195,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Services\CustomPopupView.xaml">
+    <Page Include="Popups\CustomPopupView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

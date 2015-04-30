@@ -13,15 +13,17 @@
              mc:Ignorable="d">
     <StackPanel>
         <TextBlock Text="Witamy w programie" />
+        <TextBlock Text="Notepad/Test area." />
         <StackPanel>
             <Label Content="Ostatnie operacje" />
-            <Button Command="{Binding ShowStandardMsgBox}"
+            <Button Command="{Binding ShowStandardMsgBoxCommand}"
                     Content="Standard" />
-            <Button Command="{Binding ShowToolkitMsgBox}"
+            <Button Command="{Binding ShowToolkitMsgBoxCommand}"
                     Content="WpfToolkit" />
-            <Button Content="Op1" />
-            <Button Command="{Binding NotificationCommand}"
-                    Content="Invoke Prism" />
+            <Button Command="{Binding ShowViaEventAggregatorCommand}"
+                    Content="Via event aggregator" />
+            <Button Command="{Binding ShowViaMessageBoxServiceCommand}"
+                    Content="Via event msg service" />
         </StackPanel>
         <TextBlock Text="Notatnik" />
         <ScrollViewer Height="200">

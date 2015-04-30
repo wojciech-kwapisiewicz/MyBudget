@@ -61,6 +61,15 @@ namespace MyBudget.UI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
         internal static string EndDate {
@@ -115,11 +124,38 @@ namespace MyBudget.UI.Core.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        internal static string NoButton {
+            get {
+                return ResourceManager.GetString("NoButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ok.
+        /// </summary>
+        internal static string OkButton {
+            get {
+                return ResourceManager.GetString("OkButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
         internal static string StartDate {
             get {
                 return ResourceManager.GetString("StartDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        internal static string YesButton {
+            get {
+                return ResourceManager.GetString("YesButton", resourceCulture);
             }
         }
     }

@@ -6,7 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 
-namespace MyBudget.UI.Core.Services
+namespace MyBudget.UI.Core.Popups
 {
     public class ShowMessageBoxEvent : PubSubEvent<ShowMessageBoxEventParameter>
     {

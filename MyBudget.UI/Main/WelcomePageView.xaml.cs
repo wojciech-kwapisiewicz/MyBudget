@@ -17,7 +17,7 @@ using System.Windows.Shapes;
 using Microsoft.Practices.Prism.Interactivity;
 using Microsoft.Practices.Prism.Interactivity.InteractionRequest;
 using Microsoft.Practices.Prism.Mvvm;
-using MyBudget.UI.Core.Services;
+using MyBudget.UI.Core.Popups;
 using Microsoft.Practices.Prism.PubSubEvents;
 
 namespace MyBudget.UI.Main
@@ -28,17 +28,21 @@ namespace MyBudget.UI.Main
         private string InnerCaption = "Inner caption";
 
         private IEventAggregator _eventAggregator;
+        private IMessageBoxService _messageBoxService;
 
-        public WelcomPageViewModel(IEventAggregator eventAggregator)
+        public WelcomPageViewModel(IEventAggregator eventAggregator, IMessageBoxService messageBoxService)
         {
             _eventAggregator = eventAggregator;
-            ShowStandardMsgBox = new DelegateCommand(() => MessageBox.Show(
+            _messageBoxService = messageBoxService;
+            ShowStandardMsgBoxCommand = new DelegateCommand(() => MessageBox.Show(
                 InnerText, 
                 InnerCaption,
                 MessageBoxButton.YesNo,
                 MessageBoxImage.Information,
                 MessageBoxResult.No));
-            ShowToolkitMsgBox = new DelegateCommand(ShowToolkig);
+            ShowToolkitMsgBoxCommand = new DelegateCommand(ShowToolkit);
+            ShowViaEventAggregatorCommand = new DelegateCommand(ShowViaEventAggregator);
+            ShowViaMessageBoxServiceCommand = new DelegateCommand(ShowViaMessageBoxService);
         }
 
         private object _Status;
@@ -68,36 +72,47 @@ namespace MyBudget.UI.Main
             }
         }
 
-        public ICommand ShowStandardMsgBox { get; set; }
-        public ICommand ShowToolkitMsgBox { get; set; }
+        public ICommand ShowStandardMsgBoxCommand { get; set; }
 
-        void ShowToolkig()
+        public ICommand ShowToolkitMsgBoxCommand { get; set; }
+
+        void ShowToolkit()
+        {
+            System.Windows.Style style = new System.Windows.Style();
+            style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.YesButtonContentProperty, "Yes, FTW!"));
+            style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonContentProperty, "Omg, no"));
+
+            Xceed.Wpf.Toolkit.MessageBox.Show(
+                InnerText,
+                InnerCaption,
+                MessageBoxButton.YesNo,
+                MessageBoxImage.Information,
+                MessageBoxResult.No,
+                style);
+        }
+
+        public ICommand ShowViaEventAggregatorCommand { get; set; }
+
+        private void ShowViaEventAggregator()
         {
             ShowMessageBoxEventParameter parameter = new ShowMessageBoxEventParameter()
             {
                 Buttons = MessageBoxButton.OKCancel,
-                Header = "???",
-                Content = "!!!!",
-                Continuation = Mmm
+                Caption = "???",
+                Content = "!!!!"
             };
             _eventAggregator.GetEvent<ShowMessageBoxEvent>().Publish(parameter);
-            //System.Windows.Style style = new System.Windows.Style();
-            //style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.YesButtonContentProperty, "Yes, FTW!"));
-            //style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonContentProperty, "Omg, no"));
-
-            //Xceed.Wpf.Toolkit.MessageBox.Show(
-            //    InnerText,
-            //    InnerCaption,
-            //    MessageBoxButton.YesNo,
-            //    MessageBoxImage.Information,
-            //    MessageBoxResult.No,
-            //    style);
         }
 
+        public ICommand ShowViaMessageBoxServiceCommand { get; set; }
 
-        void Mmm(MessageBoxResult result)
+        private void ShowViaMessageBoxService()
         {
-            MessageBox.Show("wow1234");
+            _messageBoxService.ShowMessageBox(
+                "Sent via service", 
+                "Conent was sent via service. How cool is that? :)",
+                MessageBoxButton.OKCancel, 
+                null);
         }
     }
 
