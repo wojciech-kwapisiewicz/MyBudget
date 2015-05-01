@@ -78,9 +78,36 @@ namespace MyBudget.UI.Main
 
         void ShowToolkit()
         {
+
+            //var buttonStyle = Application.Current.FindResource("LabelTemplate") as Style;
+            //List<KeyValuePair<object, object>> styles = new List<KeyValuePair<object, object>>();
+
+            //foreach (var dictionary in Application.Current.Resources.MergedDictionaries)
+            //{
+            //    foreach (var key in dictionary.Keys)
+            //    {
+            //        styles.Add(new KeyValuePair<object, object>(key, dictionary[key]));
+            //    }
+            //}
+
+            //var keys = styles.Select(a => a.Key);
+            //var unique = styles.Count == keys.Distinct().Count();
+
+
+            var buttonDefaultStyle = (Style)Application.Current.FindResource(typeof(Button));
+
+            //var buttonStyles = styles.Where(a => a.Value is Style && ((Style)a.Value)
+            //    .TargetType == typeof(Button)).ToArray();
             System.Windows.Style style = new System.Windows.Style();
             style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.YesButtonContentProperty, "Yes, FTW!"));
             style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonContentProperty, "Omg, no"));
+            style.Setters.Add(new Setter(Xceed.Wpf.Toolkit.MessageBox.NoButtonStyleProperty, buttonDefaultStyle));
+
+
+            var b = new Xceed.Wpf.Toolkit.MessageBox();
+            b.OkButtonStyle = buttonDefaultStyle;
+            var x = b.ShowDialog();
+
 
             Xceed.Wpf.Toolkit.MessageBox.Show(
                 InnerText,
@@ -125,7 +152,7 @@ namespace MyBudget.UI.Main
         public WelcomePageView(WelcomPageViewModel view)
         {
             this.DataContext = view;
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         public bool KeepAlive

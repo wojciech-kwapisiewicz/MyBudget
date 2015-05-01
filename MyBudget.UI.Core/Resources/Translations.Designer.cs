@@ -22,7 +22,7 @@ namespace MyBudget.UI.Core.Resources {
     [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    internal class Translations {
+    public class Translations {
         
         private static global::System.Resources.ResourceManager resourceMan;
         
@@ -36,7 +36,7 @@ namespace MyBudget.UI.Core.Resources {
         ///   Returns the cached ResourceManager instance used by this class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Resources.ResourceManager ResourceManager {
+        public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
                     global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyBudget.UI.Core.Resources.Translations", typeof(Translations).Assembly);
@@ -51,7 +51,7 @@ namespace MyBudget.UI.Core.Resources {
         ///   resource lookups using this strongly typed resource class.
         /// </summary>
         [global::System.ComponentModel.EditorBrowsableAttribute(global::System.ComponentModel.EditorBrowsableState.Advanced)]
-        internal static global::System.Globalization.CultureInfo Culture {
+        public static global::System.Globalization.CultureInfo Culture {
             get {
                 return resourceCulture;
             }
@@ -63,7 +63,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
-        internal static string CancelButton {
+        public static string CancelButton {
             get {
                 return ResourceManager.GetString("CancelButton", resourceCulture);
             }
@@ -72,7 +72,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Znaleziono {0} operacji z konfliktami{1}{2}.
         /// </summary>
-        internal static string ConflictsTextTemplate {
+        public static string ConflictsTextTemplate {
             get {
                 return ResourceManager.GetString("ConflictsTextTemplate", resourceCulture);
             }
@@ -81,7 +81,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to End date.
         /// </summary>
-        internal static string EndDate {
+        public static string EndDate {
             get {
                 return ResourceManager.GetString("EndDate", resourceCulture);
             }
@@ -90,7 +90,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to All files (*.*)|*.*.
         /// </summary>
-        internal static string FilterAllFiles {
+        public static string FilterAllFiles {
             get {
                 return ResourceManager.GetString("FilterAllFiles", resourceCulture);
             }
@@ -99,7 +99,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Supported (*.txt,*.csv,*.xml,*.pdf)|*.txt;*.csv;*.xml;*.pdf.
         /// </summary>
-        internal static string FilterAllSupported {
+        public static string FilterAllSupported {
             get {
                 return ResourceManager.GetString("FilterAllSupported", resourceCulture);
             }
@@ -108,7 +108,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Filter by month.
         /// </summary>
-        internal static string FilterByMonth {
+        public static string FilterByMonth {
             get {
                 return ResourceManager.GetString("FilterByMonth", resourceCulture);
             }
@@ -117,7 +117,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Filter by range.
         /// </summary>
-        internal static string FilterByRange {
+        public static string FilterByRange {
             get {
                 return ResourceManager.GetString("FilterByRange", resourceCulture);
             }
@@ -126,7 +126,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Month.
         /// </summary>
-        internal static string Month {
+        public static string Month {
             get {
                 return ResourceManager.GetString("Month", resourceCulture);
             }
@@ -135,7 +135,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to No.
         /// </summary>
-        internal static string NoButton {
+        public static string NoButton {
             get {
                 return ResourceManager.GetString("NoButton", resourceCulture);
             }
@@ -144,7 +144,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Ok.
         /// </summary>
-        internal static string OkButton {
+        public static string OkButton {
             get {
                 return ResourceManager.GetString("OkButton", resourceCulture);
             }
@@ -153,7 +153,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Start date.
         /// </summary>
-        internal static string StartDate {
+        public static string StartDate {
             get {
                 return ResourceManager.GetString("StartDate", resourceCulture);
             }
@@ -162,7 +162,7 @@ namespace MyBudget.UI.Core.Resources {
         /// <summary>
         ///   Looks up a localized string similar to Yes.
         /// </summary>
-        internal static string YesButton {
+        public static string YesButton {
             get {
                 return ResourceManager.GetString("YesButton", resourceCulture);
             }

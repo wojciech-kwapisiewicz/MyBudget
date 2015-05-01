@@ -15,7 +15,8 @@ namespace MyBudget.UI.Core.Popups
         {
             var window = base.GetWindow(notification);
             window.ResizeMode = ResizeMode.NoResize;
-            window.SizeToContent = SizeToContent.WidthAndHeight;
+            window.Width = 400;
+            window.SizeToContent = SizeToContent.Height;
             return window;
         }
 
