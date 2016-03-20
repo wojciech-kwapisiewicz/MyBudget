@@ -1,2 +1,0 @@
-Sometimes nuget packages are so big that is is pointless to install it if you need just a fraction of functionality served by them:
-like pdfbox

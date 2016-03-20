@@ -365,7 +365,33 @@ namespace MyBudget.UI.Operations
             var classifier = new OperationsClassifier(
                 _context.GetRepository<IRepository<ClassificationDefinition>>(),
                 _context.GetRepository<IRepository<BankAccount>>());
-            var classificationResult = classifier.ClasifyOpearations(Data.OfType<BankOperation>());
+
+            _messageBoxService.ShowMessageBox(
+                "Uwaga",
+                "Czy klasyfikować również te które już mają przypisane kategorie?",
+                MessageBoxButton.YesNo,
+                result =>
+                {                    
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        DoApplyRulesToPickedOperations(
+                            classifier,
+                            Data.OfType<BankOperation>());
+                    }
+                    else
+                    {
+                        DoApplyRulesToPickedOperations(
+                            classifier,
+                            Data.OfType<BankOperation>().Where(a =>
+                                string.IsNullOrEmpty(a.Category) &&
+                                string.IsNullOrEmpty(a.SubCategory)));
+                    }
+                });
+        }
+
+        private void DoApplyRulesToPickedOperations(OperationsClassifier classifier, IEnumerable<BankOperation> operations)
+        {
+            var classificationResult = classifier.ClasifyOpearations(operations);
 
             _resolveConflicts.ResolveConflicts(classificationResult);
             var assigned = classifier.ApplyClassificationResult(classificationResult);
