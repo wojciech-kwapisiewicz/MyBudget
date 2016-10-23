@@ -77,6 +77,8 @@
   <ItemGroup>
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\MilleniumParser_Sample1Entry.csv" />
+    <None Include="Resources\BGZParser_LongDescPayment.csv" />
+    <None Include="Resources\BGZParser_StandardCases.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">
