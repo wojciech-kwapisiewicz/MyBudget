@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BgzBnpParibasName" xml:space="preserve">
+    <value>BGZ BNP Paribas operations</value>
+  </data>
+  <data name="CsvFilter" xml:space="preserve">
+    <value>(.csv)|*.csv</value>
+  </data>
   <data name="MilleniumFilter" xml:space="preserve">
     <value>Millenium operations (.csv)|*.csv</value>
   </data>

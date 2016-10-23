@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BgzBnpParibas\BgzBnpParibasParserTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />

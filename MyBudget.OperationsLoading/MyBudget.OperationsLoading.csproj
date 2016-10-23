@@ -49,6 +49,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BgzBnpParibas\BgzBnpParibasParser.cs" />
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />
     <Compile Include="ImportData\CheckStatus.cs" />
