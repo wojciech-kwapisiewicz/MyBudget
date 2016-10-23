@@ -33,8 +33,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
             }
         }
 
-        ParseHelper _parseHelper;
-        IFillOperationFromDescriptionChain _fillDescription;
+        private ParseHelper _parseHelper;
+        private IFillOperationFromDescriptionChain _fillDescription;
         private IRepositoryHelper _repositoryHelper;
 
         public BgzBnpParibasParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IFillOperationFromDescriptionChain fillDescription)

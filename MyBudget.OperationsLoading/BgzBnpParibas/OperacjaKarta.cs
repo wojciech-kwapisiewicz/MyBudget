@@ -26,6 +26,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
                 throw new ArgumentNullException("next");
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
+            if (parseHelper == null)
+                throw new ArgumentNullException("parseHelper");
             _next = next;
             _repositoryHelper = repositoryHelper;
             _parseHelper = parseHelper;
