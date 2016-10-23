@@ -21,6 +21,8 @@ namespace MyBudget.XmlPersistance.Configuration
 
             unityContainer.RegisterType<IRepository<BankAccount>, BankAccountXmlRepository>();
             unityContainer.RegisterType<IRepository<BankAccount, string>, BankAccountXmlRepository>();
+            unityContainer.RegisterType<IRepository<Card>, CardXmlRepository>();
+            unityContainer.RegisterType<IRepository<Card, string>, CardXmlRepository>();
             unityContainer.RegisterType<IRepository<BankOperation>, BankOperationXmlRepository>();
             unityContainer.RegisterType<IRepository<BankOperation, int>, BankOperationXmlRepository>();
             unityContainer.RegisterType<IRepository<BankOperationType>, BankOperationTypeXmlRepository>();

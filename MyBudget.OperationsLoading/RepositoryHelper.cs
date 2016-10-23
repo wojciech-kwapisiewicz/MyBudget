@@ -62,7 +62,7 @@ namespace MyBudget.OperationsLoading
         public BankOperationType GetOrAddOperationType(string typeName)
         {
             BankOperationType operationType = _bankOperationTypeRepository
-                .GetAll().Where(a => a.Name == typeName || a.AlternativeNames.Contains(typeName))
+                .GetAll().Where(a => a.Name == typeName || a.AlternativeNames == typeName)
                 .SingleOrDefault();
             if (operationType == null)
             {

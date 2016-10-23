@@ -22,11 +22,12 @@ namespace MyBudget.XmlPersistance.Tests
         internal XmlRepositoryFactory GetRepoFactory()
         {
             BankAccountXmlRepository ba = new BankAccountXmlRepository();
+            CardXmlRepository ca = new CardXmlRepository();
             BankOperationTypeXmlRepository bt = new BankOperationTypeXmlRepository();
             BankStatementXmlRepository bs = new BankStatementXmlRepository();
             BankOperationXmlRepository bo = new BankOperationXmlRepository(ba, bt, bs);
             ClassificationDefinitionXmlRepository cr = new ClassificationDefinitionXmlRepository();
-            return new XmlRepositoryFactory(ba, bt, bs, bo, cr);
+            return new XmlRepositoryFactory(ba, ca, bt, bs, bo, cr);
         }
 
         internal XmlContext GetNewContext()

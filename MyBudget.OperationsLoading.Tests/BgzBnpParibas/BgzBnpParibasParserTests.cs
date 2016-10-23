@@ -79,7 +79,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         public Stream ToStream(string text)
         {
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
             writer.Write(text);
             writer.Flush();
             stream.Position = 0;
@@ -96,6 +96,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Type.Name == "PRZELEW PRZYCHODZĄCY" &&
                 op.Cleared == true &&
                 op.Description == "ABC WYPŁATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa" &&
+                op.Title == "ABC WYPŁATA 01 10 20" &&
                 op.EndingBalance == 1000.12M &&
                 op.CounterAccount == "01234567890123456789012345");
 
@@ -107,6 +108,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Type.Name == "PRZELEW" &&
                 op.Cleared == true &&
                 op.Description == "Abc" &&
+                op.Title == "Abc" &&
                 op.EndingBalance == 899.56M &&
                 op.CounterAccount == "01234567890123456789012346");
 
@@ -118,6 +120,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Type.Name == "PRZELEW DO INNEGO BANKU" &&
                 op.Cleared == true &&
                 op.Description == "asadfasfdsaf" &&
+                op.Title == "asadfasfdsaf" &&
                 op.EndingBalance == 895.56M &&
                 op.CounterAccount == "01234567890123456789012347");
 
@@ -129,6 +132,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Type.Name == "WYPŁATA KARTĄ Z BANKOMATU" &&
                 op.Cleared == true &&
                 op.Description == "WYPŁATA KARTĄ Z BANKOMATU A111 BANK1 SA" &&
+                op.Title == "WYPŁATA KARTĄ Z BANK" &&
                 op.EndingBalance == 885.45M &&
                 op.Card.CardNumber == "123456XXXXXX7890");
 
@@ -140,6 +144,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Type.Name == "TRANSAKCJA KARTĄ PŁATNICZĄ" &&
                 op.Cleared == true &&
                 op.Description == "SKLEP SPOZYWCZY" &&
+                op.Title == "SKLEP SPOZYWCZY" &&
                 op.EndingBalance == 862.45M &&
                 op.Card.CardNumber == "123456XXXXXX7891");
         }

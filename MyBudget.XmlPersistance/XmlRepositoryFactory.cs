@@ -27,13 +27,14 @@ namespace MyBudget.XmlPersistance
 
         public XmlRepositoryFactory(
             BankAccountXmlRepository ba,
+            CardXmlRepository ca,
             BankOperationTypeXmlRepository bot,
             BankStatementXmlRepository bs,
             BankOperationXmlRepository bo,
             ClassificationDefinitionXmlRepository cr
             )
         {
-            foreach (var repo in new IRepository[] { ba, bot, bs, bo, cr })
+            foreach (var repo in new IRepository[] { ba, ca, bot, bs, bo, cr })
             {
                 RegisterRepository(repo);
             }              

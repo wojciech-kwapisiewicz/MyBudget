@@ -38,5 +38,14 @@ namespace MyBudget.OperationsLoading
                 CultureInfo.GetCultureInfo("pl"));
             return parsedAmount;
         }
+
+        public string GetFirstNCharacters(string description, int n = 30)
+        {
+            if (description.Length > n)
+            {
+                return description.Substring(0, n);
+            }
+            return description;
+        }
     }
 }

@@ -85,7 +85,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                 .Replace(" ", "");
             string typeName = entries[3];
             string description = entries[6];
-            string title = ExtractTitle(description);
+            string title = _parseHelper.GetFirstNCharacters(description, 30);
 
             BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
 
@@ -113,16 +113,6 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                 Type = _repositoryHelper.GetOrAddOperationType(typeName),
                 Cleared = true
             };
-        }
-
-        private string ExtractTitle(string description)
-        {
-            int maxDesc = 20;
-            if (description.Length > maxDesc)
-            {
-                return description.Substring(0, maxDesc);
-            }
-            return description;
         }
     }
 }

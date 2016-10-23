@@ -58,7 +58,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         public Stream ToStream(string text)
         {
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
+            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
             writer.Write(text);
             writer.Flush();
             stream.Position = 0;
@@ -68,7 +68,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
             List<BankOperation> operations = new List<BankOperation>();
-            using (var reader = new CsvReader(new StreamReader(stream), true, ';'))
+            using (var reader = new CsvReader(new StreamReader(stream, Encoding.Default), true, ';'))
             {
                 while (reader.ReadNextRecord())
                 {
@@ -79,6 +79,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
                     operation.Amount = _parseHelper.ParseDecimalInvariant(reader[1]);
                     operation.EndingBalance = _parseHelper.ParseDecimalInvariant(reader[3]);
                     _fillDescription.Match(operation, reader[2]);
+                    operation.Title = _parseHelper.GetFirstNCharacters(operation.Description, 30);
                     operations.Add(operation);
                 }
             }

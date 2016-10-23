@@ -42,6 +42,11 @@ namespace MyBudget.XmlPersistance
             {
                 _repositoryFactory.GetRepository<BankAccountXmlRepository>().Load(accountsElement);
             }
+            XElement cardsElement = dataToLoad.Element("ArrayOfCard");
+            if (cardsElement != null)
+            {
+                _repositoryFactory.GetRepository<CardXmlRepository>().Load(cardsElement);
+            }
             XElement statementsElement = dataToLoad.Element("ArrayOfBankStatement");
             if (statementsElement != null)
             {
@@ -76,6 +81,7 @@ namespace MyBudget.XmlPersistance
         {
             XElement el = new XElement("savedData");
             el.Add(_repositoryFactory.GetRepository<BankAccountXmlRepository>().Save());
+            el.Add(_repositoryFactory.GetRepository<CardXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankStatementXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationTypeXmlRepository>().Save());
             el.Add(_repositoryFactory.GetRepository<BankOperationXmlRepository>().Save());

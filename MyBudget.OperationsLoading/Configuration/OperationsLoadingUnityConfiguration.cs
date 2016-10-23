@@ -1,4 +1,5 @@
 ﻿using Microsoft.Practices.Unity;
+using MyBudget.OperationsLoading.BgzBnpParibas;
 using MyBudget.OperationsLoading.MilleniumAccount;
 using MyBudget.OperationsLoading.PkoBpAccount;
 using MyBudget.OperationsLoading.PkoBpCreditCard;
@@ -21,6 +22,17 @@ namespace MyBudget.OperationsLoading.Configuration
             unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
             unityContainer.RegisterType<IParser, PkoBpCreditCardUnclearedParser>("Pko BP credit card parser");
             unityContainer.RegisterType<IParser, PkoBpCreditClearedParser>("Pko BP credit card cleared parser");
+
+            Func<IUnityContainer, object> createChain = container =>
+                new WyplataBankomat(container.Resolve<IRepositoryHelper>(), container.Resolve<ParseHelper>(),
+                new OperacjaKarta(container.Resolve<IRepositoryHelper>(), container.Resolve<ParseHelper>(),
+                new Przelew(container.Resolve<IRepositoryHelper>(),
+                new PrzelewPrzychodzacy(container.Resolve<IRepositoryHelper>(), container.Resolve<ParseHelper>(),
+                new PrzelewWychodzacy(container.Resolve<IRepositoryHelper>(),
+                new InnaOperacja(container.Resolve<IRepositoryHelper>()))))));
+            unityContainer.RegisterType<IFillOperationFromDescriptionChain>(new InjectionFactory(createChain));
+
+            unityContainer.RegisterType<IParser, BgzBnpParibasParser>("BGZ BPN Paribas account parser");
         }
-    }   
+    }
 }
