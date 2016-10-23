@@ -18,6 +18,7 @@ namespace MyBudget.Core.UnitTests.ImportData
     {
         private Mock<IRepository<BankAccount, string>> accountRepo;
         private Mock<IRepository<BankOperationType, string>> typeRepo;
+        private Mock<IRepository<Card, string>> cardRepo;
         private MilleniumParser parser;
 
         [SetUp]
@@ -25,7 +26,8 @@ namespace MyBudget.Core.UnitTests.ImportData
         {
             this.accountRepo = new Mock<IRepository<BankAccount, string>>();
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
-            this.parser = new MilleniumParser(new ParseHelper(), new RepositoryHelper(accountRepo.Object, typeRepo.Object));
+            this.cardRepo = new Mock<IRepository<Card, string>>();
+            this.parser = new MilleniumParser(new ParseHelper(), new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object));
         }
 
         [Test]

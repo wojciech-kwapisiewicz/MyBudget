@@ -21,6 +21,7 @@ namespace MyBudget.Core.UnitTests.ImportData
     {
         Mock<IRepository<BankAccount, string>> accountRepo;
         Mock<IRepository<BankOperationType, string>> typeRepo;
+        Mock<IRepository<Card, string>> cardRepo;
         PkoBpParser parser;
 
         [SetUp]
@@ -28,7 +29,8 @@ namespace MyBudget.Core.UnitTests.ImportData
         {
             this.accountRepo = new Mock<IRepository<BankAccount, string>>();
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
-            this.parser = new PkoBpParser(new ParseHelper(), new RepositoryHelper(accountRepo.Object, typeRepo.Object));
+            this.cardRepo = new Mock<IRepository<Card, string>>();
+            this.parser = new PkoBpParser(new ParseHelper(), new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object));
         }
 
         [Test]

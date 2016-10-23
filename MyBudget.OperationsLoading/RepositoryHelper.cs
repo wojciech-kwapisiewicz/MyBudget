@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace MyBudget.OperationsLoading
 {
@@ -12,17 +13,22 @@ namespace MyBudget.OperationsLoading
     {
         private IRepository<BankAccount, string> _bankAccountRepository;
         private IRepository<BankOperationType, string> _bankOperationTypeRepository;
+        private IRepository<Card, string> _cardRepository;
 
         public RepositoryHelper(
             IRepository<BankAccount, string> bankAccountRepository,
-            IRepository<BankOperationType, string> bankOperationTypeRepository)
+            IRepository<BankOperationType, string> bankOperationTypeRepository,
+            IRepository<Card, string> cardRepository)
         {
             if (bankAccountRepository == null)
                 throw new ArgumentNullException("bankAccountRepository");
             if (bankOperationTypeRepository == null)
                 throw new ArgumentNullException("bankOperationTypeRepository");
+            if (cardRepository == null)
+                throw new ArgumentNullException("cardRepository");
             _bankAccountRepository = bankAccountRepository;
             _bankOperationTypeRepository = bankOperationTypeRepository;
+            _cardRepository = cardRepository;
         }
 
         public BankAccount GetOrAddAccount(string accountNumber)
@@ -38,6 +44,19 @@ namespace MyBudget.OperationsLoading
             }
 
             return account;
+        }
+
+        public Card GetOrAddCard(string cardNumber)
+        {
+            Card card = _cardRepository.Get(cardNumber);
+            if (card == null)
+            {
+                card = new Card();
+                card.CardNumber = cardNumber;
+                _cardRepository.Add(card);
+            }
+
+            return card;
         }
 
         public BankOperationType GetOrAddOperationType(string typeName)

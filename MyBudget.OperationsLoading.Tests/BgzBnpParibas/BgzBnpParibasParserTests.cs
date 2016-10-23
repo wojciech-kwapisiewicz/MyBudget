@@ -6,6 +6,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,7 +19,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         private Mock<IRepository<BankAccount, string>> accountRepo;
         private Mock<IRepository<BankOperationType, string>> typeRepo;
         private Mock<IRepository<Card, string>> cardRepo;
+        private RepositoryHelper repositoryHelper;
         private BgzBnpParibasParser parser;
+        private ParseHelper parseHelper = new ParseHelper();
 
         [SetUp]
         public void SetUp()
@@ -26,7 +29,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             this.accountRepo = new Mock<IRepository<BankAccount, string>>();
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
             this.cardRepo = new Mock<IRepository<Card, string>>();
-            this.parser = new BgzBnpParibasParser();
+            this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
+            this.parser = new BgzBnpParibasParser(
+                parseHelper, repositoryHelper, new WyplataBankomat(null, repositoryHelper, parseHelper));
         }
 
         [Test]
@@ -56,7 +61,8 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         public void GivenBasicCases_WhenParseBgzFormat_Then5OperationsAreReturnedAccountAnd5NewTypesAreAdded()
         {
             //When
-            var operations = parser.Parse(Resources.TestFiles.BGZParser_StandardCases);
+                
+            var operations = parser.Parse(ToStream(Resources.TestFiles.BGZParser_StandardCases));
 
             //Then
             Assert.AreEqual(5, operations.Count());
@@ -64,10 +70,20 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             VerifyAccountAndOperationTypes();
         }
 
+        public Stream ToStream(string text)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
         private static void VerifyOperations(IEnumerable<BankOperation> operations)
         {
             operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 1) &&
                 op.OrderDate == new DateTime(2016, 10, 1) &&
                 op.Amount == 1000.12M &&
@@ -78,7 +94,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.CounterAccount == "01234567890123456789012345");
 
             operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 2) &&
                 op.OrderDate == new DateTime(2016, 10, 2) &&
                 op.Amount == -100.56M &&
@@ -89,7 +105,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.CounterAccount == "01234567890123456789012346");
 
             operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 3) &&
                 op.OrderDate == new DateTime(2016, 10, 3) &&
                 op.Amount == -4.00M &&
@@ -100,7 +116,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.CounterAccount == "01234567890123456789012347");
 
             operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 5) &&
                 op.OrderDate == new DateTime(2016, 10, 4) &&
                 op.Amount == -10.11M &&
@@ -111,7 +127,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 op.Card.CardNumber == "123456XXXXXX7890");
 
             operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 7) &&
                 op.OrderDate == new DateTime(2016, 10, 4) &&
                 op.Amount == -23.00M &&

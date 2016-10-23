@@ -22,12 +22,13 @@ namespace MyBudget.Core.UnitTests.ImportData
             //Given
             Mock<IRepository<BankAccount, string>> accountRepo = new Mock<IRepository<BankAccount, string>>();
             Mock<IRepository<BankOperationType, string>> typeRepo = new Mock<IRepository<BankOperationType, string>>();
+            Mock<IRepository<Card, string>> cardRepo = new Mock<IRepository<Card, string>>();
             string creditCardText = TestFiles.PkoBpCreditCardParser_Sample;
 
             //When
             var list = new PkoBpCreditCardUnclearedParser(
                 new ParseHelper(),
-                new RepositoryHelper(accountRepo.Object, typeRepo.Object),
+                new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object),
                 new CreditCardTextParsing(),
                 new CreditCardUnclearedTextParsing())
                 .Parse(creditCardText).ToArray();

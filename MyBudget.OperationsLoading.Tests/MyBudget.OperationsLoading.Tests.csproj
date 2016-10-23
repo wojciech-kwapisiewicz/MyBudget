@@ -50,6 +50,7 @@
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />
+    <Compile Include="BgzBnpParibas\WyplataBankomatTests.cs" />
     <Compile Include="PkoBpCreditCard\PkoBpCreditCardParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\TestFiles.Designer.cs">
