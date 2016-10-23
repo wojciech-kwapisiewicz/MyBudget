@@ -30,8 +30,14 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
+            IFillOperationFromDescriptionChain chain =
+                new WyplataBankomat(repositoryHelper, parseHelper,
+                new OperacjaKarta(repositoryHelper, parseHelper,
+                new Przelew(repositoryHelper,
+                new PrzelewPrzychodzacy(repositoryHelper, parseHelper,
+                new PrzelewWychodzacy(repositoryHelper, null)))));
             this.parser = new BgzBnpParibasParser(
-                parseHelper, repositoryHelper, new WyplataBankomat(null, repositoryHelper, parseHelper));
+                parseHelper, repositoryHelper, new WyplataBankomat(repositoryHelper, parseHelper, chain));
         }
 
         [Test]
@@ -60,8 +66,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         [Test]
         public void GivenBasicCases_WhenParseBgzFormat_Then5OperationsAreReturnedAccountAnd5NewTypesAreAdded()
         {
-            //When
-                
+            //When                
             var operations = parser.Parse(ToStream(Resources.TestFiles.BGZParser_StandardCases));
 
             //Then
@@ -142,8 +147,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         {
             accountRepo.Verify(repo => repo.Add(
                 It.Is<BankAccount>(account =>
-                account.Name == "BGZBNPParibas" &&
-                string.IsNullOrEmpty(account.Description))));
+                account.Number == "BGZBNPParibas")));
 
             cardRepo.Verify(repo => repo.Add(
                 It.Is<Card>(card =>

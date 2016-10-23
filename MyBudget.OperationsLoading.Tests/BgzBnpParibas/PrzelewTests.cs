@@ -31,15 +31,15 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.fillMock = new Mock<IFillOperationFromDescriptionChain>();
             this.przelew = new Przelew(
-                fillMock.Object,
-                new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object));
-            this.przelewPrzychodzacy = new PrzelewPrzychodzacy(
-                fillMock.Object,
                 new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object),
-                new ParseHelper());
+                fillMock.Object);
+            this.przelewPrzychodzacy = new PrzelewPrzychodzacy(
+                new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object),
+                new ParseHelper(),
+                fillMock.Object);
             this.przelewWychodzacy = new PrzelewWychodzacy(
-                fillMock.Object,
-                new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object));
+                new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object),
+                fillMock.Object);
         }
 
         [Test]

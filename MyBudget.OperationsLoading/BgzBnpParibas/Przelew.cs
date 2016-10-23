@@ -17,8 +17,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         private IRepositoryHelper _repositoryHelper;
 
         public Przelew(
-            IFillOperationFromDescriptionChain next,
-            IRepositoryHelper repositoryHelper)
+            IRepositoryHelper repositoryHelper,
+            IFillOperationFromDescriptionChain next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");

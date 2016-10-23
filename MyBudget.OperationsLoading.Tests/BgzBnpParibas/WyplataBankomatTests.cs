@@ -29,9 +29,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.fillMock = new Mock<IFillOperationFromDescriptionChain>();                
                this.parser = new WyplataBankomat(
-                   fillMock.Object, 
-                   new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object), 
-                   new ParseHelper());
+                   new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object),
+                   new ParseHelper(),
+                   fillMock.Object);
         }
 
         [Test]

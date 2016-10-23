@@ -18,9 +18,9 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         private ParseHelper _parseHelper;
 
         public OperacjaKarta(
-            IFillOperationFromDescriptionChain next,
             IRepositoryHelper repositoryHelper,
-            ParseHelper parseHelper)
+            ParseHelper parseHelper,
+            IFillOperationFromDescriptionChain next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");

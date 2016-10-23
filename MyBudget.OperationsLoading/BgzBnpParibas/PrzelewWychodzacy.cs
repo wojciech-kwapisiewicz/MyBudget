@@ -17,11 +17,11 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         private IRepositoryHelper _repositoryHelper;
 
         public PrzelewWychodzacy(
-            IFillOperationFromDescriptionChain next,
-            IRepositoryHelper repositoryHelper)
+            IRepositoryHelper repositoryHelper,
+            IFillOperationFromDescriptionChain next)
         {
-            if (next == null)
-                throw new ArgumentNullException("next");
+            //if (next == null)
+            //    throw new ArgumentNullException("next");
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
             _next = next;
