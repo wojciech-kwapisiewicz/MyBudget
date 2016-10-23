@@ -52,7 +52,17 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
 
         public IEnumerable<BankOperation> Parse(string inputString)
         {
-            throw new NotImplementedException();
+            return Parse(ToStream(inputString));
+        }
+
+        public Stream ToStream(string text)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
 
         public IEnumerable<BankOperation> Parse(Stream stream)

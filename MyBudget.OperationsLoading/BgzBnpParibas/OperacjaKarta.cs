@@ -46,6 +46,11 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
             operation.Card = _repositoryHelper.GetOrAddCard(match.Groups[1].Value);
             operation.Description = match.Groups[2].Value.Trim();
             operation.OrderDate = _parseHelper.ParseDate(match.Groups[4].Value, "dd.MM.yyyy");
+
+            if (operation.Description.Length > 15 && operation.Description[15] == ' ')
+            {
+                operation.Description = operation.Description.Remove(15, 1);
+            }
         }
     }
 }

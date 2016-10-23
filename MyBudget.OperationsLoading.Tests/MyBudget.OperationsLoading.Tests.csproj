@@ -82,6 +82,7 @@
     <None Include="packages.config" />
     <EmbeddedResource Include="Resources\MilleniumParser_Sample1Entry.csv" />
     <None Include="Resources\BGZParser_LongDescPayment.csv" />
+    <None Include="Resources\BGZParser_OtherOperation.csv" />
     <None Include="Resources\BGZParser_StandardCases.csv" />
   </ItemGroup>
   <ItemGroup>

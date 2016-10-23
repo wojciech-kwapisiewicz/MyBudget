@@ -121,6 +121,9 @@
   <data name="BGZParser_LongDescPayment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>BGZParser_LongDescPayment.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
+  <data name="BGZParser_OtherOperation" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>BGZParser_OtherOperation.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
+  </data>
   <data name="BGZParser_StandardCases" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>BGZParser_StandardCases.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>

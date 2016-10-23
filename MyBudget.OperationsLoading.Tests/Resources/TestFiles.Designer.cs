@@ -62,14 +62,21 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-01;1000.12;PRZELEW UZNANIOWY (NADANO 01-10-2016) ABC WYPŁATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa ;1000.12
-        ///2016-10-02;-100.56;PRZELEW NA RACHUNEK NUMER 01 2345 6789 0123 4567 8901 2346 Abc ;899.56
-        ///2016-10-03;-4.00;PRZELEW OBCIĄŻENIOWY asadfasfdsaf   01 2345 6789 0123 4567 8901 2347 Abc 1 Asadfasdf ;895.56
-        ///2016-10-05;-10.11;OPERACJA KARTĄ ZLOTA 123456XXXXXX7890 000001 WYPL ATA GOTÓW [rest of string was truncated]&quot;;.
+        ///2016-10-08;-24.00;OPERACJA KARTĄ ZLOTA 123456XXXXXX7891 000002 TRAN SAKCJA BEZGOTOWKOWA MORETHAN15SIGNS DESCSPACE   23.00PLN D=04.10.2016   ;862.45.
         /// </summary>
         internal static string BGZParser_LongDescPayment {
             get {
                 return ResourceManager.GetString("BGZParser_LongDescPayment", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
+        ///2016-10-10;-345.00;   blablba   ;345.45.
+        /// </summary>
+        internal static string BGZParser_OtherOperation {
+            get {
+                return ResourceManager.GetString("BGZParser_OtherOperation", resourceCulture);
             }
         }
         

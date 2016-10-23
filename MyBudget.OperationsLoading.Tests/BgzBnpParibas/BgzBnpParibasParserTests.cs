@@ -182,7 +182,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             //Probably this is newline replaced by space
 
             //When
-            var operations = parser.Parse(Resources.TestFiles.BGZParser_StandardCases);
+            var operations = parser.Parse(Resources.TestFiles.BGZParser_LongDescPayment);
 
             //Then
             Assert.AreEqual(1, operations.Count());
@@ -202,7 +202,20 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         public void GivenOtherTransaction_WhenParseBgzFormat_ThenGenericTypeOperationAdded()
         {
             //To add test for operations that were not analysed/designed yet
-            Assert.Inconclusive();
+            //When
+            var operations = parser.Parse(Resources.TestFiles.BGZParser_OtherOperation);
+
+            //Then
+            Assert.AreEqual(1, operations.Count());
+            operations.Any(op =>
+                op.BankAccount.Name == "BGZBNPParibas" &&
+                op.ExecutionDate == new DateTime(2016, 10, 10) &&
+                op.OrderDate == new DateTime(2016, 10, 10) &&
+                op.Amount == -345.00M &&
+                op.Type.Name == "INNA OPERACJA" &&
+                op.Cleared == true &&
+                op.Description == "blablba" &&
+                op.EndingBalance == 345.45M);
         }
     }
 }
