@@ -20,8 +20,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
             IRepositoryHelper repositoryHelper,
             IFillOperationFromDescriptionChain next)
         {
-            //if (next == null)
-            //    throw new ArgumentNullException("next");
+            if (next == null)
+                throw new ArgumentNullException("next");
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
             _next = next;

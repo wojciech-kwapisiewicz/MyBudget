@@ -35,7 +35,8 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 new OperacjaKarta(repositoryHelper, parseHelper,
                 new Przelew(repositoryHelper,
                 new PrzelewPrzychodzacy(repositoryHelper, parseHelper,
-                new PrzelewWychodzacy(repositoryHelper, null)))));
+                new PrzelewWychodzacy(repositoryHelper,
+                new InnaOperacja(repositoryHelper))))));
             this.parser = new BgzBnpParibasParser(
                 parseHelper, repositoryHelper, new WyplataBankomat(repositoryHelper, parseHelper, chain));
         }

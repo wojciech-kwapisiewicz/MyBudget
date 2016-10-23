@@ -55,6 +55,7 @@
   <ItemGroup>
     <Compile Include="BgzBnpParibas\BgzBnpParibasParser.cs" />
     <Compile Include="BgzBnpParibas\IFillOperationFromDescriptionChain.cs" />
+    <Compile Include="BgzBnpParibas\InnaOperacja.cs" />
     <Compile Include="BgzBnpParibas\OperacjaKarta.cs" />
     <Compile Include="BgzBnpParibas\Przelew.cs" />
     <Compile Include="BgzBnpParibas\PrzelewPrzychodzacy.cs" />
