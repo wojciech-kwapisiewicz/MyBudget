@@ -8,16 +8,16 @@ using System.Threading.Tasks;
 
 namespace MyBudget.OperationsLoading.BgzBnpParibas
 {
-    public class WyplataBankomat : IFillOperationFromDescriptionChain
+    public class OperacjaKarta : IFillOperationFromDescriptionChain
     {
-        private const string Pattern = @"OPERACJA KARTĄ .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} WYPL ATA GOTÓWKI (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
-        private const string Type = "WYPŁATA KARTĄ Z BANKOMATU";
+        private const string Pattern = @"OPERACJA KARTĄ .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} TRAN SAKCJA BEZGOTOWKOWA (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
+        private const string Type = "TRANSAKCJA KARTĄ PŁATNICZĄ";
 
         private IFillOperationFromDescriptionChain _next;
         private IRepositoryHelper _repositoryHelper;
         private ParseHelper _parseHelper;
 
-        public WyplataBankomat(
+        public OperacjaKarta(
             IFillOperationFromDescriptionChain next,
             IRepositoryHelper repositoryHelper,
             ParseHelper parseHelper)
@@ -42,7 +42,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
 
             operation.Type = _repositoryHelper.GetOrAddOperationType(Type);
             operation.Card = _repositoryHelper.GetOrAddCard(match.Groups[1].Value);
-            operation.Description = string.Format("{0} {1}", Type, match.Groups[2].Value.Trim());
+            operation.Description = match.Groups[2].Value.Trim();
             operation.OrderDate = _parseHelper.ParseDate(match.Groups[4].Value, "dd.MM.yyyy");
         }
     }

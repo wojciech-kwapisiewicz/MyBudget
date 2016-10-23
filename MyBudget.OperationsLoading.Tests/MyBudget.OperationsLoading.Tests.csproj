@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BgzBnpParibas\BgzBnpParibasParserTests.cs" />
+    <Compile Include="BgzBnpParibas\OperacjaKartaTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />
