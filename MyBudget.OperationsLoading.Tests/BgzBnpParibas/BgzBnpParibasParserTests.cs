@@ -5,6 +5,7 @@ using MyBudget.OperationsLoading.BgzBnpParibas;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,10 +28,22 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             this.parser = new BgzBnpParibasParser();
         }
 
-        [Test]
-        public void BnpParibasParser_FilterCSVFiles()
+        [Test]        
+        [SetUICulture("pl")]
+        public void BnpParibasParser_FilterCSVFilesPL()
         {
-            //When
+            //When            
+            var extensions = this.parser.SupportedFileExtensions;
+            
+            //Then
+            Assert.AreEqual("BGZ BNP Paribas" + " " + "(.csv)|*.csv", extensions);
+        }
+
+        [Test]
+        [SetUICulture("en")]
+        public void BnpParibasParser_FilterCSVFilesEN()
+        {
+            //When            
             var extensions = this.parser.SupportedFileExtensions;
 
             //Then
