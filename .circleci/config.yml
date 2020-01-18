@@ -12,7 +12,7 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore
+          command: dotnet.exe restore MyBudget.sln
       - run:
           name: "Run Build step"
           command: dotnet.exe build MyBudget.sln
