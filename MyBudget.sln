@@ -33,7 +33,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.OperationsLoading.
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{DFB69EEF-48BC-4094-A401-2E7F033149D9}"
 	ProjectSection(SolutionItems) = preProject
-		circleci\config.yml = circleci\config.yml
+		.circleci\config.yml = .circleci\config.yml
 	EndProjectSection
 EndProject
 Global
