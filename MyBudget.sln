@@ -31,9 +31,9 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.XmlPersistance.Tes
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.OperationsLoading.Tests", "MyBudget.OperationsLoading.Tests\MyBudget.OperationsLoading.Tests.csproj", "{0CB7D51D-49D0-4EAF-8703-9C93971ED782}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".circleci", ".circleci", "{6E9399E6-1471-4D63-81F7-EE2AC24BA014}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{DFB69EEF-48BC-4094-A401-2E7F033149D9}"
 	ProjectSection(SolutionItems) = preProject
-		config.yml = config.yml
+		circleci\config.yml = circleci\config.yml
 	EndProjectSection
 EndProject
 Global
