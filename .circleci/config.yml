@@ -12,9 +12,12 @@ jobs:
       - checkout
       - run:
           name: "Install project dependencies"
-          command: dotnet.exe restore MyBudget.sln
+          command: nuget restore MyBudget.sln
       - run:
           name: "Run Build step"
-          command: dotnet.exe build MyBudget.sln
+          command: msbuild /p:Configuration=Release MyBudget.sln
+      - run:
+          name: "Create artifacts"
+          command: New-Item -ItemType "directory" -Path "Artifacts" -force; Compress-Archive -Path bin\Release -Update -DestinationPath .\Artifacts\Piggy.Zip      
       - store_artifacts:
-          path: .\bin\
+          path: .\Artifacts\
