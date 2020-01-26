@@ -53,14 +53,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BgzBnpParibas\BgzBnpParibasParser.cs" />
-    <Compile Include="BgzBnpParibas\IFillOperationFromDescriptionChain.cs" />
-    <Compile Include="BgzBnpParibas\InnaOperacja.cs" />
-    <Compile Include="BgzBnpParibas\OperacjaKarta.cs" />
-    <Compile Include="BgzBnpParibas\Przelew.cs" />
-    <Compile Include="BgzBnpParibas\PrzelewPrzychodzacy.cs" />
-    <Compile Include="BgzBnpParibas\PrzelewWychodzacy.cs" />
-    <Compile Include="BgzBnpParibas\WyplataBankomat.cs" />
+    <Compile Include="BgzBnpParibasCsv\BgzBnpParibasCsvParser.cs" />
+    <Compile Include="BgzBnpParibasCsv\IFillOperationFromDescriptionChain.cs" />
+    <Compile Include="BgzBnpParibasCsv\InnaOperacja.cs" />
+    <Compile Include="BgzBnpParibasCsv\OperacjaKarta.cs" />
+    <Compile Include="BgzBnpParibasCsv\Przelew.cs" />
+    <Compile Include="BgzBnpParibasCsv\PrzelewPrzychodzacy.cs" />
+    <Compile Include="BgzBnpParibasCsv\PrzelewWychodzacy.cs" />
+    <Compile Include="BgzBnpParibasCsv\WyplataBankomat.cs" />
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />
     <Compile Include="ImportData\CheckStatus.cs" />
@@ -106,6 +106,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BgzBnpParibasXls\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

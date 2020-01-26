@@ -46,14 +46,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BgzBnpParibas\BgzBnpParibasParserTests.cs" />
-    <Compile Include="BgzBnpParibas\InnaOperacjaTests.cs" />
-    <Compile Include="BgzBnpParibas\OperacjaKartaTests.cs" />
-    <Compile Include="BgzBnpParibas\PrzelewTests.cs" />
+    <Compile Include="BgzBnpParibasCsv\BgzBnpParibasParserTests.cs" />
+    <Compile Include="BgzBnpParibasCsv\InnaOperacjaTests.cs" />
+    <Compile Include="BgzBnpParibasCsv\OperacjaKartaTests.cs" />
+    <Compile Include="BgzBnpParibasCsv\PrzelewTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />
-    <Compile Include="BgzBnpParibas\WyplataBankomatTests.cs" />
+    <Compile Include="BgzBnpParibasCsv\WyplataBankomatTests.cs" />
     <Compile Include="PkoBpCreditCard\PkoBpCreditCardParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Resources\TestFiles.Designer.cs">

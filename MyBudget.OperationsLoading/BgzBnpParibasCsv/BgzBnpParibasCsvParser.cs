@@ -8,9 +8,9 @@ using MyBudget.Model;
 using LumenWorks.Framework.IO.Csv;
 using System.Text.RegularExpressions;
 
-namespace MyBudget.OperationsLoading.BgzBnpParibas
+namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
 {
-    public class BgzBnpParibasParser : IParser
+    public class BgzBnpParibasCsvParser : IParser
     {        
         private const string RegexTransakcjaKarta = @"OPERACJA KARTĄ .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} TRAN SAKCJA BEZGOTOWKOWA (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
         private const string RegexPrzelew = @"PRZELEW NA RACHUNEK NUMER ([0-9]{2} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}) (.*)";
@@ -37,7 +37,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
         private IFillOperationFromDescriptionChain _fillDescription;
         private IRepositoryHelper _repositoryHelper;
 
-        public BgzBnpParibasParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IFillOperationFromDescriptionChain fillDescription)
+        public BgzBnpParibasCsvParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IFillOperationFromDescriptionChain fillDescription)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");

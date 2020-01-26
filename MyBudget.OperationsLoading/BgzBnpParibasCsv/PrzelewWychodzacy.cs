@@ -6,17 +6,17 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MyBudget.OperationsLoading.BgzBnpParibas
+namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
 {
-    public class Przelew : IFillOperationFromDescriptionChain
+    public class PrzelewWychodzacy : IFillOperationFromDescriptionChain
     {
-        private const string Pattern = @"PRZELEW NA RACHUNEK NUMER ([0-9]{2} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}) (.*)";
-        private const string Type = "PRZELEW";
+        private const string Pattern = @"PRZELEW OBCIĄŻENIOWY (.*) ([0-9]{2} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}) (.*)";        
+        private const string Type = "PRZELEW DO INNEGO BANKU";
 
         private IFillOperationFromDescriptionChain _next;
         private IRepositoryHelper _repositoryHelper;
 
-        public Przelew(
+        public PrzelewWychodzacy(
             IRepositoryHelper repositoryHelper,
             IFillOperationFromDescriptionChain next)
         {
@@ -38,8 +38,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
             }
 
             operation.Type = _repositoryHelper.GetOrAddOperationType(Type);
-            operation.CounterAccount = match.Groups[1].Value.Trim().Replace(" ", string.Empty);
-            operation.Description = match.Groups[2].Value.Trim();
+            operation.Description = match.Groups[1].Value.Trim();
+            operation.CounterAccount = match.Groups[2].Value.Trim().Replace(" ", string.Empty);
         }
     }
 }
