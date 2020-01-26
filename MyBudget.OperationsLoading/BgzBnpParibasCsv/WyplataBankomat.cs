@@ -10,7 +10,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
 {
     public class WyplataBankomat : IFillOperationFromDescriptionChain
     {
-        private const string Pattern = @"OPERACJA KARTA .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} WYPL ATA GOTÓWKI (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
+        private const string Pattern = @"OPERACJA KARTĄ .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} WYPL ATA GOTÓWKI (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
         private const string Type = "WYPŁATA KARTĄ Z BANKOMATU";
 
         private IFillOperationFromDescriptionChain _next;

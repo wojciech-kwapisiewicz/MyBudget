@@ -58,7 +58,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
         public Stream ToStream(string text)
         {
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
             writer.Write(text);
             writer.Flush();
             stream.Position = 0;
@@ -68,7 +68,7 @@ namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
             List<BankOperation> operations = new List<BankOperation>();
-            using (var reader = new CsvReader(new StreamReader(stream, Encoding.Default), true, ';'))
+            using (var reader = new CsvReader(new StreamReader(stream, Encoding.UTF8), true, ';'))
             {
                 while (reader.ReadNextRecord())
                 {
