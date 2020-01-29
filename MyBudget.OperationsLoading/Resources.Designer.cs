@@ -70,6 +70,24 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to BNPParibas operations (XLS / Excel) (.xlsx)|*.xlsx.
+        /// </summary>
+        internal static string BnpParibasXslxFilter {
+            get {
+                return ResourceManager.GetString("BnpParibasXslxFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BNPParibas operations (XLS / Excel).
+        /// </summary>
+        internal static string BnpParibasXslxName {
+            get {
+                return ResourceManager.GetString("BnpParibasXslxName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to (.csv)|*.csv.
         /// </summary>
         internal static string CsvFilter {

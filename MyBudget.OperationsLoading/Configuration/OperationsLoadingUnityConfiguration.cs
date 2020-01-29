@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
 using MyBudget.OperationsLoading.BgzBnpParibasCsv;
+using MyBudget.OperationsLoading.BnpParibasXlsx;
 using MyBudget.OperationsLoading.MilleniumAccount;
 using MyBudget.OperationsLoading.PkoBpAccount;
 using MyBudget.OperationsLoading.PkoBpCreditCard;
@@ -18,6 +19,7 @@ namespace MyBudget.OperationsLoading.Configuration
             unityContainer.RegisterType<IRepositoryHelper, RepositoryHelper>();
 
             //Parsers
+            unityContainer.RegisterType<IParser, BnpParibasXslxParser>("BNP Paribas account parser");
             unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
             unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
             unityContainer.RegisterType<IParser, PkoBpCreditClearedParser>("Pko BP credit card cleared parser");

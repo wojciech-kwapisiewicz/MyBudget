@@ -120,6 +120,12 @@
   <data name="BgzBnpParibasName" xml:space="preserve">
     <value>[Obsolete] BGZ BNP Paribas operations (CSV)</value>
   </data>
+  <data name="BnpParibasXslxFilter" xml:space="preserve">
+    <value>BNPParibas operations (XLS / Excel) (.xlsx)|*.xlsx</value>
+  </data>
+  <data name="BnpParibasXslxName" xml:space="preserve">
+    <value>BNPParibas operations (XLS / Excel)</value>
+  </data>
   <data name="CsvFilter" xml:space="preserve">
     <value>(.csv)|*.csv</value>
   </data>
