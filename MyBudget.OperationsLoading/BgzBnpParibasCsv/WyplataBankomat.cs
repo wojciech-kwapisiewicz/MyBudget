@@ -6,26 +6,31 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
-namespace MyBudget.OperationsLoading.BgzBnpParibas
+namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
 {
-    public class Przelew : IFillOperationFromDescriptionChain
+    public class WyplataBankomat : IFillOperationFromDescriptionChain
     {
-        private const string Pattern = @"PRZELEW NA RACHUNEK NUMER ([0-9]{2} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}) (.*)";
-        private const string Type = "PRZELEW";
+        private const string Pattern = @"OPERACJA KARTĄ .* ([0-9]{6}X{6}[0-9]{4}) [0-9]{6} WYPL ATA GOTÓWKI (.*) ([1-9][0-9]*.[0-9]{2}[A-Z]{3}) D=([0-9]{2}.[0-9]{2}.[0-9]{4}).*";
+        private const string Type = "WYPŁATA KARTĄ Z BANKOMATU";
 
         private IFillOperationFromDescriptionChain _next;
         private IRepositoryHelper _repositoryHelper;
+        private ParseHelper _parseHelper;
 
-        public Przelew(
+        public WyplataBankomat(
             IRepositoryHelper repositoryHelper,
+            ParseHelper parseHelper,
             IFillOperationFromDescriptionChain next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
+            if (parseHelper == null)
+                throw new ArgumentNullException("parseHelper");
             _next = next;
             _repositoryHelper = repositoryHelper;
+            _parseHelper = parseHelper;
         }
 
         public void Match(BankOperation operation, string description)
@@ -38,8 +43,9 @@ namespace MyBudget.OperationsLoading.BgzBnpParibas
             }
 
             operation.Type = _repositoryHelper.GetOrAddOperationType(Type);
-            operation.CounterAccount = match.Groups[1].Value.Trim().Replace(" ", string.Empty);
-            operation.Description = match.Groups[2].Value.Trim();
+            operation.Card = _repositoryHelper.GetOrAddCard(match.Groups[1].Value);
+            operation.Description = string.Format("{0} {1}", Type, match.Groups[2].Value.Trim());
+            operation.OrderDate = _parseHelper.ParseDate(match.Groups[4].Value, "dd.MM.yyyy");
         }
     }
 }

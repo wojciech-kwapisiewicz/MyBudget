@@ -1,7 +1,7 @@
 ﻿using Moq;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
-using MyBudget.OperationsLoading.BgzBnpParibas;
+using MyBudget.OperationsLoading.BgzBnpParibasCsv;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -11,7 +11,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
+namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
 {
     [TestFixture]
     public class BgzBnpParibasParserTests
@@ -20,7 +20,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         private Mock<IRepository<BankOperationType, string>> typeRepo;
         private Mock<IRepository<Card, string>> cardRepo;
         private RepositoryHelper repositoryHelper;
-        private BgzBnpParibasParser parser;
+        private BgzBnpParibasCsvParser parser;
         private ParseHelper parseHelper = new ParseHelper();
 
         [SetUp]
@@ -37,7 +37,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
                 new PrzelewPrzychodzacy(repositoryHelper, parseHelper,
                 new PrzelewWychodzacy(repositoryHelper,
                 new InnaOperacja(repositoryHelper))))));
-            this.parser = new BgzBnpParibasParser(
+            this.parser = new BgzBnpParibasCsvParser(
                 parseHelper, repositoryHelper, new WyplataBankomat(repositoryHelper, parseHelper, chain));
         }
 
@@ -49,7 +49,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             var extensions = this.parser.SupportedFileExtensions;
 
             //Then
-            Assert.AreEqual("BGZ BNP Paribas" + " " + "(.csv)|*.csv", extensions);
+            Assert.AreEqual("[Wycofany] BGZ BNP Paribas (CSV)" + " " + "(.csv)|*.csv", extensions);
         }
 
         [Test]
@@ -60,7 +60,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
             var extensions = this.parser.SupportedFileExtensions;
 
             //Then
-            Assert.AreEqual("BGZ BNP Paribas operations" + " " + "(.csv)|*.csv", extensions);
+            Assert.AreEqual("[Obsolete] BGZ BNP Paribas operations (CSV)" + " " + "(.csv)|*.csv", extensions);
         }
 
 
@@ -79,7 +79,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
         public Stream ToStream(string text)
         {
             MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream, Encoding.Default);
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
             writer.Write(text);
             writer.Flush();
             stream.Position = 0;

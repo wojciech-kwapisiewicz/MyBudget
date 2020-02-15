@@ -19,7 +19,7 @@ namespace MyBudget.OperationsLoading {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -61,11 +61,29 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to BGZ BNP Paribas operations.
+        ///   Looks up a localized string similar to [Obsolete] BGZ BNP Paribas operations (CSV).
         /// </summary>
         internal static string BgzBnpParibasName {
             get {
                 return ResourceManager.GetString("BgzBnpParibasName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BNPParibas operations (XLS / Excel) (.xlsx)|*.xlsx.
+        /// </summary>
+        internal static string BnpParibasXslxFilter {
+            get {
+                return ResourceManager.GetString("BnpParibasXslxFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to BNPParibas operations (XLS / Excel).
+        /// </summary>
+        internal static string BnpParibasXslxName {
+            get {
+                return ResourceManager.GetString("BnpParibasXslxName", resourceCulture);
             }
         }
         
@@ -88,7 +106,7 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Millenium operations.
+        ///   Looks up a localized string similar to Millenium operations CSV.
         /// </summary>
         internal static string MilleniumName {
             get {
@@ -106,7 +124,7 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations (.pdf)|*.pdf.
+        ///   Looks up a localized string similar to Pko BP cleared CreditCard operations (.pdf)|*.pdf.
         /// </summary>
         internal static string PkoBpCardClearedFilter {
             get {
@@ -124,7 +142,7 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations (.txt)|*.txt.
+        ///   Looks up a localized string similar to {Obsolete} Pko BP uncleared CreditCard operations (.txt)|*.txt.
         /// </summary>
         internal static string PkoBpCardFilter {
             get {
@@ -133,7 +151,7 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pko BP uncleared CreditCard operations.
+        ///   Looks up a localized string similar to {Obsolete} Pko BP uncleared CreditCard operations.
         /// </summary>
         internal static string PkoBpCardName {
             get {
@@ -151,7 +169,7 @@ namespace MyBudget.OperationsLoading {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Pko BP operations.
+        ///   Looks up a localized string similar to Pko BP operations (XML).
         /// </summary>
         internal static string PkoBpName {
             get {

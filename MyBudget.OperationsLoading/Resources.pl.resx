@@ -118,13 +118,13 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="BgzBnpParibasName" xml:space="preserve">
-    <value>BGZ BNP Paribas</value>
+    <value>[Wycofany] BGZ BNP Paribas (CSV)</value>
   </data>
   <data name="MilleniumFilter" xml:space="preserve">
     <value>Millenium (.csv)|*.csv</value>
   </data>
   <data name="MilleniumName" xml:space="preserve">
-    <value>Millenium</value>
+    <value>Millenium (CSV)</value>
   </data>
   <data name="NoCreditCardFound" xml:space="preserve">
     <value>Nie znaleziono numeru karty kredytowej.</value>
@@ -133,18 +133,18 @@
     <value>Pko BP - rozliczone operacje karta kredytowa (.pdf)|*.pdf</value>
   </data>
   <data name="PkoBpCardClearedName" xml:space="preserve">
-    <value>Pko BP - rozliczone operacje karta kredytowa</value>
+    <value>Pko BP - rozliczone operacje karta kredytowa (PDF)</value>
   </data>
   <data name="PkoBpCardFilter" xml:space="preserve">
-    <value>Pko BP - nierozliczone operacje karta kredytowa (.txt)|*.txt</value>
+    <value>[Wycofany] Pko BP - nierozliczone operacje karta kredytowa (.txt)|*.txt</value>
   </data>
   <data name="PkoBpCardName" xml:space="preserve">
-    <value>Pko BP - nierozliczone operacje karta kredytowa</value>
+    <value>[Wycofany] Pko BP - nierozliczone operacje karta kredytowa</value>
   </data>
   <data name="PkoBpFilter" xml:space="preserve">
     <value>Pko BP (.xml)|*.xml</value>
   </data>
   <data name="PkoBpName" xml:space="preserve">
-    <value>Pko BP</value>
+    <value>Pko BP (XML)</value>
   </data>
 </root>

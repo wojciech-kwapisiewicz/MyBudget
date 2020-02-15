@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.21005.1
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29519.181
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.UI", "MyBudget.UI\MyBudget.UI.csproj", "{759F6016-11B9-416A-ADA9-8ABBC69D15F8}"
 EndProject
@@ -30,6 +30,11 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.XmlPersistance.Tests", "MyBudget.XmlPersistance.Tests\MyBudget.XmlPersistance.Tests.csproj", "{2284B8AF-99CD-42E5-9BB0-B0D90913B7C5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.OperationsLoading.Tests", "MyBudget.OperationsLoading.Tests\MyBudget.OperationsLoading.Tests.csproj", "{0CB7D51D-49D0-4EAF-8703-9C93971ED782}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{DFB69EEF-48BC-4094-A401-2E7F033149D9}"
+	ProjectSection(SolutionItems) = preProject
+		.circleci\config.yml = .circleci\config.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,12 +95,15 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
+		{759F6016-11B9-416A-ADA9-8ABBC69D15F8} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{FA2FADC7-9DD1-49B8-A630-B21977114AFC} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{F2CC466B-4F35-47CC-8305-BDCF6F5D71D6} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{ABF818D9-8D87-40CA-8C20-03606E27A09C} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{FC584294-00E8-4F87-841C-85945E4B7C04} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
-		{759F6016-11B9-416A-ADA9-8ABBC69D15F8} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{2284B8AF-99CD-42E5-9BB0-B0D90913B7C5} = {980656C2-C7BB-4C65-A93F-C69474B03E69}
 		{0CB7D51D-49D0-4EAF-8703-9C93971ED782} = {980656C2-C7BB-4C65-A93F-C69474B03E69}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D4E7A73B-02EA-445D-9C90-28DF84710056}
 	EndGlobalSection
 EndGlobal

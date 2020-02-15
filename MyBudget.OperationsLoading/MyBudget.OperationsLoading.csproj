@@ -30,6 +30,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EPPlus, Version=4.5.3.2, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.5.3.2\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
     <Reference Include="LumenWorks.Framework.IO, Version=3.9.1.0, Culture=neutral, PublicKeyToken=5ad3ea2f85776344, processorArchitecture=MSIL">
       <HintPath>..\packages\LumenWorksCsvReader.3.9.1\lib\net20\LumenWorks.Framework.IO.dll</HintPath>
       <Private>True</Private>
@@ -44,8 +47,12 @@
     <Reference Include="Microsoft.Practices.Unity.RegistrationByConvention">
       <HintPath>..\packages\Unity.3.5.1404.0\lib\net45\Microsoft.Practices.Unity.RegistrationByConvention.dll</HintPath>
     </Reference>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -53,14 +60,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BgzBnpParibas\BgzBnpParibasParser.cs" />
-    <Compile Include="BgzBnpParibas\IFillOperationFromDescriptionChain.cs" />
-    <Compile Include="BgzBnpParibas\InnaOperacja.cs" />
-    <Compile Include="BgzBnpParibas\OperacjaKarta.cs" />
-    <Compile Include="BgzBnpParibas\Przelew.cs" />
-    <Compile Include="BgzBnpParibas\PrzelewPrzychodzacy.cs" />
-    <Compile Include="BgzBnpParibas\PrzelewWychodzacy.cs" />
-    <Compile Include="BgzBnpParibas\WyplataBankomat.cs" />
+    <Compile Include="BgzBnpParibasCsv\BgzBnpParibasCsvParser.cs" />
+    <Compile Include="BgzBnpParibasCsv\IFillOperationFromDescriptionChain.cs" />
+    <Compile Include="BgzBnpParibasCsv\InnaOperacja.cs" />
+    <Compile Include="BgzBnpParibasCsv\OperacjaKarta.cs" />
+    <Compile Include="BgzBnpParibasCsv\Przelew.cs" />
+    <Compile Include="BgzBnpParibasCsv\PrzelewPrzychodzacy.cs" />
+    <Compile Include="BgzBnpParibasCsv\PrzelewWychodzacy.cs" />
+    <Compile Include="BgzBnpParibasCsv\WyplataBankomat.cs" />
+    <Compile Include="BnpParibasXlsx\BnpParibasXslxParser.cs" />
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />
     <Compile Include="ImportData\CheckStatus.cs" />
@@ -107,6 +115,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

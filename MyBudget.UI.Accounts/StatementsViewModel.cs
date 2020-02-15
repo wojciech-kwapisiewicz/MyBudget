@@ -37,9 +37,9 @@ namespace MyBudget.UI.Accounts
         {
             _context = context;
             _operationRepository = context.GetRepository<IRepository<BankOperation>>();
-            _statementsRepository = context.GetRepository<IRepository<BankStatement>>();            
+            _statementsRepository = context.GetRepository<IRepository<BankStatement>>();
 
-            _supportedParsers = supportedParsers.OrderBy(a => a.Name);
+            _supportedParsers = supportedParsers;//.OrderBy(a => a.Name);
             _importer = new OperationsImporter(_operationRepository, _statementsRepository);
             _messageBoxService = messageBoxService;
             _resolveConflicts = resolveConflicts;

@@ -1,7 +1,7 @@
 ﻿using Moq;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
-using MyBudget.OperationsLoading.BgzBnpParibas;
+using MyBudget.OperationsLoading.BgzBnpParibasCsv;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MyBudget.OperationsLoading.Tests.BgzBnpParibas
+namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
 {
     [TestFixture]
     public class InnaOperacjaTests

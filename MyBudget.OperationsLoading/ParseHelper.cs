@@ -39,6 +39,7 @@ namespace MyBudget.OperationsLoading
             return parsedAmount;
         }
 
+
         public string GetFirstNCharacters(string description, int n = 30)
         {
             if (description.Length > n)

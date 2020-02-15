@@ -1,0 +1,23 @@
+version: 2.1
+
+orbs:
+  win: circleci/windows@1.0.0
+
+jobs:
+  build:
+    executor:
+      name: win/vs2019
+      shell: powershell.exe
+    steps:
+      - checkout
+      - run:
+          name: "Install project dependencies"
+          command: nuget restore MyBudget.sln
+      - run:
+          name: "Run Build step"
+          command: msbuild /p:Configuration=Release MyBudget.sln
+      - run:
+          name: "Create artifacts"
+          command: New-Item -ItemType "directory" -Path "Artifacts" -force; Compress-Archive -Path bin\Release -Update -DestinationPath .\Artifacts\Piggy.Zip      
+      - store_artifacts:
+          path: .\Artifacts\

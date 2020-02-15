@@ -1,5 +1,6 @@
 ﻿using Microsoft.Practices.Unity;
-using MyBudget.OperationsLoading.BgzBnpParibas;
+using MyBudget.OperationsLoading.BgzBnpParibasCsv;
+using MyBudget.OperationsLoading.BnpParibasXlsx;
 using MyBudget.OperationsLoading.MilleniumAccount;
 using MyBudget.OperationsLoading.PkoBpAccount;
 using MyBudget.OperationsLoading.PkoBpCreditCard;
@@ -18,11 +19,14 @@ namespace MyBudget.OperationsLoading.Configuration
             unityContainer.RegisterType<IRepositoryHelper, RepositoryHelper>();
 
             //Parsers
-            unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
+            unityContainer.RegisterType<IParser, BnpParibasXslxParser>("BNP Paribas account parser");
             unityContainer.RegisterType<IParser, MilleniumParser>("Millenium account parser");
-            unityContainer.RegisterType<IParser, PkoBpCreditCardUnclearedParser>("Pko BP credit card parser");
+            unityContainer.RegisterType<IParser, PkoBpParser>("Pko BP standard account parser");
             unityContainer.RegisterType<IParser, PkoBpCreditClearedParser>("Pko BP credit card cleared parser");
 
+            #region Legacy parser
+            unityContainer.RegisterType<IParser, PkoBpCreditCardUnclearedParser>("Pko BP credit card parser");
+            
             Func<IUnityContainer, object> createChain = container =>
                 new WyplataBankomat(container.Resolve<IRepositoryHelper>(), container.Resolve<ParseHelper>(),
                 new OperacjaKarta(container.Resolve<IRepositoryHelper>(), container.Resolve<ParseHelper>(),
@@ -31,8 +35,8 @@ namespace MyBudget.OperationsLoading.Configuration
                 new PrzelewWychodzacy(container.Resolve<IRepositoryHelper>(),
                 new InnaOperacja(container.Resolve<IRepositoryHelper>()))))));
             unityContainer.RegisterType<IFillOperationFromDescriptionChain>(new InjectionFactory(createChain));
-
-            unityContainer.RegisterType<IParser, BgzBnpParibasParser>("BGZ BPN Paribas account parser");
+            unityContainer.RegisterType<IParser, BgzBnpParibasCsvParser>("BGZ BPN Paribas account parser");
+            #endregion Legacy parser
         }
     }
 }
