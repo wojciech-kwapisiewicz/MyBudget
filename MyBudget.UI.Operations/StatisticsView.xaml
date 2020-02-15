@@ -22,8 +22,17 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <controls:DateRangeControl Margin="0 0 0 2"
+                                   StartDate="{Binding Start,
+                                                               Mode=OneWayToSource}" 
+                                   EndDate="{Binding End,
+                                                               Mode=OneWayToSource}"    
+                                   FilterMonth="{Binding Month,
+                                                               Mode=OneWayToSource}"      
+                                   RangeType="{Binding DateRangeType,
+                                                               Mode=OneWayToSource}"    
                                    FilteringFunction="{Binding FilterFunction,
-                                                               Mode=OneWayToSource}" />
+                                                               Mode=OneWayToSource}"                                   
+                                   />
         <StackPanel Grid.Row="1"
                     HorizontalAlignment="Right"
                     Orientation="Horizontal">

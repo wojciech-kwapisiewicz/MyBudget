@@ -1,6 +1,7 @@
 ﻿using Microsoft.Practices.Prism.Mvvm;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
+using MyBudget.UI.Core.Controls;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace MyBudget.UI.Operations
         public StatisticsViewModel(IContext context)
         {
             _bankOperationRepository = context.GetRepository<IRepository<BankOperation>>();
-            ReloadView();
+            //ReloadView();
         }
 
         private Func<DateTime, bool> _filterFunction;
@@ -34,6 +35,11 @@ namespace MyBudget.UI.Operations
                 ReloadView();
             }
         }
+
+        public DateTime Start { get; set; }
+        public DateTime End { get; set; }
+        public DateTime Month { get; set; }
+        public DateRangeType DateRangeType { get; set; }
 
         private bool? _cleared;
         public bool? Cleared
@@ -83,10 +89,11 @@ namespace MyBudget.UI.Operations
         private void ReloadView()
         {
             var operations = FilterOperations();
+            var previousOps = GetOperationsForPreviousMonth();
 
             var roots = GetGroup(operations.GroupBy(l1 => l1.Category ?? string.Empty));
 
-            foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType<StatisticsGroup>())
+            foreach (var item in roots.Where(a => !string.IsNullOrEmpty(a.Key)).OfType<StatisticsGroup>().OrderBy(x=>x.Sum))
             {
                 var subGroupping = item.Elements.GroupBy(a => a.SubCategory ?? string.Empty)
                     .Where(a => !string.IsNullOrEmpty(a.Key));
@@ -157,6 +164,36 @@ namespace MyBudget.UI.Operations
             return itemsToDisplay;
         }
 
+        private IEnumerable<BankOperation> GetOperationsForPreviousMonth()
+        {
+            var itemsToDisplay = _bankOperationRepository.GetAll();
+            if (Cleared.HasValue)
+            {
+                itemsToDisplay = itemsToDisplay.Where(a => a.Cleared == Cleared.Value);
+            }
+
+            Func<DateTime, bool> filterByDate;
+
+            if(DateRangeType == DateRangeType.ByMonth)
+            {
+                var previousMonth = new DateTime(Month.Year, Month.Month, 1).AddDays(-1);
+                filterByDate = (date) => date.Year == previousMonth.Year && date.Month == previousMonth.Month;
+            }
+            else
+            {
+                int length = (Start - End).Days;
+                var prevStart = Start.AddDays(-length);
+                var prevEnd = End.AddDays(-length);
+                filterByDate = (date) => date >= prevStart && date <= prevEnd;
+            }
+
+            if (FilterFunction != null)
+            {
+                itemsToDisplay = itemsToDisplay.Where(a => filterByDate(a.OrderDate));
+            }
+            return itemsToDisplay;
+        }
+
         private ObservableCollection<IGroupItem> GetGroup(IEnumerable<IGrouping<string, BankOperation>> groupping)
         {
             return new ObservableCollection<IGroupItem>(groupping.Select(group =>
@@ -165,7 +202,7 @@ namespace MyBudget.UI.Operations
                         Key = group.Key,
                         Elements = group,
                         Sum = group.Sum(el1 => el1.Amount)
-                    }));
+                    }).OrderBy(x => x.Sum));
         }
 
         private IEnumerable<IGroupItem> _items { get; set; }

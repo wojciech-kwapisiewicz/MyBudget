@@ -172,3 +172,7 @@ UpgradeLog*.htm
 
 # Microsoft Fakes
 FakesAssemblies/
+/.vs/MyBudget/v16/Server/sqlite3/storage.ide-wal
+/.vs/MyBudget/v16/Server/sqlite3/storage.ide-shm
+/.vs/MyBudget/v16/Server/sqlite3/storage.ide
+/.vs/MyBudget/v16/Server/sqlite3/db.lock
