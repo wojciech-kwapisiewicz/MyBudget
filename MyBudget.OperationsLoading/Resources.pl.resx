@@ -120,6 +120,12 @@
   <data name="BgzBnpParibasName" xml:space="preserve">
     <value>[Wycofany] BGZ BNP Paribas (CSV)</value>
   </data>
+  <data name="BnpParibasXslxFilter" xml:space="preserve">
+    <value>BNPParibas (XLS / Excel) (.xlsx)|*.xlsx</value>
+  </data>
+  <data name="BnpParibasXslxName" xml:space="preserve">
+    <value>BNPParibas (XLS / Excel)</value>
+  </data>
   <data name="MilleniumFilter" xml:space="preserve">
     <value>Millenium (.csv)|*.csv</value>
   </data>

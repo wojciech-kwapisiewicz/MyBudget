@@ -50,6 +50,7 @@
     <Compile Include="BgzBnpParibasCsv\InnaOperacjaTests.cs" />
     <Compile Include="BgzBnpParibasCsv\OperacjaKartaTests.cs" />
     <Compile Include="BgzBnpParibasCsv\PrzelewTests.cs" />
+    <Compile Include="BnpParibasXlsx\BnpParibasXslxParserTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -24,11 +25,31 @@ namespace MyBudget.OperationsLoading.Tests
         public static string CardBNP_No2 = "512345------0020";
         public static string CardBNP_No2_CardHolder = "JAN KOWALSKI";
 
-        public static string Shortest(this string input)
+        public static string Compact(this string input)
         {
             return input
                 .Replace(" ", "")
                 .Replace("\t", "");
+        }
+
+        public static Stream ToStream(this string text)
+        {
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
+        }
+
+        public static Stream ToStream(this byte[] bytes)
+        {
+            MemoryStream stream = new MemoryStream();
+            BinaryWriter writer = new BinaryWriter(stream, Encoding.UTF8);
+            writer.Write(bytes);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }

@@ -79,7 +79,8 @@ namespace MyBudget.OperationsLoading.BgzBnpParibasCsv
                     operation.Amount = _parseHelper.ParseDecimalInvariant(reader[1]);
                     operation.EndingBalance = _parseHelper.ParseDecimalInvariant(reader[3]);
                     _fillDescription.Match(operation, reader[2]);
-                    operation.Title = _parseHelper.GetFirstNCharacters(operation.Description, 30);
+                    operation.Title = _parseHelper.GetFirstNCharacters(operation.Description, 20);
+                    operation.Cleared = true;
                     operations.Add(operation);
                 }
             }

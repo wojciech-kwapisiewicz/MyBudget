@@ -68,39 +68,29 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
         public void GivenBasicCases_WhenParseBgzFormat_Then5OperationsAreReturnedAccountAnd5NewTypesAreAdded()
         {
             //When                
-            var operations = parser.Parse(ToStream(Resources.TestFiles.BGZParser_StandardCases));
+            var operations = parser.Parse(Resources.TestFiles.BGZParser_StandardCases.ToStream());
 
             //Then
             Assert.AreEqual(5, operations.Count());
             VerifyOperations(operations);
-            VerifyAccountAndOperationTypes();
-        }
-
-        public Stream ToStream(string text)
-        {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
-            writer.Write(text);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
+            VerifyAccountAndCardNumbersAndOperationTypes();
         }
 
         private static void VerifyOperations(IEnumerable<BankOperation> operations)
         {
-            operations.Any(op =>
+            Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 1) &&
                 op.OrderDate == new DateTime(2016, 10, 1) &&
                 op.Amount == 1000.12M &&
                 op.Type.Name == "PRZELEW PRZYCHODZĄCY" &&
                 op.Cleared == true &&
-                op.Description == "ABC WYPŁATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa" &&
-                op.Title == "ABC WYPŁATA 01 10 20" &&
+                op.Description == $"ABC WYPLATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  {TestBankData.ExternalAccount_TestAccount1} ABC CR/Aaaa" &&
+                op.Title == "ABC WYPLATA 01 10 20" &&
                 op.EndingBalance == 1000.12M &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
-            operations.Any(op =>
+            Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 2) &&
                 op.OrderDate == new DateTime(2016, 10, 2) &&
@@ -110,9 +100,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "Abc" &&
                 op.Title == "Abc" &&
                 op.EndingBalance == 899.56M &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
-            operations.Any(op =>
+            Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 3) &&
                 op.OrderDate == new DateTime(2016, 10, 3) &&
@@ -122,9 +112,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "asadfasfdsaf" &&
                 op.Title == "asadfasfdsaf" &&
                 op.EndingBalance == 895.56M &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
-            operations.Any(op =>
+            Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 5) &&
                 op.OrderDate == new DateTime(2016, 10, 4) &&
@@ -134,9 +124,9 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "WYPŁATA KARTĄ Z BANKOMATU A111 BANK1 SA" &&
                 op.Title == "WYPŁATA KARTĄ Z BANK" &&
                 op.EndingBalance == 885.45M &&
-                op.Card.CardNumber == TestBankData.CardNo1);
+                op.Card.CardNumber == TestBankData.CardNo1));
 
-            operations.Any(op =>
+            Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 7) &&
                 op.OrderDate == new DateTime(2016, 10, 4) &&
@@ -146,10 +136,10 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "SKLEP SPOZYWCZY" &&
                 op.Title == "SKLEP SPOZYWCZY" &&
                 op.EndingBalance == 862.45M &&
-                op.Card.CardNumber == TestBankData.CardNo2);
+                op.Card.CardNumber == TestBankData.CardNo2));
         }
 
-        private void VerifyAccountAndOperationTypes()
+        private void VerifyAccountAndCardNumbersAndOperationTypes()
         {
             accountRepo.Verify(repo => repo.Add(
                 It.Is<BankAccount>(account =>
@@ -187,20 +177,20 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
             //Probably this is newline replaced by space
 
             //When
-            var operations = parser.Parse(Resources.TestFiles.BGZParser_LongDescPayment);
+            var operations = parser.Parse(Resources.TestFiles.BGZParser_LongDescPayment.ToStream());
 
             //Then
             Assert.AreEqual(1, operations.Count());
-            operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+            Assert.IsTrue(operations.Any(op =>
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 8) &&
                 op.OrderDate == new DateTime(2016, 10, 4) &&
-                op.Amount == -24.000M &&
+                op.Amount == -24.00M &&
                 op.Type.Name == "TRANSAKCJA KARTĄ PŁATNICZĄ" &&
                 op.Cleared == true &&
                 op.Description == "MORETHAN15SIGNSDESCSPACE" &&
                 op.EndingBalance == 862.45M &&
-                op.Card.CardNumber == TestBankData.CardNo2);
+                op.Card.CardNumber == TestBankData.CardNo2));
         }
 
         [Test]
@@ -208,19 +198,19 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
         {
             //To add test for operations that were not analysed/designed yet
             //When
-            var operations = parser.Parse(Resources.TestFiles.BGZParser_OtherOperation);
+            var operations = parser.Parse(Resources.TestFiles.BGZParser_OtherOperation.ToStream());
 
             //Then
             Assert.AreEqual(1, operations.Count());
-            operations.Any(op =>
-                op.BankAccount.Name == "BGZBNPParibas" &&
+            Assert.IsTrue(operations.Any(op =>
+                op.BankAccount.Number == "BGZBNPParibas" &&
                 op.ExecutionDate == new DateTime(2016, 10, 10) &&
                 op.OrderDate == new DateTime(2016, 10, 10) &&
-                op.Amount == -345.00M &&
+                op.Amount == -345.45M &&
                 op.Type.Name == "INNA OPERACJA" &&
                 op.Cleared == true &&
                 op.Description == "blablba" &&
-                op.EndingBalance == 345.45M);
+                op.EndingBalance == 345.45M));
         }
     }
 }

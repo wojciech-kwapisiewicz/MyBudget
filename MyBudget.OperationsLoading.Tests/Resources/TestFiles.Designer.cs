@@ -19,7 +19,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "16.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class TestFiles {
@@ -62,7 +62,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-08;-24.00;OPERACJA KARTĄ ZLOTA 123456XXXXXX7891 000002 TRAN SAKCJA BEZGOTOWKOWA MORETHAN15SIGNS DESCSPACE   23.00PLN D=04.10.2016   ;862.45.
+        ///2016-10-08;-24.00;OPERACJA KARTÄ„ ZLOTA 123456XXXXXX7891 000002 TRAN SAKCJA BEZGOTOWKOWA MORETHAN15SIGNS DESCSPACE   23.00PLN D=04.10.2016   ;862.45.
         /// </summary>
         internal static string BGZParser_LongDescPayment {
             get {
@@ -82,8 +82,8 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-01;1000.12;PRZELEW UZNANIOWY (NADANO 01-10-2016) ABC WYPŁATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa ;1000.12
-        ///2016-10-02;-100.56;PRZELEW NA RACHUNEK NUMER 01 2345 6789 0123 4567 8901 2346 Abc ;899.56
+        ///2016-10-01;1000.12;PRZELEW UZNANIOWY (NADANO 01-10-2016) ABC WYPLATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa ;1000.12
+        ///2016-10-02;-100.56;PRZELEW NA RACHUNEK NUMER 11 2222 3333 4444 5555 6666 7777 Abc ;899.56
         ///2016-10-03;-4.00;PRZELEW OBCIĄŻENIOWY asadfasfdsaf   01 2345 6789 0123 4567 8901 2347 Abc 1 Asadfasdf ;895.56
         ///2016-10-05;-10.11;OPERACJA KARTĄ ZLOTA 123456XXXXXX7890 000001 WYPL ATA GOTÓW [rest of string was truncated]&quot;;.
         /// </summary>
@@ -94,10 +94,20 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BNP_TestOperations {
+            get {
+                object obj = ResourceManager.GetObject("BNP_TestOperations", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
-        ///&quot;PL00 0123 4567 8910 0000 1111 1234&quot;,&quot;2014-09-20&quot;,&quot;2014-09-20&quot;,&quot;PRZELEW WEWNĘTRZNY WYCHODZĄCY&quot;,&quot;&quot;,&quot;AAA BBB&quot;,&quot;Przelew własny&quot;,&quot;-1234.00&quot;,&quot;&quot;,&quot;10000.00&quot;,&quot;PLN&quot;
-        ///&quot;PL00 0123 4567 8910 0000 1111 1234&quot;,&quot;2014-09-19&quot;,&quot;2014-09-19&quot;,&quot;OBCIĄŻENIE&quot;,&quot;&quot;,&quot;&quot;,&quot;PODATEK OD ODSETEK&quot;,&quot;-11.22&quot;,&quot;&quot;,&quot;0.00&quot;,&quot;PLN&quot;
-        ///&quot;PL00 0123 4567 8910 0000 1111 1234&quot;,&quot;2014-09-18&quot;,&quot;2014-09-18&quot;,&quot;UZNANIE&quot;,&quot;&quot;, [rest of string was truncated]&quot;;.
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-20&quot;,&quot;2014-09-20&quot;,&quot;PRZELEW WEWNĘTRZNY WYCHODZĄCY&quot;,&quot;&quot;,&quot;AAA BBB&quot;,&quot;Przelew własny&quot;,&quot;-1234.00&quot;,&quot;&quot;,&quot;10000.00&quot;,&quot;PLN&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-19&quot;,&quot;2014-09-19&quot;,&quot;OBCIĄŻENIE&quot;,&quot;&quot;,&quot;&quot;,&quot;PODATEK OD ODSETEK&quot;,&quot;-11.22&quot;,&quot;&quot;,&quot;0.00&quot;,&quot;PLN&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-18&quot;,&quot;2014-09-18&quot;,&quot;UZNANIE&quot;,&quot;&quot;, [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MilleniumParser_Sample {
             get {
@@ -107,7 +117,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
-        ///&quot;PL00 0123 4567 8910 0000 1111 1234&quot;,&quot;2014-09-17&quot;,&quot;2014-09-17&quot;,&quot;PRZELEW PRZYCHODZĄCY&quot;,&quot;03 10 2039 5800 0012 3456 7890 00&quot;,&quot;AAA BBB&quot;,&quot;Tytul&quot;,&quot;&quot;,&quot;123.45&quot;,&quot;0.00&quot;,&quot;PLN&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-17&quot;,&quot;2014-09-17&quot;,&quot;PRZELEW PRZYCHODZĄCY&quot;,&quot;11 22 2233 3344 4455 5566 6677 77&quot;,&quot;AAA BBB&quot;,&quot;Tytul&quot;,&quot;&quot;,&quot;123.45&quot;,&quot;0.00&quot;,&quot;PLN&quot;
         ///.
         /// </summary>
         internal static string MilleniumParser_Sample1Entry {
@@ -196,7 +206,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-2&quot;?&gt;
         ///&lt;account-history&gt;
         ///  &lt;search&gt;
-        ///    &lt;account&gt;03102039580000123456789000&lt;/account&gt;
+        ///    &lt;account&gt;00102039580000123456789000&lt;/account&gt;
         ///    &lt;date since=&apos;2013-02-01&apos; to=&apos;2012-02-20&apos;/&gt;
         ///    &lt;filtering&gt;Wszystkie&lt;/filtering&gt;
         ///  &lt;/search&gt;
@@ -220,7 +230,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         ///   Looks up a localized string similar to &lt;?xml version=&quot;1.0&quot; encoding=&quot;iso-8859-2&quot;?&gt;
         ///&lt;account-history&gt;
         ///  &lt;search&gt;
-        ///    &lt;account&gt;03102039580000123456789000&lt;/account&gt;
+        ///    &lt;account&gt;00102039580000123456789000&lt;/account&gt;
         ///    &lt;date since=&apos;2013-02-01&apos; to=&apos;2012-02-20&apos;/&gt;
         ///    &lt;filtering&gt;Wszystkie&lt;/filtering&gt;
         ///  &lt;/search&gt;

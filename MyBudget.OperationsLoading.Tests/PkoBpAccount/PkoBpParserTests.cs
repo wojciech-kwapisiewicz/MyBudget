@@ -53,7 +53,7 @@ namespace MyBudget.OperationsLoading.Tests.PkoBpAccount
         public void GivenEmptyRepositoriesAndPkoBpXmlFileWith1Entry_WhenParse_ThenAccountAndTypeAddedAndListOf1EntryReturned()
         {
             //Given
-            using (Stream pkoBpList = ToStream(TestFiles.PkoBpParser_1Entry))
+            using (Stream pkoBpList = TestBankData.ToStream(TestFiles.PkoBpParser_1Entry))
             {
                 //When
                 var list = this.parser.Parse(pkoBpList).ToArray();
@@ -63,16 +63,6 @@ namespace MyBudget.OperationsLoading.Tests.PkoBpAccount
                 accountRepo.Verify(a => a.Add(It.IsAny<BankAccount>()));
                 typeRepo.Verify(a => a.Add(It.IsAny<BankOperationType>()));
             }
-        }
-
-        public Stream ToStream(string text)
-        {
-            MemoryStream stream = new MemoryStream();
-            StreamWriter writer = new StreamWriter(stream);
-            writer.Write(text);
-            writer.Flush();
-            stream.Position = 0;
-            return stream;
         }
 
         [Test]
@@ -98,7 +88,7 @@ namespace MyBudget.OperationsLoading.Tests.PkoBpAccount
 
             //Then
             var op = list.Single();
-            Assert.AreEqual(TestBankData.PKOBP_Belchatow_TestAccount1.Shortest(), op.BankAccount.Number);
+            Assert.AreEqual(TestBankData.PKOBP_Belchatow_TestAccount1.Compact(), op.BankAccount.Number);
             Assert.AreEqual(new DateTime(2013, 2, 2), op.OrderDate);
             Assert.AreEqual(new DateTime(2013, 2, 2), op.ExecutionDate);
             Assert.AreEqual(-100.00, op.Amount);
@@ -106,7 +96,7 @@ namespace MyBudget.OperationsLoading.Tests.PkoBpAccount
             Assert.AreEqual(true, op.Cleared);
             string expectedDesc = $"Nr rach. przeciwst.: {TestBankData.ExternalAccount_TestAccount1}\r\nDane adr. rach. przeciwst.: Name\r\nTytuł: SomeTitle";
             Assert.AreEqual(expectedDesc, op.Description);
-            Assert.AreEqual(TestBankData.ExternalAccount_TestAccount1.Shortest(), op.CounterAccount);
+            Assert.AreEqual(TestBankData.ExternalAccount_TestAccount1.Compact(), op.CounterAccount);
         }
     }
 }
