@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>TestFiles.resx</DependentUpon>
     </Compile>
+    <Compile Include="TestBankData.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\MilleniumParser_Sample.csv" />
@@ -84,6 +85,7 @@
     <None Include="Resources\BGZParser_LongDescPayment.csv" />
     <None Include="Resources\BGZParser_OtherOperation.csv" />
     <None Include="Resources\BGZParser_StandardCases.csv" />
+    <None Include="Resources\BNP_TestOperations.xlsx" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\MyBudget.Core\MyBudget.Core.csproj">

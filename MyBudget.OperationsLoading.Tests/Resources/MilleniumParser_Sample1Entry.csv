@@ -1,2 +1,2 @@
 ﻿Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
-"PL00 0123 4567 8910 0000 1111 1234","2014-09-17","2014-09-17","PRZELEW PRZYCHODZĄCY","03 10 2039 5800 0012 3456 7890 00","AAA BBB","Tytul","","123.45","0.00","PLN"
+"PL00 1160 2202 0000 1234 5678 8000","2014-09-17","2014-09-17","PRZELEW PRZYCHODZĄCY","11 22 2233 3344 4455 5566 6677 77","AAA BBB","Tytul","","123.45","0.00","PLN"

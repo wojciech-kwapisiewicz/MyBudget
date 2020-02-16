@@ -14,7 +14,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Xml;
 
-namespace MyBudget.Core.UnitTests.ImportData
+namespace MyBudget.OperationsLoading.Tests.PkoBpAccount
 {
     [TestFixture]
     public class PkoBpParserTests
@@ -98,15 +98,15 @@ namespace MyBudget.Core.UnitTests.ImportData
 
             //Then
             var op = list.Single();
-            Assert.AreEqual("03102039580000123456789000", op.BankAccount.Number);
+            Assert.AreEqual(TestBankData.PKOBP_Belchatow_TestAccount1.Shortest(), op.BankAccount.Number);
             Assert.AreEqual(new DateTime(2013, 2, 2), op.OrderDate);
             Assert.AreEqual(new DateTime(2013, 2, 2), op.ExecutionDate);
             Assert.AreEqual(-100.00, op.Amount);
             Assert.AreEqual("Przelew z rachunku", op.Type.Name);
             Assert.AreEqual(true, op.Cleared);
-            string expectedDesc ="Nr rach. przeciwst.: 11 2222 3333 4444 5555 6666 7777\r\nDane adr. rach. przeciwst.: Name\r\nTytuł: SomeTitle";
+            string expectedDesc = $"Nr rach. przeciwst.: {TestBankData.ExternalAccount_TestAccount1}\r\nDane adr. rach. przeciwst.: Name\r\nTytuł: SomeTitle";
             Assert.AreEqual(expectedDesc, op.Description);
-            Assert.AreEqual("11222233334444555566667777", op.CounterAccount);
+            Assert.AreEqual(TestBankData.ExternalAccount_TestAccount1.Shortest(), op.CounterAccount);
         }
     }
 }

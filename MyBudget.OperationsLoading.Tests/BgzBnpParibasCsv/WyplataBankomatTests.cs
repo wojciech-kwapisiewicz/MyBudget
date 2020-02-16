@@ -38,7 +38,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
         public void GivenValidDescription_WhenParsed_OperationIsFilledWithDataAndCardIsAdded()
         {
             //Given
-            string description = "OPERACJA KARTĄ ZLOTA 123456XXXXXX7890 000001 WYPL ATA GOTÓWKI A111 BANK1 SA   10.11PLN D=04.10.2016  ";
+            string description = $"OPERACJA KARTĄ ZLOTA {TestBankData.CardNo1} 000001 WYPL ATA GOTÓWKI A111 BANK1 SA   10.11PLN D=04.10.2016  ";
             var operation = new BankOperation();
 
             //When
@@ -50,8 +50,8 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
             Assert.AreEqual(new DateTime(2016, 10, 4), operation.OrderDate);
             cardRepo.Verify(repo => repo.Add(
                 It.Is<Card>(card =>
-                card.CardNumber == "123456XXXXXX7890")));
-            Assert.AreEqual("123456XXXXXX7890", operation.Card.CardNumber);
+                card.CardNumber == TestBankData.CardNo1)));
+            Assert.AreEqual(TestBankData.CardNo1, operation.Card.CardNumber);
         }
     }
 }

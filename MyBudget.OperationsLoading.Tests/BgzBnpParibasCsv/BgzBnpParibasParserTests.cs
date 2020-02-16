@@ -98,7 +98,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "ABC WYPŁATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa" &&
                 op.Title == "ABC WYPŁATA 01 10 20" &&
                 op.EndingBalance == 1000.12M &&
-                op.CounterAccount == "01234567890123456789012345");
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
 
             operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
@@ -110,7 +110,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "Abc" &&
                 op.Title == "Abc" &&
                 op.EndingBalance == 899.56M &&
-                op.CounterAccount == "01234567890123456789012346");
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
 
             operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
@@ -122,7 +122,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "asadfasfdsaf" &&
                 op.Title == "asadfasfdsaf" &&
                 op.EndingBalance == 895.56M &&
-                op.CounterAccount == "01234567890123456789012347");
+                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Shortest());
 
             operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
@@ -134,7 +134,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "WYPŁATA KARTĄ Z BANKOMATU A111 BANK1 SA" &&
                 op.Title == "WYPŁATA KARTĄ Z BANK" &&
                 op.EndingBalance == 885.45M &&
-                op.Card.CardNumber == "123456XXXXXX7890");
+                op.Card.CardNumber == TestBankData.CardNo1);
 
             operations.Any(op =>
                 op.BankAccount.Number == "BGZBNPParibas" &&
@@ -146,7 +146,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Description == "SKLEP SPOZYWCZY" &&
                 op.Title == "SKLEP SPOZYWCZY" &&
                 op.EndingBalance == 862.45M &&
-                op.Card.CardNumber == "123456XXXXXX7891");
+                op.Card.CardNumber == TestBankData.CardNo2);
         }
 
         private void VerifyAccountAndOperationTypes()
@@ -157,11 +157,11 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
 
             cardRepo.Verify(repo => repo.Add(
                 It.Is<Card>(card =>
-                card.CardNumber == "123456XXXXXX7890")));
+                card.CardNumber == TestBankData.CardNo1)));
 
             cardRepo.Verify(repo => repo.Add(
                 It.Is<Card>(card =>
-                card.CardNumber == "123456XXXXXX7891")));
+                card.CardNumber == TestBankData.CardNo2)));
 
             typeRepo.Verify(repo => repo.Add(
                 It.Is<BankOperationType>(type =>
@@ -200,7 +200,7 @@ namespace MyBudget.OperationsLoading.Tests.BgzBnpParibasCsv
                 op.Cleared == true &&
                 op.Description == "MORETHAN15SIGNSDESCSPACE" &&
                 op.EndingBalance == 862.45M &&
-                op.Card.CardNumber == "123456XXXXXX7891");
+                op.Card.CardNumber == TestBankData.CardNo2);
         }
 
         [Test]
