@@ -74,7 +74,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
                 op.ExecutionDate == new DateTime(2020, 02, 17) &&
                 op.OrderDate == new DateTime(2020, 02, 17) &&
-                op.Amount == -1200.00M &&
+                op.Amount == -1000.00M &&
                 op.Type.Name == "Operacja kredytowa" &&
                 op.Cleared == true &&
                 op.Description == "Operacja kredytowa nr 01234568" &&
