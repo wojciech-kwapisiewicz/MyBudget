@@ -1,4 +1,5 @@
-﻿using MyBudget.Model;
+﻿using LumenWorks.Framework.IO.Csv;
+using MyBudget.Model;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -43,76 +44,56 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
 
         public IEnumerable<BankOperation> Parse(Stream stream)
         {
-            using (var reader = new StreamReader(stream))
+            List<BankOperation> operations = new List<BankOperation>();
+            int line = 1;
+            using (var reader = new CsvReader(new StreamReader(stream, Encoding.UTF8), true, ','))
             {
-                reader.ReadLine();//to ignore headers
-                List<BankOperation> ops = new List<BankOperation>();
-                int i = 0;
-                while (!reader.EndOfStream)
+                while (reader.ReadNextRecord())
                 {
-                    var line = reader.ReadLine();
-                    ops.Add(ParseLine(line, ++i));
+                    BankOperation operation = new BankOperation() { Cleared = true, LpOnStatement = line++ };
+
+                    string accountNumber = reader[0].Replace(" ", "").Substring(2, 26);
+                    operation.BankAccount = _repositoryHelper.GetOrAddAccount(accountNumber);
+
+                    operation.OrderDate = _parseHelper.ParseDate(reader[1], "yyyy-MM-dd");
+                    operation.ExecutionDate = _parseHelper.ParseDate(reader[2], "yyyy-MM-dd");
+                    operation.Type = _repositoryHelper.GetOrAddOperationType(reader[3]);
+                    operation.CounterAccount = reader[4].Replace(" ", "");
+                    operation.Description = reader[6];
+                    operation.Title = _parseHelper.GetFirstNCharacters(operation.Description, OperationsLoadingConsts.OperationTitleLength);
+
+                    string amount = reader[7];
+                    if (string.IsNullOrEmpty(amount))
+                    {
+                        amount = reader[8];
+                    }
+                    if (string.IsNullOrEmpty(amount))
+                    {
+                        throw new FormatException("Invalid format of parsing message");
+                    }
+                    operation.Amount = _parseHelper.ParseDecimalInvariant(amount);
+                    operation.EndingBalance = _parseHelper.ParseDecimalInvariant(reader[9]);
+
+                    operations.Add(operation);
                 }
-                return ops;
             }
+
+            return operations;
         }
 
         public IEnumerable<BankOperation> Parse(string inputString)
         {
-            string[] lines = inputString.Split(
-                new[] { Environment.NewLine },
-                StringSplitOptions.RemoveEmptyEntries);
-
-            List<BankOperation> ops = new List<BankOperation>(lines.Length);
-            for (int i = 1; i < lines.Length; i++)
-            {
-                ops.Add(ParseLine(lines[i], i));
-            }
-
-            return ops;
+            return Parse(ToStream(inputString));
         }
 
-        private BankOperation ParseLine(string line, int lineNumber)
+        public Stream ToStream(string text)
         {
-            string[] entries = line.Split(',')
-                .Select(a => a.Trim('"')).ToArray();
-            var bo = new BankOperation();
-
-            string accountNumber = entries[0]
-                .Replace(" ", "")
-                .Substring(2, 26);
-            string counterAccount = entries[4]
-                .Replace(" ", "");
-            string typeName = entries[3];
-            string description = entries[6];
-            string title = _parseHelper.GetFirstNCharacters(description, OperationsLoadingConsts.OperationTitleLength);
-
-            BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
-
-            string amount = entries[7];
-            if (string.IsNullOrEmpty(amount))
-            {
-                amount = entries[8];
-            }
-            if (string.IsNullOrEmpty(amount))
-            {
-                throw new FormatException("Invalid format of parsing message");
-            }
-
-            return new BankOperation()
-            {
-                LpOnStatement = lineNumber,
-                BankAccount = account,
-                OrderDate = _parseHelper.ParseDate(entries[1], "yyyy-MM-dd"),
-                ExecutionDate = _parseHelper.ParseDate(entries[2], "yyyy-MM-dd"),
-                Amount = _parseHelper.ParseDecimalInvariant(amount),
-                EndingBalance = _parseHelper.ParseDecimalInvariant(entries[9]),
-                Title = title,
-                CounterAccount = counterAccount,
-                Description = description,
-                Type = _repositoryHelper.GetOrAddOperationType(typeName),
-                Cleared = true
-            };
+            MemoryStream stream = new MemoryStream();
+            StreamWriter writer = new StreamWriter(stream, Encoding.UTF8);
+            writer.Write(text);
+            writer.Flush();
+            stream.Position = 0;
+            return stream;
         }
     }
 }
