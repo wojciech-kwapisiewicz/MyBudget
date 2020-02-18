@@ -16,20 +16,16 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 
         public string SupportedFileExtensions => Resources.BnpParibasXslxFilter;
 
-        ParseHelper _parseHelper;
-        IRepositoryHelper _repositoryHelper;
-        IOperationHandler _operationHandler;
+        private IRepositoryHelper _repositoryHelper;
+        private IOperationHandler _operationHandler;
 
-        public BnpParibasXslxParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IOperationHandler operationHandler)
+        public BnpParibasXslxParser(IRepositoryHelper repositoryHelper, IOperationHandler operationHandler)
         {
-            if (parseHelper == null)
-                throw new ArgumentNullException("parseHelper");
-            _parseHelper = parseHelper;
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
-            _repositoryHelper = repositoryHelper;
             if(operationHandler==null)
                 throw new ArgumentNullException("operationHandler");
+            _repositoryHelper = repositoryHelper;
             _operationHandler = operationHandler;
         }
 

@@ -9,7 +9,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 {
     public class DefaultHandler : IOperationHandler
     {
-        ParseHelper _parseHelper;
+        private ParseHelper _parseHelper;
 
         public DefaultHandler(ParseHelper parseHelper)
         {

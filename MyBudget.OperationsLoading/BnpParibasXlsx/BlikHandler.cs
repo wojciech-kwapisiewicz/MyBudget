@@ -9,9 +9,9 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 {
     public class BlikHandler : IOperationHandler
     {
-        IOperationHandler _next;
-        ParseHelper _parseHelper;
-        string _supportedOperationType = "Transakcja BLIK";
+        private IOperationHandler _next;
+        private ParseHelper _parseHelper;
+        private string _supportedOperationType = "Transakcja BLIK";
 
         public BlikHandler(IOperationHandler next, ParseHelper parseHelper)
         {

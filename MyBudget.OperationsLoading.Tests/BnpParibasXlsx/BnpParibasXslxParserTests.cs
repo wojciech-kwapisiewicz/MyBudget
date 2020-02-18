@@ -22,6 +22,8 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         private BnpParibasXslxParser parser;
         private ParseHelper parseHelper = new ParseHelper();
 
+        private List<BankAccount> mockAccountsCreated = new List<BankAccount>();
+
         [SetUp]
         public void SetUp()
         {
@@ -29,11 +31,16 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
-            this.parser = new BnpParibasXslxParser(parseHelper, repositoryHelper,
+            this.parser = new BnpParibasXslxParser(repositoryHelper,
                 new BankTransferHandler(
                     new BlikHandler(
                         new CardHandler(
-                            new DefaultHandler(parseHelper), parseHelper), parseHelper), parseHelper));
+                            new DefaultHandler(parseHelper), parseHelper, repositoryHelper), parseHelper), parseHelper));
+
+            this.accountRepo.Setup(a => a.Get(It.IsAny<string>())).Returns<string>(
+                a => mockAccountsCreated.FirstOrDefault(x => x.Number == a));
+            this.accountRepo.Setup(a => a.Add(It.IsAny<BankAccount>())).Callback<BankAccount>(
+                a => mockAccountsCreated.Add(a));
         }
 
         [Test]
@@ -200,7 +207,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Description == "512345------0010 ANNA KOWALSKA WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25" &&
                 op.Title == "WARSZAWA MPK1234 1WR" &&
                 op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == TestBankData.CardNo1));
+                op.Card.CardNumber == TestBankData.CardBNP_No1));
 
             Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
@@ -212,17 +219,22 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Description == "512345------0020 JAN KOWALSKI WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24" &&
                 op.Title == "WARSZAWA SKLEP WARSZ" &&
                 op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == TestBankData.CardNo2));
+                op.Card.CardNumber == TestBankData.CardBNP_No2));
 
             #endregion
         }
 
         private void VerifyAccountAndCardNumbersAndOperationTypes()
         {
+            //We want just 1 account to be inserted
             accountRepo.Verify(repo => repo.Add(
                 It.Is<BankAccount>(account =>
-                account.Number == TestBankData.BNPParibas_TestAccount1)));
+                account.Number == TestBankData.BNPParibas_TestAccount1.Compact())), Times.Once);
 
+            accountRepo.Verify(repo => repo.Get(
+                It.Is<string>(accountNumber => accountNumber == TestBankData.BNPParibas_TestAccount1.Compact())), Times.Exactly(10));
+
+            //Likewise this should be changed to adjust
             cardRepo.Verify(repo => repo.Add(
                 It.Is<Card>(card =>
                 card.CardNumber == TestBankData.CardBNP_No1)));

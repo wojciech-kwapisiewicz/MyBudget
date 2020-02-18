@@ -10,11 +10,12 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 {
     public class CardHandler : IOperationHandler
     {
-        IOperationHandler _next;
-        ParseHelper _parseHelper;
-        string _supportedOperationType = "Transakcja kartą";
+        private IOperationHandler _next;
+        private ParseHelper _parseHelper;
+        private IRepositoryHelper _repositoryHelper;
+        private string _supportedOperationType = "Transakcja kartą";
 
-        public CardHandler(IOperationHandler next, ParseHelper parseHelper)
+        public CardHandler(IOperationHandler next, ParseHelper parseHelper, IRepositoryHelper repositoryHelper)
         {
             if (next == null)
                 throw new ArgumentNullException("next");
@@ -22,6 +23,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                 throw new ArgumentNullException("parseHelper");
             _next = next;
             _parseHelper = parseHelper;
+            _repositoryHelper = repositoryHelper;
         }
 
         public void Handle(BankOperation operation, string description, string counterpartyInfo)
@@ -33,11 +35,6 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                 return;
             }
 
-            operation.Title = GetCardOperationDetails(description);
-        }
-
-        public string GetCardOperationDetails(string description)
-        {
             string regexPattern = @"^(\d*------\d*) (\w* \w*) (.*)$";
             var matchedParts = Regex.Match(description, regexPattern);
 
@@ -45,7 +42,9 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
             var cardHolder = matchedParts.Groups[2].Value;
             var transactionDetails = matchedParts.Groups[3].Value;
 
-            return _parseHelper.GetFirstNCharacters(transactionDetails, 30);
+
+            operation.Title = _parseHelper.GetFirstNCharacters(transactionDetails, OperationsLoadingConsts.OperationTitleLength);
+            operation.Card = _repositoryHelper.GetOrAddCard(cardNum);
         }
     }
 }
