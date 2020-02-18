@@ -62,7 +62,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-08;-24.00;OPERACJA KARTÄ„ ZLOTA 123456XXXXXX7891 000002 TRAN SAKCJA BEZGOTOWKOWA MORETHAN15SIGNS DESCSPACE   23.00PLN D=04.10.2016   ;862.45.
+        ///2016-10-08;-24.00;OPERACJA KARTĄ ZLOTA 123456XXXXXX7891 000002 TRAN SAKCJA BEZGOTOWKOWA MORETHAN15SIGNS DESCSPACE   24.00PLN D=04.10.2016   ;862.45.
         /// </summary>
         internal static string BGZParser_LongDescPayment {
             get {
@@ -72,7 +72,7 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-10;-345.00;   blablba   ;345.45.
+        ///2016-10-10;-345.45;   blablba   ;345.45.
         /// </summary>
         internal static string BGZParser_OtherOperation {
             get {
@@ -82,9 +82,9 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         
         /// <summary>
         ///   Looks up a localized string similar to Data operacji;Kwota transakcji;Opis;Saldo po operacji
-        ///2016-10-01;1000.12;PRZELEW UZNANIOWY (NADANO 01-10-2016) ABC WYPLATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  01 2345 6789 0123 4567 8901 2345 ABC CR/Aaaa ;1000.12
+        ///2016-10-01;1000.12;PRZELEW UZNANIOWY (NADANO 01-10-2016) ABC WYPLATA 01 10 2016    ABC. Z O.O.   UL.ABC 1 11-111 WARSZAWA  11 2222 3333 4444 5555 6666 7777 ABC CR/Aaaa ;1000.12
         ///2016-10-02;-100.56;PRZELEW NA RACHUNEK NUMER 11 2222 3333 4444 5555 6666 7777 Abc ;899.56
-        ///2016-10-03;-4.00;PRZELEW OBCIĄŻENIOWY asadfasfdsaf   01 2345 6789 0123 4567 8901 2347 Abc 1 Asadfasdf ;895.56
+        ///2016-10-03;-4.00;PRZELEW OBCIĄŻENIOWY asadfasfdsaf   11 2222 3333 4444 5555 6666 7777 Abc 1 Asadfasdf ;895.56
         ///2016-10-05;-10.11;OPERACJA KARTĄ ZLOTA 123456XXXXXX7890 000001 WYPL ATA GOTÓW [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string BGZParser_StandardCases {
@@ -104,10 +104,10 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
+        ///   Looks up a localized string similar to &quot;Numer rachunku/karty&quot;,&quot;Data transakcji&quot;,&quot;Data rozliczenia&quot;,&quot;Rodzaj transakcji&quot;,&quot;Na konto/Z konta&quot;,&quot;Odbiorca/Zleceniodawca&quot;,&quot;Opis&quot;,&quot;Obciążenia&quot;,&quot;Uznania&quot;,&quot;Saldo&quot;,&quot;Waluta&quot;
         ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-20&quot;,&quot;2014-09-20&quot;,&quot;PRZELEW WEWNĘTRZNY WYCHODZĄCY&quot;,&quot;&quot;,&quot;AAA BBB&quot;,&quot;Przelew własny&quot;,&quot;-1234.00&quot;,&quot;&quot;,&quot;10000.00&quot;,&quot;PLN&quot;
         ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-19&quot;,&quot;2014-09-19&quot;,&quot;OBCIĄŻENIE&quot;,&quot;&quot;,&quot;&quot;,&quot;PODATEK OD ODSETEK&quot;,&quot;-11.22&quot;,&quot;&quot;,&quot;0.00&quot;,&quot;PLN&quot;
-        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-18&quot;,&quot;2014-09-18&quot;,&quot;UZNANIE&quot;,&quot;&quot;, [rest of string was truncated]&quot;;.
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-18&quot;,&quot;201 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MilleniumParser_Sample {
             get {
@@ -116,13 +116,24 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
+        ///   Looks up a localized string similar to &quot;Numer rachunku/karty&quot;,&quot;Data transakcji&quot;,&quot;Data rozliczenia&quot;,&quot;Rodzaj transakcji&quot;,&quot;Na konto/Z konta&quot;,&quot;Odbiorca/Zleceniodawca&quot;,&quot;Opis&quot;,&quot;Obciążenia&quot;,&quot;Uznania&quot;,&quot;Saldo&quot;,&quot;Waluta&quot;
         ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-17&quot;,&quot;2014-09-17&quot;,&quot;PRZELEW PRZYCHODZĄCY&quot;,&quot;11 22 2233 3344 4455 5566 6677 77&quot;,&quot;AAA BBB&quot;,&quot;Tytul&quot;,&quot;&quot;,&quot;123.45&quot;,&quot;0.00&quot;,&quot;PLN&quot;
         ///.
         /// </summary>
         internal static string MilleniumParser_Sample1Entry {
             get {
                 return ResourceManager.GetString("MilleniumParser_Sample1Entry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &quot;Numer rachunku/karty&quot;,&quot;Data transakcji&quot;,&quot;Data rozliczenia&quot;,&quot;Rodzaj transakcji&quot;,&quot;Na konto/Z konta&quot;,&quot;Odbiorca/Zleceniodawca&quot;,&quot;Opis&quot;,&quot;Obciążenia&quot;,&quot;Uznania&quot;,&quot;Saldo&quot;,&quot;Waluta&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-17&quot;,&quot;2014-09-17&quot;,&quot;PRZELEW PRZYCHODZĄCY&quot;,&quot;11 22 2233 3344 4455 5566 6677 77&quot;,&quot;AAA BBB, 00-999 Warszawa&quot;,&quot;Tytul, z przecinkiem&quot;,&quot;&quot;,&quot;123.45&quot;,&quot;0.00&quot;,&quot;PLN&quot;
+        ///.
+        /// </summary>
+        internal static string MilleniumParser_Sample1Entry_Comma {
+            get {
+                return ResourceManager.GetString("MilleniumParser_Sample1Entry_Comma", resourceCulture);
             }
         }
         

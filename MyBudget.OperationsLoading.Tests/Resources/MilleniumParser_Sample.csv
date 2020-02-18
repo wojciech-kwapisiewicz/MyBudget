@@ -1,4 +1,4 @@
-﻿Numer rachunku/karty,Data transakcji,Data rozliczenia,Rodzaj transakcji,Na konto/Z konta,Odbiorca/Zleceniodawca,Opis,Obciążenia,Uznania,Saldo,Waluta
+﻿"Numer rachunku/karty","Data transakcji","Data rozliczenia","Rodzaj transakcji","Na konto/Z konta","Odbiorca/Zleceniodawca","Opis","Obciążenia","Uznania","Saldo","Waluta"
 "PL00 1160 2202 0000 1234 5678 8000","2014-09-20","2014-09-20","PRZELEW WEWNĘTRZNY WYCHODZĄCY","","AAA BBB","Przelew własny","-1234.00","","10000.00","PLN"
 "PL00 1160 2202 0000 1234 5678 8000","2014-09-19","2014-09-19","OBCIĄŻENIE","","","PODATEK OD ODSETEK","-11.22","","0.00","PLN"
 "PL00 1160 2202 0000 1234 5678 8000","2014-09-18","2014-09-18","UZNANIE","","","KAPITALIZACJA ODS.","","55.66","0.00","PLN"
