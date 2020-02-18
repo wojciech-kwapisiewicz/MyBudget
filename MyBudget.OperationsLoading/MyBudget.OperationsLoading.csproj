@@ -68,11 +68,17 @@
     <Compile Include="BgzBnpParibasCsv\PrzelewPrzychodzacy.cs" />
     <Compile Include="BgzBnpParibasCsv\PrzelewWychodzacy.cs" />
     <Compile Include="BgzBnpParibasCsv\WyplataBankomat.cs" />
+    <Compile Include="BnpParibasXlsx\DefaultHandler.cs" />
+    <Compile Include="BnpParibasXlsx\CardHandler.cs" />
+    <Compile Include="BnpParibasXlsx\BlikHandler.cs" />
+    <Compile Include="BnpParibasXlsx\BankTransferHandler.cs" />
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParser.cs" />
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />
     <Compile Include="ImportData\CheckStatus.cs" />
+    <Compile Include="BnpParibasXlsx\IOperationHandler.cs" />
     <Compile Include="IRepositoryHelper.cs" />
+    <Compile Include="OperationsLoadingConsts.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardClearedTextParsing.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardOperationDetails.cs" />
     <Compile Include="PkoBpCreditCard\CreditCardPageDefinition.cs" />

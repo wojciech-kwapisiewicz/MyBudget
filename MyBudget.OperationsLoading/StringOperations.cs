@@ -42,5 +42,15 @@ namespace MyBudget.OperationsLoading
             }
             return text.Substring(0, pos) + replace + text.Substring(pos + search.Length);
         }
+
+
+        public static string GetFirstNCharacters(this string text, int n)
+        {
+            if (text.Length > n)
+            {
+                return text.Substring(0, n);
+            }
+            return text;
+        }
     }
 }

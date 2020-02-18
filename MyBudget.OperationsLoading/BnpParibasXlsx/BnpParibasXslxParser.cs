@@ -18,8 +18,9 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 
         ParseHelper _parseHelper;
         IRepositoryHelper _repositoryHelper;
+        IOperationHandler _operationHandler;
 
-        public BnpParibasXslxParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper)
+        public BnpParibasXslxParser(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IOperationHandler operationHandler)
         {
             if (parseHelper == null)
                 throw new ArgumentNullException("parseHelper");
@@ -27,6 +28,9 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
             if (repositoryHelper == null)
                 throw new ArgumentNullException("repositoryHelper");
             _repositoryHelper = repositoryHelper;
+            if(operationHandler==null)
+                throw new ArgumentNullException("operationHandler");
+            _operationHandler = operationHandler;
         }
 
         public IEnumerable<BankOperation> Parse(string inputString)
@@ -56,48 +60,22 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                 var sb = new StringBuilder(); //this is your data
                 for (int rowNum = 2; rowNum <= totalRows; rowNum++) //select starting row here
                 {
-                    var orderDate = GetDateFromExcelRange(myWorksheet.Cells[rowNum, 1]);
-                    var executionDate = GetDateFromExcelRange(myWorksheet.Cells[rowNum, 2]);
-                    var amount = Convert.ToDecimal(myWorksheet.Cells[rowNum, 3].Value);  
-                    
-                    var counterAccount = myWorksheet.Cells[rowNum, 5].Value.ToString();
-                    var description = myWorksheet.Cells[rowNum, 6].Value.ToString();                    
-                    var typeName = myWorksheet.Cells[rowNum, 8].Value.ToString();
-                    var product = myWorksheet.Cells[rowNum, 7].Value.ToString();
+                    var bankOperation = new BankOperation();
+                    bankOperation.LpOnStatement = rowNum;
+                    bankOperation.OrderDate = GetDateFromExcelRange(myWorksheet.Cells[rowNum, 1]);
+                    bankOperation.ExecutionDate = GetDateFromExcelRange(myWorksheet.Cells[rowNum, 2]);
+                    bankOperation.Amount = Convert.ToDecimal(myWorksheet.Cells[rowNum, 3].Value);
+                    bankOperation.Description = myWorksheet.Cells[rowNum, 6].Value.ToString();
+                    bankOperation.Type = _repositoryHelper.GetOrAddOperationType(myWorksheet.Cells[rowNum, 8].Value.ToString());
+                    bankOperation.Cleared = true;
 
-                    var accountNumber = product.Split('\n')[1];
+                    var bankAccountProduct = myWorksheet.Cells[rowNum, 7].Value.ToString();                    
+                    var accountNumber = bankAccountProduct.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[1];
+                    bankOperation.BankAccount = _repositoryHelper.GetOrAddAccount(accountNumber);
 
-                    //Parsing title for different transactions
-                    string title = string.Empty;
-                    switch (typeName)
-                    {
-                        case "Transakcja BLIK":
-                            title = GetBlikTitle(description);
-                            break;
-                        case "Transakcja kartą":
-                            title = GetCardDetails(description);
-                            break;
-                        default:
-                            title = _parseHelper.GetFirstNCharacters(description, 30);
-                            break;
-                    };
-
-                    BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
-
-                    var bankOperation = new BankOperation()
-                    {
-                        LpOnStatement = rowNum,
-                        BankAccount = account,
-                        OrderDate = orderDate,
-                        ExecutionDate = executionDate,
-                        Amount = amount,
-                        Description = description,
-                        Title = title,
-                        CounterAccount = counterAccount,
-
-                        Type = _repositoryHelper.GetOrAddOperationType(typeName),
-                        Cleared = true
-                    };
+                    //Parsing title and other details for different transactions
+                    var counterpartyInfo = myWorksheet.Cells[rowNum, 5].Value.ToString();
+                    _operationHandler.Handle(bankOperation, bankOperation.Description, myWorksheet.Cells[rowNum, 5].Value.ToString());
 
                     ops.Add(bankOperation);
                 }
@@ -111,24 +89,6 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
             double dateValue = (double) excelRange.Value;
             DateTime date = DateTime.FromOADate(dateValue);
             return date;
-        }
-
-        public string GetBlikTitle(string description)
-        {
-            var transactionDetails = description.Replace("Transakcja BLIK, ", "");
-            return _parseHelper.GetFirstNCharacters(transactionDetails, 30);
-        }
-
-        public string GetCardDetails(string description)
-        {
-            string regexPattern = @"^(\d*------\d*) (\w* \w*) (.*)$";
-            var matchedParts = Regex.Match(description, regexPattern);
-
-            var cardNum = matchedParts.Groups[1].Value;
-            var cardHolder = matchedParts.Groups[2].Value;
-            var transactionDetails = matchedParts.Groups[3].Value;
-
-            return _parseHelper.GetFirstNCharacters(transactionDetails, 30);
         }
     }
 }

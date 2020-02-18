@@ -29,7 +29,11 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             this.typeRepo = new Mock<IRepository<BankOperationType, string>>();
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
-            this.parser = new BnpParibasXslxParser(parseHelper, repositoryHelper);
+            this.parser = new BnpParibasXslxParser(parseHelper, repositoryHelper,
+                new BankTransferHandler(
+                    new BlikHandler(
+                        new CardHandler(
+                            new DefaultHandler(parseHelper), parseHelper), parseHelper), parseHelper));
         }
 
         [Test]
@@ -78,10 +82,10 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Operacja kredytowa" &&
                 op.Cleared == true &&
                 op.Description == "Operacja kredytowa nr 01234568" &&
-                op.Title == "Operacja kredytowa n" &&
+                op.Title == "Operacja kredytowa nr 01234568".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
-                op.CounterAccount == string.Empty));
+                op.CounterAccount == null));
 
             Assert.IsTrue(operations.Any(op =>
                 op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
@@ -91,10 +95,10 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Prowizje i opłaty" &&
                 op.Cleared == true &&
                 op.Description == "Prowizja kredytowa nr 01234567" &&
-                op.Title == "Prowizja kredytowa n" &&
+                op.Title == "Prowizja kredytowa nr 01234567".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
-                op.CounterAccount == string.Empty));
+                op.CounterAccount == null));
 
             #endregion
 
@@ -108,7 +112,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Przelew przychodzący" &&
                 op.Cleared == true &&
                 op.Description == "Przelew przychodzacy - wyplata" &&
-                op.Title == "Przelew przychodzacy" &&
+                op.Title == "Przelew przychodzacy - wyplata".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
@@ -121,7 +125,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Przelew wychodzący" &&
                 op.Cleared == true &&
                 op.Description == "Oplata za cos" &&
-                op.Title == "Oplata za cos" &&
+                op.Title == "Oplata za cos".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
@@ -134,7 +138,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Zlecenie stałe" &&
                 op.Cleared == true &&
                 op.Description == "Oplata stala za prad" &&
-                op.Title == "Oplata stala za prad" &&
+                op.Title == "Oplata stala za prad".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount2.Compact()));
@@ -147,7 +151,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Przelew internetowy" &&
                 op.Cleared == true &&
                 op.Description == "Numer 12345678901234567890" &&
-                op.Title == "Numer 12345678901234" &&
+                op.Title == "Numer 12345678901234567890".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
@@ -166,7 +170,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Description == "Transakcja BLIK, Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy" &&
                 op.Title == "Zwrot BLIK, Zwrot BL" &&
                 op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == string.Empty &&
+                op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
             Assert.IsTrue(operations.Any(op =>
@@ -179,7 +183,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Description == "Transakcja BLIK, 12345678901, Platnosc za zakupy" &&
                 op.Title == "12345678901, Platnos" &&
                 op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == string.Empty &&
+                op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
             #endregion
