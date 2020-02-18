@@ -175,7 +175,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Transakcja BLIK" &&
                 op.Cleared == true &&
                 op.Description == "Transakcja BLIK, Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy" &&
-                op.Title == "Zwrot BLIK, Zwrot BL" &&
+                op.Title == "Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
@@ -188,7 +188,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Transakcja BLIK" &&
                 op.Cleared == true &&
                 op.Description == "Transakcja BLIK, 12345678901, Platnosc za zakupy" &&
-                op.Title == "12345678901, Platnos" &&
+                op.Title == "12345678901, Platnosc za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card == null &&
                 op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
@@ -205,7 +205,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Transakcja kartą" &&
                 op.Cleared == true &&
                 op.Description == "512345------0010 ANNA KOWALSKA WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25" &&
-                op.Title == "WARSZAWA MPK1234 1WR" &&
+                op.Title == "WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card.CardNumber == TestBankData.CardBNP_No1));
 
@@ -217,7 +217,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
                 op.Type.Name == "Transakcja kartą" &&
                 op.Cleared == true &&
                 op.Description == "512345------0020 JAN KOWALSKI WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24" &&
-                op.Title == "WARSZAWA SKLEP WARSZ" &&
+                op.Title == "WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
                 op.EndingBalance == 0.0M &&
                 op.Card.CardNumber == TestBankData.CardBNP_No2));
 

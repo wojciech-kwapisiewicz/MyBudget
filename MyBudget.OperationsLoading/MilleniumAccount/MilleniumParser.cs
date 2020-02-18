@@ -85,7 +85,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                 .Replace(" ", "");
             string typeName = entries[3];
             string description = entries[6];
-            string title = _parseHelper.GetFirstNCharacters(description, 30);
+            string title = _parseHelper.GetFirstNCharacters(description, OperationsLoadingConsts.OperationTitleLength);
 
             BankAccount account = _repositoryHelper.GetOrAddAccount(accountNumber);
 
