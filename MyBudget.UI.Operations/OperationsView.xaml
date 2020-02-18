@@ -183,7 +183,8 @@
 
                 <DataGridTextColumn MinWidth="60"
                                     Binding="{Binding Amount,
-                                                      Converter={StaticResource decimalConverter}}"
+                                                      Converter={StaticResource decimalConverter},
+                                                      ConverterParameter='N2'}"
                                     ElementStyle="{StaticResource RightAligned}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Amount}" />
                 <DataGridTextColumn Binding="{Binding Category}"
@@ -232,7 +233,9 @@
                            MinWidth="110"
                            Margin="10 0 10 0"
                            Style="{StaticResource HeaderTextBlockStyle}"
-                           Text="{Binding SelectedOperation.Amount}"
+                           Text="{Binding SelectedOperation.Amount,
+                                          Converter={StaticResource decimalConverter},
+                                          ConverterParameter='N2'}"
                            TextAlignment="Right" />
 
                 <Label Grid.Column="2"
