@@ -13,7 +13,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
         private ParseHelper _parseHelper;
         private string _supportedOperationType = "Transakcja BLIK";
 
-        public BlikHandler(IOperationHandler next, ParseHelper parseHelper)
+        public BlikHandler(ParseHelper parseHelper, IOperationHandler next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");

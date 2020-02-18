@@ -14,7 +14,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
 
         public string[] supportedOperations = new string[] { "Przelew przychodzący", "Przelew wychodzący", "Przelew internetowy", "Zlecenie stałe" };
 
-        public BankTransferHandler(IOperationHandler next, ParseHelper parseHelper)
+        public BankTransferHandler(ParseHelper parseHelper, IOperationHandler next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");

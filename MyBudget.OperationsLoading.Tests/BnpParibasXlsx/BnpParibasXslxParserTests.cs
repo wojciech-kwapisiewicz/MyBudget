@@ -33,9 +33,9 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
             this.parser = new BnpParibasXslxParser(repositoryHelper,
                 new BankTransferHandler(
-                    new BlikHandler(
-                        new CardHandler(
-                            new DefaultHandler(parseHelper), parseHelper, repositoryHelper), parseHelper), parseHelper));
+                    parseHelper, new BlikHandler(
+                        parseHelper, new CardHandler(
+                            parseHelper, repositoryHelper, new DefaultHandler(parseHelper)))));
 
             this.accountRepo.Setup(a => a.Get(It.IsAny<string>())).Returns<string>(
                 a => mockAccountsCreated.FirstOrDefault(x => x.Number == a));

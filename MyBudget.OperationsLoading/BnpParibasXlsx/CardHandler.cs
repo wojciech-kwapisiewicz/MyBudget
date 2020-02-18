@@ -15,7 +15,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
         private IRepositoryHelper _repositoryHelper;
         private string _supportedOperationType = "Transakcja kartą";
 
-        public CardHandler(IOperationHandler next, ParseHelper parseHelper, IRepositoryHelper repositoryHelper)
+        public CardHandler(ParseHelper parseHelper, IRepositoryHelper repositoryHelper, IOperationHandler next)
         {
             if (next == null)
                 throw new ArgumentNullException("next");
