@@ -96,18 +96,28 @@ namespace MyBudget.OperationsLoading.Tests.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
-        internal static byte[] BNP_TestOperations {
+        internal static byte[] BNP_TestOperations_v1 {
             get {
-                object obj = ResourceManager.GetObject("BNP_TestOperations", resourceCulture);
+                object obj = ResourceManager.GetObject("BNP_TestOperations_v1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Byte[].
+        /// </summary>
+        internal static byte[] BNP_TestOperations_v2 {
+            get {
+                object obj = ResourceManager.GetObject("BNP_TestOperations_v2", resourceCulture);
                 return ((byte[])(obj));
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to &quot;Numer rachunku/karty&quot;,&quot;Data transakcji&quot;,&quot;Data rozliczenia&quot;,&quot;Rodzaj transakcji&quot;,&quot;Na konto/Z konta&quot;,&quot;Odbiorca/Zleceniodawca&quot;,&quot;Opis&quot;,&quot;Obciążenia&quot;,&quot;Uznania&quot;,&quot;Saldo&quot;,&quot;Waluta&quot;
-        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-20&quot;,&quot;2014-09-20&quot;,&quot;PRZELEW WEWNĘTRZNY WYCHODZĄCY&quot;,&quot;&quot;,&quot;AAA BBB&quot;,&quot;Przelew własny&quot;,&quot;-1234.00&quot;,&quot;&quot;,&quot;10000.00&quot;,&quot;PLN&quot;
-        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-19&quot;,&quot;2014-09-19&quot;,&quot;OBCIĄŻENIE&quot;,&quot;&quot;,&quot;&quot;,&quot;PODATEK OD ODSETEK&quot;,&quot;-11.22&quot;,&quot;&quot;,&quot;0.00&quot;,&quot;PLN&quot;
-        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-18&quot;,&quot;201 [rest of string was truncated]&quot;;.
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-20&quot;,&quot;2014-09-20&quot;,&quot;PRZELEW WEWNĘTRZNY WYCHODZĄCY&quot;,&quot;&quot;,&quot;AAA BBB&quot;,&quot;Przelew własny&quot;,&quot;-1234.00&quot;,&quot;&quot;,&quot;933.89&quot;,&quot;PLN&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-19&quot;,&quot;2014-09-19&quot;,&quot;OBCIĄŻENIE&quot;,&quot;&quot;,&quot;&quot;,&quot;PODATEK OD ODSETEK&quot;,&quot;-11.22&quot;,&quot;&quot;,&quot;2167.89&quot;,&quot;PLN&quot;
+        ///&quot;PL00 1160 2202 0000 1234 5678 8000&quot;,&quot;2014-09-18&quot;,&quot;20 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string MilleniumParser_Sample {
             get {

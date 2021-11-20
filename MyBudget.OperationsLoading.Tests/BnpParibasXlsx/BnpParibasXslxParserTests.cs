@@ -5,6 +5,7 @@ using MyBudget.OperationsLoading.BnpParibasXlsx;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,12 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         private ParseHelper parseHelper = new ParseHelper();
 
         private List<BankAccount> mockAccountsCreated = new List<BankAccount>();
+
+        Dictionary<string, Stream> BNPFileVersions = new Dictionary<string, Stream>()
+        {
+            {"v1",Resources.TestFiles.BNP_TestOperations_v1.ToStream() },
+            {"v2",Resources.TestFiles.BNP_TestOperations_v2.ToStream() }
+        };
 
         [SetUp]
         public void SetUp()
@@ -66,10 +73,12 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         }
 
         [Test]
-        public void GivenBasicCases_WhenParseBnpFormat_Then10OperationsAreReturned_AccountAnd8NewTypesAreAdded()
+        [TestCase("v1")]
+        [TestCase("v2")]
+        public void GivenBasicCases_WhenParseBnpFormat_Then10OperationsAreReturned_AccountAnd8NewTypesAreAdded(string version)
         {
             //When                
-            var operations = parser.Parse(Resources.TestFiles.BNP_TestOperations.ToStream());
+            var operations = parser.Parse(BNPFileVersions[version]);
 
             //Then
             Assert.AreEqual(10, operations.Count());

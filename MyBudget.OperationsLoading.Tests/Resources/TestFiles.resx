@@ -127,8 +127,11 @@
   <data name="BGZParser_StandardCases" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>BGZParser_StandardCases.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;windows-1250</value>
   </data>
-  <data name="BNP_TestOperations" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>BNP_TestOperations.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  <data name="BNP_TestOperations_v1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>BNP_TestOperations_v1.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="BNP_TestOperations_v2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>BNP_TestOperations_v2.xlsx;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </data>
   <data name="MilleniumParser_Sample" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>MilleniumParser_Sample.csv;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>

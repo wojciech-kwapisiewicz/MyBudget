@@ -86,7 +86,8 @@
     <None Include="Resources\BGZParser_LongDescPayment.csv" />
     <None Include="Resources\BGZParser_OtherOperation.csv" />
     <None Include="Resources\BGZParser_StandardCases.csv" />
-    <None Include="Resources\BNP_TestOperations.xlsx" />
+    <None Include="Resources\BNP_TestOperations_v1.xlsx" />
+    <None Include="Resources\BNP_TestOperations_v2.xlsx" />
     <None Include="Resources\MilleniumParser_Sample1Entry_Comma.csv" />
   </ItemGroup>
   <ItemGroup>
