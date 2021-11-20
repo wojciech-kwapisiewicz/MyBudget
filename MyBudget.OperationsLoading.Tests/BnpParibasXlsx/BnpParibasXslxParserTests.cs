@@ -13,7 +13,8 @@ using System.Threading.Tasks;
 
 namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
 {
-    [TestFixture]
+    [TestFixture("v1")]
+    [TestFixture("v2")]
     public class BnpParibasXslxParserTests
     {
         private Mock<IRepository<BankAccount, string>> accountRepo;
@@ -24,12 +25,17 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         private ParseHelper parseHelper = new ParseHelper();
 
         private List<BankAccount> mockAccountsCreated = new List<BankAccount>();
-
+        private Stream XlsxFile = null;
         Dictionary<string, Stream> BNPFileVersions = new Dictionary<string, Stream>()
         {
-            {"v1",Resources.TestFiles.BNP_TestOperations_v1.ToStream() },
-            {"v2",Resources.TestFiles.BNP_TestOperations_v2.ToStream() }
+            {"v1", Resources.TestFiles.BNP_TestOperations_v1.ToStream() },
+            {"v2", Resources.TestFiles.BNP_TestOperations_v2.ToStream() }
         };
+
+        public BnpParibasXslxParserTests(string version)
+        {
+            XlsxFile = BNPFileVersions[version];
+        }
 
         [SetUp]
         public void SetUp()
@@ -73,12 +79,10 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         }
 
         [Test]
-        [TestCase("v1")]
-        [TestCase("v2")]
-        public void GivenBasicCases_WhenParseBnpFormat_Then10OperationsAreReturned_AccountAnd8NewTypesAreAdded(string version)
+        public void GivenBasicCases_WhenParseBnpFormat_Then10OperationsAreReturned_AccountAnd8NewTypesAreAdded()
         {
             //When                
-            var operations = parser.Parse(BNPFileVersions[version]);
+            var operations = parser.Parse(XlsxFile);
 
             //Then
             Assert.AreEqual(10, operations.Count());
