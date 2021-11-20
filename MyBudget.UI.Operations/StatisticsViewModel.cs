@@ -127,13 +127,14 @@ namespace MyBudget.UI.Operations
                 roots.Add(new Splitter() { Key = "==============", Sum = "==============" });
                 foreach (var summary in separateSumaries)
                 {
-                    var summarySum = operations
-                        .Where(op => summary == op.Category)
-                        .Sum(a => a.Amount);
+                    var operationsInCategory = operations.Where(op => summary == op.Category);
+                        
                     roots.Add(new StatisticsGroup()
                     {
                         Key = summary,
-                        Sum = summarySum
+                        Sum = operationsInCategory.Sum(a => a.Amount),
+                        SumIncome = operationsInCategory.Where(a => a.Amount > 0).Sum(b => b.Amount),
+                        SumSpending = operationsInCategory.Where(a => a.Amount < 0).Sum(b => b.Amount),
                     });
                 }
             }
@@ -201,8 +202,10 @@ namespace MyBudget.UI.Operations
                     {
                         Key = group.Key,
                         Elements = group,
-                        Sum = group.Sum(el1 => el1.Amount)
-                    }).OrderBy(x => x.Sum));
+                        Sum = group.Sum(a => a.Amount),
+                        SumIncome = group.Where(a => a.Amount > 0).Sum(b => b.Amount),
+                        SumSpending = group.Where(a => a.Amount < 0).Sum(b => b.Amount),
+                    }).OrderBy((StatisticsGroup x) => x, new StatisticsGroupSorter()));
         }
 
         private IEnumerable<IGroupItem> _items { get; set; }

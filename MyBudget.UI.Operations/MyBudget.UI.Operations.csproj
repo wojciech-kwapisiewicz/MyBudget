@@ -146,6 +146,7 @@
     </Compile>
     <Compile Include="Splitter.cs" />
     <Compile Include="StatisticsGroup.cs" />
+    <Compile Include="StatisticsGroupSorter.cs" />
     <Compile Include="StatisticsView.xaml.cs">
       <DependentUpon>StatisticsView.xaml</DependentUpon>
     </Compile>
