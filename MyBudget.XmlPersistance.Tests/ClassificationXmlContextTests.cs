@@ -24,9 +24,9 @@ namespace MyBudget.XmlPersistance.Tests
             def.Category = "Cat";
             def.Description = "Desc";
             def.SubCategory = "Sub";
-            def.Rules.Add(new ClassificationRule() { RegularExpression = "Test1" });
-            def.Rules.Add(new ClassificationRule() { RegularExpression = "Test2", Account = "Acc1" });
-            def.Rules.Add(new ClassificationRule() { RegularExpression = "Test3", CounterAccount = "Acc2" });
+            def.Rules.Add(new ClassificationRule() { SearchedPhrase = "Test1" });
+            def.Rules.Add(new ClassificationRule() { SearchedPhrase = "Test2", Account = "Acc1" });
+            def.Rules.Add(new ClassificationRule() { SearchedPhrase = "Test3", CounterAccount = "Acc2" });
 
             repo.Add(def);
             saveContext.SaveChanges();
@@ -41,9 +41,9 @@ namespace MyBudget.XmlPersistance.Tests
             Assert.AreEqual("Desc", loadedDefinition.Description);
             Assert.AreEqual("Sub", loadedDefinition.SubCategory);
             Assert.AreEqual(3, loadedDefinition.Rules.Count);
-            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.RegularExpression == "Test1" && a.Account == null && a.CounterAccount == null));
-            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.RegularExpression == "Test2" && a.Account == "Acc1" && a.CounterAccount == null));
-            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.RegularExpression == "Test3" && a.Account == null && a.CounterAccount == "Acc2"));
+            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.SearchedPhrase == "Test1" && a.Account == null && a.CounterAccount == null));
+            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.SearchedPhrase == "Test2" && a.Account == "Acc1" && a.CounterAccount == null));
+            Assert.AreEqual(1, loadedDefinition.Rules.Count(a => a.SearchedPhrase == "Test3" && a.Account == null && a.CounterAccount == "Acc2"));
         }
     }
 }
