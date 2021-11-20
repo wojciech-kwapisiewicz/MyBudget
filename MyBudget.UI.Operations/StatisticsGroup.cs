@@ -11,6 +11,8 @@ namespace MyBudget.UI.Operations
     {
         public string Key { get; set; }
         public decimal Sum { get; set; }
+        public decimal SumIncome { get; set; }
+        public decimal SumSpending { get; set; }
         public IEnumerable<BankOperation> Elements { get; set; }
         public IEnumerable<IGroupItem> SubGroups { get; set; }
     }
