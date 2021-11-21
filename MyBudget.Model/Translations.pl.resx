@@ -141,6 +141,9 @@
   <data name="BankOperation_Category" xml:space="preserve">
     <value>Kategoria</value>
   </data>
+  <data name="BankOperation_CounterParty" xml:space="preserve">
+    <value>Odbiorca / Nadawca</value>
+  </data>
   <data name="BankOperation_Description" xml:space="preserve">
     <value>Opis</value>
   </data>

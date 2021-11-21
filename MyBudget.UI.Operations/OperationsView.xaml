@@ -165,13 +165,19 @@
                                                       Converter={StaticResource dateConverter}}"
                                     ElementStyle="{StaticResource RightAligned}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_OrderDate}" />
-                <DataGridTextColumn Width="*"
+                
+                <DataGridTextColumn Binding="{Binding Type}"
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Type}" />
+
+                
+                <DataGridTextColumn Width="2*"
                                     Binding="{Binding Title}"
                                     Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Title}" />
-                <!--
-                    <DataGridTextColumn Binding="{Binding Type}"
-                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_Type}" />
-                -->
+                
+
+                <DataGridTextColumn Width="*"
+                                    Binding="{Binding CounterParty}"
+                                    Header="{lex:Loc MyBudget.Model:Translations:BankOperation_CounterParty}" />                
 
                 <!--
                     <DataGridTextColumn MinWidth="70"
@@ -211,7 +217,7 @@
                                        Converter={StaticResource nullConverter}}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="7*" />
-                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="4*" />
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="4*" />
                 </Grid.ColumnDefinitions>
@@ -279,11 +285,24 @@
 
                 <ScrollViewer Grid.Row="3"
                               Grid.RowSpan="3"
-                              Grid.ColumnSpan="2"
+                              Grid.ColumnSpan="1"
                               Height="90"
                               Margin="0 0 10 0">
                     <TextBox AcceptsReturn="True"
                              IsReadOnly="True"
+                             TextWrapping="Wrap"
+                             Text="{Binding SelectedOperation.Description}" />
+                </ScrollViewer>
+
+                <ScrollViewer Grid.Row="3"
+                              Grid.RowSpan="3"
+                              Grid.Column="1"
+                              Grid.ColumnSpan="1"
+                              Height="90"
+                              Margin="0 0 10 0">
+                    <TextBox AcceptsReturn="True"
+                             IsReadOnly="True"
+                             TextWrapping="Wrap"
                              Text="{Binding SelectedOperation.Description}" />
                 </ScrollViewer>
 
