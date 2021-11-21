@@ -115,8 +115,9 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 17));
             Assert.AreEqual(checkOp.Type.Name, "PRZELEW PRZYCHODZĄCY");
             Assert.AreEqual(checkOp.Cleared, true);
-            Assert.AreEqual(checkOp.Description, "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac");
-            Assert.AreEqual(checkOp.Title, "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.Description, "Bardzo dlugi tytul na ponad 60 znakow ktore trzeba bedzie przyciac");
+            Assert.AreEqual(checkOp.Title, "Bardzo dlugi tytul na ponad 60 znakow ktore trzeba bedzie przyciac".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.Title.Length, 60);
             Assert.AreEqual(checkOp.EndingBalance, 2123.45M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.AreEqual(checkOp.CounterAccount, "11 22 2233 3344 4455 5566 6677 77".Compact());
