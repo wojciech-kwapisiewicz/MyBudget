@@ -93,11 +93,17 @@
                                 CommandParameter="{Binding}"
                                 Content="{lex:Loc Piggy:Generic:ButtonDelete}" />
                         <Label Grid.Row="1"
-                               Grid.ColumnSpan="5"
-                               Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_RegularExpression}" />
-                        <TextBox Grid.Row="2"
-                                 Grid.ColumnSpan="5"
-                                 Text="{Binding Data.RegularExpression}" />
+                               Content="{lex:Loc MyBudget.Model:Translations:ClassificationRule_SearchedPhrase}" />
+                        <TextBox Grid.Row="1"
+                                 Grid.Column="1"
+                                 Grid.ColumnSpan="4"
+                                 Text="{Binding Data.SearchedPhrase}" />
+                        <Label Grid.Row="2"
+                               Content="{lex:Loc MyBudget.Model:Translations:ClassifictaionRule_IsRegularExpression}" />
+                        <CheckBox Grid.Row="2"
+                                 Grid.Column="1"
+                                 Grid.ColumnSpan="4"
+                                 IsChecked="{Binding Data.IsRegularExpression}" />
                     </Grid>
                 </DataTemplate>
             </ListBox.ItemTemplate>
