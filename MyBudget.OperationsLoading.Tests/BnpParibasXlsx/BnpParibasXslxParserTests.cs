@@ -139,7 +139,6 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
 
             #region Operation type - bank transfer
 
-
             //3
             checkOp = operations.FirstOrDefault(a =>
                 a.OrderDate == new DateTime(2020, 02, 21) &&
@@ -196,7 +195,6 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             Assert.AreEqual(checkOp.CounterParty, "Dostawca pradu" + Environment.NewLine +
                 "Nowa 11/2" + Environment.NewLine +
                 "00-000 Warszawa");
-
 
             //6
             checkOp = operations.FirstOrDefault(a =>

@@ -51,102 +51,132 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
 
         private static void VerifyOperations(IEnumerable<BankOperation> operations)
         {
+            BankOperation checkOp;
             #region Account no 1
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 20) &&
-                op.OrderDate == new DateTime(2014, 09, 20) &&
-                op.Amount == -1234.00M &&
-                op.Type.Name == "PRZELEW WEWNĘTRZNY WYCHODZĄCY" &&
-                op.Cleared == true &&
-                op.Description == "Przelew własny" &&
-                op.Title == "Przelew własny".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 933.89M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            //1
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 20) &&
+                a.Amount == -1234.00M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 19) &&
-                op.OrderDate == new DateTime(2014, 09, 19) &&
-                op.Amount == -11.22M &&
-                op.Type.Name == "OBCIĄŻENIE" &&
-                op.Cleared == true &&
-                op.Description == "PODATEK OD ODSETEK" &&
-                op.Title == "PODATEK OD ODSETEK".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 2167.89M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 20));
+            Assert.AreEqual(checkOp.Type.Name, "PRZELEW WEWNĘTRZNY WYCHODZĄCY");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Przelew własny");
+            Assert.AreEqual(checkOp.Title, "Przelew własny".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 933.89M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 18) &&
-                op.OrderDate == new DateTime(2014, 09, 18) &&
-                op.Amount == 55.66M &&
-                op.Type.Name == "UZNANIE" &&
-                op.Cleared == true &&
-                op.Description == "KAPITALIZACJA ODS." &&
-                op.Title == "KAPITALIZACJA ODS.".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 2179.11M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            //2
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 19) &&
+                a.Amount == -11.22M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 17) &&
-                op.OrderDate == new DateTime(2014, 09, 17) &&
-                op.Amount == 123.45M &&
-                op.Type.Name == "PRZELEW PRZYCHODZĄCY" &&
-                op.Cleared == true &&
-                op.Description == "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac" &&
-                op.Title == "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 2123.45M &&
-                op.Card == null &&
-                op.CounterAccount == "11 22 2233 3344 4455 5566 6677 77".Compact()));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 19));
+            Assert.AreEqual(checkOp.Type.Name, "OBCIĄŻENIE");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "PODATEK OD ODSETEK");
+            Assert.AreEqual(checkOp.Title, "PODATEK OD ODSETEK".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 2167.89M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
+
+            //3
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 18) &&
+                a.Amount == 55.66M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 18));
+            Assert.AreEqual(checkOp.Type.Name, "UZNANIE");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "KAPITALIZACJA ODS.");
+            Assert.AreEqual(checkOp.Title, "KAPITALIZACJA ODS.".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 2179.11M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
+
+            //4
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 17) &&
+                a.Amount == 123.45M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 17));
+            Assert.AreEqual(checkOp.Type.Name, "PRZELEW PRZYCHODZĄCY");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac");
+            Assert.AreEqual(checkOp.Title, "Bardzo dlugi tytul na ponad 30 znakow ktore trzeba bedzie przyciac".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 2123.45M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, "11 22 2233 3344 4455 5566 6677 77".Compact());
+            Assert.AreEqual(checkOp.CounterParty, null);
 
             #endregion
 
             #region Account no 2
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount2.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 16) &&
-                op.OrderDate == new DateTime(2014, 09, 14) &&
-                op.Amount == -3.00M &&
-                op.Type.Name == "TRANSAKCJA KARTĄ PŁATNICZĄ" &&
-                op.Cleared == true &&
-                op.Description == "Trans" &&
-                op.Title == "Trans".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 1990.37M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            //5
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 14) &&
+                a.Amount == -3.00M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount2.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 13) &&
-                op.OrderDate == new DateTime(2014, 09, 13) &&
-                op.Amount == -3.52M &&
-                op.Type.Name == "WYPŁATA KARTĄ Z BANKOMATU" &&
-                op.Cleared == true &&
-                op.Description == "xx1" &&
-                op.Title == "xx1".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 1993.37M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount2.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 16));
+            Assert.AreEqual(checkOp.Type.Name, "TRANSAKCJA KARTĄ PŁATNICZĄ");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Trans");
+            Assert.AreEqual(checkOp.Title, "Trans".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 1990.37M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.Millenium_TestAccount2.Compact() &&
-                op.ExecutionDate == new DateTime(2014, 09, 12) &&
-                op.OrderDate == new DateTime(2014, 09, 12) &&
-                op.Amount == -3.11M &&
-                op.Type.Name == "WYPŁATA KARTĄ Z BANKOMATU" &&
-                op.Cleared == true &&
-                op.Description == "xx1" &&
-                op.Title == "xx1".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 1996.89M &&
-                op.Card == null &&
-                string.IsNullOrEmpty(op.CounterAccount)));
+            //6
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 13) &&
+                a.Amount == -3.52M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount2.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 13));
+            Assert.AreEqual(checkOp.Type.Name, "WYPŁATA KARTĄ Z BANKOMATU");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "xx1");
+            Assert.AreEqual(checkOp.Title, "xx1".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 1993.37M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
+
+            //7
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2014, 09, 12) &&
+                a.Amount == -3.11M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.Millenium_TestAccount2.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2014, 09, 12));
+            Assert.AreEqual(checkOp.Type.Name, "WYPŁATA KARTĄ Z BANKOMATU");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "xx1");
+            Assert.AreEqual(checkOp.Title, "xx1".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 1996.89M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
+            Assert.AreEqual(checkOp.CounterParty, null);
+
 
             #endregion
 
