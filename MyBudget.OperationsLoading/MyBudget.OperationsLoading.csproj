@@ -71,7 +71,6 @@
     <Compile Include="BnpParibasXlsx\DefaultHandler.cs" />
     <Compile Include="BnpParibasXlsx\CardHandler.cs" />
     <Compile Include="BnpParibasXlsx\BlikHandler.cs" />
-    <Compile Include="BnpParibasXlsx\BankTransferHandler.cs" />
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParser.cs" />
     <Compile Include="Configuration\OperationsLoadingUnityConfiguration.cs" />
     <Compile Include="ImportData\CheckResult.cs" />

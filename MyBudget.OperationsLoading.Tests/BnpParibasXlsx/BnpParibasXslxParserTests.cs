@@ -45,10 +45,9 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             this.cardRepo = new Mock<IRepository<Card, string>>();
             this.repositoryHelper = new RepositoryHelper(accountRepo.Object, typeRepo.Object, cardRepo.Object);
             this.parser = new BnpParibasXslxParser(repositoryHelper,
-                new BankTransferHandler(
-                    parseHelper, new BlikHandler(
-                        parseHelper, new CardHandler(
-                            parseHelper, repositoryHelper, new DefaultHandler(parseHelper)))));
+                new BlikHandler(parseHelper, 
+                new CardHandler(parseHelper, repositoryHelper, 
+                new DefaultHandler(parseHelper))));
 
             this.accountRepo.Setup(a => a.Get(It.IsAny<string>())).Returns<string>(
                 a => mockAccountsCreated.FirstOrDefault(x => x.Number == a));
@@ -92,148 +91,207 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
 
         private static void VerifyOperations(IEnumerable<BankOperation> operations)
         {
+            BankOperation checkOp;
+
             #region Operation type - default
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 17) &&
-                op.OrderDate == new DateTime(2020, 02, 17) &&
-                op.Amount == -1000.00M &&
-                op.Type.Name == "Operacja kredytowa" &&
-                op.Cleared == true &&
-                op.Description == "Operacja kredytowa nr 01234568" &&
-                op.Title == "Operacja kredytowa nr 01234568".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == null));
+            //1
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 17) &&
+                a.Amount == -1000.00M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 17) &&
-                op.OrderDate == new DateTime(2020, 02, 17) &&
-                op.Amount == -1200.00M &&
-                op.Type.Name == "Prowizje i opłaty" &&
-                op.Cleared == true &&
-                op.Description == "Prowizja kredytowa nr 01234567" &&
-                op.Title == "Prowizja kredytowa nr 01234567".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == null));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 17));
+            Assert.AreEqual(checkOp.Type.Name, "Operacja kredytowa");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Operacja kredytowa nr 01234568");
+            Assert.AreEqual(checkOp.Title, "Operacja kredytowa nr 01234568".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, "PL11222233334444555566667777");
+            Assert.AreEqual(checkOp.CounterParty, "Kowalska A i Kowalski J" + Environment.NewLine +
+                "Nowa 11/1" + Environment.NewLine +
+                "Warszawa" + Environment.NewLine +
+                "POLSKA");
+
+            //2
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 17) &&
+                a.Amount == -1200.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 17));
+            Assert.AreEqual(checkOp.Type.Name, "Prowizje i opłaty");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Prowizja kredytowa nr 01234567");
+            Assert.AreEqual(checkOp.Title, "Prowizja kredytowa nr 01234567".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, "PL11222233334444555566667777");
+            Assert.AreEqual(checkOp.CounterParty, "Kowalska A i Kowalski J" + Environment.NewLine +
+                "Nowa 11/1" + Environment.NewLine +
+                "Warszawa" + Environment.NewLine +
+                "POLSKA");
 
             #endregion
 
             #region Operation type - bank transfer
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 21) &&
-                op.OrderDate == new DateTime(2020, 02, 21) &&
-                op.Amount == 2345.00M &&
-                op.Type.Name == "Przelew przychodzący" &&
-                op.Cleared == true &&
-                op.Description == "Przelew przychodzacy - wyplata" &&
-                op.Title == "Przelew przychodzacy - wyplata".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 20) &&
-                op.OrderDate == new DateTime(2020, 02, 20) &&
-                op.Amount == -300.00M &&
-                op.Type.Name == "Przelew wychodzący" &&
-                op.Cleared == true &&
-                op.Description == "Oplata za cos" &&
-                op.Title == "Oplata za cos".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
+            //3
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 21) &&
+                a.Amount == 2345.00M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 19) &&
-                op.OrderDate == new DateTime(2020, 02, 19) &&
-                op.Amount == -150.00M &&
-                op.Type.Name == "Zlecenie stałe" &&
-                op.Cleared == true &&
-                op.Description == "Oplata stala za prad" &&
-                op.Title == "Oplata stala za prad".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount2.Compact()));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 21));
+            Assert.AreEqual(checkOp.Type.Name, "Przelew przychodzący");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Przelew przychodzacy - wyplata");
+            Assert.AreEqual(checkOp.Title, "Przelew przychodzacy - wyplata".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Nadawca przelewu" + Environment.NewLine +
+                "00-000 Warszawa, ul. Nowa 11/3" + Environment.NewLine +
+                "PL");
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 10) &&
-                op.OrderDate == new DateTime(2020, 02, 10) &&
-                op.Amount == -120.00M &&
-                op.Type.Name == "Przelew internetowy" &&
-                op.Cleared == true &&
-                op.Description == "Numer 12345678901234567890" &&
-                op.Title == "Numer 12345678901234567890".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
+            //4
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 20) &&
+                a.Amount == -300.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 20));
+            Assert.AreEqual(checkOp.Type.Name, "Przelew wychodzący");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Oplata za cos");
+            Assert.AreEqual(checkOp.Title, "Oplata za cos".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Odbiorca przelewu" + Environment.NewLine +
+                "00-000 Warszawa, ul. Nowa 11/3");
+
+            //5
+
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 19) &&
+                a.Amount == -150.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 19));
+            Assert.AreEqual(checkOp.Type.Name, "Zlecenie stałe");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Oplata stala za prad");
+            Assert.AreEqual(checkOp.Title, "Oplata stala za prad".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount2.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Dostawca pradu" + Environment.NewLine +
+                "Nowa 11/2" + Environment.NewLine +
+                "00-000 Warszawa");
+
+
+            //6
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 10) &&
+                a.Amount == -120.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 10));
+            Assert.AreEqual(checkOp.Type.Name, "Przelew internetowy");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Numer 12345678901234567890");
+            Assert.AreEqual(checkOp.Title, "Numer 12345678901234567890".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Sklep");
 
             #endregion
 
             #region Operation type - blik
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 16) &&
-                op.OrderDate == new DateTime(2020, 02, 16) &&
-                op.Amount == 50.00M &&
-                op.Type.Name == "Transakcja BLIK" &&
-                op.Cleared == true &&
-                op.Description == "Transakcja BLIK, Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy" &&
-                op.Title == "Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
+            //7
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 16) &&
+                a.Amount == 50.00M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 11) &&
-                op.OrderDate == new DateTime(2020, 02, 11) &&
-                op.Amount == -300.00M &&
-                op.Type.Name == "Transakcja BLIK" &&
-                op.Cleared == true &&
-                op.Description == "Transakcja BLIK, 12345678901, Platnosc za zakupy" &&
-                op.Title == "12345678901, Platnosc za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card == null &&
-                op.CounterAccount == TestBankData.ExternalAccount_TestAccount1.Compact()));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 16));
+            Assert.AreEqual(checkOp.Type.Name, "Transakcja BLIK");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Transakcja BLIK, Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy");
+            Assert.AreEqual(checkOp.Title, "Zwrot BLIK, Zwrot BLIK internet, Nr 12345678901, Zwrot za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Sklep" + Environment.NewLine +
+                "PL");
+
+            //8
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 11) &&
+                a.Amount == -300.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 11));
+            Assert.AreEqual(checkOp.Type.Name, "Transakcja BLIK");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "Transakcja BLIK, 12345678901, Platnosc za zakupy");
+            Assert.AreEqual(checkOp.Title, "12345678901, Platnosc za zakupy".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card, null);
+            Assert.AreEqual(checkOp.CounterAccount, TestBankData.ExternalAccount_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.CounterParty, "Sklep" + Environment.NewLine +
+                "PL");
 
             #endregion
 
             #region Operation type - card transaction
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 25) &&
-                op.OrderDate == new DateTime(2020, 02, 25) &&
-                op.Amount == -2.40M &&
-                op.Type.Name == "Transakcja kartą" &&
-                op.Cleared == true &&
-                op.Description == "512345------0010 ANNA KOWALSKA WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25" &&
-                op.Title == "WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == TestBankData.CardBNP_No1));
+            //9
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 25) &&
+                a.Amount == -2.40M);
 
-            Assert.IsTrue(operations.Any(op =>
-                op.BankAccount.Number == TestBankData.BNPParibas_TestAccount1.Compact() &&
-                op.ExecutionDate == new DateTime(2020, 02, 24) &&
-                op.OrderDate == new DateTime(2020, 02, 23) &&
-                op.Amount == -234.00M &&
-                op.Type.Name == "Transakcja kartą" &&
-                op.Cleared == true &&
-                op.Description == "512345------0020 JAN KOWALSKI WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24" &&
-                op.Title == "WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength) &&
-                op.EndingBalance == 0.0M &&
-                op.Card.CardNumber == TestBankData.CardBNP_No2));
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 25));
+            Assert.AreEqual(checkOp.Type.Name, "Transakcja kartą");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "512345------0010 ANNA KOWALSKA WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25");
+            Assert.AreEqual(checkOp.Title, "WARSZAWA MPK1234 1WRO URBANCARD POL 2,40 PLN 2020-02-25".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card.CardNumber, TestBankData.CardBNP_No1);
+            Assert.AreEqual(checkOp.CounterAccount, null);
+            Assert.AreEqual(checkOp.CounterParty, null);
 
+            //10
+            checkOp = operations.FirstOrDefault(a =>
+                a.OrderDate == new DateTime(2020, 02, 23) &&
+                a.Amount == -234.00M);
+
+            Assert.IsNotNull(checkOp);
+            Assert.AreEqual(checkOp.BankAccount.Number, TestBankData.BNPParibas_TestAccount1.Compact());
+            Assert.AreEqual(checkOp.ExecutionDate, new DateTime(2020, 02, 24));
+            Assert.AreEqual(checkOp.Type.Name, "Transakcja kartą");
+            Assert.AreEqual(checkOp.Cleared, true);
+            Assert.AreEqual(checkOp.Description, "512345------0020 JAN KOWALSKI WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24");
+            Assert.AreEqual(checkOp.Title, "WARSZAWA SKLEP WARSZAWA POL 234,00 PLN 2020-02-24".GetFirstNCharacters(OperationsLoadingConsts.OperationTitleLength));
+            Assert.AreEqual(checkOp.EndingBalance, 0.0M);
+            Assert.AreEqual(checkOp.Card.CardNumber, TestBankData.CardBNP_No2);
+            Assert.AreEqual(checkOp.CounterAccount, null);
+            Assert.AreEqual(checkOp.CounterParty, null);
             #endregion
         }
 

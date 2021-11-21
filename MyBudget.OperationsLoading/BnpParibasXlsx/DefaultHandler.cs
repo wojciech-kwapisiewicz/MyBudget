@@ -21,6 +21,13 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
         public void Handle(BankOperation operation, string description, string counterpartyInfo)
         {
             operation.Title = _parseHelper.GetFirstNCharacters(description, OperationsLoadingConsts.OperationTitleLength);
+
+            if(!string.IsNullOrWhiteSpace(counterpartyInfo))
+            {
+                var lines = counterpartyInfo.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+                operation.CounterAccount = lines[0];
+                operation.CounterParty = string.Join(Environment.NewLine, lines.Skip(1));
+            }
         }
     }
 }
