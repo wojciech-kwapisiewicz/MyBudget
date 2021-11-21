@@ -145,7 +145,7 @@ namespace MyBudget.UI.Configuration
                 {
                     newDefinition.Category = templateOperation.Category;
                     newDefinition.SubCategory = templateOperation.SubCategory;                    
-                    newRule.RegularExpression = templateOperation.Description;
+                    newRule.SearchedPhrase = templateOperation.Description;
                     newRule.Account = templateOperation.BankAccount.Number;
                     newRule.CounterAccount = templateOperation.CounterAccount;
                 }

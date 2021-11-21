@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace MyBudget.Classification
 {
-    public class RegularExpressionClassificationRule : IClassificationRule
+    public class GenericClassificationRule : IClassificationRule
     {
         public ClassificationDefinition Definition { get; private set; }
         
         private IRepository<BankAccount> _accountsRepository;
 
-        public RegularExpressionClassificationRule(ClassificationDefinition definition, IRepository<BankAccount> accountsRepository)
+        public GenericClassificationRule(ClassificationDefinition definition, IRepository<BankAccount> accountsRepository)
         {
             Definition = definition;
             _accountsRepository = accountsRepository;
@@ -36,14 +36,28 @@ namespace MyBudget.Classification
 
         private bool MatchesDescription(ClassificationRule rule, BankOperation operation)
         {
-            if(string.IsNullOrEmpty( rule.RegularExpression))
+            if(string.IsNullOrEmpty(rule.SearchedPhrase))
             {
                 return true;
             }
-            return operation.Description
-                .IndexOf(rule.RegularExpression, StringComparison.OrdinalIgnoreCase) >= 0;
-            //return Regex
-            //  .IsMatch(operation.Description, rule.RegularExpression, RegexOptions.IgnoreCase);
+
+            foreach (var property in operation.GetType().GetProperties()
+                .Where(a => a.PropertyType == typeof(string) && rule.SearchedFieldNames.Contains(a.Name)))
+            {
+                string fieldValue = property.GetValue(operation, null) as string;
+                if (fieldValue == null) continue;
+
+                if(rule.IsRegularExpression && Regex.IsMatch(fieldValue, rule.SearchedPhrase, RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                else if(fieldValue.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         private bool MatchesAccount(string ruleAccountString, BankAccount operationAccount)

@@ -43,7 +43,6 @@ namespace MyBudget.XmlPersistance
             public bool Cleared { get; set; }
             public string TypeId { get; set; }
             public int StatementId { get; set; }
-
             public int LpOnStatement { get; set; }
             public DateTime OrderDate { get; set; }
             public DateTime ExecutionDate { get; set; }
@@ -52,13 +51,13 @@ namespace MyBudget.XmlPersistance
             public string Title { get; set; }
             public string Description { get; set; }
             public string CounterAccount { get; set; }
+            public string CounterParty { get; set; }
             public string Category { get; set; }
             public string SubCategory { get; set; }
             public Card Card { get; set; }
 
-
             public static BankOperationSaveModel FromOperation(
-                BankOperation bo, 
+                BankOperation bo,
                 BankStatement statement,
                 BankAccount account,
                 BankOperationType type
@@ -77,7 +76,8 @@ namespace MyBudget.XmlPersistance
                     Category = bo.Category,
                     SubCategory = bo.SubCategory,
                     CounterAccount = bo.CounterAccount,
-                    Cleared = bo.Cleared                    
+                    CounterParty = bo.CounterParty,
+                    Cleared = bo.Cleared
                 };
 
                 sbo.StatementId = statement.Id;
@@ -102,6 +102,7 @@ namespace MyBudget.XmlPersistance
                     Category = this.Category,
                     SubCategory = this.SubCategory,
                     CounterAccount = this.CounterAccount,
+                    CounterParty = this.CounterParty,
                     Cleared = this.Cleared
                 };
 

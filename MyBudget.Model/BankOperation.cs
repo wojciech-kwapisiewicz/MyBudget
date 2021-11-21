@@ -55,6 +55,8 @@ namespace MyBudget.Model
         public Card Card { get; set; }
 
         public string Title { get; set; }
-        public string CounterAccount { get; set; }   
+        public string CounterAccount { get; set; }
+
+        public string CounterParty { get; set; }
     }
 }

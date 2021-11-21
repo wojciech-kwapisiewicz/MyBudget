@@ -180,7 +180,10 @@
   <data name="ClassificationRule_CounterAccount" xml:space="preserve">
     <value>Counter account</value>
   </data>
-  <data name="ClassificationRule_RegularExpression" xml:space="preserve">
+  <data name="ClassificationRule_SearchedPhrase" xml:space="preserve">
     <value>Expression to find</value>
+  </data>
+  <data name="ClassifictaionRule_IsRegularExpression" xml:space="preserve">
+    <value>Regex type expression</value>
   </data>
 </root>

@@ -36,6 +36,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CI", "CI", "{DFB69EEF-48BC-
 		.circleci\config.yml = .circleci\config.yml
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyBudget.Classification.Tests", "MyBudget.Classification.Tests\MyBudget.Classification.Tests.csproj", "{5A9CB199-8E33-4070-81EA-CD41DBC335A5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -90,6 +92,10 @@ Global
 		{0CB7D51D-49D0-4EAF-8703-9C93971ED782}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0CB7D51D-49D0-4EAF-8703-9C93971ED782}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0CB7D51D-49D0-4EAF-8703-9C93971ED782}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A9CB199-8E33-4070-81EA-CD41DBC335A5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A9CB199-8E33-4070-81EA-CD41DBC335A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A9CB199-8E33-4070-81EA-CD41DBC335A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A9CB199-8E33-4070-81EA-CD41DBC335A5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -102,6 +108,7 @@ Global
 		{FC584294-00E8-4F87-841C-85945E4B7C04} = {58B44755-E4FE-4AF7-BEE4-943854612F4C}
 		{2284B8AF-99CD-42E5-9BB0-B0D90913B7C5} = {980656C2-C7BB-4C65-A93F-C69474B03E69}
 		{0CB7D51D-49D0-4EAF-8703-9C93971ED782} = {980656C2-C7BB-4C65-A93F-C69474B03E69}
+		{5A9CB199-8E33-4070-81EA-CD41DBC335A5} = {980656C2-C7BB-4C65-A93F-C69474B03E69}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D4E7A73B-02EA-445D-9C90-28DF84710056}
