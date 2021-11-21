@@ -103,7 +103,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 2179.11M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "");
 
             //4
             checkOp = operations.FirstOrDefault(a =>
