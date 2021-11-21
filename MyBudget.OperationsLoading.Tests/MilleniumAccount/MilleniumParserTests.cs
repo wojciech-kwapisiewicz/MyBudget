@@ -69,7 +69,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 933.89M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "AAA BBB");
 
             //2
             checkOp = operations.FirstOrDefault(a =>
@@ -86,7 +86,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 2167.89M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "");
 
             //3
             checkOp = operations.FirstOrDefault(a =>
@@ -120,7 +120,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 2123.45M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.AreEqual(checkOp.CounterAccount, "11 22 2233 3344 4455 5566 6677 77".Compact());
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "AAA BBB, Warszawa");
 
             #endregion
 
@@ -141,7 +141,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 1990.37M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "");
 
             //6
             checkOp = operations.FirstOrDefault(a =>
@@ -158,7 +158,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 1993.37M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
+            Assert.AreEqual(checkOp.CounterParty, "");
 
             //7
             checkOp = operations.FirstOrDefault(a =>
@@ -175,11 +175,9 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(checkOp.EndingBalance, 1996.89M);
             Assert.AreEqual(checkOp.Card, null);
             Assert.IsTrue(string.IsNullOrWhiteSpace(checkOp.CounterAccount));
-            Assert.AreEqual(checkOp.CounterParty, null);
-
+            Assert.AreEqual(checkOp.CounterParty, "");
 
             #endregion
-
         }
 
         private void VerifyAccountAndCardNumbersAndOperationTypes(IEnumerable<BankOperation> operations)
@@ -233,6 +231,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(true, op.Cleared);
             Assert.AreEqual("Tytul", op.Description);
             Assert.AreEqual(TestBankData.ExternalAccount_TestAccount1.Compact(), op.CounterAccount);
+            Assert.AreEqual(op.CounterParty, "AAA BBB");
         }
 
         [Test]
@@ -251,6 +250,7 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.AreEqual(true, op.Cleared);
             Assert.AreEqual("Tytul, z przecinkiem", op.Description);
             Assert.AreEqual(TestBankData.ExternalAccount_TestAccount1.Compact(), op.CounterAccount);
+            Assert.AreEqual(op.CounterParty, "AAA BBB, 00-999 Warszawa");
         }
     }
 }
