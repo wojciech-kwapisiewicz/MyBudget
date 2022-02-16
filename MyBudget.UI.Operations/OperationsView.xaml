@@ -303,7 +303,7 @@
                     <TextBox AcceptsReturn="True"
                              IsReadOnly="True"
                              TextWrapping="Wrap"
-                             Text="{Binding SelectedOperation.Description}" />
+                             Text="{Binding SelectedOperation.CounterParty}" />
                 </ScrollViewer>
 
                 <Label Grid.Row="3"
