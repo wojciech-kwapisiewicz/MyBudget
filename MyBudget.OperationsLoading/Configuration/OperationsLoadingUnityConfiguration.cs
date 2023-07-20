@@ -20,10 +20,9 @@ namespace MyBudget.OperationsLoading.Configuration
 
             //Parsers
             Func<IUnityContainer, object> createBnpXlsxChain = container =>
-                new BankTransferHandler(container.Resolve<ParseHelper>(),
                 new CardHandler(container.Resolve<ParseHelper>(), container.Resolve<IRepositoryHelper>(),
                 new BlikHandler(container.Resolve<ParseHelper>(),
-                new DefaultHandler(container.Resolve<ParseHelper>()))));
+                new DefaultHandler(container.Resolve<ParseHelper>())));
             unityContainer.RegisterType<IOperationHandler>(new InjectionFactory(createBnpXlsxChain));
             unityContainer.RegisterType<IParser, BnpParibasXslxParser>("BNP Paribas account parser");
 

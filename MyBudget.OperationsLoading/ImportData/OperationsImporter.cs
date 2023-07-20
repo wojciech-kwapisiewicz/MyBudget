@@ -100,6 +100,10 @@ namespace MyBudget.OperationsLoading.ImportData
 
         private bool DescriptionsAreEqual(string description1, string description2)
         {
+            if (description1 == null)
+                description1 = string.Empty;
+            if (description2 == null)
+                description2 = string.Empty;
             var ndesc1 = NormalizeString(description1);
             var ndesc2 = NormalizeString(description2);
 

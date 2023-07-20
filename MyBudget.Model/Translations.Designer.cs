@@ -124,6 +124,15 @@ namespace MyBudget.Model {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Counter party.
+        /// </summary>
+        public static string BankOperation_CounterParty {
+            get {
+                return ResourceManager.GetString("BankOperation_CounterParty", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Description.
         /// </summary>
         public static string BankOperation_Description {

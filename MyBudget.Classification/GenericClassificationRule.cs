@@ -36,7 +36,7 @@ namespace MyBudget.Classification
 
         private bool MatchesDescription(ClassificationRule rule, BankOperation operation)
         {
-            if(string.IsNullOrEmpty(rule.SearchedPhrase))
+            if (string.IsNullOrEmpty(rule.SearchedPhrase))
             {
                 return true;
             }
@@ -47,14 +47,23 @@ namespace MyBudget.Classification
                 string fieldValue = property.GetValue(operation, null) as string;
                 if (fieldValue == null) continue;
 
-                if(rule.IsRegularExpression && Regex.IsMatch(fieldValue, rule.SearchedPhrase, RegexOptions.IgnoreCase))
+                if (rule.IsRegularExpression && Regex.IsMatch(fieldValue, rule.SearchedPhrase, RegexOptions.IgnoreCase))
                 {
                     return true;
                 }
-                else if(fieldValue.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
+                else if (fieldValue.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
                 {
                     return true;
                 }
+            }
+
+            if (rule.IsRegularExpression && Regex.IsMatch(operation.Type.Name, rule.SearchedPhrase, RegexOptions.IgnoreCase))
+            {
+                return true;
+            }
+            else if (operation.Type.Name.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
+            {
+                return true;
             }
 
             return false;

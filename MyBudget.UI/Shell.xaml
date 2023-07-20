@@ -7,7 +7,7 @@
         xmlns:popups="clr-namespace:MyBudget.UI.Core.Popups;assembly=MyBudget.UI.Core"
         xmlns:prism="http://www.codeplex.com/prism"
         xmlns:uiCore="clr-namespace:MyBudget.UI.Core;assembly=MyBudget.UI.Core"
-        Title="Piggy - myBudget"
+        Title="Piggy - myBudget - v2"
         Width="900"
         Height="600"
         MinWidth="900"

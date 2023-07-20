@@ -42,7 +42,7 @@ namespace MyBudget.OperationsLoading
 
         public string GetFirstNCharacters(string description, int n = 30)
         {
-            if (description.Length > n)
+            if (description != null && description.Length > n)
             {
                 return description.Substring(0, n);
             }

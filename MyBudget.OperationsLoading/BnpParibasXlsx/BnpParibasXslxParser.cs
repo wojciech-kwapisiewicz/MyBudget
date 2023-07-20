@@ -72,7 +72,12 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                     bankOperation.ExecutionDate = GetDateFromExcelRange(
                         myWorksheet.Cells[rowNum, layoutMap.First(a => ExecutionDates.Contains(a.Key)).Value]);
                     bankOperation.Amount = Convert.ToDecimal(myWorksheet.Cells[rowNum, layoutMap["Kwota"]].Value);
-                    bankOperation.Description = myWorksheet.Cells[rowNum, layoutMap["Opis"]].Value.ToString();
+                    var desc = myWorksheet.Cells[rowNum, layoutMap["Opis"]].Value;
+                    if (desc != null)
+                    {
+                        bankOperation.Description = desc.ToString();
+                    }
+                    
                     bankOperation.Type = _repositoryHelper.GetOrAddOperationType(myWorksheet.Cells[rowNum, layoutMap["Typ transakcji"]].Value.ToString());
                     bankOperation.Cleared = true;
 

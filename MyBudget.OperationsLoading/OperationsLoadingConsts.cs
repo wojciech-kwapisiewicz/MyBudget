@@ -8,6 +8,6 @@ namespace MyBudget.OperationsLoading
 {
     public class OperationsLoadingConsts
     {
-        public static int OperationTitleLength = 30;
+        public static int OperationTitleLength = 60;
     }
 }

@@ -33,7 +33,10 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
             }
 
             operation.Title = GetBlikOperationTitle(description);
-            operation.CounterAccount = counterpartyInfo.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[0];
+
+            var lines = counterpartyInfo.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries);
+            operation.CounterAccount = lines[0];
+            operation.CounterParty = string.Join(Environment.NewLine, lines.Skip(1));
         }
 
         public string GetBlikOperationTitle(string description)

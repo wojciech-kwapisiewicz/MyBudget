@@ -59,6 +59,7 @@ namespace MyBudget.OperationsLoading.MilleniumAccount
                     operation.ExecutionDate = _parseHelper.ParseDate(reader[2], "yyyy-MM-dd");
                     operation.Type = _repositoryHelper.GetOrAddOperationType(reader[3]);
                     operation.CounterAccount = reader[4].Replace(" ", "");
+                    operation.CounterParty = reader[5];
                     operation.Description = reader[6];
                     operation.Title = _parseHelper.GetFirstNCharacters(operation.Description, OperationsLoadingConsts.OperationTitleLength);
 
