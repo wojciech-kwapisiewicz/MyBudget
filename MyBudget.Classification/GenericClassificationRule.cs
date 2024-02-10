@@ -57,13 +57,16 @@ namespace MyBudget.Classification
                 }
             }
 
-            if (rule.IsRegularExpression && Regex.IsMatch(operation.Type.Name, rule.SearchedPhrase, RegexOptions.IgnoreCase))
+            if (operation != null && operation.Type != null && operation.Type.Name != null)
             {
-                return true;
-            }
-            else if (operation.Type.Name.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
-            {
-                return true;
+                if (rule.IsRegularExpression && Regex.IsMatch(operation.Type.Name, rule.SearchedPhrase, RegexOptions.IgnoreCase))
+                {
+                    return true;
+                }
+                else if (operation.Type.Name.IndexOf(rule.SearchedPhrase, StringComparison.OrdinalIgnoreCase) >= 0)
+                {
+                    return true;
+                }
             }
 
             return false;
