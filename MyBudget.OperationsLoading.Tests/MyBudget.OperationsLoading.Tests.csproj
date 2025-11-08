@@ -72,6 +72,7 @@
     <EmbeddedResource Include="Resources\MilleniumParser_Sample.csv" />
     <EmbeddedResource Include="Resources\TestFiles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
       <LastGenOutput>TestFiles.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
@@ -92,6 +93,7 @@
     <None Include="Resources\BGZParser_StandardCases.csv" />
     <None Include="Resources\BNP_TestOperations_v2.xlsx" />
     <None Include="Resources\BNP_TestOperations_v1.xlsx" />
+    <None Include="Resources\BNP_TestOperations_v3.xlsx" />
     <None Include="Resources\MilleniumParser_Sample1Entry_Comma.csv" />
   </ItemGroup>
   <ItemGroup>

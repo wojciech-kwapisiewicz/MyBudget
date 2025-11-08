@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -15,6 +16,7 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
 {
     [TestFixture("v1")]
     [TestFixture("v2")]
+    [TestFixture("v3")]
     public class BnpParibasXslxParserTests
     {
         private Mock<IRepository<BankAccount, string>> accountRepo;
@@ -29,7 +31,8 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
         Dictionary<string, Stream> BNPFileVersions = new Dictionary<string, Stream>()
         {
             {"v1", Resources.TestFiles.BNP_TestOperations_v1.ToStream() },
-            {"v2", Resources.TestFiles.BNP_TestOperations_v2.ToStream() }
+            {"v2", Resources.TestFiles.BNP_TestOperations_v2.ToStream() },
+            {"v3", Resources.TestFiles.BNP_TestOperations_v3.ToStream() }
         };
 
         public BnpParibasXslxParserTests(string version)
