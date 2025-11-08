@@ -25,15 +25,21 @@ jobs:
             & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" $test.FullName /Logger:trx
             }
       - store_artifacts:
-          path: "**/*.trx"
+          path: "TestResults/*.trx"
           destination: test-results
       - run:
           name: Convert TRX to JUnit XML
           command: |
-            choco install trx2junit
+            nuget install trx2junit -Version 1.3.4 -OutputDirectory packages
+            $trx2junit = Join-Path $PSScriptRoot "packages\trx2junit.1.3.4\tools\net472\trx2junit.exe"
+
             Get-ChildItem -Recurse -Filter *.trx | ForEach-Object { trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml" }
+
+            # Convert all TRX files to JUnit XML
+            Get-ChildItem -Recurse -Filter *.trx | ForEach-Object { $trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml"
+            }
       - store_test_results:
-          path: "**/*.xml"
+          path: "TestResults/*.xml"
       - run:
           name: "Create artifacts"
           command: New-Item -ItemType "directory" -Path "Artifacts" -force; Compress-Archive -Path bin\Release -Update -DestinationPath .\Artifacts\Piggy.Zip      
