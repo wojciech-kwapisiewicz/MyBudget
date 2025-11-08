@@ -30,12 +30,11 @@ jobs:
       - run:
           name: Convert TRX to JUnit XML
           command: |
-            nuget install trx2junit -Version 1.3.2 -OutputDirectory packages
-            $trx2junit = Join-Path $PSScriptRoot "packages\trx2junit.1.3.2\tools\net472\trx2junit.exe"
+            dotnet tool install -g trx2junit --version 1.3.2
 
             # Convert all TRX files to JUnit XML
             Get-ChildItem -Recurse -Filter *.trx | ForEach-Object {
-                & $trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml"
+                & trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml"
             }
       - store_test_results:
           path: "TestResults/"
