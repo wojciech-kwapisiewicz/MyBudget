@@ -20,7 +20,8 @@ jobs:
           name: "Run unit tests"
           command: |
             # Find all test assemblies (adjust path/pattern if needed)
-            $testAssemblies = Get-ChildItem -Path . -Recurse -Filter "*Tests.dll"
+            $testAssemblies = Get-ChildItem -Path . -Recurse -Filter "*Tests.dll" |
+                  Where-Object { $_.FullName -notmatch "\\obj\\" }
             foreach ($test in $testAssemblies) {
             & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" $test.FullName /Logger:trx
             }
@@ -30,10 +31,11 @@ jobs:
       - run:
           name: Convert TRX to JUnit XML
           command: |
-            dotnet tool install -g trx2junit --version 1.3.2
+            dotnet tool install -g trx2junit --version 2.1.0
 
             # Convert all TRX files to JUnit XML
-            Get-ChildItem -Recurse -Filter *.trx | ForEach-Object {
+            Get-ChildItem -Path . -Recurse -Filter "*.trx" |
+                  Where-Object { $_.FullName -notmatch "\\obj\\" } | ForEach-Object {
                 & trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml"
             }
       - store_test_results:
