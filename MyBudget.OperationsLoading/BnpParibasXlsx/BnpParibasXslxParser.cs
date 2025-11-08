@@ -22,8 +22,6 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
         private List<string> OperationDates = new List<string>() { "Data transakcji", "Data zlecenia operacji" };
         private List<string> ExecutionDates = new List<string>() { "Data zaksięgowania", "Data realizacji" };
 
-        private Dictionary<string, int> layoutMap = new Dictionary<string, int>();
-
         public BnpParibasXslxParser(IRepositoryHelper repositoryHelper, IOperationHandler operationHandler)
         {
             if (repositoryHelper == null)
@@ -50,7 +48,7 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
         }
 
         public IEnumerable<BankOperation> Parse(Stream stream)
-        {
+        {            
             List<BankOperation> ops = new List<BankOperation>();
             using (ExcelPackage xlPackage = new ExcelPackage(stream))
             {
@@ -59,8 +57,8 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                 var totalColumns = myWorksheet.Dimension.End.Column;
 
                 var sb = new StringBuilder(); //this is your data
-                
-                MapHeader(myWorksheet);
+
+                Dictionary<string, int> layoutMap = MapHeader(myWorksheet);
 
                 for (int rowNum = 2; rowNum <= totalRows; rowNum++) //select starting row here
                 {
@@ -91,8 +89,27 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                     var accountNumber = bankAccountProduct.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[1];
                     bankOperation.BankAccount = _repositoryHelper.GetOrAddAccount(accountNumber);
 
+
+                    //Parsing counterparty depending on the version of the file
+                    object counterpartyValue = null;
+                    if (layoutMap.Keys.Contains("Nadawca / odbiorca"))
+                    {
+                        counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca / odbiorca"]].Value;
+                    }
+                    else
+                    {
+                        if (bankOperation.Amount > 0)
+                        {
+                            counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca"]].Value;
+                        }
+                        else
+                        {
+                            counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Odbiorca"]].Value;
+                        }                   
+                    }
+
                     //Parsing title and other details for different transactions
-                    var counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca / odbiorca"]].Value;
+
                     _operationHandler.Handle(bankOperation, bankOperation.Description, counterpartyValue == null ? string.Empty : counterpartyValue.ToString());
 
                     ops.Add(bankOperation);
@@ -102,16 +119,20 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
             return ops;
         }
 
-        private void MapHeader(ExcelWorksheet myWorksheet)
+        private Dictionary<string, int> MapHeader(ExcelWorksheet myWorksheet)
         {
             var x = 1;
             var rowValue = myWorksheet.Cells[1, x].Value;
+
+            Dictionary<string, int> layoutMap = new Dictionary<string, int>();
 
             while (rowValue != null)
             {
                 layoutMap.Add(rowValue.ToString(), x++);
                 rowValue = myWorksheet.Cells[1, x].Value;
             }
+
+            return layoutMap;
         }
 
         public DateTime GetDateFromExcelRange(ExcelRange excelRange)
