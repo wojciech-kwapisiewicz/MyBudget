@@ -91,8 +91,27 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                     var accountNumber = bankAccountProduct.Split(new[] { '\r', '\n' }, StringSplitOptions.RemoveEmptyEntries)[1];
                     bankOperation.BankAccount = _repositoryHelper.GetOrAddAccount(accountNumber);
 
+
+                    //Parsing counterparty depending on the version of the file
+                    object counterpartyValue = null;
+                    if (layoutMap.Keys.Contains("Nadawca / odbiorca"))
+                    {
+                        counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca / odbiorca"]].Value;
+                    }
+                    else
+                    {
+                        if (bankOperation.Amount > 0)
+                        {
+                            counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca"]].Value;
+                        }
+                        else
+                        {
+                            counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Odbiorca"]].Value;
+                        }                   
+                    }
+
                     //Parsing title and other details for different transactions
-                    var counterpartyValue = myWorksheet.Cells[rowNum, layoutMap["Nadawca / odbiorca"]].Value;
+
                     _operationHandler.Handle(bankOperation, bankOperation.Description, counterpartyValue == null ? string.Empty : counterpartyValue.ToString());
 
                     ops.Add(bankOperation);
