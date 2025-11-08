@@ -9,9 +9,7 @@ jobs:
       name: win/default
       shell: powershell.exe
     steps:
-      - run: git config --global url."https://github.com/".insteadOf "git@github.com:"
       - checkout
-      - run: git submodule update --init --recursive
       - run:
           name: "Install project dependencies"
           command: nuget restore MyBudget.sln
