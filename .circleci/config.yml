@@ -17,6 +17,24 @@ jobs:
           name: "Run Build step"
           command: msbuild /p:Configuration=Release MyBudget.sln
       - run:
+          name: "Run unit tests"
+          command: |
+            # Find all test assemblies (adjust path/pattern if needed)
+            $testAssemblies = Get-ChildItem -Path . -Recurse -Filter "*Tests.dll"
+            foreach ($test in $testAssemblies) {
+                & "C:\Program Files (x86)\Microsoft Visual Studio\2019\BuildTools\Common7\IDE\Extensions\TestPlatform\vstest.console.exe" $test.FullName /Logger:trx
+            }
+      - store_artifacts:
+          path: "**/*.trx"
+          destination: test-results
+      - run:
+          name: Convert TRX to JUnit XML
+          command: |
+            choco install trx2junit
+            Get-ChildItem -Recurse -Filter *.trx | ForEach-Object { trx2junit $_.FullName -o "$($_.DirectoryName)\$($_.BaseName).xml" }
+      - store_test_results:
+          path: "**/*.xml"
+      - run:
           name: "Create artifacts"
           command: New-Item -ItemType "directory" -Path "Artifacts" -force; Compress-Archive -Path bin\Release -Update -DestinationPath .\Artifacts\Piggy.Zip      
       - store_artifacts:
