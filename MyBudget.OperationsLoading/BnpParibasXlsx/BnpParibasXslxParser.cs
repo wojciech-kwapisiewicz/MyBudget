@@ -65,10 +65,10 @@ namespace MyBudget.OperationsLoading.BnpParibasXlsx
                 for (int rowNum = 2; rowNum <= totalRows; rowNum++) //select starting row here
                 {
                     var executionDateObject = myWorksheet.Cells[rowNum, layoutMap.First(a => ExecutionDates.Contains(a.Key)).Value];
-                    //if (executionDateObject.Value == null)
-                    //{
-                    //    continue; //not-settled operation
-                    //}    
+                    if (executionDateObject.Value == null)
+                    {
+                        continue; //not-settled operation
+                    }
 
                     var bankOperation = new BankOperation();
                     bankOperation.LpOnStatement = rowNum;
