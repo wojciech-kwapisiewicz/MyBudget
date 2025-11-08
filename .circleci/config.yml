@@ -22,7 +22,7 @@ jobs:
             # Find all test assemblies (adjust path/pattern if needed)
             $testAssemblies = Get-ChildItem -Path . -Recurse -Filter "*Tests.dll"
             foreach ($test in $testAssemblies) {
-            & "C:\Program Files\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" $test.FullName /Logger:trx
+            & "C:\Program Files (x86)\Microsoft Visual Studio\2022\BuildTools\Common7\IDE\CommonExtensions\Microsoft\TestWindow\vstest.console.exe" $test.FullName /Logger:trx
             }
       - store_artifacts:
           path: "**/*.trx"
