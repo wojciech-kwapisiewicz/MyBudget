@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.4.5.0\build\net462\NUnit3TestAdapter.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -55,6 +55,7 @@
     <Compile Include="BgzBnpParibasCsv\OperacjaKartaTests.cs" />
     <Compile Include="BgzBnpParibasCsv\PrzelewTests.cs" />
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParserCrossVersionTests.cs" />
+    <Compile Include="BnpParibasXlsx\BnpParibasXslxParserDemoDataTests.cs" />
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParserTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserDemoDataTests.cs" />
