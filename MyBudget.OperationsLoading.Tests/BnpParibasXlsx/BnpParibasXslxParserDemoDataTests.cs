@@ -38,29 +38,128 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             this.accountRepo.Setup(a => a.Add(It.IsAny<BankAccount>())).Callback<BankAccount>(a => mockAccountsCreated.Add(a));
         }
 
-        [Test] public void GivenDemoWorkbook03_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_03, new DateTime(2026, 03, 01), new DateTime(2026, 03, 31));
-        [Test] public void GivenDemoWorkbook04_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_04, new DateTime(2026, 04, 01), new DateTime(2026, 04, 30));
-        [Test] public void GivenDemoWorkbook05_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_05, new DateTime(2026, 05, 01), new DateTime(2026, 05, 31));
-        [Test] public void GivenDemoWorkbook06_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_06, new DateTime(2026, 06, 01), new DateTime(2026, 06, 30));
-        [Test] public void GivenDemoWorkbook07_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_07, new DateTime(2026, 07, 01), new DateTime(2026, 07, 31));
-        [Test] public void GivenDemoWorkbook08_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_08, new DateTime(2026, 08, 01), new DateTime(2026, 08, 31));
+        [Test] public void GivenDemoWorkbook03_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_03, new[]
+            {
+                new ExpectedOperation(6800.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 03, 01)),
+                new ExpectedOperation(-2650.00M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 03, 02)),
+                new ExpectedOperation(-487.80M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 03)),
+                new ExpectedOperation(-782.20M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 03, 04)),
+                new ExpectedOperation(-164.90M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 05)),
+                new ExpectedOperation(-133.50M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 06)),
+                new ExpectedOperation(-99.00M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 07)),
+                new ExpectedOperation(-218.50M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 08)),
+                new ExpectedOperation(-75.09M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 09)),
+                new ExpectedOperation(-360.50M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 03, 10))
+            });
 
-        private void AssertDemoMonth(byte[] workbook, DateTime expectedFrom, DateTime expectedTo)
+        [Test] public void GivenDemoWorkbook04_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_04, new[]
+            {
+                new ExpectedOperation(6900.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 04, 01)),
+                new ExpectedOperation(-2661.20M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 04, 02)),
+                new ExpectedOperation(-499.00M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 03)),
+                new ExpectedOperation(-793.40M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 04, 04)),
+                new ExpectedOperation(-176.10M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 05)),
+                new ExpectedOperation(-144.70M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 06)),
+                new ExpectedOperation(-110.20M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 07)),
+                new ExpectedOperation(-229.70M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 08)),
+                new ExpectedOperation(-86.29M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 09)),
+                new ExpectedOperation(-371.70M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 04, 10))
+            });
+
+        [Test] public void GivenDemoWorkbook05_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_05, new[]
+            {
+                new ExpectedOperation(7000.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 05, 01)),
+                new ExpectedOperation(-2641.50M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 05, 02)),
+                new ExpectedOperation(-479.30M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 03)),
+                new ExpectedOperation(-773.70M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 05, 04)),
+                new ExpectedOperation(-156.40M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 05)),
+                new ExpectedOperation(-125.00M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 06)),
+                new ExpectedOperation(-90.50M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 07)),
+                new ExpectedOperation(-210.00M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 08)),
+                new ExpectedOperation(-66.59M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 09)),
+                new ExpectedOperation(-352.00M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 05, 10))
+            });
+
+        [Test] public void GivenDemoWorkbook06_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_06, new[]
+            {
+                new ExpectedOperation(7100.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 06, 01)),
+                new ExpectedOperation(-2666.40M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 06, 02)),
+                new ExpectedOperation(-504.20M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 03)),
+                new ExpectedOperation(-798.60M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 06, 04)),
+                new ExpectedOperation(-181.30M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 05)),
+                new ExpectedOperation(-149.90M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 06)),
+                new ExpectedOperation(-115.40M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 07)),
+                new ExpectedOperation(-234.90M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 08)),
+                new ExpectedOperation(-91.49M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 09)),
+                new ExpectedOperation(-376.90M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 06, 10))
+            });
+
+        [Test] public void GivenDemoWorkbook07_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_07, new[]
+            {
+                new ExpectedOperation(7200.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 07, 01)),
+                new ExpectedOperation(-2644.30M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 07, 02)),
+                new ExpectedOperation(-482.10M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 03)),
+                new ExpectedOperation(-776.50M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 07, 04)),
+                new ExpectedOperation(-159.20M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 05)),
+                new ExpectedOperation(-127.80M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 06)),
+                new ExpectedOperation(-93.30M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 07)),
+                new ExpectedOperation(-212.80M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 08)),
+                new ExpectedOperation(-69.39M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 09)),
+                new ExpectedOperation(-354.80M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 07, 10))
+            });
+
+        [Test] public void GivenDemoWorkbook08_WhenParsed_ThenOperationsAreLoaded() => AssertDemoMonth(DemoFiles.BNP_TestOperations_2026_08, new[]
+            {
+                new ExpectedOperation(7300.00M, "Przelew wynagrodzenia - Anna Nowak", "PRZELEW PRZYCHODZ\u0104CY", new DateTime(2026, 08, 01)),
+                new ExpectedOperation(-2672.10M, "Czynsz za mieszkanie", "PRZELEW WYKONANY", new DateTime(2026, 08, 02)),
+                new ExpectedOperation(-509.90M, "Zakupy spo\u017cywcze dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 03)),
+                new ExpectedOperation(-804.30M, "Czesne za przedszkole", "PRZELEW WYKONANY", new DateTime(2026, 08, 04)),
+                new ExpectedOperation(-187.00M, "Artyku\u0142y dla dzieci", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 05)),
+                new ExpectedOperation(-155.60M, "Chemia domowa i kosmetyki", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 06)),
+                new ExpectedOperation(-121.10M, "Leki dla rodziny", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 07)),
+                new ExpectedOperation(-240.60M, "Ubrania dzieci\u0119ce", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 08)),
+                new ExpectedOperation(-97.19M, "Ksi\u0105\u017cki i materia\u0142y szkolne", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 09)),
+                new ExpectedOperation(-382.60M, "Zakupy spo\u017cywcze - weekend", "P\u0141ATNO\u015a\u0106 KART\u0104", new DateTime(2026, 08, 10))
+            });
+
+        private void AssertDemoMonth(byte[] workbook, ExpectedOperation[] expectedOperations)
         {
             var operations = parser.Parse(workbook.ToStream()).ToList();
 
-            Assert.AreEqual(10, operations.Count);
-            Assert.IsTrue(operations.All(op => op.Cleared));
-            Assert.IsTrue(operations.All(op => op.BankAccount != null));
-            Assert.IsTrue(operations.All(op => op.OrderDate >= expectedFrom && op.OrderDate <= expectedTo));
-            Assert.IsTrue(operations.All(op => op.ExecutionDate >= expectedFrom && op.ExecutionDate <= expectedTo));
-            Assert.IsTrue(operations.All(op => !string.IsNullOrWhiteSpace(op.Description)));
-            Assert.IsTrue(operations.All(op => op.Type != null));
-            Assert.AreEqual(3, operations.Select(op => op.Type.Name).Distinct().Count());
-            Assert.AreEqual(1, operations.Count(op => op.Amount > 0));
-            Assert.AreEqual(9, operations.Count(op => op.Amount < 0));
+            Assert.AreEqual(expectedOperations.Length, operations.Count);
+            for (var index = 0; index < expectedOperations.Length; index++)
+            {
+                AssertOperation(operations[index], expectedOperations[index]);
+            }
+
             Assert.AreEqual(1, mockAccountsCreated.Count);
             Assert.AreEqual(TestBankData.BNPParibas_TestAccount1.Compact(), mockAccountsCreated[0].Number);
+        }
+
+        private static void AssertOperation(BankOperation actual, ExpectedOperation expected)
+        {
+            Assert.AreEqual(expected.Amount, actual.Amount);
+            Assert.AreEqual(expected.Title, actual.Title);
+            Assert.AreEqual(expected.Type, actual.Type.Name);
+            Assert.AreEqual(expected.OrderDate, actual.OrderDate);
+            Assert.AreEqual(expected.Amount > 0, actual.Amount > 0);
+            Assert.IsTrue(actual.Cleared);
+        }
+
+        private class ExpectedOperation
+        {
+            public ExpectedOperation(decimal amount, string title, string type, DateTime orderDate)
+            {
+                Amount = amount;
+                Title = title;
+                Type = type;
+                OrderDate = orderDate;
+            }
+
+            public decimal Amount { get; private set; }
+            public string Title { get; private set; }
+            public string Type { get; private set; }
+            public DateTime OrderDate { get; private set; }
         }
     }
 }
