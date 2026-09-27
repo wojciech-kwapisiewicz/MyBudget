@@ -173,3 +173,6 @@ UpgradeLog*.htm
 # Microsoft Fakes
 FakesAssemblies/
 /.vs
+
+# Visual Studio cache and settings folder
+.vs/

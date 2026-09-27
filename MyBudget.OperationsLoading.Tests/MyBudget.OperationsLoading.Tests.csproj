@@ -57,11 +57,13 @@
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParserCrossVersionTests.cs" />
     <Compile Include="BnpParibasXlsx\BnpParibasXslxParserTests.cs" />
     <Compile Include="ImportData\OperationsImporterTests.cs" />
+    <Compile Include="MilleniumAccount\MilleniumParserDemoDataTests.cs" />
     <Compile Include="MilleniumAccount\MilleniumParserTests.cs" />
     <Compile Include="PkoBpAccount\PkoBpParserTests.cs" />
     <Compile Include="BgzBnpParibasCsv\WyplataBankomatTests.cs" />
     <Compile Include="PkoBpCreditCard\PkoBpCreditCardParserTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources\DemoFiles.Designer.cs" />
     <Compile Include="Resources\TestFiles.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -70,6 +72,9 @@
     <Compile Include="TestBankData.cs" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resources\DemoFiles.resx">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\MilleniumParser_Sample.csv" />
     <EmbeddedResource Include="Resources\TestFiles.resx">
       <Generator>ResXFileCodeGenerator</Generator>
