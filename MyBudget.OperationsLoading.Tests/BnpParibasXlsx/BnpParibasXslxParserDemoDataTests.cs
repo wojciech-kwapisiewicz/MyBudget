@@ -57,8 +57,8 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             Assert.IsTrue(operations.All(op => !string.IsNullOrWhiteSpace(op.Description)));
             Assert.IsTrue(operations.All(op => op.Type != null));
             Assert.AreEqual(3, operations.Select(op => op.Type.Name).Distinct().Count());
-            Assert.AreEqual(2, operations.Count(op => op.Amount > 0));
-            Assert.AreEqual(8, operations.Count(op => op.Amount < 0));
+            Assert.AreEqual(1, operations.Count(op => op.Amount > 0));
+            Assert.AreEqual(9, operations.Count(op => op.Amount < 0));
             Assert.AreEqual(1, mockAccountsCreated.Count);
             Assert.AreEqual(TestBankData.BNPParibas_TestAccount1.Compact(), mockAccountsCreated[0].Number);
         }

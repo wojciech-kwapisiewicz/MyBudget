@@ -98,9 +98,21 @@
     <None Include="Resources\BGZParser_LongDescPayment.csv" />
     <None Include="Resources\BGZParser_OtherOperation.csv" />
     <None Include="Resources\BGZParser_StandardCases.csv" />
+    <None Include="Resources\BNP_TestOperations_2026_03.xlsx" />
+    <None Include="Resources\BNP_TestOperations_2026_04.xlsx" />
+    <None Include="Resources\BNP_TestOperations_2026_05.xlsx" />
+    <None Include="Resources\BNP_TestOperations_2026_06.xlsx" />
+    <None Include="Resources\BNP_TestOperations_2026_07.xlsx" />
+    <None Include="Resources\BNP_TestOperations_2026_08.xlsx" />
     <None Include="Resources\BNP_TestOperations_v2.xlsx" />
     <None Include="Resources\BNP_TestOperations_v1.xlsx" />
     <None Include="Resources\BNP_TestOperations_v3.xlsx" />
+    <None Include="Resources\MilleniumParser_Family2026_03.csv" />
+    <None Include="Resources\MilleniumParser_Family2026_04.csv" />
+    <None Include="Resources\MilleniumParser_Family2026_05.csv" />
+    <None Include="Resources\MilleniumParser_Family2026_06.csv" />
+    <None Include="Resources\MilleniumParser_Family2026_07.csv" />
+    <None Include="Resources\MilleniumParser_Family2026_08.csv" />
     <None Include="Resources\MilleniumParser_Sample1Entry_Comma.csv" />
   </ItemGroup>
   <ItemGroup>

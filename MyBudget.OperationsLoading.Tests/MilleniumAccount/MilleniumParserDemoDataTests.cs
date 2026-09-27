@@ -78,10 +78,10 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
             Assert.IsTrue(list.All(op => !string.IsNullOrWhiteSpace(op.Description)));
             Assert.IsTrue(list.All(op => op.Type != null));
             Assert.IsTrue(list.All(op => op.Amount > 0));
-            Assert.AreEqual(2, list.Count(op => op.Type.Name == "PRZELEW PRZYCHODZĄCY"));
-            Assert.AreEqual(8, list.Count(op => op.Type.Name == "OBCIĄŻENIE"));
-            Assert.IsTrue(list.Any(op => op.CounterParty.Contains("Wynagrodzenie")));
-            Assert.IsTrue(list.Any(op => op.Description.Contains("Czynsz")));
+            Assert.AreEqual(1, list.Count(op => op.Type.Name == "PRZELEW PRZYCHODZĄCY"));
+            Assert.AreEqual(9, list.Count(op => op.Type.Name == "OBCIĄŻENIE"));
+            Assert.IsTrue(list.Any(op => op.CounterParty.Contains("Piotra Nowaka")));
+            Assert.IsTrue(list.Any(op => op.Description.Contains("PGE")));
         }
     }
 }
