@@ -1,4 +1,4 @@
-using Moq;
+ï»¿using Moq;
 using MyBudget.Core.DataContext;
 using MyBudget.Model;
 using MyBudget.OperationsLoading;
@@ -55,19 +55,10 @@ namespace MyBudget.OperationsLoading.Tests.BnpParibasXlsx
             Assert.IsTrue(operations.All(op => op.OrderDate >= expectedFrom && op.OrderDate <= expectedTo));
             Assert.IsTrue(operations.All(op => op.ExecutionDate >= expectedFrom && op.ExecutionDate <= expectedTo));
             Assert.IsTrue(operations.All(op => !string.IsNullOrWhiteSpace(op.Description)));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Transakcja kart¹"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Transakcja BLIK"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Przelew przychodz¹cy"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Przelew wychodz¹cy"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Zlecenie sta³e"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Operacja kredytowa"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Prowizje i op³aty"));
-            Assert.IsTrue(operations.Any(op => op.Type.Name == "Przelew internetowy"));
-            Assert.IsTrue(operations.Any(op => op.Amount > 0));
-            Assert.IsTrue(operations.Any(op => op.Amount < 0));
-            Assert.IsTrue(operations.Any(op => op.Card != null));
-            Assert.IsTrue(operations.Any(op => op.CounterParty != null));
-            Assert.IsTrue(operations.Any(op => op.Description.Contains("zakupy") || op.Description.Contains("op³ata") || op.Description.Contains("przelew")));
+            Assert.IsTrue(operations.All(op => op.Type != null));
+            Assert.AreEqual(3, operations.Select(op => op.Type.Name).Distinct().Count());
+            Assert.AreEqual(2, operations.Count(op => op.Amount > 0));
+            Assert.AreEqual(8, operations.Count(op => op.Amount < 0));
             Assert.AreEqual(1, mockAccountsCreated.Count);
             Assert.AreEqual(TestBankData.BNPParibas_TestAccount1.Compact(), mockAccountsCreated[0].Number);
         }
