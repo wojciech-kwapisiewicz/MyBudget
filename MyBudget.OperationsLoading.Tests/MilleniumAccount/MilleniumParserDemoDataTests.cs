@@ -71,16 +71,17 @@ namespace MyBudget.OperationsLoading.Tests.MilleniumAccount
         private void AssertMonthDemoData(IEnumerable<BankOperation> operations, DateTime expectedFrom, DateTime expectedTo)
         {
             var list = operations.ToList();
-            Assert.GreaterOrEqual(list.Count, 15);
-            Assert.LessOrEqual(list.Count, 20);
+            Assert.AreEqual(10, list.Count);
             Assert.IsTrue(list.All(op => op.Cleared));
             Assert.IsTrue(list.All(op => op.BankAccount != null));
             Assert.IsTrue(list.All(op => op.OrderDate >= expectedFrom && op.OrderDate <= expectedTo));
             Assert.IsTrue(list.All(op => !string.IsNullOrWhiteSpace(op.Description)));
-            Assert.IsTrue(list.Any(op => op.Amount > 0));
-            Assert.IsTrue(list.Any(op => op.Amount < 0));
-            Assert.IsTrue(list.Any(op => op.Description.Contains("Biedronka") || op.Description.Contains("Lidl") || op.Description.Contains("Żabka") || op.Description.Contains("PGE") || op.Description.Contains("Czynsz") || op.Description.Contains("Przelew wynagrodzenia") || op.Description.Contains("InPost")));
-            Assert.IsTrue(list.Any(op => op.Type != null));
+            Assert.IsTrue(list.All(op => op.Type != null));
+            Assert.IsTrue(list.All(op => op.Amount > 0));
+            Assert.AreEqual(2, list.Count(op => op.Type.Name == "PRZELEW PRZYCHODZĄCY"));
+            Assert.AreEqual(8, list.Count(op => op.Type.Name == "OBCIĄŻENIE"));
+            Assert.IsTrue(list.Any(op => op.CounterParty.Contains("Wynagrodzenie")));
+            Assert.IsTrue(list.Any(op => op.Description.Contains("Czynsz")));
         }
     }
 }
